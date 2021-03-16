@@ -1,0 +1,5 @@
+UC_01: Consult Menu (Scénario) --> A
+UC_05 : Authentification (Scénario) --> A
+UC_07: Validate Order (Scénario) --> A
+UC_12 : Sign Restaurant (Scénario)--> A
+UC_16 : Manage Order (Scénario)--> A
