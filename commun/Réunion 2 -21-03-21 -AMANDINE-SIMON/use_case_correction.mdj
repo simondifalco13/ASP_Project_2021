@@ -531,7 +531,7 @@
 											"top": 701,
 											"width": 72.236328125,
 											"height": 13,
-											"text": "Custommer"
+											"text": "Customer"
 										},
 										{
 											"_type": "LabelView",
@@ -6346,7 +6346,7 @@
 							},
 							"font": "Arial;13;0",
 							"left": 992,
-							"top": 648,
+							"top": 664,
 							"width": 100.21533203125,
 							"height": 116,
 							"text": "If the custommer want to note the restaurant/the order he can make an opinion"
@@ -6365,7 +6365,20 @@
 								"$ref": "AAAAAAF4VWaFB1kvfZI="
 							},
 							"lineStyle": 1,
-							"points": "850:721;991:709"
+							"points": "850:721;991:721"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF4VZYOsE71aSg=",
+							"_parent": {
+								"$ref": "AAAAAAF4T0Rb3M6t5y8="
+							},
+							"font": "Arial;13;0",
+							"left": 528,
+							"top": 1288,
+							"width": 417,
+							"height": 73,
+							"text": "GREEN -> commun, ROSE -> Restorer , Orange -> Custommer , Blue -> Visitor"
 						}
 					]
 				},
@@ -6659,7 +6672,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Custommer",
+					"name": "Customer",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
