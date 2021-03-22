@@ -6376,9 +6376,9 @@
 							"font": "Arial;13;0",
 							"left": 528,
 							"top": 1288,
-							"width": 417,
+							"width": 601,
 							"height": 73,
-							"text": "GREEN -> commun, ROSE -> Restorer , Orange -> Custommer , Blue -> Visitor"
+							"text": "GREEN -> commun, ROSE -> Restorer , Orange -> Customer , Blue -> Visitor"
 						}
 					]
 				},
