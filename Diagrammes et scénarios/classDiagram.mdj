@@ -3683,6 +3683,19 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAF4aWUk4FjLdYw="
 							}
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAF4baaA59vktDI=",
+							"_parent": {
+								"$ref": "AAAAAAF4aI1qmFNUKmg="
+							},
+							"font": "Arial;13;0",
+							"left": 640,
+							"top": 560,
+							"width": 84.30810546875,
+							"height": 142,
+							"text": "Panier sert peut être a rien vu que commande dans 1 seul resto"
 						}
 					]
 				},
@@ -3702,7 +3715,8 @@
 								"$ref": "AAAAAAF4aI25lFNYfh0="
 							},
 							"name": "first name",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3711,7 +3725,8 @@
 								"$ref": "AAAAAAF4aI25lFNYfh0="
 							},
 							"name": "last name",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3720,7 +3735,8 @@
 								"$ref": "AAAAAAF4aI25lFNYfh0="
 							},
 							"name": "phone number",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3729,7 +3745,8 @@
 								"$ref": "AAAAAAF4aI25lFNYfh0="
 							},
 							"name": "adress",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3738,7 +3755,8 @@
 								"$ref": "AAAAAAF4aI25lFNYfh0="
 							},
 							"name": "email",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3747,7 +3765,8 @@
 								"$ref": "AAAAAAF4aI25lFNYfh0="
 							},
 							"name": "gender",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3756,7 +3775,8 @@
 								"$ref": "AAAAAAF4aI25lFNYfh0="
 							},
 							"name": "password",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -3790,7 +3810,8 @@
 								"$ref": "AAAAAAF4aLsQK1Oqv0o="
 							},
 							"name": "RestorerId",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3799,7 +3820,8 @@
 								"$ref": "AAAAAAF4aLsQK1Oqv0o="
 							},
 							"name": "TVA Number",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -3833,7 +3855,8 @@
 								"$ref": "AAAAAAF4aLs5l1PVa+0="
 							},
 							"name": "CustomerId",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -3878,7 +3901,8 @@
 								"$ref": "AAAAAAF4aQZW1FSEjCU="
 							},
 							"name": "restaurantName",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3887,7 +3911,8 @@
 								"$ref": "AAAAAAF4aQZW1FSEjCU="
 							},
 							"name": "adress",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3896,7 +3921,8 @@
 								"$ref": "AAAAAAF4aQZW1FSEjCU="
 							},
 							"name": "phone number",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3905,7 +3931,8 @@
 								"$ref": "AAAAAAF4aQZW1FSEjCU="
 							},
 							"name": "opening hours",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3914,7 +3941,8 @@
 								"$ref": "AAAAAAF4aQZW1FSEjCU="
 							},
 							"name": "restaurantType",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3923,7 +3951,8 @@
 								"$ref": "AAAAAAF4aQZW1FSEjCU="
 							},
 							"name": "comments",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -4040,7 +4069,8 @@
 								"$ref": "AAAAAAF4aQ8N5FVZDnk="
 							},
 							"name": "customer",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4049,7 +4079,8 @@
 								"$ref": "AAAAAAF4aQ8N5FVZDnk="
 							},
 							"name": "date",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4058,7 +4089,8 @@
 								"$ref": "AAAAAAF4aQ8N5FVZDnk="
 							},
 							"name": "content",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4067,7 +4099,8 @@
 								"$ref": "AAAAAAF4aQ8N5FVZDnk="
 							},
 							"name": "order status",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4076,7 +4109,8 @@
 								"$ref": "AAAAAAF4aQ8N5FVZDnk="
 							},
 							"name": "delivery adress",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4085,7 +4119,8 @@
 								"$ref": "AAAAAAF4aQ8N5FVZDnk="
 							},
 							"name": "price",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4094,7 +4129,8 @@
 								"$ref": "AAAAAAF4aQ8N5FVZDnk="
 							},
 							"name": "note",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -4113,7 +4149,8 @@
 								"$ref": "AAAAAAF4aQ9sq1WFRZY="
 							},
 							"name": "Date",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4122,7 +4159,8 @@
 								"$ref": "AAAAAAF4aQ9sq1WFRZY="
 							},
 							"name": "customer",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4131,7 +4169,8 @@
 								"$ref": "AAAAAAF4aQ9sq1WFRZY="
 							},
 							"name": "order",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4139,7 +4178,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF4aQ9sq1WFRZY="
 							},
-							"name": "a supprimer je pense"
+							"name": "a supprimer je pense",
+							"type": ""
 						}
 					]
 				},
@@ -4158,7 +4198,8 @@
 								"$ref": "AAAAAAF4aRD1/VW5lG4="
 							},
 							"name": "content",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4167,7 +4208,8 @@
 								"$ref": "AAAAAAF4aRD1/VW5lG4="
 							},
 							"name": "total price",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -4186,7 +4228,8 @@
 								"$ref": "AAAAAAF4aRF5CFXkPn0="
 							},
 							"name": "content",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -4220,7 +4263,8 @@
 								"$ref": "AAAAAAF4aRGniFYPXls="
 							},
 							"name": "dishID",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4229,7 +4273,8 @@
 								"$ref": "AAAAAAF4aRGniFYPXls="
 							},
 							"name": "dishName",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -4263,7 +4308,8 @@
 								"$ref": "AAAAAAF4aRHF9VY5sa0="
 							},
 							"name": "menuName",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4272,7 +4318,8 @@
 								"$ref": "AAAAAAF4aRHF9VY5sa0="
 							},
 							"name": "menuID",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4281,7 +4328,8 @@
 								"$ref": "AAAAAAF4aRHF9VY5sa0="
 							},
 							"name": "content",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -4342,7 +4390,8 @@
 								"$ref": "AAAAAAF4aWE/n1eyHV8="
 							},
 							"name": "description",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4351,7 +4400,8 @@
 								"$ref": "AAAAAAF4aWE/n1eyHV8="
 							},
 							"name": "price",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4360,7 +4410,8 @@
 								"$ref": "AAAAAAF4aWE/n1eyHV8="
 							},
 							"name": "supplements",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				}
