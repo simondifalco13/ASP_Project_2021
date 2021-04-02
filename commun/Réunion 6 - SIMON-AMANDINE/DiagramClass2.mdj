@@ -1557,7 +1557,7 @@
 											"top": 811,
 											"width": 153.861328125,
 											"height": 12,
-											"text": "-address1: string",
+											"text": "-adress: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2099,7 +2099,7 @@
 											"top": 553,
 											"width": 115.201171875,
 											"height": 12,
-											"text": "-adress1: string",
+											"text": "-adress: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8278,7 +8278,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF4Y6002RNzTEQ="
 							},
-							"name": "address1",
+							"name": "adress",
 							"visibility": "private",
 							"type": "string"
 						},
@@ -8760,7 +8760,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF4Y7GyEiy0+mQ="
 							},
-							"name": "adress1",
+							"name": "adress",
 							"visibility": "private",
 							"type": "string"
 						},
