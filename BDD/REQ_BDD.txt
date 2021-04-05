@@ -5,7 +5,7 @@ CREATE DATABASE asp_project
 
 CREATE TABLE restorers
 (
-  restorerId INT PRIMARY KEY NOT NULL,
+  restorerId INT PRIMARY KEY IDENTITY,
   firstName VARCHAR(50),
   lastName VARCHAR(50),
   password VARCHAR(30),
@@ -18,7 +18,7 @@ CREATE TABLE restorers
 
 CREATE TABLE customers
 (
-  customerId INT PRIMARY KEY NOT NULL,
+  customerId INT PRIMARY KEY IDENTITY,
   firstName VARCHAR(50),
   lastName VARCHAR(50),
   password VARCHAR(30),
@@ -33,7 +33,7 @@ CREATE TABLE customers
 
 CREATE TABLE restaurants
 (
-  restaurantId INT PRIMARY KEY NOT NULL,
+  restaurantId INT PRIMARY KEY IDENTITY,
   name VARCHAR(50),
   lastName VARCHAR(50),
   password VARCHAR(30),
@@ -52,7 +52,7 @@ CREATE TABLE restaurants
 
 CREATE TABLE opinions
 (
-  opinionId INT PRIMARY KEY NOT NULL,
+  opinionId INT PRIMARY KEY IDENTITY,
   restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE,
   customerId INT FOREIGN KEY REFERENCES customers(customerId) ON DELETE CASCADE ,
   opinionText varchar(200),
@@ -61,7 +61,7 @@ CREATE TABLE opinions
 
 CREATE TABLE schedules
 (
-  scheduleId INT PRIMARY KEY NOT NULL,
+  scheduleId INT PRIMARY KEY IDENTITY,
   restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE,
   openingDay varchar(20),
   openTime time,
@@ -71,7 +71,7 @@ CREATE TABLE schedules
 
 CREATE TABLE menus
 (
-  menuId INT PRIMARY KEY NOT NULL,
+  menuId INT PRIMARY KEY IDENTITY,
   restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE ,
   name VARCHAR(50),
   price DECIMAL(5,2),
@@ -81,7 +81,7 @@ CREATE TABLE menus
 
 CREATE TABLE dishes
 (
-  dishId INT PRIMARY KEY NOT NULL,
+  dishId INT PRIMARY KEY IDENTITY,
   restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE ,
   name VARCHAR(50),
   price DECIMAL(5,2),
@@ -101,7 +101,7 @@ CREATE TABLE menu_details
 
 CREATE TABLE orders
 (
- orderId INT PRIMARY KEY NOT NULL,
+ orderId INT PRIMARY KEY IDENTITY,
  orderStatus varchar(50),
  deliveryAdress varchar(100),
  orderDate datetime,
@@ -129,4 +129,5 @@ A TESTER CAR PAS SÛR POUR LES CASCADES
 2.INSERTIONS
 ____________
 
-
+INSERT INTO customers (firstName,lastName,password,gender,adress,postalCode,country,phoneNumber,dateOfBirth) VALUES 
+('Daniel','Pret','password1234','male','rue enghien 12','6200','Belgique','0479854147','1956-12-03'),('Marie','Roper','password1234','female','rue enior 32','6400','Belgique','0479334117','1976-11-28')
