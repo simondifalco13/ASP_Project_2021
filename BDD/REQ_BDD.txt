@@ -1,0 +1,132 @@
+1.CREATION OF STRUCTURE
+--------------------------
+
+CREATE DATABASE asp_project
+
+CREATE TABLE restorers
+(
+  restorerId INT PRIMARY KEY NOT NULL,
+  firstName VARCHAR(50),
+  lastName VARCHAR(50),
+  password VARCHAR(30),
+  gender varchar(10),
+  adress varchar(100),
+  postalCode varchar(15),
+  country varchar(50),
+  phoneNumber varchar(50)
+)
+
+CREATE TABLE customers
+(
+  customerId INT PRIMARY KEY NOT NULL,
+  firstName VARCHAR(50),
+  lastName VARCHAR(50),
+  password VARCHAR(30),
+  gender varchar(10),
+  adress varchar(100),
+  postalCode varchar(15),
+  country varchar(50),
+  phoneNumber varchar(50),
+  dateOfBirth DATE
+)
+
+
+CREATE TABLE restaurants
+(
+  restaurantId INT PRIMARY KEY NOT NULL,
+  name VARCHAR(50),
+  lastName VARCHAR(50),
+  password VARCHAR(30),
+  gender varchar(10),
+  adress varchar(100),
+  postalCode varchar(15),
+  country varchar(50),
+  phoneNumber varchar(50),
+  restaurantType varchar(30),
+  description varchar(200),
+  tvaNumber varchar(30),
+  restorerId INT FOREIGN KEY REFERENCES restorers(restorerId) ON DELETE CASCADE,
+  
+)
+
+
+CREATE TABLE opinions
+(
+  opinionId INT PRIMARY KEY NOT NULL,
+  restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE,
+  customerId INT FOREIGN KEY REFERENCES customers(customerId) ON DELETE CASCADE ,
+  opinionText varchar(200),
+  rating INT
+)
+
+CREATE TABLE schedules
+(
+  scheduleId INT PRIMARY KEY NOT NULL,
+  restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE,
+  openingDay varchar(20),
+  openTime time,
+  closeTime time
+)
+
+
+CREATE TABLE menus
+(
+  menuId INT PRIMARY KEY NOT NULL,
+  restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE ,
+  name VARCHAR(50),
+  price DECIMAL(5,2),
+  description varchar(200),
+  typeService varchar(50)
+)
+
+CREATE TABLE dishes
+(
+  dishId INT PRIMARY KEY NOT NULL,
+  restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE ,
+  name VARCHAR(50),
+  price DECIMAL(5,2),
+  description varchar(200),
+  typeService varchar(50),
+  typeDish varchar(50)
+  
+)
+
+
+CREATE TABLE menu_details
+(
+  menuId INT FOREIGN KEY REFERENCES menus(menuId) ,
+  dishId INT FOREIGN KEY REFERENCES dishes(dishId)
+)
+
+
+CREATE TABLE orders
+(
+ orderId INT PRIMARY KEY NOT NULL,
+ orderStatus varchar(50),
+ deliveryAdress varchar(100),
+ orderDate datetime,
+ note varchar(200),
+ customerId INT FOREIGN KEY REFERENCES customers(customerId) ON DELETE CASCADE,
+)
+
+CREATE TABLE order_dish_details
+(
+  orderId INT FOREIGN KEY REFERENCES orders(orderId) ON DELETE CASCADE,
+  dishId INT FOREIGN KEY REFERENCES dishes(dishId) 
+)
+
+
+CREATE TABLE order_menu_details
+(
+  orderId INT FOREIGN KEY REFERENCES orders(orderId) ON DELETE CASCADE,
+  menuId INT FOREIGN KEY REFERENCES menus(menuId)
+)
+
+--------------------
+A TESTER CAR PAS SÛR POUR LES CASCADES
+
+---------------------------------------
+2.INSERTIONS
+____________
+
+
