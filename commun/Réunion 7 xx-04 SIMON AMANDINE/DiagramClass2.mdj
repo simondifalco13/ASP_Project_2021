@@ -1714,7 +1714,7 @@
 											"top": 881,
 											"width": 163.634765625,
 											"height": 12,
-											"text": "-tel: int",
+											"text": "-tel: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8420,7 +8420,7 @@
 							},
 							"name": "tel",
 							"visibility": "private",
-							"type": "int"
+							"type": "string"
 						},
 						{
 							"_type": "UMLAttribute",
