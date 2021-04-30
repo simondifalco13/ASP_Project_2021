@@ -13310,7 +13310,7 @@
 									"font": "Arial;13;0",
 									"left": 798,
 									"top": 332.5,
-									"width": 106.078125,
+									"width": 106,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeYNXOe3A="
@@ -13918,7 +13918,7 @@
 									"font": "Arial;13;0",
 									"left": 1245,
 									"top": 748.5,
-									"width": 100.99365234375,
+									"width": 100,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeYNXszHo="
@@ -14332,7 +14332,7 @@
 									"font": "Arial;13;0",
 									"left": 814,
 									"top": 1204.5,
-									"width": 105.3544921875,
+									"width": 104,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeYdYCwkk="
@@ -14537,7 +14537,7 @@
 									"font": "Arial;13;0",
 									"left": 813.5,
 									"top": 1300.5,
-									"width": 102.47265625,
+									"width": 101,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeYdYNfUk="
@@ -17494,7 +17494,7 @@
 									"font": "Arial;13;0",
 									"left": 800,
 									"top": 980.5,
-									"width": 114.0126953125,
+									"width": 113,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeYtaYsps="
@@ -18619,7 +18619,7 @@
 									"font": "Arial;13;0",
 									"left": 709.5,
 									"top": 1428.5,
-									"width": 102.45361328125,
+									"width": 101,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeY9bMbtM="
@@ -19133,7 +19133,7 @@
 									"font": "Arial;13;0",
 									"left": 1079.5,
 									"top": 1620.5,
-									"width": 73.552734375,
+									"width": 73,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeY9bm8Fo="
@@ -19343,7 +19343,7 @@
 									"font": "Arial;13;0",
 									"left": 1035,
 									"top": 1668.5,
-									"width": 90.16455078125,
+									"width": 89,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeY9bxmXQ="
@@ -19553,7 +19553,7 @@
 									"font": "Arial;13;0",
 									"left": 673,
 									"top": 1676.5,
-									"width": 82.21728515625,
+									"width": 82,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeY9b8sa4="
@@ -19763,7 +19763,7 @@
 									"font": "Arial;13;0",
 									"left": 948.5,
 									"top": 1732.5,
-									"width": 98.86083984375,
+									"width": 98,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeY9cHyP8="
@@ -19973,7 +19973,7 @@
 									"font": "Arial;13;0",
 									"left": 763,
 									"top": 1732.5,
-									"width": 90.91357421875,
+									"width": 90,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeY9cSYRY="
@@ -20747,7 +20747,7 @@
 									"font": "Arial;13;0",
 									"left": 955.5,
 									"top": 1428.5,
-									"width": 132.8017578125,
+									"width": 132,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeZNc1GdM="
@@ -20957,7 +20957,7 @@
 									"font": "Arial;13;0",
 									"left": 806,
 									"top": 844.5,
-									"width": 104.62451171875,
+									"width": 103,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeZNdAipw="
@@ -21800,7 +21800,7 @@
 									"font": "Arial;13;0",
 									"left": 644,
 									"top": 1084.5,
-									"width": 133.4873046875,
+									"width": 132,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeZddnjQk="
@@ -22010,7 +22010,7 @@
 									"font": "Arial;13;0",
 									"left": 946.5,
 									"top": 1084.5,
-									"width": 126.9873046875,
+									"width": 126,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF4hLfeZddy0Eg="
@@ -33086,8 +33086,8 @@
 										"$ref": "AAAAAAF5EqLEHAOglmQ="
 									},
 									"font": "times new roman;12;0",
-									"left": 952,
-									"top": 24,
+									"left": 1168,
+									"top": 88,
 									"width": 249,
 									"height": 169,
 									"text": "class diagram\n\nForgot password\nVerifyMail\nGenerateRandPassword\nSendPassword"
