@@ -8,7 +8,7 @@ namespace ASP2020_2021_.Models.A_trier_avec_Simon {
         Lunch,
         Evening
     }
-    public class Meal {
+    public abstract class Meal {
         typeService type;
         public string Name { get; set; }
         public string Description { get; set; }

@@ -17,7 +17,7 @@ namespace ASP2020_2021_.Models.A_trier_avec_Simon {
         Italian
     }
     public class Restaurant {
-        restaurantType type;
+        public restaurantType Type { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
         public string Country { get; set; }

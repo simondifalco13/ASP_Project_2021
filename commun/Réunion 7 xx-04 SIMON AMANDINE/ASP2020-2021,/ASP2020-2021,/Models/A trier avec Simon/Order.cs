@@ -4,14 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASP2020_2021_.Models.A_trier_avec_Simon {
-    enum orderStatus {
+    public enum orderStatus {
         Validate,
         OnPreparation,
         OnDelivery,
         Finished
     }
     public class Order {
-        orderStatus status;
+
+        public orderStatus Status { get; set; }
         public bool Delivery { get; set; }
         public string DeliveryAdress { get; set; }
         public string Note { get; set; }
