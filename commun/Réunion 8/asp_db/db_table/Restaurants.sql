@@ -1,7 +1,7 @@
 USE [ASP_Project]
 GO
 
-/****** Object:  Table [dbo].[Restaurants]    Script Date: 04-05-21 22:43:37 ******/
+/****** Object:  Table [dbo].[Restaurants]    Script Date: 09-05-21 08:59:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,7 +11,7 @@ GO
 CREATE TABLE [dbo].[Restaurants](
 	[Name] [nvarchar](100) NOT NULL,
 	[City] [nvarchar](100) NOT NULL,
-	[Address] [nvarchar](100) NOT NULL,
+	[Adress] [nvarchar](100) NOT NULL,
 	[PostalCode] [nvarchar](20) NOT NULL,
 	[PhoneNumber] [nvarchar](50) NOT NULL,
 	[RestaurantType] [nvarchar](50) NOT NULL,

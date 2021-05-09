@@ -1,7 +1,7 @@
 USE [ASP_Project]
 GO
 
-/****** Object:  Table [dbo].[OrderMenuDetails]    Script Date: 04-05-21 22:43:21 ******/
+/****** Object:  Table [dbo].[OrderMenuDetails]    Script Date: 09-05-21 08:58:53 ******/
 SET ANSI_NULLS ON
 GO
 
