@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASP_PROJECT.DAL.IDAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -40,6 +41,20 @@ namespace ASP_PROJECT.Models.Project
         public override void Modify()
         {
 
+        }
+
+        public static bool AddDish(Dish d,Restaurant r,IMenuDAL menuDAL)
+        {
+            bool success;
+            success=menuDAL.AddDish(d, r);
+            return success;
+        }
+
+        public static List<Dish> GetDishes(Restaurant r,IMenuDAL menuDAL)
+        {
+            List<Dish> list;
+            list = menuDAL.GetDishes(r);
+            return list;
         }
     }
 }

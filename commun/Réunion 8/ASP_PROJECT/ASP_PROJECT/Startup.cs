@@ -1,3 +1,5 @@
+using ASP_PROJECT.DAL.CDAL;
+using ASP_PROJECT.DAL.IDAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,7 +25,10 @@ namespace ASP_PROJECT
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = Configuration.GetConnectionString("default");
             services.AddControllersWithViews();
+            services.AddTransient<IMenuDAL>(md => new MenuDAL(connectionString));
+            services.AddTransient<IRestaurantDAL>(md => new RestaurantDAL(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

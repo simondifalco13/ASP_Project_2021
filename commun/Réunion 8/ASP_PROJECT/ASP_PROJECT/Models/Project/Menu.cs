@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,8 @@ namespace ASP_PROJECT.Models.Project
 {
     public class Menu : Meal
     {
-        public List<Dish> dishList;
+        [Display(Name ="Liste des plats")]
+        public List<Dish> DishList;
         public Menu() : base()
         {
 
