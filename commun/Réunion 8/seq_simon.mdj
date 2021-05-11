@@ -10532,7 +10532,7 @@
 												"$ref": "AAAAAAF42eY3008PA0M="
 											},
 											"font": "Arial;13;0",
-											"left": 384.72998046875,
+											"left": 376.72998046875,
 											"top": 5,
 											"width": 94.2216796875,
 											"height": 13,
@@ -10545,7 +10545,7 @@
 												"$ref": "AAAAAAF42eY3008PA0M="
 											},
 											"font": "Arial;13;1",
-											"left": 365,
+											"left": 357,
 											"top": 5,
 											"width": 14.72998046875,
 											"height": 13,
@@ -10553,7 +10553,7 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 360,
+									"left": 352,
 									"width": 969,
 									"height": 785,
 									"nameLabel": {
@@ -12842,7 +12842,7 @@
 												"$ref": "AAAAAAF5CNxbETZuAR0="
 											},
 											"font": "Arial;13;0",
-											"left": 40.72998046875,
+											"left": 32.72998046875,
 											"top": 21,
 											"width": 120.22802734375,
 											"height": 13,
@@ -12855,7 +12855,7 @@
 												"$ref": "AAAAAAF5CNxbETZuAR0="
 											},
 											"font": "Arial;13;1",
-											"left": 21,
+											"left": 13,
 											"top": 21,
 											"width": 14.72998046875,
 											"height": 13,
@@ -12863,7 +12863,7 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 16,
+									"left": 8,
 									"top": 16,
 									"width": 1185,
 									"height": 441,
@@ -12916,7 +12916,7 @@
 													"top": 47,
 													"width": 138.58447265625,
 													"height": 13,
-													"text": "Lifeline1: Restaurant"
+													"text": ": Restaurant"
 												},
 												{
 													"_type": "LabelView",
@@ -13032,7 +13032,7 @@
 													"top": 47,
 													"width": 113.30810546875,
 													"height": 13,
-													"text": "Lifeline3: Orders"
+													"text": ": Orders"
 												},
 												{
 													"_type": "LabelView",
@@ -13091,14 +13091,14 @@
 											"left": 870,
 											"top": 80,
 											"width": 1,
-											"height": 377
+											"height": 353
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 808,
 									"top": 40,
 									"width": 123.30810546875,
-									"height": 417,
+									"height": 393,
 									"nameCompartment": {
 										"$ref": "AAAAAAF5CN/2PjdAMec="
 									},
@@ -13454,12 +13454,12 @@
 												"$ref": "AAAAAAF5WGx9W1WRfbM="
 											},
 											"font": "Arial;13;0",
-											"left": 387,
+											"left": 400,
 											"top": 280,
 											"width": 195.81884765625,
 											"height": 13,
-											"alpha": 1.5707963267948966,
-											"distance": 10,
+											"alpha": 0.655695254494504,
+											"distance": 16.401219466856727,
 											"hostEdge": {
 												"$ref": "AAAAAAF5WGx9XFWSm/g="
 											},
@@ -13829,7 +13829,6 @@
 							"_parent": {
 								"$ref": "AAAAAAF5CNxbETZsPlk="
 							},
-							"name": "Lifeline1",
 							"represent": {
 								"$ref": "AAAAAAF5CN6ATzaU/bw="
 							},
@@ -13841,7 +13840,6 @@
 							"_parent": {
 								"$ref": "AAAAAAF5CNxbETZsPlk="
 							},
-							"name": "Lifeline3",
 							"represent": {
 								"$ref": "AAAAAAF5CN/2Pjc9VYU="
 							},
@@ -14089,7 +14087,7 @@
 													"top": 47,
 													"width": 138.58447265625,
 													"height": 13,
-													"text": "Lifeline1: Restaurant"
+													"text": ": Restaurant"
 												},
 												{
 													"_type": "LabelView",
@@ -14205,7 +14203,7 @@
 													"top": 87,
 													"width": 114.1435546875,
 													"height": 13,
-													"text": "Lifeline2: Restorer"
+													"text": ": Restorer"
 												},
 												{
 													"_type": "LabelView",
@@ -14322,7 +14320,7 @@
 													"top": 47,
 													"width": 113.30810546875,
 													"height": 13,
-													"text": "Lifeline3: Orders"
+													"text": ": Orders"
 												},
 												{
 													"_type": "LabelView",
@@ -14516,9 +14514,9 @@
 											"font": "Arial;13;0",
 											"left": 335.9599609375,
 											"top": 261,
-											"width": 82.64990234375,
+											"width": 126.72802734375,
 											"height": 13,
-											"text": "UpdateOrders"
+											"text": "Update Orders Status"
 										},
 										{
 											"_type": "LabelView",
@@ -14569,7 +14567,7 @@
 													"font": "Arial;13;0",
 													"left": 304,
 													"top": 279,
-													"width": 177.576171875,
+													"width": 181.18798828125,
 													"height": 43,
 													"guardLabel": {
 														"$ref": "AAAAAAF5COkKwjh1068="
@@ -14579,14 +14577,14 @@
 											"font": "Arial;13;0",
 											"left": 304,
 											"top": 279,
-											"width": 177.576171875,
+											"width": 181.18798828125,
 											"height": 43
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 304,
 									"top": 256,
-									"width": 177.576171875,
+									"width": 181.18798828125,
 									"height": 66,
 									"nameLabel": {
 										"$ref": "AAAAAAF5COkKvDhmtAo="
@@ -14615,8 +14613,8 @@
 												"$ref": "AAAAAAF5COlf1jiAChc="
 											},
 											"font": "Arial;13;0",
-											"left": 309.07177734375,
-											"top": 221,
+											"left": 317.07177734375,
+											"top": 229,
 											"width": 76.8798828125,
 											"height": 13,
 											"text": "Update order"
@@ -14628,8 +14626,8 @@
 												"$ref": "AAAAAAF5COlf1jiAChc="
 											},
 											"font": "Arial;13;1",
-											"left": 285,
-											"top": 221,
+											"left": 293,
+											"top": 229,
 											"width": 19.07177734375,
 											"height": 13,
 											"text": "opt"
@@ -14662,14 +14660,14 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 300,
-															"top": 254,
+															"left": 308,
+															"top": 262,
 															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
-													"left": 280,
-													"top": 239,
+													"left": 288,
+													"top": 247,
 													"width": 625,
 													"height": 43,
 													"guardLabel": {
@@ -14678,15 +14676,15 @@
 												}
 											],
 											"font": "Arial;13;0",
-											"left": 280,
-											"top": 239,
+											"left": 288,
+											"top": 247,
 											"width": 625,
 											"height": 43
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 280,
-									"top": 216,
+									"left": 288,
+									"top": 224,
 									"width": 625,
 									"height": 121,
 									"nameLabel": {
@@ -14709,7 +14707,6 @@
 							"_parent": {
 								"$ref": "AAAAAAF5COdpzze00LU="
 							},
-							"name": "Lifeline1",
 							"represent": {
 								"$ref": "AAAAAAF5COhF5TfmGxU="
 							},
@@ -14721,7 +14718,6 @@
 							"_parent": {
 								"$ref": "AAAAAAF5COdpzze00LU="
 							},
-							"name": "Lifeline2",
 							"represent": {
 								"$ref": "AAAAAAF5COhP1TgFkbM="
 							},
@@ -14754,7 +14750,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF5COdpzze00LU="
 							},
-							"name": "UpdateOrders",
+							"name": "Update Orders Status",
 							"interactionOperator": "seq",
 							"operands": [
 								{
@@ -14961,7 +14957,7 @@
 									"left": 24,
 									"top": 8,
 									"width": 1321,
-									"height": 865,
+									"height": 785,
 									"nameLabel": {
 										"$ref": "AAAAAAF5CPPBRjijg+g="
 									},
@@ -19129,14 +19125,14 @@
 											"left": 143,
 											"top": 105,
 											"width": 1,
-											"height": 240
+											"height": 176
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 81,
 									"top": 40,
 									"width": 124.1435546875,
-									"height": 305,
+									"height": 241,
 									"stereotypeDisplay": "icon",
 									"nameCompartment": {
 										"$ref": "AAAAAAF5DXikEOgMZCY="
@@ -25085,7 +25081,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 64.72998046875,
-											"top": 37,
+											"top": 29,
 											"width": 120.2216796875,
 											"height": 13,
 											"text": "Consult Informations"
@@ -25098,7 +25094,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 45,
-											"top": 37,
+											"top": 29,
 											"width": 14.72998046875,
 											"height": 13,
 											"text": "sd"
@@ -25106,7 +25102,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 40,
-									"top": 32,
+									"top": 24,
 									"width": 1401,
 									"height": 529,
 									"nameLabel": {
@@ -25275,7 +25271,7 @@
 													"top": 87,
 													"width": 132.91357421875,
 													"height": 13,
-													"text": "Lifeline2: Custommer"
+													"text": ": Custommer"
 												},
 												{
 													"_type": "LabelView",
@@ -26167,9 +26163,9 @@
 												"$ref": "AAAAAAF5XJKgaYf4zh4="
 											},
 											"font": "Arial;13;0",
-											"left": 1032,
+											"left": 1028,
 											"top": 136,
-											"width": 132.2216796875,
+											"width": 140.8798828125,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -26177,7 +26173,7 @@
 												"$ref": "AAAAAAF5XJKgaYf5Uds="
 											},
 											"edgePosition": 1,
-											"text": "3 : DisplayInformations"
+											"text": "3 : DisplayInformations()"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -26302,6 +26298,9 @@
 							},
 							"target": {
 								"$ref": "AAAAAAF5E1k7ZxbLhxg="
+							},
+							"signature": {
+								"$ref": "AAAAAAF5XObFdUK25YE="
 							}
 						},
 						{
@@ -26354,7 +26353,6 @@
 							"_parent": {
 								"$ref": "AAAAAAF5E1ctVhZY/ng="
 							},
-							"name": "Lifeline2",
 							"represent": {
 								"$ref": "AAAAAAF5E1kZAxap5Ew="
 							},
@@ -26470,7 +26468,8 @@
 					"_parent": {
 						"$ref": "AAAAAAF5E1ctVRZX9b4="
 					},
-					"name": "Role6"
+					"name": "Role6",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -26500,6 +26499,14 @@
 						"$ref": "AAAAAAF5E1g2ThahHMQ="
 					},
 					"name": "ModifyInformations"
+				},
+				{
+					"_type": "UMLOperation",
+					"_id": "AAAAAAF5XObFdUK25YE=",
+					"_parent": {
+						"$ref": "AAAAAAF5E1g2ThahHMQ="
+					},
+					"name": "DisplayInformations"
 				}
 			]
 		},
@@ -27966,12 +27973,12 @@
 												"$ref": "AAAAAAF5XJm2q4kIcwc="
 											},
 											"font": "Arial;13;0",
-											"left": 310,
-											"top": 472,
+											"left": 309,
+											"top": 456,
 											"width": 88.13720703125,
 											"height": 13,
-											"alpha": -1.6162191526082168,
-											"distance": 22.02271554554524,
+											"alpha": -1.8925453811907886,
+											"distance": 6.324555320336759,
 											"hostEdge": {
 												"$ref": "AAAAAAF5XJm2rIkJ140="
 											},
@@ -32047,7 +32054,8 @@
 					"_parent": {
 						"$ref": "AAAAAAF5FLCY0BMQLMU="
 					},
-					"name": "Role11"
+					"name": "Role11",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -32055,7 +32063,8 @@
 					"_parent": {
 						"$ref": "AAAAAAF5FLCY0BMQLMU="
 					},
-					"name": "Role12"
+					"name": "Role12",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -32063,7 +32072,8 @@
 					"_parent": {
 						"$ref": "AAAAAAF5FLCY0BMQLMU="
 					},
-					"name": "Role13"
+					"name": "Role13",
+					"type": ""
 				}
 			]
 		},
