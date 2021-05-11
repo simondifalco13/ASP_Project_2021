@@ -1,0 +1,25 @@
+﻿<style src="wwwroot/css/simon.css"></style>
+
+<div class="grid-container">
+    <div class="item1">
+        <h2 class="display-4">Bienvenue sur la page de management de la carte</h2>
+    </div>
+    <div class="item2">
+        <button><a asp-controller="Menu" asp-action="AddMenu">Add Menu</a></button>
+        <button><a asp-controller="Menu" asp-action="AddDish">Add Dish</a></button>
+    </div>
+    <div>
+        <div class="item3">
+            Menus<br />
+            
+        </div>
+        <div class="item4">Dishes</div>
+    </div>
+</div>
+@if ((String)ViewData["success"] == "true")
+{
+    <div class="alert-success">
+        <p>Ajout du dish avec succès</p>
+    </div>
+} 
+

@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "z76Kn7/X3mGy6bmCMot5poC6aoq8U3ZizL63mdoSCV1IPUJJR9uXDbN/nUa+4/GTTiLvr1kEZUhDmCmsWH96gQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Kira\\Documents\\GitHub\\ASP_Project_2021\\commun\\réunion 9\\ASP_PROJECT\\ASP_PROJECT\\ASP_PROJECT.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Kira\\.nuget\\packages\\ado.net.client\\1.4.1.1\\ado.net.client.1.4.1.1.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\ado.net.client.annotations\\1.1.9.2\\ado.net.client.annotations.1.1.9.2.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\ado.net.client.core\\1.4.2.1\\ado.net.client.core.1.4.2.1.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\ado.net.client.implementation\\1.4.1.1\\ado.net.client.implementation.1.4.1.1.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\system.data.sqlclient\\4.8.2\\system.data.sqlclient.4.8.2.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\Kira\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
