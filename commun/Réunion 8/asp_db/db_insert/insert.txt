@@ -54,16 +54,16 @@ INSERT INTO opinions(restaurantId,customerId,opinionText,rating) VALUES
 
 
 INSERT INTO dishes (restaurantId,name,price,typeService,typeDish,description) VALUES
-(1,'Mitraillette Poulet Mariné',6.5,'Evening','Dish','La mitraillette avec du poulet mariné maison !'),
-(1,'Hamburger',3,'Lunch','Dish','Le bon hamburger viande maison'),
-(1,'Assiette Pitta',10,'Evening','Dish','Assiette Pitta avec crudités,feta,sauce'),
-(1,'Soda Maison',2,'Lunch','Drink','Soda à la pêche fait maison, très frais'),
-(1,'Frites',3,'Evening','Dish','Frites maison avec des pommes de terres locales'),
-(1,'Crême glacée vanille',3,'Lunch','Dessert','Glace faite maison'),
-(2,'Pâtes bolognese',12,'Evening','Dish','Les pâtes bolognese de la maison ! Un classique.'),
-(2,'Scampi maison',10,'Evening','Dish','Produit frais de qualité'),
-(2,'Verre de Vin rouge',4,'Evening','Drink','Du vin de très bon millésime'),
-(2,'Patisseries siciliennes',15,'Evening','Dessert','Les meilleurs de la région')
+(1,'Mitraillette Poulet Mariné',6.5,1,1,'La mitraillette avec du poulet mariné maison !'),
+(1,'Hamburger',3,0,1,'Le bon hamburger viande maison'),
+(1,'Assiette Pitta',10,1,1,'Assiette Pitta avec crudités,feta,sauce'),
+(1,'Soda Maison',2,0,4,'Soda à la pêche fait maison, très frais'),
+(1,'Frites',3,1,1,'Frites maison avec des pommes de terres locales'),
+(1,'Crême glacée vanille',3,0,2,'Glace faite maison'),
+(2,'Pâtes bolognese',12,1,1,'Les pâtes bolognese de la maison ! Un classique.'),
+(2,'Scampi maison',10,1,1,'Produit frais de qualité'),
+(2,'Verre de Vin rouge',4,1,4,'Du vin de très bon millésime'),
+(2,'Patisseries siciliennes',15,1,2,'Les meilleurs de la région')
 
 
 INSERT INTO menus (restaurantId,name,price,typeService,description) VALUES
