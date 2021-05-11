@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "ASP_PROJECT/1.0.0": {
         "dependencies": {
+          "ADO.Net.Client": "1.4.1.1",
           "System.Data.SqlClient": "4.8.2",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
@@ -323,6 +324,59 @@
         },
         "compile": {
           "ASP_PROJECT.dll": {}
+        }
+      },
+      "ADO.Net.Client/1.4.1.1": {
+        "dependencies": {
+          "ADO.Net.Client.Implementation": "1.4.1.1"
+        },
+        "runtime": {
+          "lib/net5.0/ADO.Net.Client.dll": {
+            "assemblyVersion": "1.4.1.1",
+            "fileVersion": "1.4.1.1"
+          }
+        },
+        "compile": {
+          "lib/net5.0/ADO.Net.Client.dll": {}
+        }
+      },
+      "ADO.Net.Client.Annotations/1.1.9.2": {
+        "runtime": {
+          "lib/net5.0/ADO.Net.Client.Annotations.dll": {
+            "assemblyVersion": "1.1.9.2",
+            "fileVersion": "1.1.9.2"
+          }
+        },
+        "compile": {
+          "lib/net5.0/ADO.Net.Client.Annotations.dll": {}
+        }
+      },
+      "ADO.Net.Client.Core/1.4.2.1": {
+        "dependencies": {
+          "ADO.Net.Client.Annotations": "1.1.9.2"
+        },
+        "runtime": {
+          "lib/net5.0/ADO.Net.Client.Core.dll": {
+            "assemblyVersion": "1.4.2.1",
+            "fileVersion": "1.4.2.1"
+          }
+        },
+        "compile": {
+          "lib/net5.0/ADO.Net.Client.Core.dll": {}
+        }
+      },
+      "ADO.Net.Client.Implementation/1.4.1.1": {
+        "dependencies": {
+          "ADO.Net.Client.Core": "1.4.2.1"
+        },
+        "runtime": {
+          "lib/net5.0/ADO.Net.Client.Implementation.dll": {
+            "assemblyVersion": "1.4.1.1",
+            "fileVersion": "1.4.1.1"
+          }
+        },
+        "compile": {
+          "lib/net5.0/ADO.Net.Client.Implementation.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/3.1.0": {},
@@ -2108,6 +2162,34 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "ADO.Net.Client/1.4.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rhUZO52MQPletbKnq4O0XiEayM829fdxyNhFcQcFQqvswbm7eOAwAjX9jCWWgPprMBYioperSgDzAXoqFTOTtg==",
+      "path": "ado.net.client/1.4.1.1",
+      "hashPath": "ado.net.client.1.4.1.1.nupkg.sha512"
+    },
+    "ADO.Net.Client.Annotations/1.1.9.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aOlIhHMX6h+ySkl58TkabksKMT+b7ovoevt2/TGY36Liv/jCuvqSEolIvv6aDjb8n3+99C8lti8ruZMTVz9abA==",
+      "path": "ado.net.client.annotations/1.1.9.2",
+      "hashPath": "ado.net.client.annotations.1.1.9.2.nupkg.sha512"
+    },
+    "ADO.Net.Client.Core/1.4.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qcXvRbQ8f8OQsoh1j6u4LwZLrTSOiu42u1ahU727QFj7IwwJSXI5NHYdAkrSL/1+owWDB1hitDA55YHini+/0g==",
+      "path": "ado.net.client.core/1.4.2.1",
+      "hashPath": "ado.net.client.core.1.4.2.1.nupkg.sha512"
+    },
+    "ADO.Net.Client.Implementation/1.4.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hmwHxB+pwjfzczuvYxcXryTZ/WD9wloiE3/AX9ho+/EP50WDOSLMaoY7mRQbZnqZCmleYb2dnaw+HNgK77GwTA==",
+      "path": "ado.net.client.implementation/1.4.1.1",
+      "hashPath": "ado.net.client.implementation.1.4.1.1.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/3.1.0": {
       "type": "package",

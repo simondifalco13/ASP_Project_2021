@@ -9,6 +9,12 @@ INSERT INTO customers (firstName,lastName,password,gender,address,postalCode,cit
 INSERT INTO restorers(firstName,lastName,password,gender,address,postalCode,city,country,email,phoneNumber) VALUES
 ('Phillipe','Esteb','password1234','male','rue steak ','6000','Charleroi','Belgique','phil.est@hotmail.com','0479781295'),
 ('Frank','Angus','password1234','male','avenue Baudouin','6001','Marcinelle','Belgique','frank.angus@gmail.com','0425219365'),
+('Daniella','Passin','password1234','female','rue du rosier','6010','Couillet','Belgique','daniella.ps@hotmail.com','0494135925')
+
+
+INSERT INTO restaurants(name,address,postalCode,city,country,phoneNumber,restaurantType,description,tvaNumber,restorerId) 
+VALUES
+('Snack Dan','place verte 3','6000','Charleroi','Belgique','071323768','Snack','Snack de qualité supérieure','BE7123543235',3),
 ('Chez Phil','chaussée de bruxelles','6040','Lodelinsart','Belgique','071143568','Italien','Restaurant italien avec des produits plus que frais','BE71678563235',1),
 ('Mex and Go','rue de leuven','4000','Louvain-La-Neuve','Belgique','071315918','Mexicain','Nourriture mexicain en fast food','BE7173543485',2),
 ('Phill & Co','rue de gosselies','6041','Jumet','Belgique','071891291','Pizza','Pizzeria de qualité','BE8923543729',1)

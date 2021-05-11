@@ -5,9 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Amandine\" />
+    <Compile Remove="Views\Amandine\**" />
+    <Content Remove="Views\Amandine\**" />
+    <EmbeddedResource Remove="Views\Amandine\**" />
+    <None Remove="Views\Amandine\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ViewModels\Amandine\" />
-    <Folder Include="Views\Amandine\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -96,3 +96,7 @@ C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\réunion 9\ASP_PROJECT\AS
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\réunion 9\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ref\ASP_PROJECT.dll
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\réunion 9\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.pdb
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\réunion 9\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.genruntimeconfig.cache
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\réunion 9\ASP_PROJECT\ASP_PROJECT\bin\Debug\net5.0\ADO.Net.Client.dll
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\réunion 9\ASP_PROJECT\ASP_PROJECT\bin\Debug\net5.0\ADO.Net.Client.Annotations.dll
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\réunion 9\ASP_PROJECT\ASP_PROJECT\bin\Debug\net5.0\ADO.Net.Client.Core.dll
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\réunion 9\ASP_PROJECT\ASP_PROJECT\bin\Debug\net5.0\ADO.Net.Client.Implementation.dll
