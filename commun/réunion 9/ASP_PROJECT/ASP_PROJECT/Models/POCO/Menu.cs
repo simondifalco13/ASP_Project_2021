@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASP_PROJECT.Models.Project
+namespace ASP_PROJECT.Models.POCO
 {
     public class Menu : Meal
     {
@@ -12,7 +12,7 @@ namespace ASP_PROJECT.Models.Project
         public List<Dish> DishList;
         public Menu() : base()
         {
-
+            DishList = new List<Dish>();
         }
         public override void Add()
         {

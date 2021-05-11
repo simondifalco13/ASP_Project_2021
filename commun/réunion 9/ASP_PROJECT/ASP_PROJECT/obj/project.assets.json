@@ -2,51 +2,6 @@
   "version": 3,
   "targets": {
     "net5.0": {
-      "ADO.Net.Client/1.4.1.1": {
-        "type": "package",
-        "dependencies": {
-          "ADO.Net.Client.Implementation": "1.4.1.1"
-        },
-        "compile": {
-          "lib/net5.0/ADO.Net.Client.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/ADO.Net.Client.dll": {}
-        }
-      },
-      "ADO.Net.Client.Annotations/1.1.9.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/ADO.Net.Client.Annotations.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/ADO.Net.Client.Annotations.dll": {}
-        }
-      },
-      "ADO.Net.Client.Core/1.4.2.1": {
-        "type": "package",
-        "dependencies": {
-          "ADO.Net.Client.Annotations": "1.1.9.2"
-        },
-        "compile": {
-          "lib/net5.0/ADO.Net.Client.Core.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/ADO.Net.Client.Core.dll": {}
-        }
-      },
-      "ADO.Net.Client.Implementation/1.4.1.1": {
-        "type": "package",
-        "dependencies": {
-          "ADO.Net.Client.Core": "1.4.2.1"
-        },
-        "compile": {
-          "lib/net5.0/ADO.Net.Client.Implementation.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/ADO.Net.Client.Implementation.dll": {}
-        }
-      },
       "Microsoft.NETCore.Platforms/3.1.0": {
         "type": "package",
         "compile": {
@@ -179,108 +134,6 @@
     }
   },
   "libraries": {
-    "ADO.Net.Client/1.4.1.1": {
-      "sha512": "rhUZO52MQPletbKnq4O0XiEayM829fdxyNhFcQcFQqvswbm7eOAwAjX9jCWWgPprMBYioperSgDzAXoqFTOTtg==",
-      "type": "package",
-      "path": "ado.net.client/1.4.1.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "CONTRIBUTING.md",
-        "LICENSE.md",
-        "README.md",
-        "ado.net.client.1.4.1.1.nupkg.sha512",
-        "ado.net.client.nuspec",
-        "icon.png",
-        "lib/net40/ADO.Net.Client.dll",
-        "lib/net40/ADO.Net.Client.xml",
-        "lib/net45/ADO.Net.Client.dll",
-        "lib/net45/ADO.Net.Client.xml",
-        "lib/net461/ADO.Net.Client.dll",
-        "lib/net461/ADO.Net.Client.xml",
-        "lib/net5.0/ADO.Net.Client.dll",
-        "lib/net5.0/ADO.Net.Client.xml",
-        "lib/netstandard2.0/ADO.Net.Client.dll",
-        "lib/netstandard2.0/ADO.Net.Client.xml",
-        "lib/netstandard2.1/ADO.Net.Client.dll",
-        "lib/netstandard2.1/ADO.Net.Client.xml"
-      ]
-    },
-    "ADO.Net.Client.Annotations/1.1.9.2": {
-      "sha512": "aOlIhHMX6h+ySkl58TkabksKMT+b7ovoevt2/TGY36Liv/jCuvqSEolIvv6aDjb8n3+99C8lti8ruZMTVz9abA==",
-      "type": "package",
-      "path": "ado.net.client.annotations/1.1.9.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "CONTRIBUTING.md",
-        "LICENSE.md",
-        "README.md",
-        "ado.net.client.annotations.1.1.9.2.nupkg.sha512",
-        "ado.net.client.annotations.nuspec",
-        "icon.png",
-        "lib/net40/ADO.Net.Client.Annotations.dll",
-        "lib/net40/ADO.Net.Client.Annotations.xml",
-        "lib/net5.0/ADO.Net.Client.Annotations.dll",
-        "lib/net5.0/ADO.Net.Client.Annotations.xml",
-        "lib/netstandard2.0/ADO.Net.Client.Annotations.dll",
-        "lib/netstandard2.0/ADO.Net.Client.Annotations.xml"
-      ]
-    },
-    "ADO.Net.Client.Core/1.4.2.1": {
-      "sha512": "qcXvRbQ8f8OQsoh1j6u4LwZLrTSOiu42u1ahU727QFj7IwwJSXI5NHYdAkrSL/1+owWDB1hitDA55YHini+/0g==",
-      "type": "package",
-      "path": "ado.net.client.core/1.4.2.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "CONTRIBUTING.md",
-        "LICENSE.md",
-        "README.md",
-        "ado.net.client.core.1.4.2.1.nupkg.sha512",
-        "ado.net.client.core.nuspec",
-        "icon.png",
-        "lib/net40/ADO.Net.Client.Core.dll",
-        "lib/net40/ADO.Net.Client.Core.xml",
-        "lib/net45/ADO.Net.Client.Core.dll",
-        "lib/net45/ADO.Net.Client.Core.xml",
-        "lib/net461/ADO.Net.Client.Core.dll",
-        "lib/net461/ADO.Net.Client.Core.xml",
-        "lib/net5.0/ADO.Net.Client.Core.dll",
-        "lib/net5.0/ADO.Net.Client.Core.xml",
-        "lib/netstandard2.0/ADO.Net.Client.Core.dll",
-        "lib/netstandard2.0/ADO.Net.Client.Core.xml",
-        "lib/netstandard2.1/ADO.Net.Client.Core.dll",
-        "lib/netstandard2.1/ADO.Net.Client.Core.xml"
-      ]
-    },
-    "ADO.Net.Client.Implementation/1.4.1.1": {
-      "sha512": "hmwHxB+pwjfzczuvYxcXryTZ/WD9wloiE3/AX9ho+/EP50WDOSLMaoY7mRQbZnqZCmleYb2dnaw+HNgK77GwTA==",
-      "type": "package",
-      "path": "ado.net.client.implementation/1.4.1.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "CONTRIBUTING.md",
-        "LICENSE.md",
-        "README.md",
-        "ado.net.client.implementation.1.4.1.1.nupkg.sha512",
-        "ado.net.client.implementation.nuspec",
-        "icon.png",
-        "lib/net40/ADO.Net.Client.Implementation.dll",
-        "lib/net40/ADO.Net.Client.Implementation.xml",
-        "lib/net45/ADO.Net.Client.Implementation.dll",
-        "lib/net45/ADO.Net.Client.Implementation.xml",
-        "lib/net461/ADO.Net.Client.Implementation.dll",
-        "lib/net461/ADO.Net.Client.Implementation.xml",
-        "lib/net5.0/ADO.Net.Client.Implementation.dll",
-        "lib/net5.0/ADO.Net.Client.Implementation.xml",
-        "lib/netstandard2.0/ADO.Net.Client.Implementation.dll",
-        "lib/netstandard2.0/ADO.Net.Client.Implementation.xml",
-        "lib/netstandard2.1/ADO.Net.Client.Implementation.dll",
-        "lib/netstandard2.1/ADO.Net.Client.Implementation.xml"
-      ]
-    },
     "Microsoft.NETCore.Platforms/3.1.0": {
       "sha512": "z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w==",
       "type": "package",
@@ -597,24 +450,23 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "ADO.Net.Client >= 1.4.1.1",
       "System.Data.SqlClient >= 4.8.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kira\\.nuget\\packages\\": {}
+    "C:\\Users\\simon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kira\\Documents\\GitHub\\ASP_Project_2021\\commun\\réunion 9\\ASP_PROJECT\\ASP_PROJECT\\ASP_PROJECT.csproj",
+      "projectUniqueName": "C:\\Users\\simon\\Desktop\\ASP_PROJECT\\ASP_PROJECT\\ASP_PROJECT.csproj",
       "projectName": "ASP_PROJECT",
-      "projectPath": "C:\\Users\\Kira\\Documents\\GitHub\\ASP_Project_2021\\commun\\réunion 9\\ASP_PROJECT\\ASP_PROJECT\\ASP_PROJECT.csproj",
-      "packagesPath": "C:\\Users\\Kira\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kira\\Documents\\GitHub\\ASP_Project_2021\\commun\\réunion 9\\ASP_PROJECT\\ASP_PROJECT\\obj\\",
+      "projectPath": "C:\\Users\\simon\\Desktop\\ASP_PROJECT\\ASP_PROJECT\\ASP_PROJECT.csproj",
+      "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\simon\\Desktop\\ASP_PROJECT\\ASP_PROJECT\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Kira\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -640,10 +492,6 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
-          "ADO.Net.Client": {
-            "target": "Package",
-            "version": "[1.4.1.1, )"
-          },
           "System.Data.SqlClient": {
             "target": "Package",
             "version": "[4.8.2, )"

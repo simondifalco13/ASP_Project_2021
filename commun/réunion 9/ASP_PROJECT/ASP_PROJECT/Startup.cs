@@ -29,6 +29,7 @@ namespace ASP_PROJECT
             services.AddControllersWithViews();
             services.AddTransient<IMenuDAL>(md => new MenuDAL(connectionString));
             services.AddTransient<IRestaurantDAL>(md => new RestaurantDAL(connectionString));
+            services.AddTransient<IAccountDAL>(md => new AccountDAL(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

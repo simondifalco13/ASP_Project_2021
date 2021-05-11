@@ -1,6 +1,6 @@
-﻿@model ASP_PROJECT.ViewModels.Simon.DishViewModel
+﻿@model ASP_PROJECT.ViewModels.DishViewModel
 
-<h1>Créer un post</h1>
+<h1>Modifier le  plat</h1>
 <div class="text-center">
 
     <form asp-controller="Menu" method="post">
@@ -8,7 +8,7 @@
             <tr>
                 <td><label asp-for="Dish.Name"></label></td>
                 <td>
-                    <input asp-for="Dish.Name" />
+                    <input asp-for="Dish.Name"/>
                 </td>
                 <td><span asp-validation-for="Dish.Name" class="text-danger"></span></td>
             </tr>
@@ -44,10 +44,12 @@
             <tr>
                 <td><a asp-action="Index">Annuler</a></td>
                 <td>
-                    <input type="submit" />
+                    <input type="submit" asp-action="UpdatingDish" />
                 </td>
             </tr>
         </table>
     </form>
 
 </div>
+
+

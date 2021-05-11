@@ -1,7 +1,6 @@
-﻿@model ASP_PROJECT.ViewModels.Simon.MenuViewModel
+﻿@model ASP_PROJECT.ViewModels.MenuViewModel
 
-
-<h1>Créer un post</h1>
+<h1>Créer un menu</h1>
 <div class="text-center">
 
     <div class="card">
@@ -40,20 +39,25 @@
                 <tr>
                     <td><label asp-for="Menu.DishList"></label></td>
                     <td>
-                        <select asp-for="SelectedDish"  class="width:200px;height:400px">
+                        <select class="width:200px;height:400px">
                             @foreach (var item in Model.Dlist)
                             {
-                                <option value="@(item)">@(item.Name)</option>
+                                <option value="@item">@(item.Name)</option>
                             }
                         </select>
                     </td>
-                   
-                   
+                    <td>
+                        Affiche les dishes du menu
+                        @foreach (var item in Model.Menu.DishList)
+                        {
+                            <p>@item.Name</p>
+                        }
+                    </td>
                 </tr>
                 
                 <tr>
                     <td>
-                        <button asp-action="AddDishToMenu">Add Dish</button>
+                        <input type="submit" value="Add"/>
                     </td>
                 </tr>
                 <tr>
@@ -64,6 +68,11 @@
                 </tr>
             </table>
         </form>
+        <partial name="_ShowDishesMenu.cshtml" />
     </div>
 
 </div>
+
+<script>
+
+</script>

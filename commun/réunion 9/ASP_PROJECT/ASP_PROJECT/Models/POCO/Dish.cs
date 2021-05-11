@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASP_PROJECT.Models.Project
+namespace ASP_PROJECT.Models.POCO
 {
     public enum TypeDish
     {
@@ -55,6 +55,37 @@ namespace ASP_PROJECT.Models.Project
             List<Dish> list;
             list = menuDAL.GetDishes(r);
             return list;
+        }
+
+        public  string ConvertDishType()
+        {
+            string value="";
+            switch (this.Type)
+            {
+                case TypeDish.Input:
+                    value="Entrée";
+                    break;
+
+                case TypeDish.Dish:
+                    value = "Plat";
+                    break;
+
+                case TypeDish.Dessert:
+                    value = "Dessert";
+                    break;
+
+                case TypeDish.Drink:
+                    value = "Boisson";
+                    break;
+
+                case TypeDish.Accompaniment:
+                    value = "Accompagnement";
+                    break;
+
+
+            }
+            return value;
+
         }
     }
 }

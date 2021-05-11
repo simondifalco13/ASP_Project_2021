@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASP_PROJECT.Models.Project
+namespace ASP_PROJECT.Models.POCO
 {
     public enum TypeService
     {
@@ -44,6 +44,22 @@ namespace ASP_PROJECT.Models.Project
         virtual public void Modify()
         {
 
+        }
+
+        public string ConvertTypeService()
+        {
+            string value = "";
+            switch (this.Service)
+            {
+                case TypeService.Evening:
+                    value = "Soir";
+                    break;
+
+                case TypeService.Lunch:
+                    value = "Midi";
+                    break;
+            }
+            return value;
         }
     }
 }
