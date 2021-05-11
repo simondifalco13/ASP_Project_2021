@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Amandine\" />
-    <Folder Include="ViewModels\Amandine\" />
-    <Folder Include="Views\Amandine\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 

@@ -1,0 +1,19 @@
+﻿@model ASP_PROJECT.ViewModels.Simon.ListDishViewModel
+
+<div>
+    <h1>Les plat de votre restaurant : </h1>
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Type de plat</th>
+            <th>Type de service</th>
+            <th>Prix</th>
+        </tr>
+        @foreach (var item in Model.ListDishesDb)
+        {
+            <partial name="_DishPartial.cshtml" for="@item" />
+        }
+    </table>
+    <a  asp-controller="Menu" asp-action="Index">Retour</a>
+</div>
