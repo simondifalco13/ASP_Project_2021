@@ -26,9 +26,9 @@ namespace ASP_PROJECT.Models.POCO
         [Required(ErrorMessage = "Champs obligatoire")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [StringLength(32, ErrorMessage = "Le {0} doit avoir au moins {2} de long", MinimumLength = 10)]
-        // Regexp à tester
-        [RegularExpression("^((?=.*?[A-Z]))", ErrorMessage = "Le mot de passe doit contenir au moins 8 caractères et posséder au minimum une majuscule")]
+        [StringLength(32, ErrorMessage = "Le {0} doit avoir au moins {2} caractères de long", MinimumLength = 10)]
+        // Regexp à tester : (simon) changement de la regex car elle n'allait pas 
+        //[RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*?)[a-zA-Z]{8,}$", ErrorMessage = "Le mot de passe doit contenir au moins 8 caractères et posséder au minimum une majuscule")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Champs obligatoire")]

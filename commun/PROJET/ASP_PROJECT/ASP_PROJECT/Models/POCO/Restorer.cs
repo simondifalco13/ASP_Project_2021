@@ -1,4 +1,5 @@
 ﻿using ASP_PROJECT.DAL.IDAL;
+using ASP_PROJECT.Models.Other;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace ASP_PROJECT.Models.POCO
 
         public static bool Register(IAccountDAL accountDAL,Restorer r)
         {
+            r.Password = Hash.CreateHash(r.Password);
             bool success = accountDAL.SaveRestaurant(r);
             return success;
         }

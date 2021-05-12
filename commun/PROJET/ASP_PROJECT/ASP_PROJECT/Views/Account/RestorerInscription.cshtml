@@ -2,6 +2,14 @@
 
 <h1>Inscription d'un restaurateur : </h1>
 <div>
+    @if (!String.IsNullOrEmpty((string)TempData["Error"]))
+    {
+        <div class="row justify-content-center">
+            <div class="alertPerso">
+                <span class="alert alert-danger border border-danger">@TempData["Error"]</span>
+            </div>
+        </div>
+    }
     <form asp-controller="Account" method="post">
         <table>
             <tr>
@@ -14,7 +22,7 @@
             <tr>
                 <td><label asp-for="Lastname"></label></td>
                 <td>
-                    <input asp-for="Lastname"/>
+                    <input asp-for="Lastname" />
                 </td>
                 <td><span asp-validation-for="Lastname" class="text-danger"></span></td>
             </tr>
@@ -22,8 +30,8 @@
                 <td><label asp-for="Gender"></label></td>
                 <td>
                     <select asp-for="Gender">
-                        <option value="Male">Homme</option>
-                        <option value="Female">Femme</option>
+                        <option value="M">Homme</option>
+                        <option value="F">Femme</option>
                     </select>
                 </td>
             </tr>
@@ -70,6 +78,13 @@
                     <input asp-for="Tel" />
                 </td>
                 <td><span asp-validation-for="Tel" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Password"></label></td>
+                <td>
+                    <input asp-for="Password" type="password" />
+                </td>
+                <td><span asp-validation-for="Password" class="text-danger"></span></td>
             </tr>
             <tr>
                 <td><a asp-action="Index">Annuler</a></td>

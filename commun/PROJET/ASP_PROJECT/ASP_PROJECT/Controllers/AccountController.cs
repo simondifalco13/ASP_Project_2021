@@ -30,13 +30,25 @@ namespace ASP_PROJECT.Controllers
         [HttpPost]
         public IActionResult Register(Restorer r)
         {
-            //pb
             if (ModelState.IsValid)
             {
-                bool success = Restorer.Register(_accountDAL,r);
-                return View("Index");
+                //pb dans register
+                bool success = Restorer.Register(_accountDAL, r);
+                if (success == true)
+                {
+                    TempData["RegisterSuccess"] = "Vous avez créer un compte de restorateur avec succès";
+                    return View("Index");
+                }
+                else
+                {
+                    TempData["Error"] = "An account with this email adress already exists !";
+                    return View("RestorerInscription", r);
+                }
             }
-            return View("RestorerInscription", r);
+            else
+            {
+                return View("RestorerInscription", r);
+            }
         }
 
 
