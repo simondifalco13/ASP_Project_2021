@@ -23,11 +23,24 @@
                     <label asp-for="Lastname"></label>
                 </td>
                 <td>
-                    <input asp-for="Lastname"/>
+                    <input asp-for="Lastname" />
                 </td>
                 <td>
                     <span asp-validation-for="Lastname" class="text-danger"></span>
                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Password"></label>
+                </td>
+                <td>
+                    <input asp-for="Password" />
+                </td>
+                <td>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <label asp-for="DoB"></label>
                 </td>
@@ -100,7 +113,7 @@
                     <label asp-for="Email"></label>
                 </td>
                 <td>
-                    <input asp-for="Email"/>
+                    <input asp-for="Email" />
                 </td>
                 <td>
                     <span asp-validation-for="Email" class="text-danger"></span>
@@ -114,7 +127,7 @@
                     <input asp-for="Tel" />
                 </td>
                 <td>
-                    <span asp-validation-for="Tel" class="text-danger"></span>       
+                    <span asp-validation-for="Tel" class="text-danger"></span>
                 </td>
             </tr>
             <tr>
@@ -122,7 +135,7 @@
                     <a asp-controller="Home" asp-action="Index">Annuler</a>
                 </td>
                 <td>
-                    <input type="submit"/>
+                    <input type="submit" />
                 </td>
             </tr>
         </table>
