@@ -11,5 +11,7 @@ namespace ASP_PROJECT.DAL.IDAL
         bool AddDish(Dish d, Restaurant r);
 
         List<Dish> GetDishes(Restaurant r);
+
+        bool SuppressDish(Dish d);
     }
 }

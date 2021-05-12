@@ -47,7 +47,7 @@ namespace ASP_PROJECT.DAL.CDAL
             decimal price;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string request = "SELECT Name,Price,TypeService,Description,TypeDish FROM dbo.Dishes WHERE RestaurantId=@RestaurantId";
+                string request = "SELECT DishId,Name,Price,TypeService,Description,TypeDish FROM dbo.Dishes WHERE RestaurantId=@RestaurantId";
                 SqlCommand cmd = new SqlCommand(request, connection);
                 cmd.Parameters.AddWithValue("RestaurantId", r.Id);
                 connection.Open();
@@ -55,6 +55,7 @@ namespace ASP_PROJECT.DAL.CDAL
                 {
                     while (reader.Read())
                     {
+                        temp.Id = reader.GetInt32("DishId");
                         temp.Name=reader.GetString("Name");
                         price=reader.GetDecimal("Price");
                         temp.Price = (double)price;
@@ -69,6 +70,22 @@ namespace ASP_PROJECT.DAL.CDAL
                 }
             }
             return listDishes;
+        }
+
+        public bool SuppressDish(Dish d)
+        {
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "DELETE FROM dbo.Dishes WHERE DishId=@DishId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("DishId", d.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res >0;
+
+            }
+            return success;
         }
     }
 }

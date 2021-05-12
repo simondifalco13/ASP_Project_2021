@@ -20,7 +20,7 @@ namespace ASP_PROJECT.Models.POCO
         public static bool Register(IAccountDAL accountDAL,Restorer r)
         {
             r.Password = Hash.CreateHash(r.Password);
-            bool success = accountDAL.SaveRestaurant(r);
+            bool success = accountDAL.SaveRestorer(r);
             return success;
         }
     }

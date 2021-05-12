@@ -7,10 +7,14 @@
     <td>@Model.ConvertTypeService()</td>
     <td>@Model.Price €</td>
     <td>
-        @*<input type="button" value="Modifier" asp-action="ModifyDish"/>*@
-        <a asp-controller="Menu" asp-action="ModifyDish">Modifier</a>
+        @*<a asp-controller="Menu" asp-action="ModifyDish">Modifier</a>*@
+        <input type="submit" asp-controller="Menu" asp-action="ModifyDish" value="Modifier" />
+
     </td>
     <td>
-        <input type="button" value="Supprimer" />
+        @*<a asp-controller="Menu" asp-action="SuppressDish">Supprimer</a>*@
+        <input type="submit" asp-controller="Menu" asp-action="SuppressDish" value="Supprimer" />
+
     </td>
 </tr>
+

@@ -8,7 +8,7 @@ namespace ASP_PROJECT.DAL.IDAL
 {
     public interface IAccountDAL
     {
-        bool SaveRestaurant(Restorer r);
+        bool SaveRestorer(Restorer r);
         //Signature de la méthode
         bool SaveCustomer(Customer accountC);
     }

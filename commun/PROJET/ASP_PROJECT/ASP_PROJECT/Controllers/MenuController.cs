@@ -133,6 +133,25 @@ namespace ASP_PROJECT.Controllers
            
         }
 
+        //comment récuperer l'objet envoyé
+       [HttpPost]
+        public IActionResult SuppressDish(Dish d)
+        {
+            Restaurant r = new Restaurant();
+            r.Id = 1;
+            bool success = Dish.DeleteDish(d,r,_menuDAL);
+            if (success==true)
+            {
+                TempData["Suppressing"] = "La suppression du plat à été effectuée";
+                return RedirectToAction("ConsultDishes");
+            }
+            else
+            {
+                TempData["Suppressing"] = "La suppression du plat à échoué";
+                return RedirectToAction("ConsultDishes");
+            }
+        }
+
 
     }
 }

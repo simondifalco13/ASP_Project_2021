@@ -17,7 +17,7 @@ namespace ASP_PROJECT.DAL.CDAL
             this.connectionString = connectionString;
         }
 
-        public  bool SaveRestaurant(Restorer r)
+        public  bool SaveRestorer(Restorer r)
         {
             bool existingUser = VerifyExistingUser(r);
             if (existingUser != true)

@@ -17,6 +17,8 @@ namespace ASP_PROJECT.Models.POCO
     }
     public class Dish : Meal
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Champs obligatoire")]
         [Display(Name = "Type de plat")]
         public TypeDish Type { get; set; }
@@ -86,6 +88,13 @@ namespace ASP_PROJECT.Models.POCO
             }
             return value;
 
+        }
+
+        public static bool DeleteDish(Dish d,Restaurant r,IMenuDAL menuDAL)
+        {
+            bool success=false;
+            success = menuDAL.SuppressDish(d);
+            return success;
         }
     }
 }
