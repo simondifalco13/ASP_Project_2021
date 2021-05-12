@@ -16,12 +16,10 @@ namespace ASP_PROJECT.Controllers
         {
             _accountDAL = accountDAL;
         }
+        public IActionResult Index() {
+            return View();
+        }
 
-        // Pas nécessaire ? 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
 
         public IActionResult RestorerRegister()
         {
@@ -41,6 +39,10 @@ namespace ASP_PROJECT.Controllers
             return View("RestorerInscription", r);
         }
 
+
+        public IActionResult CustomerInscription() {
+            return View();
+        }
         /// À la création du comtpe, considérons la personne connectée -> Va pouvoir consulter les menus ( à modifier plus tard on verra )
         /// Si pas bon, retourner au formulaire d'inscription.
         /// Préciser HttpPost !!

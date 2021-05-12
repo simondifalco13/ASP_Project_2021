@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ASP_PROJECT.Models.POCO
 { 
-    public abstract class Account
-    {
+    public abstract class Account{
+
         [Required(ErrorMessage = "Champs obligatoire")]
         [StringLength(25, MinimumLength = 3)]
         [Display(Name = "Nom")]

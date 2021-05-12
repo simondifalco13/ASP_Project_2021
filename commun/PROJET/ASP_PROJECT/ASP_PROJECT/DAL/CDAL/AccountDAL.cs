@@ -42,7 +42,7 @@ namespace ASP_PROJECT.DAL.CDAL
 
         // A reçu l'objet depuis le contrôleur. ( Contrôleur -> Class métier -> DAL )
         public bool SaveCustomer(Customer accountC) {
-            string request = "INSERT INTO dbo.Customer (FirstName,LastName,DoB,Email,Password,Gender,City,Address,PostalCode,PhoneNumber,Country) VALUES (@FirstName,@LastName,@DoB,@Email,@Password,@Gender,@City,@Address,@PostalCode,@PhoneNumber,@Country)";
+            string request = "INSERT INTO dbo.Customers (FirstName,LastName,DoB,Email,Password,Gender,City,Address,PostalCode,PhoneNumber,Country) VALUES (@FirstName,@LastName,@DoB,@Email,@Password,@Gender,@City,@Address,@PostalCode,@PhoneNumber,@Country)";
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 SqlCommand cmd = new SqlCommand(request, connection);
