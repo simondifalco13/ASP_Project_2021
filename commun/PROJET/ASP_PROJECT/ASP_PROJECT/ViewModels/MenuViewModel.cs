@@ -1,11 +1,11 @@
-﻿using ASP_PROJECT.Models.Project;
+﻿using ASP_PROJECT.Models.POCO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASP_PROJECT.ViewModels.Simon
+namespace ASP_PROJECT.ViewModels
 {
     public class MenuViewModel
     {
@@ -19,13 +19,13 @@ namespace ASP_PROJECT.ViewModels.Simon
             MenuDishList = new List<Dish>();
         }
 
-        public MenuViewModel(List<Dish> l) :this()
+        public MenuViewModel(List<Dish> l) : this()
         {
             Dlist = l;
-            
+
         }
 
-       
+
         public List<SelectListItem> TypeService { get; set; } = new List<SelectListItem>
         {
             new SelectListItem(){Value="Lunch",Text="Diner"},

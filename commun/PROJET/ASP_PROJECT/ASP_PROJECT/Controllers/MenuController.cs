@@ -1,7 +1,7 @@
 ﻿using ASP_PROJECT.DAL.CDAL;
 using ASP_PROJECT.DAL.IDAL;
-using ASP_PROJECT.Models.Project;
-using ASP_PROJECT.ViewModels.Simon;
+using ASP_PROJECT.Models.POCO;
+using ASP_PROJECT.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASP_PROJECT.Controllers.Simon
+namespace ASP_PROJECT.Controllers
 {
     public class MenuController : Controller
     {

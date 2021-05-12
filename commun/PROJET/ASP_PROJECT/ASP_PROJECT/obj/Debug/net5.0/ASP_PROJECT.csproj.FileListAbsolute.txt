@@ -51,3 +51,5 @@ C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\ModifyDish.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_DishPartial.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_ShowDishesMenu.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Account\Index.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Account\RestorerInscription.cshtml.g.cs

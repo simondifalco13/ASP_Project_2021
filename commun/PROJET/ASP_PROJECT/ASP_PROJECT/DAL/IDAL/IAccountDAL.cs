@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ASP_PROJECT.DAL.IDAL
 {
-    public interface IRestaurantDAL 
+    public interface IAccountDAL
     {
-        Restaurant GetRestaurantById(int id);
+        bool SaveRestaurant(Restorer r);
     }
 }

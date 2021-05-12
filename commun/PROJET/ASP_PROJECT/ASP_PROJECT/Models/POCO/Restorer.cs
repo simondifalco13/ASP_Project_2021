@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ASP_PROJECT.DAL.IDAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASP_PROJECT.Models.Project
+namespace ASP_PROJECT.Models.POCO
 {
     public class Restorer : Account
     {
@@ -13,6 +14,12 @@ namespace ASP_PROJECT.Models.Project
         public Restorer() : base()
         {
 
+        }
+
+        public static bool Register(IAccountDAL accountDAL,Restorer r)
+        {
+            bool success = accountDAL.SaveRestaurant(r);
+            return success;
         }
     }
 }
