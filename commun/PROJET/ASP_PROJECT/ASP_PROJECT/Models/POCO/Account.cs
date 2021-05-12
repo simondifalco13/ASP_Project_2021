@@ -24,7 +24,7 @@ namespace ASP_PROJECT.Models.POCO
         public string Email { get; set; }
    
         [Required(ErrorMessage = "Champs obligatoire")]
-        [Display(Name = "Password")]
+        [Display(Name = "Mot de passe")]
         [DataType(DataType.Password)]
         [StringLength(32, ErrorMessage = "Le {0} doit avoir au moins {2} caractères de long")]
         // Regexp à tester : (simon) changement de la regex car elle n'allait pas 
