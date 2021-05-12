@@ -103,9 +103,12 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        public void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL)
-        {
+        public void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL){
             r = restaurantDAL.GetRestaurantById(r.Id);
+        }
+
+        public static List<Restaurant> GetAllRestaurants(IRestaurantDAL DAL) {
+            return DAL.GetAllRestaurants();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace ASP_PROJECT.DAL.CDAL
         {
             this.connectionString = connectionString;
         }
+
         public Restaurant GetRestaurantById(int id)
         {
             Restaurant r = new Restaurant();
@@ -45,6 +46,40 @@ namespace ASP_PROJECT.DAL.CDAL
                 }
             }
             return r;
+        }
+
+        public List<Restaurant> GetAllRestaurants() {
+            List<Restaurant> restos = new List<Restaurant>();
+
+            using(SqlConnection connection = new SqlConnection(connectionString)) {
+                string request = "SELECT * FROM dbo.Restaurants INNER JOIN dbo.Schedules ON dbo.Restaurants.restaurantID=dbo.Schedules.restaurantID";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                connection.Open();
+
+                using(SqlDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        Restaurant resto = new Restaurant();
+                        RestaurantType type;
+                        Enum.TryParse(reader.GetString("RestaurantType"), out type);
+                        resto.Type = type;
+                        resto.Name = reader.GetString("Name");
+                        resto.Address = reader.GetString("Adress");
+                        resto.City = reader.GetString("City");
+                        resto.Country = reader.GetString("Country");
+                        resto.Description = reader.GetString("Description");
+                        resto.Tel = reader.GetString("PhoneNumber");
+                        resto.Pc = reader.GetString("PostalCode");
+                        resto.NumTVA = reader.GetString("TvaNumber");
+                        
+                        //resto.OpeningHours = reader.GetString("OpeningDay");
+                        //resto.OpeningHours = reader.GetTime("OpenTime");
+                        //resto.OpeningHours = reader.GetTime("CloseTime");
+
+                        restos.Add(resto);
+                    }
+                }
+            }
+            return restos;
         }
     }
 }

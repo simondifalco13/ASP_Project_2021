@@ -1,9 +1,15 @@
 ﻿@model ASP_PROJECT.Models.POCO.Customer
 
-@{ 
+@{
     ViewData["Title"] = "Inscription d'un client.";
 }
 <h1>@ViewData["Title"]</h1>
+@if ((string)TempData["Message"] == "State0") {
+    <span class="alert-danger"> Le compte a bien été créé</span>
+} else if ((string)TempData["Message"] == "State1") {
+    <span class="alert-danger">Un problème a été rencontré</span>
+}
+
 <div>
     <form asp-controller="Account" method="post" asp-action="CustomerRegister">
         <table>
@@ -57,8 +63,8 @@
                 </td>
                 <td>
                     <select asp-for="Gender">
-                        <option value="Male">Homme</option>
-                        <option value="Female">Femme</option>
+                        <option value="M">Homme</option>
+                        <option value="F">Femme</option>
                     </select>
                 </td>
             </tr>

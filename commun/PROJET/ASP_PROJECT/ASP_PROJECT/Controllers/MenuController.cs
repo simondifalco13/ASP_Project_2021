@@ -152,6 +152,18 @@ namespace ASP_PROJECT.Controllers
             }
         }
 
+        // 
 
+        public IActionResult ConsultMenuAndDish(int idResto) {
+            // Parce que objet restaurant envoyé dans GetDishes
+            Restaurant resto = new Restaurant();
+            resto.Id = idResto;
+
+            List<Menu> menus = Menu.GetMenus(_menuDAL,idResto);
+
+            TempData["menus"] = menus;
+            TempData["dishes"] = Dish.GetDishes(resto, _menuDAL);
+            return View();
+        }
     }
 }

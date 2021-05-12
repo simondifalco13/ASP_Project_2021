@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASP_PROJECT.DAL.IDAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ASP_PROJECT.Models.POCO
 {
-    public class Menu : Meal
-    {
-        [Display(Name ="Liste des plats")]
+    public class Menu : Meal {
+        [Display(Name = "Liste des plats")]
         public List<Dish> DishList;
-        public Menu() : base()
-        {
+        public int Id { get; set; }
+        public Menu() : base() {
             DishList = new List<Dish>();
         }
+
         public override void Add()
         {
 
@@ -25,6 +26,10 @@ namespace ASP_PROJECT.Models.POCO
         public override void Modify()
         {
 
+        }
+        public static List<Menu> GetMenus(IMenuDAL DAL,int idResto) {
+
+            return DAL.GetMenus(idResto);
         }
     }
 }

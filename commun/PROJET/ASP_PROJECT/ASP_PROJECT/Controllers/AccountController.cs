@@ -50,8 +50,6 @@ namespace ASP_PROJECT.Controllers
                 return View("RestorerInscription", r);
             }
         }
-
-
         public IActionResult CustomerInscription() {
             return View();
         }
@@ -64,8 +62,13 @@ namespace ASP_PROJECT.Controllers
             if (ModelState.IsValid) {
                 // -> Model -> DAL -> DB
                 bool success = Customer.Register(_accountDAL, accountC);
-                return View("ConsultMenu", accountC);
-            }
+                if (success == true) {
+                    TempData["Message"] = "State0";
+                    return View("CustomerInscription", accountC);
+                } else {
+                    TempData["Message"] = "State1";
+                }
+            } 
             return View("CustomerInscription");
         }
     }

@@ -165,3 +165,4 @@ C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\ob
 C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.Views.pdb
 C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.csproj.CopyComplete
 C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.genruntimeconfig.cache
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Home\ConsultRestaurant.cshtml.g.cs

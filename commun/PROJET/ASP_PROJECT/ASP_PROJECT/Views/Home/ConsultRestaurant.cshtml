@@ -1,0 +1,77 @@
+﻿@model ASP_PROJECT.Models.POCO.Restaurant
+@{
+    ViewData["Title"] = "Restaurants";
+    List<Restaurant> restos = (List<Restaurant>)TempData["Restos"];
+}
+<h1>@ViewData["Title"]</h1>
+<!-- PAS COMPLET : à  MODIFIER AVEC LES HEURES D'OUVERTURE + Opinion !! -->
+<table>
+    <tr>
+        <th>
+            <label asp-for="Type"></label>
+        </th>
+        <th>
+            <label asp-for="Name"></label>
+        </th>
+        <th>
+            <label asp-for="Address"></label>
+        </th>
+        <th>
+            <label asp-for="City"></label>
+        </th>
+        <th>
+            <label asp-for="Country"></label>
+        </th>
+        <th>
+            <label asp-for="Description"></label>
+        </th>
+        <th>
+            <label asp-for="Tel"></label>
+        </th>
+        <th>
+            <label asp-for="Pc"></label>
+        </th>
+        <th>
+            <label asp-for="NumTVA"></label>
+        </th>
+    </tr>
+    @{
+        foreach (Restaurant resto in restos) {
+            <tr>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.Type)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.Name)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.Address)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.City)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.Country)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.Description)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.Tel)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.Pc)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => resto.NumTVA)</label>
+                </td>
+                <td>
+                    <form asp-controller="Menu" asp-action="ConsultMenuAndDish">
+                        <input type="hidden" name="id" value="@resto.Id" />
+                        <input type="submit" value="Consulter" />
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+</table>

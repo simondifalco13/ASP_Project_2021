@@ -13,5 +13,7 @@ namespace ASP_PROJECT.DAL.IDAL
         List<Dish> GetDishes(Restaurant r);
 
         bool SuppressDish(Dish d);
+
+        public List<Menu> GetMenus(int idResto);
     }
 }
