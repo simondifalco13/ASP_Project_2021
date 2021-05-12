@@ -1,0 +1,79 @@
+﻿@model ASP_PROJECT.ViewModels.Simon.MenuViewModel
+
+
+<h1>Créer un menu</h1>
+<div class="text-center">
+
+    <div class="card">
+        <form asp-controller="Menu" method="post">
+            <table>
+                <tr>
+                    <td><label asp-for="Menu.Name"></label></td>
+                    <td>
+                        <input asp-for="Menu.Name" />
+                    </td>
+                    <td><span asp-validation-for="Menu.Name" class="text-danger"></span></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Menu.Description"></label></td>
+                    <td>
+                        <textarea asp-for="Menu.Description"></textarea>
+
+                    </td>
+                    <td><span asp-validation-for="Menu.Description" class="text-danger"></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Menu.Price"></label>
+                    </td>
+                    <td>
+                        <input asp-for="Menu.Price" class="float-left" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><label asp-for="Menu.Service"></label></td>
+                    <td>
+                        <select asp-for="Menu.Service" asp-items="Model.TypeService"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Menu.DishList"></label></td>
+                    <td>
+                        <select class="width:200px;height:400px">
+                            @foreach (var item in Model.Dlist)
+                            {
+                                <option value="@item">@(item.Name)</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        Affiche les dishes du menu
+                        @foreach (var item in Model.Menu.DishList)
+                        {
+                            <p>@item.Name</p>
+                        }
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <input type="submit" value="Add"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a asp-action="Index">Annuler</a></td>
+                    <td>
+                        <input type="submit" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <partial name="_ShowDishesMenu.cshtml" />
+    </div>
+
+</div>
+
+<script>
+
+</script>
