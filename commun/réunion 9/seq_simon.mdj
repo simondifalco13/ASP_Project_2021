@@ -12342,8 +12342,8 @@
 												"$ref": "AAAAAAF5CNT14DWLZFk="
 											},
 											"font": "Arial;13;0",
-											"left": 40.72998046875,
-											"top": 13,
+											"left": 32.72998046875,
+											"top": 5,
 											"width": 141.8798828125,
 											"height": 13,
 											"text": "Consult Restorer Orders"
@@ -12355,18 +12355,17 @@
 												"$ref": "AAAAAAF5CNT14DWLZFk="
 											},
 											"font": "Arial;13;1",
-											"left": 21,
-											"top": 13,
+											"left": 13,
+											"top": 5,
 											"width": 14.72998046875,
 											"height": 13,
 											"text": "sd"
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 16,
-									"top": 8,
-									"width": 1025,
-									"height": 545,
+									"left": 8,
+									"width": 601,
+									"height": 329,
 									"nameLabel": {
 										"$ref": "AAAAAAF5CNT14TWMTNk="
 									},
@@ -12619,7 +12618,7 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"left": 52,
+													"left": 36,
 													"height": 13
 												},
 												{
@@ -12629,7 +12628,7 @@
 														"$ref": "AAAAAAF5WnOUNU1vGLE="
 													},
 													"font": "Arial;13;1",
-													"left": 141,
+													"left": 133,
 													"top": 87,
 													"width": 114.1435546875,
 													"height": 13,
@@ -12643,7 +12642,7 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"left": 52,
+													"left": 36,
 													"width": 106.20263671875,
 													"height": 13,
 													"text": "(from Interaction1)"
@@ -12656,13 +12655,13 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"left": 52,
+													"left": 36,
 													"height": 13,
 													"horizontalAlignment": 1
 												}
 											],
 											"font": "Arial;13;0",
-											"left": 136,
+											"left": 128,
 											"top": 80,
 											"width": 124.1435546875,
 											"height": 25,
@@ -12689,17 +12688,17 @@
 												"$ref": "AAAAAAF5WnOUNU1tgtQ="
 											},
 											"font": "Arial;13;0",
-											"left": 198,
+											"left": 190,
 											"top": 105,
 											"width": 1,
-											"height": 296
+											"height": 200
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 136,
+									"left": 128,
 									"top": 40,
 									"width": 124.1435546875,
-									"height": 361,
+									"height": 265,
 									"stereotypeDisplay": "icon",
 									"nameCompartment": {
 										"$ref": "AAAAAAF5WnOUNU1vGLE="
@@ -29988,9 +29987,9 @@
 												"$ref": "AAAAAAF5FLCY0RMTTrc="
 											},
 											"font": "Arial;13;0",
-											"left": 40.72998046875,
+											"left": 38.55908203125,
 											"top": 21,
-											"width": 81.208984375,
+											"width": 75.03271484375,
 											"height": 13,
 											"text": "Consult Menu"
 										},
@@ -30003,7 +30002,7 @@
 											"font": "Arial;13;1",
 											"left": 21,
 											"top": 21,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
