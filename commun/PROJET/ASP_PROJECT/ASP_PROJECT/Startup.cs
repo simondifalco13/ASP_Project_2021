@@ -26,10 +26,11 @@ namespace ASP_PROJECT
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString("simon");
+            string connectionString2 = Configuration.GetConnectionString("gabriel");
             services.AddControllersWithViews();
             services.AddTransient<IMenuDAL>(md => new MenuDAL(connectionString));
             services.AddTransient<IRestaurantDAL>(md => new RestaurantDAL(connectionString));
-            services.AddTransient<IAccountDAL>(md => new AccountDAL(connectionString));
+            services.AddTransient<IAccountDAL>(md => new AccountDAL(connectionString, connectionString2));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

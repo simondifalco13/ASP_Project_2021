@@ -11,10 +11,11 @@ namespace ASP_PROJECT.DAL.CDAL
 {
     public class AccountDAL : IAccountDAL
     {
-        private string connectionString;
-        public AccountDAL(string connectionString)
+        private string connectionString, connectionString2;
+        public AccountDAL(string connectionString,string connectionString2)
         {
             this.connectionString = connectionString;
+            this.connectionString2 = connectionString2;
         }
 
         public  bool SaveRestorer(Restorer r)
@@ -68,7 +69,7 @@ namespace ASP_PROJECT.DAL.CDAL
                 cmd.Parameters.AddWithValue("Country", accountC.Country);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
-                success = res > 10;
+                success = res > 0;
             }
             return success;
         }
