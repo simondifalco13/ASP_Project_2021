@@ -35,9 +35,6 @@ namespace ASP_PROJECT.Controllers
             vm.Dlist = Dish.GetDishes(r,_menuDAL);
             return View("Views/Menu/AddMenu.cshtml",vm);
         }
-
-        
-
         public IActionResult AddDish()
         {
             DishViewModel vm = new DishViewModel();

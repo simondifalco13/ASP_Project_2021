@@ -29,13 +29,37 @@ namespace ASP_PROJECT.DAL.CDAL
                 cmd.Parameters.AddWithValue("Password", r.Password);
                 cmd.Parameters.AddWithValue("Gender", r.Gender);
                 cmd.Parameters.AddWithValue("City", r.City);
-                cmd.Parameters.AddWithValue("Address", r.Adress);
+                cmd.Parameters.AddWithValue("Address", r.Address);
                 cmd.Parameters.AddWithValue("PostalCode", r.Pc);
                 cmd.Parameters.AddWithValue("PhoneNumber", r.Tel);
                 cmd.Parameters.AddWithValue("Country", r.Country);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res >=10;
+            }
+            return success;
+        }
+
+        // A reçu l'objet depuis le contrôleur. ( Contrôleur -> Class métier -> DAL )
+        public bool SaveCustomer(Customer accountC) {
+            string request = "INSERT INTO dbo.Customer (FirstName,LastName,DoB,Email,Password,Gender,City,Address,PostalCode,PhoneNumber,Country) VALUES (@FirstName,@LastName,@DoB,@Email,@Password,@Gender,@City,@Address,@PostalCode,@PhoneNumber,@Country)";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("FirstName", accountC.Firstname);
+                cmd.Parameters.AddWithValue("LastName", accountC.Lastname);
+                cmd.Parameters.AddWithValue("DoB", accountC.DoB);
+                cmd.Parameters.AddWithValue("Email", accountC.Email);
+                cmd.Parameters.AddWithValue("Password", accountC.Password);
+                cmd.Parameters.AddWithValue("Gender", accountC.Gender);
+                cmd.Parameters.AddWithValue("City", accountC.City);
+                cmd.Parameters.AddWithValue("Address", accountC.Address);
+                cmd.Parameters.AddWithValue("PostalCode", accountC.Pc);
+                cmd.Parameters.AddWithValue("PhoneNumber", accountC.Tel);
+                cmd.Parameters.AddWithValue("Country", accountC.Country);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res >= 10;
             }
             return success;
         }

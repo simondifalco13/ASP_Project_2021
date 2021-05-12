@@ -32,7 +32,7 @@ namespace ASP_PROJECT.DAL.CDAL
                         r.Id = id;
                         r.Name = reader.GetString("Name");
                         r.City= reader.GetString("City");
-                        r.Adress= reader.GetString("Adress");
+                        r.Address= reader.GetString("Adress");
                         r.Pc = reader.GetString("PostalCode");
                         r.Tel= reader.GetString("PhoneNumber");
                         RestaurantType type;
