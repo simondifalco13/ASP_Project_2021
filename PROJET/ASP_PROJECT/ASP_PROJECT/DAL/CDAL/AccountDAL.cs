@@ -48,6 +48,36 @@ namespace ASP_PROJECT.DAL.CDAL
                 return false;
             }
         }
+        public bool VerifyExistingUser(Restorer r)
+        {
+            bool exists = false;
+            List<string> emails = new List<string>();
+            string request = "SELECT Email FROM dbo.Restorers";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        emails.Add(reader.GetString("Email"));
+                    }
+                }
+            }
+            foreach (var email in emails)
+            {
+                if (email == r.Email)
+                {
+                    exists = true;
+                }
+            }
+            return exists;
+        }
+
+
+
+
 
         // A reçu l'objet depuis le contrôleur. ( Contrôleur -> Class métier -> DAL )
         public bool SaveCustomer(Customer accountC) {
@@ -78,33 +108,6 @@ namespace ASP_PROJECT.DAL.CDAL
                 return false;
             }
         }
-        public bool VerifyExistingUser(Restorer r)
-        {
-            bool exists = false;
-            List<string> emails = new List<string>();
-            string request = "SELECT Email FROM dbo.Restorers";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(request, connection);
-                connection.Open();
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        emails.Add(reader.GetString("Email"));
-                    }
-                }
-            }
-            foreach (var email in emails)
-            {
-                if (email == r.Email)
-                {
-                    exists = true;
-                }
-            }
-            return exists;
-        }
-
         public bool VerifyExistingCustomer(Customer accountC) {
             bool exists = false;
             List<string> emails = new List<string>();
@@ -121,6 +124,61 @@ namespace ASP_PROJECT.DAL.CDAL
             foreach (var email in emails) {
                 if (email == accountC.Email) {
                     exists = true;
+                }
+            }
+            return exists;
+        }
+
+        public bool Login(string email, string password) {
+            bool exists = false;
+            List<string> emails = new List<string>();
+            List<string> passwords = new List<string>();
+
+            bool accountIsCustomer = false;
+
+            if (accountIsCustomer) {
+
+            } else {
+
+            }
+
+            if(account is Customer) {
+                string request = "SELECT Email,Password FROM dbo.Account";
+                using(SqlConnection connection = new SqlConnection(connectionString)) {
+                    SqlCommand cmd = new SqlCommand(request, connection);
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader()) {
+                        while (reader.Read()) {
+                            emails.Add(reader.GetString("Email"));
+                            passwords.Add(reader.GetString("Password"));
+                        }
+                    }
+                }
+                foreach(var email in emails) {
+                    foreach (var password in passwords) {
+                        if (email == account.Email && password == account.Password) {
+                            exists = true;
+                        }
+                    }
+                }
+            } else if (account is Restorer) {
+                string request = "SELECT Email,Password FROM dbo.Restorers";
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    SqlCommand cmd = new SqlCommand(request, connection);
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader()) {
+                        while (reader.Read()) {
+                            emails.Add(reader.GetString("Email"));
+                            passwords.Add(reader.GetString("Password"));
+                        }
+                    }
+                }
+                foreach (var email in emails) {
+                    foreach (var password in passwords) {
+                        if (email == account.Email && password == account.Password) {
+                            exists = true;
+                        }
+                    }
                 }
             }
             return exists;

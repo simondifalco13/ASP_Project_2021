@@ -9,7 +9,9 @@ namespace ASP_PROJECT.DAL.IDAL
     public interface IAccountDAL
     {
         bool SaveRestorer(Restorer r);
-        //Signature de la méthode
+
         bool SaveCustomer(Customer accountC);
+
+        bool Login(string email, string password);
     }
 }

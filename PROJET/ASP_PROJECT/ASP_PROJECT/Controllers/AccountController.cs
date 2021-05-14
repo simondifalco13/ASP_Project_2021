@@ -71,5 +71,23 @@ namespace ASP_PROJECT.Controllers
             } 
             return View("CustomerInscription");
         }
+
+
+        public IActionResult Login() {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(Account account) {
+            if (ModelState.IsValid) {
+                bool success = account.Login(account.Email,account.Password);
+                if (success == true) {
+                    TempData["Message"] = "State0";
+                    return View();
+                } else {
+                    TempData["Message"] = "State1";
+                }
+            }
+            return View();
+        }
     }
 }
