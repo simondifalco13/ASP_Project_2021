@@ -1,24 +1,25 @@
-﻿@*@model ASP_PROJECT.Models.POCO.Menu
-@{
-    ViewData["Title"] = "Menus et plats disponibles";
+﻿@model ASP_PROJECT.Models.POCO.Restaurant
+@using ASP_PROJECT.Models.POCO
 
-    List<Menu> menus = (List<Menu>)TempData["menus"];
-    List<Dish> dishes = (List<Dish>)TempData["dishes"];
+@{
+    ViewData["Title"] = "Restaurants";
+    List<Restaurant> restos = (List<Restaurant>)TempData["Restos"];
 }
 <h1>@ViewData["Title"]</h1>
+<!-- PAS COMPLET : à  MODIFIER AVEC LES HEURES D'OUVERTURE + Opinion !! -->
 <table>
     <tr>
+        <th>
+            <label asp-for="Type"></label>
+        </th>
         <th>
             <label asp-for="Name"></label>
         </th>
         <th>
-            <label asp-for="Price"></label>
+            <label asp-for="Address"></label>
         </th>
         <th>
-            <label asp-for="Description"></label>
-        </th>
-        <th>
-            <label asp-for="TypeService"></label>
+            <label asp-for="City"></label>
         </th>
         <th>
             <label asp-for="Country"></label>
@@ -37,7 +38,7 @@
         </th>
     </tr>
     @{
-        foreach (Restaurant resto in restos) {
+        foreach (var resto in restos) {
             <tr>
                 <td>
                     <label> @Html.DisplayFor(modelItem => resto.Type)</label>
@@ -75,4 +76,4 @@
             </tr>
         }
     }
-</table>*@
+</table>
