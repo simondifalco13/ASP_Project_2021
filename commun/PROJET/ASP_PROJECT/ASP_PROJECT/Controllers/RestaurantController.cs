@@ -24,5 +24,29 @@ namespace ASP_PROJECT.Controllers {
             TempData["Restos"] = restos;
             return View();
         }
+
+        //Simon : (délimitation pour m'y retrouver quand je fais des copier coller en attendant de résoudre le problème de versionning)
+        public IActionResult SignRestaurant()
+        {
+            Restaurant r = new Restaurant();
+            return View("SignRestaurant", r);
+        }
+
+        [HttpPost]
+        public IActionResult SignRestaurant(Restaurant r)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData["RestaurantSign"] = "L'ajout du restaurant s'est déroulée avec succès";
+                return View("Index");
+            }
+            else
+            {
+                TempData["RestaurantSignError"] = "Le restaurant avec ce nom existe dèjà dans vos restaurants";
+                return View("SignRestaurant", r);
+
+            }
+
+        }
     }
 }

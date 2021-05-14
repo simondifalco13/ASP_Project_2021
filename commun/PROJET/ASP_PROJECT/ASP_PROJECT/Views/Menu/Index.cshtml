@@ -5,9 +5,11 @@
         <h2 class="display-4">Bienvenue sur la page de management de la carte</h2>
     </div>
     <div class="item2">
-        <button><a asp-controller="Menu" asp-action="AddMenu">Add Menu</a></button>
-        <button><a asp-controller="Menu" asp-action="AddDish">Add Dish</a></button>
-        <button><a asp-controller="Menu" asp-action="ConsultDishes">Consult Dishes</a></button>
+        <button><a asp-controller="Menu" asp-action="AddMenu">Ajouter menu</a></button>
+        <button><a asp-controller="Menu" asp-action="AddDish">Ajouter plat</a></button>
+        <button><a asp-controller="Menu" asp-action="ConsultDishes">Consulter plats</a></button>
+        <button><a asp-controller="Menu" asp-action="DeleteDish">Supprimer plat</a></button>
+        <button><a asp-controller="Home" asp-action="Index">Retour à l'acceuil</a></button>
     </div>
 </div>
 @if ((String)ViewData["success"] == "true")

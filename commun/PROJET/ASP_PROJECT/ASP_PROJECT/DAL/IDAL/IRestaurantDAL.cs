@@ -10,6 +10,8 @@ namespace ASP_PROJECT.DAL.IDAL
     {
         Restaurant GetRestaurantById(int id);
 
+        bool SignRestaurant(Restorer restorer, Restaurant restaurant);
+
         List<Restaurant> GetAllRestaurants();
     }
 }

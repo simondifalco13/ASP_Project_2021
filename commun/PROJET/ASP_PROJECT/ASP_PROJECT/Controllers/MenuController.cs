@@ -72,6 +72,15 @@ namespace ASP_PROJECT.Controllers
             return View("Views/Menu/ModifyDish.cshtml",vm);
         }
 
+        public IActionResult DeleteDish()
+        {
+            Restaurant r = new Restaurant();
+            r.Id = 1;
+            List<Dish> ld = Dish.GetDishes(r, _menuDAL);
+            ListDishViewModel vm = new ListDishViewModel(ld);
+            return View("DeleteDish", vm);
+
+        }
 
         [HttpPost]
         public IActionResult AddDish(DishViewModel vm)

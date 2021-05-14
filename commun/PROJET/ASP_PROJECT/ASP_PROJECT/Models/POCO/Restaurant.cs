@@ -61,7 +61,7 @@ namespace ASP_PROJECT.Models.POCO
 
         [Required(ErrorMessage = "Champs obligatoire")]
         [StringLength(20, MinimumLength = 10)]
-        [Display(Name = "TVA")]
+        [Display(Name = "N° TVA")]
         public string NumTVA { get; set; }
 
 

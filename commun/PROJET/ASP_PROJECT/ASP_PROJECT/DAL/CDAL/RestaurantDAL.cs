@@ -81,5 +81,10 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             return restos;
         }
+
+        public bool SignRestaurant(Restorer restorer, Restaurant restaurant)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
