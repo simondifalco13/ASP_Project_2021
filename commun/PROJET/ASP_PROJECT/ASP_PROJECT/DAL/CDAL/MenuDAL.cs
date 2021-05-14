@@ -116,5 +116,33 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             return listMenus;
         }
+
+        public Dish GetDishById(int id)
+        {
+            Dish SearchedDish = new Dish();
+            TypeService serviceType;
+            decimal price;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "SELECT * FROM dbo.Dishes WHERE DishId=@DishId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("DishId", id);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SearchedDish.Id = reader.GetInt32("DishId");
+                        SearchedDish.Name = reader.GetString("Name");
+                        price = reader.GetDecimal("Price");
+                        SearchedDish.Price = (double)price;
+                        Enum.TryParse(reader.GetString("TypeService"), out serviceType);
+                        SearchedDish.Service = serviceType;
+                        SearchedDish.Description = reader.GetString("Description");
+                    }
+                }
+            }
+            return SearchedDish;
+        }
     }
 }

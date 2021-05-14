@@ -107,19 +107,16 @@ namespace ASP_PROJECT.Controllers
         [HttpPost]
         public IActionResult AddDishToMenu(MenuViewModel vm)
         {
+            Dish selectedDish = vm.SelectedDish;
+            vm.Menu.DishList.Add(selectedDish);
             Restaurant r = new Restaurant();
             r.Id = 1;
             vm.Dlist = Dish.GetDishes(r, _menuDAL);
             vm.Menu.DishList = ListDish;
-            return RedirectToAction("GetViewModel",vm);
+            //return RedirectToAction("GetViewModel",vm);
+            return RedirectToAction("AddMenu",vm);
         }
 
-        [HttpPost]
-        public IActionResult AddDishToMenuBis(Dish d)
-        {
-            ListDish.Add(d);
-            return RedirectToAction("AddDishToMenu");
-        }
 
         [HttpPost]
         public IActionResult UpdatingDish(DishViewModel vm)

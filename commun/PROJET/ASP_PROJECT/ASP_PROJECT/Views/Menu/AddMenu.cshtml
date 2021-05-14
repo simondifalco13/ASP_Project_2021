@@ -37,12 +37,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label asp-for="Menu.DishList"></label></td>
+                    <td><label asp-for="SelectedDish"></label></td>
                     <td>
-                        <select class="width:200px;height:400px">
+                        <select class="width:200px;height:400px" asp-for="SelectedDish">
                             @foreach (var item in Model.Dlist)
                             {
-                                <option value="@item">@(item.Name)</option>
+                                <option value="@item.Id">@(item.Name)</option>
                             }
                         </select>
                     </td>
@@ -57,7 +57,7 @@
                 
                 <tr>
                     <td>
-                        <input type="submit" value="Add"/>
+                        <input type="submit" value="Add" asp-action="AddDishToMenu"/>
                     </td>
                 </tr>
                 <tr>

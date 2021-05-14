@@ -11,12 +11,13 @@ namespace ASP_PROJECT.ViewModels
     {
         public List<Dish> Dlist;
         public Menu Menu { get; set; }
-        public Dish SelectedDish { get; set; }
+        public int SelectedDish { get; set; }
         public MenuViewModel()
         {
             Menu = new Menu();
             Dlist = new List<Dish>();
             MenuDishList = new List<Dish>();
+            //SelectedDish = new Dish();
         }
 
         public MenuViewModel(List<Dish> l) : this()

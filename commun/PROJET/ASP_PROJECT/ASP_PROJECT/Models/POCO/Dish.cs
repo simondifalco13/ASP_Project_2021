@@ -96,5 +96,11 @@ namespace ASP_PROJECT.Models.POCO
             success = menuDAL.SuppressDish(d);
             return success;
         }
+
+        public static Dish GetDishById(int id,IMenuDAL menuDAL)
+        {
+            Dish SearchedDish = menuDAL.GetDishById(id);
+            return SearchedDish;
+        }
     }
 }
