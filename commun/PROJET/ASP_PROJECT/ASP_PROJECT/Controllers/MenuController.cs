@@ -143,13 +143,14 @@ namespace ASP_PROJECT.Controllers
         }
 
         //comment récuperer l'objet envoyé
-       [HttpPost]
-        public IActionResult SuppressDish(Dish d)
+        [HttpPost]
+        public IActionResult DeleteDish(ListDishViewModel vm)
         {
+            Dish d = vm.Dish;
             Restaurant r = new Restaurant();
             r.Id = 1;
-            bool success = Dish.DeleteDish(d,r,_menuDAL);
-            if (success==true)
+            bool success = Dish.DeleteDish(d, r, _menuDAL);
+            if (success == true)
             {
                 TempData["Suppressing"] = "La suppression du plat à été effectuée";
                 return RedirectToAction("ConsultDishes");
@@ -162,7 +163,6 @@ namespace ASP_PROJECT.Controllers
         }
 
         // 
-
         public IActionResult ConsultMenuAndDish(int idResto) {
             // Parce que objet restaurant envoyé dans GetDishes
             Restaurant resto = new Restaurant();

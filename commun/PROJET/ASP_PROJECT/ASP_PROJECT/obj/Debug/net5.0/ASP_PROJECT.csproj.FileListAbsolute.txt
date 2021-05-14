@@ -166,3 +166,8 @@ C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\ob
 C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.csproj.CopyComplete
 C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.genruntimeconfig.cache
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Home\ConsultRestaurant.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Home\ConsultRestaurant.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\ConsultMenucshtml.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\DeleteDish.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\Index.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\commun\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\SignRestaurant.cshtml.g.cs

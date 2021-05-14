@@ -1,7 +1,7 @@
 ﻿@model ASP_PROJECT.Models.POCO.Restaurant
 @{
     ViewData["Title"] = "Restaurants";
-    List<Restaurant> restos = (List<Restaurant>)TempData["Restos"];
+    //List<Restaurant> restos = (List<Restaurant>)TempData["Restos"];
 }
 <h1>@ViewData["Title"]</h1>
 <!-- PAS COMPLET : à  MODIFIER AVEC LES HEURES D'OUVERTURE + Opinion !! -->
@@ -35,9 +35,9 @@
             <label asp-for="NumTVA"></label>
         </th>
     </tr>
-    @{
-        foreach (Restaurant resto in restos) {
-            <tr>
+    @*@{
+        foreach (var resto in restos) {*@
+            @*<tr>
                 <td>
                     <label> @Html.DisplayFor(modelItem => resto.Type)</label>
                 </td>
@@ -71,7 +71,7 @@
                         <input type="submit" value="Consulter" />
                     </form>
                 </td>
-            </tr>
-        }
+            </tr>*@
+        @*}*@
     }
 </table>
