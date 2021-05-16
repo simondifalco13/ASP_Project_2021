@@ -13,7 +13,7 @@
             </tr>
             @foreach (var item in Model.ListDishesDb)
             {
-                <partial name="_DishPartial.cshtml" for="@item" />
+                <partial name="_DishPartialRestorer.cshtml" for="@item" />
             }
         </table>
     </form>

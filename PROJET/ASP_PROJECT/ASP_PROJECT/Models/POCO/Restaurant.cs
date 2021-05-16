@@ -66,14 +66,16 @@ namespace ASP_PROJECT.Models.POCO
 
 
         public List<string> DeliveryCities;
-        public DateTime[][] OpeningHours;
+        public List<DateTime> OpeningsTimes { get; set; }
+        public List<DateTime> CloseTimes { get; set; }
 
         public List<Opinion> opinionList;
         public List<Meal> mealList;
 
         public Restaurant()
         {
-
+            OpeningsTimes = new List<DateTime>();
+            CloseTimes = new List<DateTime>();
         }
 
         public Restaurant(string name,string adress,string country,string description,string tel,string pc,string ntva,string type)

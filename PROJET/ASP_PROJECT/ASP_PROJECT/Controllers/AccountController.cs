@@ -76,18 +76,29 @@ namespace ASP_PROJECT.Controllers
         public IActionResult Login() {
             return View();
         }
-        //[HttpPost]
-        //public IActionResult Login(Account account) {
-        //    if (ModelState.IsValid) {
-        //        bool success = account.Login(account.Email,account.Password);
-        //        if (success == true) {
-        //            TempData["Message"] = "State0";
-        //            return View();
-        //        } else {
-        //            TempData["Message"] = "State1";
-        //        }
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult Login(Account account)
+        {
+            if (ModelState.IsValid)
+            {
+                Account RecuperatedAccount = account.Login(_accountDAL,account);
+                //parser en bon type de POCO (customer ou restorer) via des 'is' pour verifier 
+                //recuperer objet : si l'objet est différent de null : renvoyer vue (peu importe) + message  (vue avec un lien vers les actions du type de compte) 
+                //attention prévenir car on doit modifier les 'account' en dur dans  les actions faits auparavant 
+                //l'objet va être stocké en session -> via cela on pourra récuperer 
+                //quand logged est ok -> fonction pour récuperer les restaurant et les stocker dans l'objet qu'on envoit dans ces méthodes -> via le restorer Id 
+
+                //if (success == true)
+                //{
+                //    TempData["Message"] = "State0";
+                //    return View();
+                //}
+                //else
+                //{
+                //    TempData["Message"] = "State1";
+                //}
+            }
+            return View();
+        }
     }
 }

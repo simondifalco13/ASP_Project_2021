@@ -9,6 +9,8 @@ namespace ASP_PROJECT.Models.POCO
 { 
     public abstract class Account{
 
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Champs obligatoire")]
         [StringLength(25, MinimumLength = 3)]
         [Display(Name = "Nom")]
@@ -66,10 +68,14 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        //public bool Login(IAccountDAL accountDAL,string email, string password) {
-        //    bool success = accountDAL.Login(email,password);
-        //    return success;
-        //}
+        public Account Login(IAccountDAL accountDAL, Account account)
+        {
+            //bool success = accountDAL.Login(account);
+            //recuperer objet : le retourner
+
+            Account RecuperatedAccount = accountDAL.Login(account);
+            return RecuperatedAccount;
+        }
         public void CreateAccount()
         {
 

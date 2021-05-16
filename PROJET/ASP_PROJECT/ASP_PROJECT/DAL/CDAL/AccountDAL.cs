@@ -1,4 +1,5 @@
 ﻿using ASP_PROJECT.DAL.IDAL;
+using ASP_PROJECT.Models.Other;
 using ASP_PROJECT.Models.POCO;
 using System;
 using System.Collections.Generic;
@@ -128,59 +129,72 @@ namespace ASP_PROJECT.DAL.CDAL
             return exists;
         }
 
-        //public bool Login(string email, string password) {
-        //    bool exists = false;
-        //    List<string> emails = new List<string>();
-        //    List<string> passwords = new List<string>();
+        public Account Login(Account account)
+        {
+            string AccountEmail = account.Email;
+            string AccountPassword = account.Password;
+            string email=null, password=null;
+            bool logged = false;
+            Account LoggedAccount = null;
+            if (account is Customer)
+            {
+                string request = "SELECT Email,Password FROM dbo.Customers WHERE Email=@Email";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand(request, connection);
+                    cmd.Parameters.AddWithValue("Email", AccountEmail);
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            email=reader.GetString("Email");
+                            password=reader.GetString("Password");
+                        }
+                    }
+                }
+                if (email!=null)
+                {
+                    var hash = password;
+                    bool match = Hash.comparePassword(AccountPassword, hash);
+                    if (match)
+                    {
+                        logged = true;
+                        //methode qui stocke dans LoggedAccount l'objet correspondant de la db pour le return : GetCustomerByMail(string mail)
+                    }
 
-        //    bool accountIsCustomer = false;
+                }
+            }
+            else if (account is Restorer)
+            {
+                string request = "SELECT Email,Password FROM dbo.Restorers";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand(request, connection);
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            email = reader.GetString("Email");
+                            password = reader.GetString("Password");
+                        }
+                    }
+                }
+                if (email != null)
+                {
+                    var hash = password;
+                    bool match = Hash.comparePassword(AccountPassword, hash);
+                    if (match)
+                    {
+                        logged = true;
+                        //methode qui stocke dans LoggedAccount l'objet correspondant de la db pour le return : GetRestorerByMail(string mail)
 
-        //    if (accountIsCustomer) {
+                    }
 
-        //    } else {
-
-        //    }
-        //    //
-        //    if(account is Customer) {
-        //        string request = "SELECT Email,Password FROM dbo.Account";
-        //        using(SqlConnection connection = new SqlConnection(connectionString)) {
-        //            SqlCommand cmd = new SqlCommand(request, connection);
-        //            connection.Open();
-        //            using (SqlDataReader reader = cmd.ExecuteReader()) {
-        //                while (reader.Read()) {
-        //                    emails.Add(reader.GetString("Email"));
-        //                    passwords.Add(reader.GetString("Password"));
-        //                }
-        //            }
-        //        }
-        //        foreach(var email in emails) {
-        //            foreach (var password in passwords) {
-        //                if (email == account.Email && password == account.Password) {
-        //                    exists = true;
-        //                }
-        //            }
-        //        }
-        //    } else if (account is Restorer) {
-        //        string request = "SELECT Email,Password FROM dbo.Restorers";
-        //        using (SqlConnection connection = new SqlConnection(connectionString)) {
-        //            SqlCommand cmd = new SqlCommand(request, connection);
-        //            connection.Open();
-        //            using (SqlDataReader reader = cmd.ExecuteReader()) {
-        //                while (reader.Read()) {
-        //                    emails.Add(reader.GetString("Email"));
-        //                    passwords.Add(reader.GetString("Password"));
-        //                }
-        //            }
-        //        }
-        //        foreach (var email in emails) {
-        //            foreach (var password in passwords) {
-        //                if (email == account.Email && password == account.Password) {
-        //                    exists = true;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return exists;
-        //}
+                }
+            }
+            return LoggedAccount;
+        }
     }
 }

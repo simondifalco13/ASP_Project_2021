@@ -50,13 +50,15 @@ namespace ASP_PROJECT.DAL.CDAL
 
         public List<Restaurant> GetAllRestaurants() {
             List<Restaurant> restos = new List<Restaurant>();
-
-            using(SqlConnection connection = new SqlConnection(connectionString)) {
-                string request = "SELECT * FROM dbo.Restaurants INNER JOIN dbo.Schedules ON dbo.Restaurants.restaurantID=dbo.Schedules.restaurantID";
+            //List<DateTime> OpeningTime = new List<DateTime>();
+            //List<DateTime> CloseTime = new List<DateTime>();
+            // 1  REQ -> récuperer restaurant 
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                string request = "SELECT * FROM dbo.Restaurants";
                 SqlCommand cmd = new SqlCommand(request, connection);
                 connection.Open();
 
-                using(SqlDataReader reader = cmd.ExecuteReader()) {
+                using (SqlDataReader reader = cmd.ExecuteReader()) {
                     while (reader.Read()) {
                         Restaurant resto = new Restaurant();
                         RestaurantType type;
@@ -70,21 +72,45 @@ namespace ASP_PROJECT.DAL.CDAL
                         resto.Tel = reader.GetString("PhoneNumber");
                         resto.Pc = reader.GetString("PostalCode");
                         resto.NumTVA = reader.GetString("TvaNumber");
-                        
-                        //resto.OpeningHours = reader.GetString("OpeningDay");
-                        //resto.OpeningHours = reader.GetTime("OpenTime");
-                        //resto.OpeningHours = reader.GetTime("CloseTime");
-
+                        resto.Id = reader.GetInt32("RestaurantId");
                         restos.Add(resto);
                     }
                 }
             }
-            return restos;
+            foreach (var resto in restos)
+            {
+                GetRestaurantSchedules(resto);
+            }
+                return restos;
         }
 
+        //get restaurant by id méthod
         public bool SignRestaurant(Restorer restorer, Restaurant restaurant)
         {
             throw new NotImplementedException();
+        }
+
+        public void GetRestaurantSchedules(Restaurant resto)
+        {
+            List<DateTime> OpeningTime = new List<DateTime>();
+            List<DateTime> CloseTime = new List<DateTime>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                    string request = "SELECT OpenTime,CloseTime FROM dbo.Schedules WHERE RestaurantId=@RestaurantId";
+                    SqlCommand cmd = new SqlCommand(request, connection);
+                    cmd.Parameters.AddWithValue("Restaurantid", resto.Id);
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            OpeningTime.Add(reader.GetDateTime("OpenTime"));
+                            CloseTime.Add(reader.GetDateTime("CloseTime"));
+                        }
+                    }
+                    resto.OpeningsTimes = OpeningTime;
+                    resto.CloseTimes = CloseTime;
+            }
         }
     }
 }

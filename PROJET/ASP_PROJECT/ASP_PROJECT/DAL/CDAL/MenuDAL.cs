@@ -144,5 +144,25 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             return SearchedDish;
         }
+
+        public bool UpdatingDish(Dish dish)
+        {
+            string request = "UPDATE dbo.Dishes SET Name=@Name ,Price=@Price ,TypeService=@TypeService ,Description=@Description ,TypeDish=@TypeDish WHERE DishId=@DishId";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("Name", dish.Name);
+                cmd.Parameters.AddWithValue("Price", dish.Price);
+                cmd.Parameters.AddWithValue("TypeService", dish.Service);
+                cmd.Parameters.AddWithValue("Description", dish.Description);
+                cmd.Parameters.AddWithValue("TypeDish", dish.Type);
+                cmd.Parameters.AddWithValue("DishId", dish.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+            return success;
+        }
     }
 }
