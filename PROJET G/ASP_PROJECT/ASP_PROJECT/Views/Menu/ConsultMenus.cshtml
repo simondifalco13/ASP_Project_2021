@@ -1,0 +1,65 @@
+﻿@model ASP_PROJECT.ViewModels.ListDishViewModel
+@using ASP_PROJECT.Models.POCO
+
+@{
+    ViewData["Title"] = "Menus et plats disponibles";
+
+    List<Menu> menus = (List<Menu>)TempData["menus"];
+    <!---Plutôt faire une vue partielle plutôt -->
+    List<Dish> dishes = (List<Dish>)TempData["dishes"];
+}
+<h1>@ViewData["Title"]</h1>
+<!--<table>
+    <tr>
+        <th>
+            <label asp-for="Name"></label>
+        </th>
+        <th>
+            <label asp-for="Price"></label>
+        </th>
+        <th>
+            <label asp-for="Description"></label>
+        </th>-->
+<!--Manque la partie des dishs ! -->
+<!--</tr>
+    @{
+        foreach (Menu men in menus) {
+            <tr>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => men.Name)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => men.Price)</label>
+                </td>
+                <td>
+                    <label> @Html.DisplayFor(modelItem => men.Description)</label>
+                </td>
+                <td>
+                    <form asp-controller="Order" asp-action="AddToCart">
+                        <input type="hidden" name="id" value="@men.Id" />
+                        <input type="submit" value="Ajouter au panier" />
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+</table>-->
+
+<div>
+    <h1>Les plats disponibles : </h1>
+    <form method="post" asp-controller="Menu">
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Type de plat</th>
+                <th>Type de service</th>
+                <th>Prix</th>
+            </tr>
+            @foreach (var item in Model.ListDishesDb) {
+                <partial name="_DishPartial.cshtml" for="@item" />
+            }
+        </table>
+    </form>
+    <a asp-controller="Menu" asp-action="Index">Retour</a>
+</div>
