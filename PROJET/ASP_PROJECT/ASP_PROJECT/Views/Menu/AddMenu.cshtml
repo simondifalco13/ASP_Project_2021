@@ -1,4 +1,5 @@
-﻿@model ASP_PROJECT.ViewModels.MenuViewModel
+﻿@using ASP_PROJECT.Models.POCO;
+@model ASP_PROJECT.ViewModels.MenuViewModel
 
 <h1>Créer un menu</h1>
 <div class="text-center">
@@ -54,10 +55,10 @@
                         }
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td>
-                        <input type="submit" value="Add" asp-action="AddDishToMenu"/>
+                        <input type="submit" value="Add" asp-action="AddDishToMenu" />
                     </td>
                 </tr>
                 <tr>

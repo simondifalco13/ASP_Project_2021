@@ -1,5 +1,4 @@
-﻿using ASP_PROJECT.DAL.IDAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -65,11 +64,6 @@ namespace ASP_PROJECT.Models.POCO
         {
 
         }
-
-        //public bool Login(IAccountDAL accountDAL,string email, string password) {
-        //    bool success = accountDAL.Login(email,password);
-        //    return success;
-        //}
         public void CreateAccount()
         {
 

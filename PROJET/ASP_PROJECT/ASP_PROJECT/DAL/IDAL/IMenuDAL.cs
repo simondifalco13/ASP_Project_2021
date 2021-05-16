@@ -17,5 +17,7 @@ namespace ASP_PROJECT.DAL.IDAL
         public List<Menu> GetMenus(int idResto);
 
         Dish GetDishById(int id);
+
+        bool UpdatingDish(Dish dish);
     }
 }

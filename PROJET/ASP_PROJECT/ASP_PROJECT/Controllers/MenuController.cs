@@ -20,7 +20,7 @@ namespace ASP_PROJECT.Controllers
             _menuDAL = menuDAL;
         }
 
-        public static List<Dish> ListDish = new List<Dish>();
+        //public static List<Dish> ListDish = new List<Dish>();
         public IActionResult Index()
         {
             return View("Views/Menu/Index.cshtml");
@@ -28,12 +28,12 @@ namespace ASP_PROJECT.Controllers
 
         public IActionResult AddMenu()
         {
-            MenuViewModel vm = new MenuViewModel(ListDish);
+            MenuViewModel vm = new MenuViewModel();
             //en dur a modifier
             Restaurant r = new Restaurant();
             r.Id = 1;
-            vm.Dlist = Dish.GetDishes(r,_menuDAL);
-            return View("Views/Menu/AddMenu.cshtml",vm);
+            vm.Dlist = Dish.GetDishes(r, _menuDAL);
+            return View("Views/Menu/AddMenu.cshtml", vm);
         }
         public IActionResult AddDish()
         {
@@ -64,12 +64,12 @@ namespace ASP_PROJECT.Controllers
             return View("Views/Menu/ConsultDishes.cshtml",vm);
         }
 
-        
-        public IActionResult ModifyDish(Dish d)
+
+        public IActionResult ModifyDish(Dish dishToModify)
         {
             DishViewModel vm = new DishViewModel();
-            vm.Dish = d;
-            return View("Views/Menu/ModifyDish.cshtml",vm);
+            vm.Dish = dishToModify;
+            return View("Views/Menu/ModifyDish.cshtml", vm);
         }
 
         public IActionResult DeleteDish()
@@ -81,6 +81,37 @@ namespace ASP_PROJECT.Controllers
             return View("DeleteDish", vm);
 
         }
+
+        public IActionResult DeleteDishById(int Dishid)
+        {
+            Dish SearchedDish = Dish.GetDishById(Dishid, _menuDAL);
+            Restaurant r = new Restaurant();
+            r.Id = 1;
+            bool success = Dish.DeleteDish(SearchedDish, r, _menuDAL);
+            if (success == true)
+            {
+                TempData["Suppressing"] = "La suppression du plat à été effectuée";
+                return RedirectToAction("ConsultDishes");
+            }
+            else
+            {
+                TempData["Suppressing"] = "La suppression du plat à échoué";
+                return RedirectToAction("ConsultDishes");
+            }
+        }
+
+        public IActionResult ModifyDishById(int Dishid)
+        {
+            Dish dishToModify = Dish.GetDishById(Dishid, _menuDAL);
+            Restaurant r = new Restaurant();
+            r.Id = 1;
+            DishViewModel vm = new DishViewModel();
+            vm.Dish = dishToModify;
+            TempData["ModifyDishId"] = vm.Dish.Id;
+            return View("ModifyDish", vm);
+        }
+
+        //POST METHODS
 
         [HttpPost]
         public IActionResult AddDish(DishViewModel vm)
@@ -113,51 +144,50 @@ namespace ASP_PROJECT.Controllers
         [HttpPost]
         public IActionResult AddDishToMenu(MenuViewModel vm)
         {
+            Dish AddedDish = Dish.GetDishById(vm.SelectedDish, _menuDAL);
+            vm.Menu.DishList.Add(AddedDish);
             //Dish selectedDish = vm.SelectedDish;
             //vm.Menu.DishList.Add(selectedDish);
             Restaurant r = new Restaurant();
             r.Id = 1;
             vm.Dlist = Dish.GetDishes(r, _menuDAL);
-            vm.Menu.DishList = ListDish;
-            return RedirectToAction("AddMenu",vm);
+            vm.SelectedDish = 0;
+            return View("AddMenu", vm);
+            //pourquoi ne passe pas la dishlist  : tester avec viewdata puis appliquer au model dans razor block
         }
 
-       
+
+
 
         [HttpPost]
         public IActionResult UpdatingDish(DishViewModel vm)
         {
+            TempData["Updating"] = null;
+            Dish DishToUpdate = vm.Dish;
+            DishToUpdate.Id = (int)TempData["ModifyDishId"];
             if (ModelState.IsValid)
             {
-                //on updtate en db
-                return RedirectToAction("Index");
+                bool success = Dish.UpdateDish(DishToUpdate, _menuDAL);
+                if (success == true)
+                {
+                    TempData["Updating"] = "success";
+                    return RedirectToAction("ConsultDishes");
+                }
+                else
+                {
+                    TempData["Updating"] = "error";
+                    return RedirectToAction("ModifyDishById", vm.Dish);
+                }
             }
             else
             {
-                return RedirectToAction("ModifyDish");
+                TempData["Updating"] = "Invalid";
+                return RedirectToAction("ModifyDishById", vm.Dish);
             }
-           
+
         }
 
-        //comment récuperer l'objet envoyé
-        [HttpPost]
-        public IActionResult DeleteDish(ListDishViewModel vm)
-        {
-            Dish d = vm.Dish;
-            Restaurant r = new Restaurant();
-            r.Id = 1;
-            bool success = Dish.DeleteDish(d, r, _menuDAL);
-            if (success == true)
-            {
-                TempData["Suppressing"] = "La suppression du plat à été effectuée";
-                return RedirectToAction("ConsultDishes");
-            }
-            else
-            {
-                TempData["Suppressing"] = "La suppression du plat à échoué";
-                return RedirectToAction("ConsultDishes");
-            }
-        }
+        
 
         // 
         public IActionResult ConsultMenuAndDish(int idResto) {

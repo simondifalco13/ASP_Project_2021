@@ -8,7 +8,7 @@
             <tr>
                 <td><label asp-for="Dish.Name"></label></td>
                 <td>
-                    <input asp-for="Dish.Name"/>
+                    <input asp-for="Dish.Name" />
                 </td>
                 <td><span asp-validation-for="Dish.Name" class="text-danger"></span></td>
             </tr>
@@ -44,12 +44,25 @@
             <tr>
                 <td><a asp-action="Index">Annuler</a></td>
                 <td>
-                    <input type="submit" asp-action="UpdatingDish" />
+                    <input type="submit" asp-action="UpdatingDish" value="Modifier" />
                 </td>
             </tr>
         </table>
     </form>
+    @if (!String.IsNullOrEmpty((string)ViewData["Updating"]))
+    {
 
+        @if ((string)TempData["Updating"] == "error")
+        {
+            <div class="padding:10">
+                <span class="alert alert-danger border border-danger">Modification échouée</span>
+            </div>
+        }
+        @if ((string)TempData["Updating"] == "invalid")
+        {
+            <div class="padding:10">
+                <span class="alert alert-danger border border-danger">Formulaire mal rempli</span>
+            </div>
+        }
+    }
 </div>
-
-

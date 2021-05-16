@@ -9,6 +9,7 @@
 } else if ((string)TempData["Message"] == "State1") {
     <span class="alert-danger">Un problème a été rencontré</span>
 }
+
 <div>
     <form asp-controller="Account" method="post" asp-action="CustomerRegister">
         <table>
@@ -141,9 +142,6 @@
                 </td>
                 <td>
                     <input type="submit" />
-                </td>
-                <td>
-                    <a asp-action="Index">Annuler</a>
                 </td>
             </tr>
         </table>

@@ -102,5 +102,11 @@ namespace ASP_PROJECT.Models.POCO
             Dish SearchedDish = menuDAL.GetDishById(id);
             return SearchedDish;
         }
+
+        public static bool UpdateDish(Dish dish, IMenuDAL menuDAL)
+        {
+            bool success = menuDAL.UpdatingDish(dish);
+            return success;
+        }
     }
 }

@@ -6,16 +6,12 @@
     <td>@Model.ConvertDishType()</td>
     <td>@Model.ConvertTypeService()</td>
     <td>@Model.Price €</td>
-    <!--<td>-->
-        @*<a asp-controller="Menu" asp-action="ModifyDish">Modifier</a>*@
-        <!--<input type="submit" asp-controller="Menu" asp-action="ModifyDish" value="Modifier" />
-
-    </td>
-    <td>-->
-        @*<a asp-controller="Menu" asp-action="SuppressDish">Supprimer</a>*@
-        <!--<input type="submit" asp-controller="Menu" asp-action="SuppressDish" value="Supprimer" />
-
-    </td>-->
     @*<a asp-route-ParametreMethodeController="@Model.Id"></a>*@
+    <td>
+        <a asp-controller="Menu" asp-action="ModifyDishById" asp-route-DishId="@Model.Id">Modifier</a>
+    </td>
+    <td>
+        <a asp-controller="Menu" asp-action="DeleteDishById" asp-route-DishId="@Model.Id">Supprimer</a>
+    </td>
 </tr>
 
