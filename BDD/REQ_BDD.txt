@@ -1,0 +1,260 @@
+1.CREATION OF STRUCTURE
+--------------------------
+
+CREATE DATABASE asp_project
+
+CREATE TABLE restorers
+(
+  restorerId INT PRIMARY KEY IDENTITY,
+  firstName VARCHAR(50),
+  lastName VARCHAR(50),
+  password VARCHAR(30),
+  gender varchar(10),
+  adress varchar(100),
+  postalCode varchar(15),
+  email varchar(100),
+  city varchar(50),
+  country varchar(50),
+  phoneNumber varchar(50)
+)
+
+CREATE TABLE customers
+(
+  customerId INT PRIMARY KEY IDENTITY,
+  firstName VARCHAR(50),
+  lastName VARCHAR(50),
+  password VARCHAR(30),
+  gender varchar(10),
+  adress varchar(100),
+  postalCode varchar(15),
+  city varchar(50),
+  country varchar(50),
+  email varchar(100),
+  phoneNumber varchar(50),
+  dateOfBirth DATE
+)
+
+
+CREATE TABLE restaurants
+(
+  restaurantId INT PRIMARY KEY IDENTITY,
+  name VARCHAR(50),
+  adress varchar(100),
+  postalCode varchar(15),
+  city varchar(50),
+  country varchar(50),
+  phoneNumber varchar(50),
+  restaurantType varchar(30),
+  description varchar(200),
+  tvaNumber varchar(30),
+  restorerId INT FOREIGN KEY REFERENCES restorers(restorerId) ON DELETE CASCADE,
+  
+)
+
+
+CREATE TABLE opinions
+(
+  opinionId INT PRIMARY KEY IDENTITY,
+  restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE,
+  customerId INT FOREIGN KEY REFERENCES customers(customerId) ON DELETE CASCADE ,
+  opinionText varchar(200),
+  rating INT
+)
+
+CREATE TABLE schedules
+(
+  scheduleId INT PRIMARY KEY IDENTITY,
+  restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE,
+  openingDay varchar(20),
+  openTime time,
+  closeTime time
+)
+
+
+CREATE TABLE menus
+(
+  menuId INT PRIMARY KEY IDENTITY,
+  restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE ,
+  name VARCHAR(50),
+  price DECIMAL(5,2),
+  description varchar(200),
+  typeService varchar(50)
+)
+
+CREATE TABLE dishes
+(
+  dishId INT PRIMARY KEY IDENTITY,
+  restaurantId INT FOREIGN KEY REFERENCES restaurants(restaurantId) ON DELETE CASCADE ,
+  name VARCHAR(50),
+  price DECIMAL(5,2),
+  description varchar(200),
+  typeService varchar(50),
+  typeDish varchar(50)
+  
+)
+
+
+CREATE TABLE menu_details
+(
+  menuId INT FOREIGN KEY REFERENCES menus(menuId) ,
+  dishId INT FOREIGN KEY REFERENCES dishes(dishId)
+)
+
+
+CREATE TABLE orders
+(
+ orderId INT PRIMARY KEY IDENTITY,
+ orderStatus varchar(50),
+ deliveryAdress varchar(100),
+ orderDate datetime,
+ note varchar(200),
+ customerId INT FOREIGN KEY REFERENCES customers(customerId) ON DELETE CASCADE,
+)
+
+CREATE TABLE order_dish_details
+(
+  orderId INT FOREIGN KEY REFERENCES orders(orderId) ON DELETE CASCADE,
+  dishId INT FOREIGN KEY REFERENCES dishes(dishId) 
+)
+
+
+CREATE TABLE order_menu_details
+(
+  orderId INT FOREIGN KEY REFERENCES orders(orderId) ON DELETE CASCADE,
+  menuId INT FOREIGN KEY REFERENCES menus(menuId)
+)
+
+--------------------
+A TESTER CAR PAS SÛR POUR LES CASCADES
+
+---------------------------------------
+2.INSERTIONS
+____________
+
+INSERT INTO customers (firstName,lastName,password,gender,adress,postalCode,city,country,email,phoneNumber,dateOfBirth) VALUES 
+('Daniel','Pret','password1234','male','rue enghien 12','6200','Chatelet','Belgique','daniel.pret@hotmail.com','0479854147','1956-12-03'),
+('Marie','Roper','password1234','female','rue enior 32','6400','Boyou','Belgique','marie.roper@hotmail.com','0479334117','1976-11-28'),
+('Annie','Cordale','password1234','female','rue de la sambre 1','6010','Couillet','Belgique','annie.c@gmail.com','0431394518','1970-01-08')
+
+
+INSERT INTO restorers(firstName,lastName,password,gender,adress,postalCode,city,country,email,phoneNumber) VALUES
+('Phillipe','Esteb','password1234','male','rue steak ','6000','Charleroi','Belgique','phil.est@hotmail.com','0479781295'),
+('Frank','Angus','password1234','male','avenue Baudouin','6001','Marcinelle','Belgique','frank.angus@gmail.com','0425219365'),
+('Daniella','Passin','password1234','female','rue du rosier','6010','Couillet','Belgique','daniella.ps@hotmail.com','0494135925')
+
+
+INSERT INTO restaurants(name,adress,postalCode,city,country,phoneNumber,restaurantType,description,tvaNumber,restorerId) 
+VALUES
+('Snack Dan','place verte 3','6000','Charleroi','Belgique','071323768','Snack','Snack de qualité supérieure','BE7123543235',3),
+('Chez Phil','chaussée de bruxelles','6040','Lodelinsart','Belgique','071143568','Italien','Restaurant italien avec des produits plus que frais','BE71678563235',1),
+('Mex and Go','rue de leuven','4000','Louvain-La-Neuve','Belgique','071315918','Mexicain','Nourriture mexicain en fast food','BE7173543485',2),
+('Phill & Co','rue de gosselies','6041','Jumet','Belgique','071891291','Pizza','Pizzeria de qualité','BE8923543729',1)
+
+
+INSERT INTO schedules (restaurantId,openingDay,openTime,closeTime) VALUES
+(1,'Lundi','12:00:00','23:00:00'),
+(1,'Mardi','12:00:00','23:00:00'),
+(1,'Mercredi','12:00:00','23:00:00'),
+(1,'Jeudi','12:00:00','23:00:00'),
+(1,'Vendredi','12:00:00','23:00:00'),
+(1,'Samedi','11:30:00','23:00:00'),
+(2,'Lundi','15:00:00','23:00:00'),
+(2,'Mardi','15:00:00','23:00:00'),
+(2,'Mercredi','12:00:00','23:00:00'),
+(2,'Jeudi','17:00:00','23:00:00'),
+(2,'Vendredi','16:00:00','23:00:00'),
+(2,'Samedi','11:30:00','23:00:00'),
+(3,'Lundi','11:00:00','21:00:00'),
+(3,'Mardi','11:00:00','21:00:00'),
+(3,'Mercredi','11:00:00','21:00:00'),
+(3,'Jeudi','11:00:00','21:00:00'),
+(3,'Vendredi','11:00:00','23:00:00'),
+(3,'Samedi','11:30:00','23:00:00'),
+(4,'Lundi','12:00:00','23:00:00'),
+(4,'Mardi','12:00:00','23:00:00'),
+(4,'Mercredi','12:00:00','23:00:00'),
+(4,'Jeudi','12:00:00','23:00:00'),
+(4,'Vendredi','12:00:00','23:00:00'),
+(4,'Samedi','11:30:00','23:00:00')
+
+INSERT INTO opinions(restaurantId,customerId,opinionText,rating) VALUES
+(1,2,'Très bon snack je recommande ! ',4),
+(2,3,'Quel délice, j y retournerais rapidement !',5),
+(3,1,'Rapide ,bon et sain, que demander de plus ? ',4),
+(3,2,'Bien surpris par ce fast food ! ',3)
+
+
+INSERT INTO dishes (restaurantId,name,price,typeService,typeDish,description) VALUES
+(1,'Mitraillette Poulet Mariné',6.5,'Evening','Dish','La mitraillette avec du poulet mariné maison !'),
+(1,'Hamburger',3,'Lunch','Dish','Le bon hamburger viande maison'),
+(1,'Assiette Pitta',10,'Evening','Dish','Assiette Pitta avec crudités,feta,sauce'),
+(1,'Soda Maison',2,'Lunch','Drink','Soda à la pêche fait maison, très frais'),
+(1,'Frites',3,'Evening','Dish','Frites maison avec des pommes de terres locales'),
+(1,'Crême glacée vanille',3,'Lunch','Dessert','Glace faite maison'),
+(2,'Pâtes bolognese',12,'Evening','Dish','Les pâtes bolognese de la maison ! Un classique.'),
+(2,'Scampi maison',10,'Evening','Dish','Produit frais de qualité'),
+(2,'Verre de Vin rouge',4,'Evening','Drink','Du vin de très bon millésime'),
+(2,'Patisseries siciliennes',15,'Evening','Dessert','Les meilleurs de la région')
+
+
+INSERT INTO menus (restaurantId,name,price,typeService,description) VALUES
+(1,'Menu étudiant',6,'Lunch','Mitraillette + Boisson'),
+(1,'Assiette Royale',12,'Lunch','Assiette Pitta + boisson + frites'),
+(2,'Italie Menu',15,'Evening','Le bon vin accompagné de la traditionelle bolognese'),
+(2,'Italie Complète',25,'Evening',' La traditionelle bolognese accompagnée de desserts siciliens')
+
+INSERT INTO menu_details(menuId,dishId) VALUES 
+(1,1),(1,4),
+(2,3),(2,4),(2,5),
+(3,7),(3,9),
+(4,7),(4,10)
+
+INSERT INTO orders (orderStatus,deliveryAdress,orderDate,note,customerId) VALUES
+('Validated','Rue françois oublié 12,6061, Montignies-Sur-Sambre','05/04/2021 13:02:00','',1)
+
+INSERT INTO order_menu_details (orderId,menuId) VALUES
+(1,2)
+
+INSERT INTO order_dish_details (orderId,dishId) VALUES
+(1,1),(1,5),(1,6)
+-------------------------------
+REQUEST
+_________
+
+//REQ pour voir les restaurant et leur propriétaire
+SELECT rse.firstName,rse.lastName,rse.restorerId as ID_Restaurateur,rsto.name,rsto.restaurantType,rsto.adress,rsto.city,rsto.postalCode FROM restaurants rsto INNER JOIN restorers rse ON rsto.restorerId=rse.restorerId order by rse.restorerId;
+
+//REQ pour voir tout les horaires avec leur restaurant
+SELECT r.Name,s.openingDay,s.openTime,s.closeTime FROM restaurants r INNER JOIN schedules s ON r.restaurantId=s.restaurantId
+
+
+//REQ pour voir les horaires d'un seul restaurant
+SELECT s.openingDay,s.openTime,s.closeTime FROM restaurants r INNER JOIN schedules s ON r.restaurantId=s.restaurantId where r.restaurantId=1
+
+//REQ pour voir les commentaires d'une personne précise 
+SELECT c.firstName,c.lastName,r.Name,o.opinionText,o.rating FROM customers c INNER JOIN opinions o ON c.customerId=o.customerId INNER JOIN restaurants r ON o.restaurantId=r.restaurantId WHERE c.customerId=1;
+
+//REQ pour qu'un restaurant particulier puisse voir ses commentaires 
+SELECT c.firstName,c.lastName,o.opinionText,o.rating FROM restaurants r INNER JOIN opinions o ON o.restaurantId=r.restaurantId INNER JOIN customers c ON c.customerId=o.customerId WHERE r.restaurantId=1;
+
+//REQ pour voir les menu d'un restaurant particulier
+SELECT m.menuId,m.name,m.price,m.description,m.typeService,d.name FROM menus m INNER JOIN menu_details md ON m.menuId=md.menuId INNER JOIN dishes d ON md.dishId=d.dishId WHERE m.restaurantId=1
+
+//REQ pour voir le contenu d'un menu particulier
+SELECT d.name FROM menus m INNER JOIN menu_details md ON m.menuId=md.menuId INNER JOIN dishes d ON md.dishId=d.dishId WHERE m.restaurantId=1 and m.menuId=1;
+
+//REQ pour voir les dishes dans une order
+SELECT o.orderId,o.orderStatus,o.deliveryAdress,o.orderDate,o.note,c.firstName,c.LastName,c.phoneNumber,d.name,d.price
+FROM orders o 
+INNER JOIN order_dish_details odd ON o.orderId=odd.orderId 
+INNER JOIN dishes d ON odd.dishId=d.dishId 
+INNER JOIN customers c ON o.customerId=c.customerId
+WHERE o.orderId=1
+
+//REQ pour voir les menus dans une order
+SELECT o.orderId,o.orderStatus,o.deliveryAdress,o.orderDate,o.note,c.firstName,c.LastName,c.phoneNumber,m.name,m.price 
+FROM orders o 
+INNER JOIN order_menu_details omd ON o.orderId=omd.orderId 
+INNER JOIN menus m ON m.menuId=omd.menuId 
+INNER JOIN customers c ON o.customerId=c.customerId
+WHERE o.orderId=1
