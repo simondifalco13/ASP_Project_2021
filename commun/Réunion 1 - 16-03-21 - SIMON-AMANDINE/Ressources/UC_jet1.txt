@@ -1,0 +1,24 @@
+UC_01: Consult Menu (Scénario) --> A
+UC_02 :Create account (Scénario) --> S
+UC_03: Custommer account
+UC_04: Restorer Account 
+
+UC_05 : Authentification (Scénario) --> A
+
+UC_06: Order (Scénario) --> S
+UC_07: Validate Order (Scénario) --> A
+UC_08 : Pay (Scénario) --> S
+UC_09 : Cash Paiement 
+UC_10 : Online Paiement
+UC_11 : Giving Tip
+
+UC_12 : Sign Restaurant (Scénario)--> A
+UC-13: Menu Management (Scénario) --> S
+UC_14 : Menus 
+UC_15 : Dishes 
+UC_16 : Manage Order (Scénario)--> A
+
+UC_17 : Delivrery management 
+
+UC_19 : Maintenance 
+
