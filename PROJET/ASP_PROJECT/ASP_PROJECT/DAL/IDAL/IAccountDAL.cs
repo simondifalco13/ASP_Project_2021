@@ -12,6 +12,6 @@ namespace ASP_PROJECT.DAL.IDAL
 
         bool SaveCustomer(Customer accountC);
 
-        bool Login(string email, string password);
+        //bool Login(string email, string password);
     }
 }

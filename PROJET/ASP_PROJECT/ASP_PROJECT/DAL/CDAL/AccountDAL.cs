@@ -129,59 +129,59 @@ namespace ASP_PROJECT.DAL.CDAL
             return exists;
         }
 
-        public bool Login(string email, string password) {
-            bool exists = false;
-            List<string> emails = new List<string>();
-            List<string> passwords = new List<string>();
+        //public bool Login(string email, string password) {
+        //    bool exists = false;
+        //    List<string> emails = new List<string>();
+        //    List<string> passwords = new List<string>();
 
-            bool accountIsCustomer = false;
+        //    bool accountIsCustomer = false;
 
-            if (accountIsCustomer) {
+        //    if (accountIsCustomer) {
 
-            } else {
+        //    } else {
 
-            }
-
-            if(account is Customer) {
-                string request = "SELECT Email,Password FROM dbo.Account";
-                using(SqlConnection connection = new SqlConnection(connectionString)) {
-                    SqlCommand cmd = new SqlCommand(request, connection);
-                    connection.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader()) {
-                        while (reader.Read()) {
-                            emails.Add(reader.GetString("Email"));
-                            passwords.Add(reader.GetString("Password"));
-                        }
-                    }
-                }
-                foreach(var email in emails) {
-                    foreach (var password in passwords) {
-                        if (email == account.Email && password == account.Password) {
-                            exists = true;
-                        }
-                    }
-                }
-            } else if (account is Restorer) {
-                string request = "SELECT Email,Password FROM dbo.Restorers";
-                using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    SqlCommand cmd = new SqlCommand(request, connection);
-                    connection.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader()) {
-                        while (reader.Read()) {
-                            emails.Add(reader.GetString("Email"));
-                            passwords.Add(reader.GetString("Password"));
-                        }
-                    }
-                }
-                foreach (var email in emails) {
-                    foreach (var password in passwords) {
-                        if (email == account.Email && password == account.Password) {
-                            exists = true;
-                        }
-                    }
-                }
-            }
-            return exists;
-        }
+        //    }
+        //    //
+        //    if(account is Customer) {
+        //        string request = "SELECT Email,Password FROM dbo.Account";
+        //        using(SqlConnection connection = new SqlConnection(connectionString)) {
+        //            SqlCommand cmd = new SqlCommand(request, connection);
+        //            connection.Open();
+        //            using (SqlDataReader reader = cmd.ExecuteReader()) {
+        //                while (reader.Read()) {
+        //                    emails.Add(reader.GetString("Email"));
+        //                    passwords.Add(reader.GetString("Password"));
+        //                }
+        //            }
+        //        }
+        //        foreach(var email in emails) {
+        //            foreach (var password in passwords) {
+        //                if (email == account.Email && password == account.Password) {
+        //                    exists = true;
+        //                }
+        //            }
+        //        }
+        //    } else if (account is Restorer) {
+        //        string request = "SELECT Email,Password FROM dbo.Restorers";
+        //        using (SqlConnection connection = new SqlConnection(connectionString)) {
+        //            SqlCommand cmd = new SqlCommand(request, connection);
+        //            connection.Open();
+        //            using (SqlDataReader reader = cmd.ExecuteReader()) {
+        //                while (reader.Read()) {
+        //                    emails.Add(reader.GetString("Email"));
+        //                    passwords.Add(reader.GetString("Password"));
+        //                }
+        //            }
+        //        }
+        //        foreach (var email in emails) {
+        //            foreach (var password in passwords) {
+        //                if (email == account.Email && password == account.Password) {
+        //                    exists = true;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return exists;
+        //}
     }
 }
