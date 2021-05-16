@@ -68,10 +68,7 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        public Account Login(IAccountDAL accountDAL, Account account)
-        {
-            //bool success = accountDAL.Login(account);
-            //recuperer objet : le retourner
+        public Account Login(IAccountDAL accountDAL, Account account){
 
             Account RecuperatedAccount = accountDAL.Login(account);
             return RecuperatedAccount;

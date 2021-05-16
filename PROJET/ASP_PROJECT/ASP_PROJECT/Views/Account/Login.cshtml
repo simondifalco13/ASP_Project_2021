@@ -6,8 +6,8 @@
 
 <h1>@ViewData["Title"]</h1>
 
-@if ((string)TempData["Message"] == "State1") {
-    <span class="alert-danger">Vous n'avez pas réussi à vous connecter ! </span>
+@if ((string)TempData["Message"] == "State0") {
+    <span class="alert-danger">Vous êtes bien connecté</span>
 }
 
 <form method="post" asp-controller="Account" asp-action="Login">

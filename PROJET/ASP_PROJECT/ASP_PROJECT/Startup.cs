@@ -25,7 +25,14 @@ namespace ASP_PROJECT
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = Configuration.GetConnectionString("simon");
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+
+            });
+            string connectionString = Configuration.GetConnectionString("gabriel");
             services.AddControllersWithViews();
             services.AddTransient<IMenuDAL>(md => new MenuDAL(connectionString));
             services.AddTransient<IRestaurantDAL>(md => new RestaurantDAL(connectionString));
@@ -51,6 +58,8 @@ namespace ASP_PROJECT
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

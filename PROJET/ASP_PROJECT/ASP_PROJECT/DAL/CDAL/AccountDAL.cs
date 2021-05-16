@@ -134,10 +134,10 @@ namespace ASP_PROJECT.DAL.CDAL
             string AccountEmail = account.Email;
             string AccountPassword = account.Password;
             string email=null, password=null;
-            bool logged = false;
+            //bool logged = false;
             Account LoggedAccount = null;
-            if (account is Customer)
-            {
+
+            if (account is Customer){
                 string request = "SELECT Email,Password FROM dbo.Customers WHERE Email=@Email";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -153,20 +153,18 @@ namespace ASP_PROJECT.DAL.CDAL
                         }
                     }
                 }
-                if (email!=null)
-                {
+                if (email!=null){
                     var hash = password;
                     bool match = Hash.comparePassword(AccountPassword, hash);
                     if (match)
                     {
-                        logged = true;
+                        // logged = true;
+                        // Est-ce ok ?
                         //methode qui stocke dans LoggedAccount l'objet correspondant de la db pour le return : GetCustomerByMail(string mail)
+                        LoggedAccount=GetCustomerByMail(AccountEmail);
                     }
-
                 }
-            }
-            else if (account is Restorer)
-            {
+            }else if (account is Restorer){
                 string request = "SELECT Email,Password FROM dbo.Restorers";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -187,14 +185,68 @@ namespace ASP_PROJECT.DAL.CDAL
                     bool match = Hash.comparePassword(AccountPassword, hash);
                     if (match)
                     {
-                        logged = true;
+                        // logged = true;
+                        // Est-ce ok ?
+                        LoggedAccount=GetRestorerByMail(AccountEmail);
                         //methode qui stocke dans LoggedAccount l'objet correspondant de la db pour le return : GetRestorerByMail(string mail)
-
                     }
-
                 }
             }
             return LoggedAccount;
+        }
+
+        public Customer GetCustomerByMail(string accountMail) {
+            Customer customer = new Customer();
+
+
+            string request = "SELECT CustomerId,FirstName,LastName,Gender,City,Address,PostalCode,PhoneNumber,DateOfBirth,Country FROM dbo.Customers WHERE Email=@Email";
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("Email", accountMail);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+
+                        customer.Id = reader.GetInt32("CustomerId");
+                        customer.Firstname = reader.GetString("FirstName");
+                        customer.Lastname = reader.GetString("LastName");
+                        customer.Gender = reader.GetChar("Gender");
+                        customer.City = reader.GetString("City");
+                        customer.Address = reader.GetString("Address");
+                        customer.Pc = reader.GetString("PostalCode");
+                        customer.Tel = reader.GetString("PhoneNumber");
+                        customer.DoB = reader.GetDateTime("DateOfBirth");
+                        customer.Country = reader.GetString("Country");
+                    }
+                }
+            }
+            return customer;
+        }
+        public Restorer GetRestorerByMail(string accountMail) {
+            Restorer restorer=new Restorer();
+
+
+            string request = "SELECT RestorerId,FirstName,LastName,Gender,City,Address,PostalCode,PhoneNumber,Country FROM dbo.Restorers WHERE Email=@Email";
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("Email", accountMail);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+
+                        restorer.Id = reader.GetInt32("RestorerId");
+                        restorer.Firstname = reader.GetString("FirstName");
+                        restorer.Lastname = reader.GetString("LastName");
+                        restorer.Gender = reader.GetChar("Gender");
+                        restorer.City = reader.GetString("City");
+                        restorer.Address = reader.GetString("Address");
+                        restorer.Pc = reader.GetString("PostalCode");
+                        restorer.Tel = reader.GetString("PhoneNumber");
+                        restorer.Country = reader.GetString("Country");
+                    }
+                }
+            }
+            return restorer;
         }
     }
 }

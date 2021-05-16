@@ -296,3 +296,5 @@ C:\Users\simon\Desktop\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJE
 C:\Users\simon\Desktop\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.csproj.CopyComplete
 C:\Users\simon\Desktop\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.genruntimeconfig.cache
 C:\Users\simon\Desktop\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_DishPartialRestorer.cshtml.g.cs
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_DishPartialRestorer.cshtml.g.cs
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_MenuAndDishPartial.cshtml.g.cs

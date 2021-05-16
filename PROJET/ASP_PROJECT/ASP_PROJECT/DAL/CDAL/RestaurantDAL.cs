@@ -50,9 +50,7 @@ namespace ASP_PROJECT.DAL.CDAL
 
         public List<Restaurant> GetAllRestaurants() {
             List<Restaurant> restos = new List<Restaurant>();
-            //List<DateTime> OpeningTime = new List<DateTime>();
-            //List<DateTime> CloseTime = new List<DateTime>();
-            // 1  REQ -> récuperer restaurant 
+
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 string request = "SELECT * FROM dbo.Restaurants";
                 SqlCommand cmd = new SqlCommand(request, connection);
@@ -84,7 +82,40 @@ namespace ASP_PROJECT.DAL.CDAL
                 return restos;
         }
 
-        //get restaurant by id méthod
+        public List<Restaurant> GetRestaurantsById(int ID) {
+            List<Restaurant> restos = new List<Restaurant>();
+
+
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                string request = "SELECT * FROM dbo.Restaurants WHERE ID=@ID";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("ID", ID);
+                connection.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        Restaurant resto = new Restaurant();
+                        RestaurantType type;
+                        Enum.TryParse(reader.GetString("RestaurantType"), out type);
+                        resto.Type = type;
+                        resto.Name = reader.GetString("Name");
+                        resto.Address = reader.GetString("Adress");
+                        resto.City = reader.GetString("City");
+                        resto.Country = reader.GetString("Country");
+                        resto.Description = reader.GetString("Description");
+                        resto.Tel = reader.GetString("PhoneNumber");
+                        resto.Pc = reader.GetString("PostalCode");
+                        resto.NumTVA = reader.GetString("TvaNumber");
+                        resto.Id = reader.GetInt32("RestaurantId");
+                        restos.Add(resto);
+                    }
+                }
+            }
+            foreach (var resto in restos) {
+                GetRestaurantSchedules(resto);
+            }
+            return restos;
+        }
         public bool SignRestaurant(Restorer restorer, Restaurant restaurant)
         {
             throw new NotImplementedException();
