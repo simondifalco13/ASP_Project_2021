@@ -66,10 +66,10 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        public bool Login(IAccountDAL accountDAL,string email, string password) {
-            bool success = accountDAL.Login(email,password);
-            return success;
-        }
+        //public bool Login(IAccountDAL accountDAL,string email, string password) {
+        //    bool success = accountDAL.Login(email,password);
+        //    return success;
+        //}
         public void CreateAccount()
         {
 

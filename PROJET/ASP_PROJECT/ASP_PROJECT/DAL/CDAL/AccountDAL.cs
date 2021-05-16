@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace ASP_PROJECT.DAL.CDAL
 {
-    public class AccountDAL : IAccountDAL
-    {
+    public class AccountDAL : IAccountDAL{
         private string connectionString;
         public AccountDAL(string connectionString)
         {
