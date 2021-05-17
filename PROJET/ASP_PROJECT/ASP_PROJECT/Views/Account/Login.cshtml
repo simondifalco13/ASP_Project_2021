@@ -1,4 +1,4 @@
-﻿@model ASP_PROJECT.Models.POCO.Account
+﻿@model ASP_PROJECT.ViewModels.LoginViewModel
 
 @{
     ViewData["Title"] = "Connexion";
@@ -10,28 +10,28 @@
     <span class="alert-danger">Vous êtes bien connecté</span>
 }
 
-<form method="post" asp-controller="Account" asp-action="Login">
+<form method="post" asp-controller="Account">
     <table>
         <tr>
             <td>
-                <label asp-for="Email"></label>
+                <label asp-for="user.Email"></label>
             </td>
             <td>
-                <input asp-for="Email" />
+                <input asp-for="user.Email" />
             </td>
             <td>
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <span asp-validation-for="user.Email" class="text-danger"></span>
             </td>
         </tr>
         <tr>
             <td>
-                <label asp-for="Password"></label>
+                <label asp-for="user.Password"></label>
             </td>
             <td>
-                <input asp-for="Password" />
+                <input asp-for="user.Password" type="password" />
             </td>
             <td>
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <span asp-validation-for="user.Password" class="text-danger"></span>
             </td>
         </tr>
         <tr>
@@ -39,7 +39,7 @@
                 <a asp-action="Index"> Annuler </a>
             </td>
             <td>
-                <input type="submit" />
+                <input type="submit" asp-action="Login"/>
             </td>
         </tr>
     </table>

@@ -89,5 +89,12 @@ namespace ASP_PROJECT.Models.POCO
         {
 
         }
+
+        public bool VerifyExistingRestorer(IAccountDAL accountDAL,Account r)
+        {
+            Restorer r2 = (Restorer)r;
+            bool existing = accountDAL.VerifyExistingRestorer(r2);
+            return existing;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace ASP_PROJECT.DAL.CDAL
 
         public  bool SaveRestorer(Restorer r)
         {
-            bool existingUser = VerifyExistingUser(r);
+            bool existingUser = VerifyExistingRestorer(r);
             if (existingUser != true)
             {
                 string request = "INSERT INTO dbo.Restorers (FirstName,LastName,Email,Password,Gender,City,Address,PostalCode,PhoneNumber,Country) VALUES (@FirstName,@LastName,@Email,@Password,@Gender,@City,@Address,@PostalCode,@PhoneNumber,@Country)";
@@ -48,7 +48,7 @@ namespace ASP_PROJECT.DAL.CDAL
                 return false;
             }
         }
-        public bool VerifyExistingUser(Restorer r)
+        public bool VerifyExistingRestorer(Restorer r)
         {
             bool exists = false;
             List<string> emails = new List<string>();
@@ -136,7 +136,7 @@ namespace ASP_PROJECT.DAL.CDAL
             string email=null, password=null;
             //bool logged = false;
             Account LoggedAccount = null;
-
+            //revoir manière de penser : chercher si le compte est contenu dans une des 2 tables, si c'est le cas crée une variable Account LoggedAccount=new Restorer() ou LoggedAccount=new customer
             if (account is Customer){
                 string request = "SELECT Email,Password FROM dbo.Customers WHERE Email=@Email";
                 using (SqlConnection connection = new SqlConnection(connectionString))

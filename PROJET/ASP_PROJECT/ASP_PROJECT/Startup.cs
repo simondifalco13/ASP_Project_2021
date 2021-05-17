@@ -32,7 +32,7 @@ namespace ASP_PROJECT
                 options.Cookie.IsEssential = true;
 
             });
-            string connectionString = Configuration.GetConnectionString("gabriel");
+            string connectionString = Configuration.GetConnectionString("simon");
             services.AddControllersWithViews();
             services.AddTransient<IMenuDAL>(md => new MenuDAL(connectionString));
             services.AddTransient<IRestaurantDAL>(md => new RestaurantDAL(connectionString));

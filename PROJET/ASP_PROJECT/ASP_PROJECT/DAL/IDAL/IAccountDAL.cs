@@ -13,5 +13,7 @@ namespace ASP_PROJECT.DAL.IDAL
         bool SaveCustomer(Customer accountC);
 
         Account Login(Account account);
+
+        public bool VerifyExistingRestorer(Restorer r);
     }
 }
