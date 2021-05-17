@@ -211,7 +211,6 @@ C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\o
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\AddMenu.cshtml.g.cs
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\ConsultDishes.cshtml.g.cs
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\ConsultMenus.cshtml.g.cs
-C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\ConsultRestaurant.cshtml.g.cs
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\DeleteDish.cshtml.g.cs
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\Index.cshtml.g.cs
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\ModifyDish.cshtml.g.cs
@@ -363,3 +362,7 @@ C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.pdb
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.genruntimeconfig.cache
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Account\ConsultRestorerInformations.cshtml.g.cs
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Account\ConsultRestorerInformations.cshtml.g.cs
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\ConsultAllRestaurants.cshtml.g.cs
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantAllInformationPartial.cshtml.g.cs
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantSummaryPartial.cshtml.g.cs

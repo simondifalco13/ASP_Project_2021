@@ -26,7 +26,5 @@ namespace ASP_PROJECT.ViewModels
                 Dishes.Add(new SelectListItem() { Value = dish.Id.ToString(), Text = dish.Name });
             }
         }
-
-
     }
 }

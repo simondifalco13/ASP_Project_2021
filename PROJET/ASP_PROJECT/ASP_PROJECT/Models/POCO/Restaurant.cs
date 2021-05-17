@@ -71,6 +71,7 @@ namespace ASP_PROJECT.Models.POCO
 
         public List<Opinion> opinionList;
         public List<Meal> mealList;
+        //public int Note { get; set; }
 
         public Restaurant()
         {

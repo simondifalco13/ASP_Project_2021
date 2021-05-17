@@ -1,5 +1,6 @@
 ﻿using ASP_PROJECT.DAL.IDAL;
 using ASP_PROJECT.Models.POCO;
+using ASP_PROJECT.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,11 @@ namespace ASP_PROJECT.Controllers {
         }
 
         public IActionResult ConsultRestaurant() {
-            List<Restaurant> restos = Restaurant.GetAllRestaurants(_restaurantDAL);
 
-            TempData["Restos"] = restos;
-            return View();
+            List<Restaurant> restos = Restaurant.GetAllRestaurants(_restaurantDAL);
+            ListRestaurantsViewModel viewModel = new ListRestaurantsViewModel(restos);
+
+            return View("Views/Restaurant/ConsultAllRestaurants.cshtml",viewModel);
         }
 
         //Simon : (délimitation pour m'y retrouver quand je fais des copier coller en attendant de résoudre le problème de versionning)

@@ -189,8 +189,8 @@ namespace ASP_PROJECT.Controllers
 
         
 
-        // 
-        public IActionResult ConsultMenuAndDish(int idResto) {
+        // à refaire
+        public IActionResult ConsultMenus(int idResto) {
             // Parce que objet restaurant envoyé dans GetDishes
             Restaurant resto = new Restaurant();
             resto.Id = idResto;
