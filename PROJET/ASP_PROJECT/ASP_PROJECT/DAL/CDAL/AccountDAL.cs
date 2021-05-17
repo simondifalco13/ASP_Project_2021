@@ -134,9 +134,7 @@ namespace ASP_PROJECT.DAL.CDAL
             string AccountEmail = account.Email;
             string AccountPassword = account.Password;
             string email=null, password=null;
-            //bool logged = false;
             Account LoggedAccount = null;
-            //revoir manière de penser : chercher si le compte est contenu dans une des 2 tables, si c'est le cas crée une variable Account LoggedAccount=new Restorer() ou LoggedAccount=new customer
             if (account is Customer){
                 string request = "SELECT Email,Password FROM dbo.Customers WHERE Email=@Email";
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -158,17 +156,20 @@ namespace ASP_PROJECT.DAL.CDAL
                     bool match = Hash.comparePassword(AccountPassword, hash);
                     if (match)
                     {
-                        // logged = true;
-                        // Est-ce ok ?
-                        //methode qui stocke dans LoggedAccount l'objet correspondant de la db pour le return : GetCustomerByMail(string mail)
                         LoggedAccount=GetCustomerByMail(AccountEmail);
                     }
+                    else
+                    {
+                        throw new Exception("password don't match");
+                    }
                 }
-            }else if (account is Restorer){
-                string request = "SELECT Email,Password FROM dbo.Restorers";
+            }
+            if (account is Restorer){
+                string request = "SELECT Email,Password FROM dbo.Restorers WHERE Email=@Email";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand(request, connection);
+                    cmd.Parameters.AddWithValue("Email", AccountEmail);
                     connection.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -185,10 +186,11 @@ namespace ASP_PROJECT.DAL.CDAL
                     bool match = Hash.comparePassword(AccountPassword, hash);
                     if (match)
                     {
-                        // logged = true;
-                        // Est-ce ok ?
-                        LoggedAccount=GetRestorerByMail(AccountEmail);
-                        //methode qui stocke dans LoggedAccount l'objet correspondant de la db pour le return : GetRestorerByMail(string mail)
+                        LoggedAccount = GetRestorerByMail(AccountEmail);
+                    }
+                    else
+                    {
+                        throw new Exception("password don't match");
                     }
                 }
             }
@@ -197,8 +199,7 @@ namespace ASP_PROJECT.DAL.CDAL
 
         public Customer GetCustomerByMail(string accountMail) {
             Customer customer = new Customer();
-
-
+            string gender;
             string request = "SELECT CustomerId,FirstName,LastName,Gender,City,Address,PostalCode,PhoneNumber,DateOfBirth,Country FROM dbo.Customers WHERE Email=@Email";
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 SqlCommand cmd = new SqlCommand(request, connection);
@@ -210,7 +211,10 @@ namespace ASP_PROJECT.DAL.CDAL
                         customer.Id = reader.GetInt32("CustomerId");
                         customer.Firstname = reader.GetString("FirstName");
                         customer.Lastname = reader.GetString("LastName");
-                        customer.Gender = reader.GetChar("Gender");
+                        //méthode GetChar ne fonctionnait pas pour une raison inconnue
+                        //modifier dans db GEnder -> nvarchar(1)
+                        gender = reader.GetString("Gender");
+                        customer.Gender = gender[0];
                         customer.City = reader.GetString("City");
                         customer.Address = reader.GetString("Address");
                         customer.Pc = reader.GetString("PostalCode");
@@ -220,12 +224,12 @@ namespace ASP_PROJECT.DAL.CDAL
                     }
                 }
             }
+            customer.Email = accountMail;
             return customer;
         }
         public Restorer GetRestorerByMail(string accountMail) {
             Restorer restorer=new Restorer();
-
-
+            string gender;
             string request = "SELECT RestorerId,FirstName,LastName,Gender,City,Address,PostalCode,PhoneNumber,Country FROM dbo.Restorers WHERE Email=@Email";
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 SqlCommand cmd = new SqlCommand(request, connection);
@@ -237,7 +241,10 @@ namespace ASP_PROJECT.DAL.CDAL
                         restorer.Id = reader.GetInt32("RestorerId");
                         restorer.Firstname = reader.GetString("FirstName");
                         restorer.Lastname = reader.GetString("LastName");
-                        restorer.Gender = reader.GetChar("Gender");
+                        //méthode GetChar ne fonctionnait pas pour une raison inconnue
+                        //modifier dans db GEnder -> nvarchar(1)
+                        gender = reader.GetString("Gender");
+                        restorer.Gender = gender[0];
                         restorer.City = reader.GetString("City");
                         restorer.Address = reader.GetString("Address");
                         restorer.Pc = reader.GetString("PostalCode");
@@ -246,6 +253,7 @@ namespace ASP_PROJECT.DAL.CDAL
                     }
                 }
             }
+            restorer.Email = accountMail;
             return restorer;
         }
     }

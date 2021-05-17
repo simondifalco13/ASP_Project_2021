@@ -4,9 +4,7 @@
     ViewData["Title"] = "Inscription d'un client.";
 }
 <h1>@ViewData["Title"]</h1>
-@if ((string)TempData["Message"] == "State0") {
-    <span class="alert-danger"> Le compte a bien été créé</span>
-} else if ((string)TempData["Message"] == "State1") {
+@if ((string)TempData["Message"] == "State1") {
     <span class="alert-danger">Un problème a été rencontré</span>
 }
 <div>

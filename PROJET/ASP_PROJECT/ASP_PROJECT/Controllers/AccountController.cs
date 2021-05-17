@@ -1,4 +1,5 @@
 ﻿using ASP_PROJECT.DAL.IDAL;
+using ASP_PROJECT.Models.Other;
 using ASP_PROJECT.Models.POCO;
 using ASP_PROJECT.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,34 @@ namespace ASP_PROJECT.Controllers
             Restorer r = new Restorer();
             return View("RestorerInscription", r);
         }
+        public IActionResult CustomerInscription()
+        {
+            return View();
+        }
 
+        public IActionResult Login()
+        {
+            LoginViewModel vm = new LoginViewModel();
+            return View("Login", vm);
+        }
+
+        public IActionResult ConsultRestorerInformations()
+        {
+            Restorer restorer = new Restorer();
+            restorer.Firstname = HttpContext.Session.GetString("Firstname");
+            restorer.Lastname = HttpContext.Session.GetString("Lastname");
+            restorer.Id = (int)HttpContext.Session.GetInt32("CustomerId");
+            restorer.Email = HttpContext.Session.GetString("Email");
+            restorer.City = HttpContext.Session.GetString("City");
+            restorer.Address = HttpContext.Session.GetString("Address");
+            restorer.Pc = HttpContext.Session.GetString("PostalCode");
+            restorer.Tel = HttpContext.Session.GetString("PhoneNumber");
+            restorer.Country = HttpContext.Session.GetString("Country");
+            string gender= HttpContext.Session.GetString("Gender");
+            restorer.Gender = gender[0];
+            return View("ConsultRestorerInformations", restorer);
+        }
+        //POST
         [HttpPost]
         public IActionResult RestorerRegister(Restorer r)
         {
@@ -52,9 +80,7 @@ namespace ASP_PROJECT.Controllers
                 return View("RestorerInscription", r);
             }
         }
-        public IActionResult CustomerInscription() {
-            return View();
-        }
+       
         /// À la création du comtpe, considérons la personne connectée -> Va pouvoir consulter les menus ( à modifier plus tard on verra )
         /// Si pas bon, retourner au formulaire d'inscription.
         /// Préciser HttpPost !!
@@ -71,19 +97,16 @@ namespace ASP_PROJECT.Controllers
                     TempData["Message"] = "State1";
                 }
             } 
-            return View("CustomerInscription");
+            return View("Index");
         }
 
-        public IActionResult Login() {
-            //envoyer un viewmodel avec 2 objets de type restorer et customer, leur passer les données au 2 mais dans la DAL verifier que c'est le bon qu'on renvoit 
-            LoginViewModel vm = new LoginViewModel();
-            return View("Login",vm);
-        }
+        
         [HttpPost]
         public IActionResult Login(LoginViewModel vm)
         {
             //verifier si le mail est un custommer ou restorer et ensuite créer un objet correspondant
             //Account account;
+            Account RecuperatedAccount;
             Account TryRestorer = new Restorer();
             Account TryCustomer = new Customer();
             bool IsRestorer = false;
@@ -93,56 +116,78 @@ namespace ASP_PROJECT.Controllers
 
             TryCustomer.Email = vm.user.Email;
             TryCustomer.Password = vm.user.Password;
-            IsRestorer =TryRestorer.VerifyExistingRestorer(_accountDAL,TryRestorer);
-            if (IsRestorer == true)
+
+            if (vm.user.Email!=null && vm.user.Password!=null)
             {
-                //traitement pour verifier
+                IsRestorer = TryRestorer.VerifyExistingRestorer(_accountDAL, TryRestorer);
+                if (IsRestorer == true)
+                {
+                    try
+                    {
+                        RecuperatedAccount = Account.Login(_accountDAL, TryRestorer);
+                        if (String.IsNullOrEmpty(HttpContext.Session.GetString("restorerConnected")))
+                        {
+                            TempData["Message"] = "State10";
+                            HttpContext.Session.SetString("restorerConnected", "true");
+                            HttpContext.Session.SetInt32("CustomerId", RecuperatedAccount.Id);
+                            HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
+                            HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
+                            HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
+                            HttpContext.Session.SetString("City", RecuperatedAccount.City);
+                            HttpContext.Session.SetString("Address", RecuperatedAccount.Address);
+                            HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
+                            HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
+                            HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
+                            HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        TempData["Exception"] = e.Message;
+
+                    }
+                }
+                else
+                {
+
+                    IsCustomer = TryCustomer.VerifyExistingCustomer(_accountDAL, TryCustomer);
+                    if (IsCustomer == true)
+                    {
+                        try
+                        {
+                            RecuperatedAccount = Account.Login(_accountDAL, TryCustomer);
+                            if (String.IsNullOrEmpty(HttpContext.Session.GetString("customerConnected")))
+                            {
+                                TempData["Message"] = "State10";
+                                HttpContext.Session.SetString("customerConnected", "true");
+                                HttpContext.Session.SetInt32("CustomerId", RecuperatedAccount.Id);
+                                HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
+                                HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
+                                HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
+                                HttpContext.Session.SetString("City", RecuperatedAccount.City);
+                                HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
+                                HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
+                                HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
+                                HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
+
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            TempData["Exception"] = e.Message;
+                        }
+                    }
+                    else
+                    {
+                        TempData["Message"] = "State1";
+                    }
+                }
             }
             else
             {
-                //IsCustomer=TryCustomer.
-                if (IsCustomer == true)
-                {
-                    //traitement
-                }
+                TempData["Message"] = "Uncompleted";
             }
-            
-
-            //if (ModelState.IsValid)
-            //{
-            //    Account RecuperatedAccount = account.Login(_accountDAL,account);
-
-            //    if (account is Customer && account != null) {
-            //        TempData["Message"] = "State0";
-
-            //        if (String.IsNullOrEmpty(HttpContext.Session.GetString("customerConnected"))) {
-            //            HttpContext.Session.SetInt32("CustomerId", RecuperatedAccount.Id);
-            //            HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
-            //            HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
-            //            HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
-            //            HttpContext.Session.SetString("City", RecuperatedAccount.City);
-            //            HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
-            //            HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
-            //            HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
-            //        }
-            //        return View();
-            //    } else if (account is Restorer && account != null) {
-            //        TempData["Message"] = "State0";
-
-            //        if (String.IsNullOrEmpty(HttpContext.Session.GetString("restorerConnected"))) {
-            //            HttpContext.Session.SetInt32("CustomerId", RecuperatedAccount.Id);
-            //            HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
-            //            HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
-            //            HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
-            //            HttpContext.Session.SetString("City", RecuperatedAccount.City);
-            //            HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
-            //            HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
-            //            HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
-            //        }
-            //        return View();
-            //    }
-            //}
-            return View();
+            return View("Index");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ASP_PROJECT.DAL.IDAL;
+using ASP_PROJECT.Models.Other;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -68,10 +69,18 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        public Account Login(IAccountDAL accountDAL, Account account){
+        public static Account Login(IAccountDAL accountDAL, Account account){
 
-            Account RecuperatedAccount = accountDAL.Login(account);
-            return RecuperatedAccount;
+            try
+            {
+                Account RecuperatedAccount = accountDAL.Login(account);
+                return RecuperatedAccount;
+            }
+            catch(Exception e)
+            {
+                string message = e.Message;
+                throw new Exception(message);
+            }
         }
         public void CreateAccount()
         {
@@ -90,10 +99,16 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        public bool VerifyExistingRestorer(IAccountDAL accountDAL,Account r)
+        public bool VerifyExistingRestorer(IAccountDAL accountDAL,Account account)
         {
-            Restorer r2 = (Restorer)r;
-            bool existing = accountDAL.VerifyExistingRestorer(r2);
+            Restorer restorer = (Restorer)account;
+            bool existing = accountDAL.VerifyExistingRestorer(restorer);
+            return existing;
+        }
+        public bool VerifyExistingCustomer(IAccountDAL accountDAL,Account account)
+        {
+            Customer customer = (Customer)account;
+            bool existing = accountDAL.VerifyExistingCustomer(customer);
             return existing;
         }
     }

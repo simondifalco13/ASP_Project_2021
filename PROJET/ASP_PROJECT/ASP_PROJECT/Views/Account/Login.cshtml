@@ -6,8 +6,22 @@
 
 <h1>@ViewData["Title"]</h1>
 
-@if ((string)TempData["Message"] == "State0") {
-    <span class="alert-danger">Vous êtes bien connecté</span>
+@if ((string)TempData["Message"] == "Uncompleted")
+{
+    <span class="m-2 alert-danger">Remplissez tout les champs</span>
+}
+@if ((string)TempData["Message"] == "State1")
+{
+    <div class="m-2 alert-danger">
+        <p>Aucun compte existant avec cet email</p>
+        <button><a asp-controller="Account" asp-action="RestorerRegister">Créer un compte de restorateur</a></button>
+        <br />
+        <button><a asp-controller="Account" asp-action="CustomerInscription">Créer un compte de client</a></button>
+    </div>
+}
+@if (!String.IsNullOrEmpty((string)TempData["Exception"]))
+{
+    <span class="m-2 alert-danger">@TempData["Exception"]</span>
 }
 
 <form method="post" asp-controller="Account">
@@ -39,7 +53,7 @@
                 <a asp-action="Index"> Annuler </a>
             </td>
             <td>
-                <input type="submit" asp-action="Login"/>
+                <input type="submit" asp-action="Login" />
             </td>
         </tr>
     </table>

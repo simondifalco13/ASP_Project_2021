@@ -8,7 +8,7 @@ namespace ASP_PROJECT.ViewModels
 {
     public class LoginViewModel
     {
-
+        
         public Restorer user { get; set; }
         public LoginViewModel()
         {

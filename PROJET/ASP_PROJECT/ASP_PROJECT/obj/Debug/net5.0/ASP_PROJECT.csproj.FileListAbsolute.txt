@@ -362,3 +362,4 @@ C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ref\ASP_PROJECT.dll
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.pdb
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.genruntimeconfig.cache
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Account\ConsultRestorerInformations.cshtml.g.cs
