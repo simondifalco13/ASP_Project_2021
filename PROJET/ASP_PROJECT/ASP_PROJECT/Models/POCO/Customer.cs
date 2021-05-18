@@ -28,5 +28,17 @@ namespace ASP_PROJECT.Models.POCO
             bool success = DAL.SaveCustomer(accountC);
             return success;
         }
+
+        public static Customer GetCustomerByMail(IAccountDAL accountDAL, string mail)
+        {
+            Customer SearchedRestorer = accountDAL.GetCustomerByMail(mail);
+            return SearchedRestorer;
+        }
+
+        public static bool ModifyCustomerInformations(IAccountDAL accountDAL, Customer customerToModify)
+        {
+            bool success = accountDAL.UpdateCustomerInformations(customerToModify);
+            return success;
+        }
     }
 }

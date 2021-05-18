@@ -23,5 +23,17 @@ namespace ASP_PROJECT.Models.POCO
             bool success = accountDAL.SaveRestorer(r);
             return success;
         }
+
+        public static Restorer GetRestorerByMail(IAccountDAL accountDAL,string mail)
+        {
+            Restorer SearchedRestorer = accountDAL.GetRestorerByMail(mail);
+            return SearchedRestorer;
+        }
+
+        public static bool ModifyRestorerInformations(IAccountDAL accountDAL,Restorer restorerToModify)
+        {
+            bool success = accountDAL.UpdateRestorerInformations(restorerToModify);
+            return success;
+        }
     }
 }

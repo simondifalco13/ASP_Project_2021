@@ -16,5 +16,12 @@ namespace ASP_PROJECT.DAL.IDAL
 
         public bool VerifyExistingRestorer(Restorer r);
         public bool VerifyExistingCustomer(Customer c);
+
+        public Restorer GetRestorerByMail(string accountMail);  
+        public Customer GetCustomerByMail(string accountMail);
+
+        public bool UpdateRestorerInformations(Restorer restorerToModify);
+
+        public bool UpdateCustomerInformations(Customer customerToModify);
     }
 }

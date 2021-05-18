@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace ASP_PROJECT.DAL.CDAL
 {
-    public class AccountDAL : IAccountDAL{
+    public class AccountDAL : IAccountDAL
+    {
         private string connectionString;
         public AccountDAL(string connectionString)
         {
@@ -160,7 +161,7 @@ namespace ASP_PROJECT.DAL.CDAL
                     }
                     else
                     {
-                        throw new Exception("password don't match");
+                        throw new Exception("Le mot de passe n'est pas bon");
                     }
                 }
             }
@@ -190,7 +191,7 @@ namespace ASP_PROJECT.DAL.CDAL
                     }
                     else
                     {
-                        throw new Exception("password don't match");
+                        throw new Exception("Le mot de passe n'est pas bon");
                     }
                 }
             }
@@ -255,6 +256,53 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             restorer.Email = accountMail;
             return restorer;
+        }
+
+        public bool UpdateRestorerInformations(Restorer restorerToModify)
+        {
+            string request = "UPDATE dbo.Restorers SET FirstName=@FirstName ,LastName=@LastName,Gender=@Gender, City=@City,Address=@Address,PostalCode=@PostalCode,PhoneNumber=@PhoneNumber WHERE RestorerId=@RestorerId";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("FirstName", restorerToModify.Firstname);
+                cmd.Parameters.AddWithValue("LastName", restorerToModify.Lastname);
+                cmd.Parameters.AddWithValue("Gender", restorerToModify.Gender);
+                cmd.Parameters.AddWithValue("Address", restorerToModify.Address);
+                cmd.Parameters.AddWithValue("City", restorerToModify.City);
+                cmd.Parameters.AddWithValue("PostalCode", restorerToModify.Pc);
+                cmd.Parameters.AddWithValue("PhoneNumber", restorerToModify.Tel);
+                cmd.Parameters.AddWithValue("RestorerId", restorerToModify.Id);
+                
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+            return success;
+        }
+
+        public bool UpdateCustomerInformations(Customer customerToModify)
+        {
+            string request = "UPDATE dbo.Customers SET FirstName=@FirstName ,LastName=@LastName,Gender=@Gender, City=@City,Address=@Address,PostalCode=@PostalCode,PhoneNumber=@PhoneNumber,DateOfBirth=@DateOfBirth WHERE CustomerId=@CustomerId";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("FirstName", customerToModify.Firstname);
+                cmd.Parameters.AddWithValue("LastName", customerToModify.Lastname);
+                cmd.Parameters.AddWithValue("Gender", customerToModify.Gender);
+                cmd.Parameters.AddWithValue("Address", customerToModify.Address);
+                cmd.Parameters.AddWithValue("City", customerToModify.City);
+                cmd.Parameters.AddWithValue("PostalCode", customerToModify.Pc);
+                cmd.Parameters.AddWithValue("PhoneNumber", customerToModify.Tel);
+                cmd.Parameters.AddWithValue("DateOfBirth", customerToModify.DoB);
+                cmd.Parameters.AddWithValue("CustomerId", customerToModify.Id);
+
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+            return success;
         }
     }
 }

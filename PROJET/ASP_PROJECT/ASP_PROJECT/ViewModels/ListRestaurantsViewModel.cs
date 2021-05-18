@@ -12,13 +12,16 @@ namespace ASP_PROJECT.ViewModels {
         public List<Restaurant> ListRestoDb { get; set; }
         public Restaurant Resto { get; set; }
 
-        public ListRestaurantsViewModel(){
+        public ListRestaurantsViewModel()
+        {
             Restos = new List<SelectListItem>();
             Resto = new Restaurant();
         }
-        public ListRestaurantsViewModel(List<Restaurant> restos) : this() {
+        public ListRestaurantsViewModel(List<Restaurant> restos) : this()
+        {
             ListRestoDb = restos;
-            foreach (var rest in restos) {
+            foreach (var rest in restos)
+            {
                 Restos.Add(new SelectListItem() { Value = rest.Id.ToString(), Text = rest.Name });
             }
         }

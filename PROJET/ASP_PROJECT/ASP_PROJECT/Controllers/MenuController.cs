@@ -2,6 +2,7 @@
 using ASP_PROJECT.DAL.IDAL;
 using ASP_PROJECT.Models.POCO;
 using ASP_PROJECT.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -64,6 +65,14 @@ namespace ASP_PROJECT.Controllers
             return View("Views/Menu/ConsultDishes.cshtml",vm);
         }
 
+        public IActionResult ConsultMenus(int RestoId)
+        {
+            Restaurant r = new Restaurant();
+            r.Id = RestoId;
+            List<Menu> ListMenu = Menu.GetMenus(_menuDAL,r);
+            ListMenuViewModel vm = new ListMenuViewModel(ListMenu);
+            return View("ConsultMenus", vm);
+        }
 
         public IActionResult ModifyDish(Dish dishToModify)
         {
@@ -100,6 +109,13 @@ namespace ASP_PROJECT.Controllers
             }
         }
 
+        public IActionResult DeleteMenuById(int MenuId)
+        {
+            Menu SearchedMenu = Menu.GetMenuById(MenuId, _menuDAL);
+            bool success = Menu.DeleteMenu(SearchedMenu, _menuDAL);
+            return RedirectToAction("ConsultAllRestaurant");
+        }
+
         public IActionResult ModifyDishById(int Dishid)
         {
             Dish dishToModify = Dish.GetDishById(Dishid, _menuDAL);
@@ -109,6 +125,22 @@ namespace ASP_PROJECT.Controllers
             vm.Dish = dishToModify;
             TempData["ModifyDishId"] = vm.Dish.Id;
             return View("ModifyDish", vm);
+        }
+
+        public IActionResult AddDishToMenu(int DishId)
+        {
+            Dish AddedDish = Dish.GetDishById(DishId, _menuDAL);
+            //ajouter dans variable de session afin de récuperer dans la fonction suivante
+            if (!String.IsNullOrEmpty(HttpContext.Session.GetString("restorerConnected")))
+            {
+                HttpContext.Session.SetString("Dish", DishId.ToString());
+            }
+            Restaurant r = new Restaurant();
+            r.Id = 1;
+            //vm.Dlist = Dish.GetDishes(r, _menuDAL);
+            //vm.SelectedDish = 0;
+            return View("AddMenu");
+            //pourquoi ne passe pas la dishlist  : tester avec viewdata puis appliquer au model dans razor block
         }
 
         //POST METHODS
@@ -142,24 +174,6 @@ namespace ASP_PROJECT.Controllers
 
 
         [HttpPost]
-        public IActionResult AddDishToMenu(MenuViewModel vm)
-        {
-            Dish AddedDish = Dish.GetDishById(vm.SelectedDish, _menuDAL);
-            vm.Menu.DishList.Add(AddedDish);
-            //Dish selectedDish = vm.SelectedDish;
-            //vm.Menu.DishList.Add(selectedDish);
-            Restaurant r = new Restaurant();
-            r.Id = 1;
-            vm.Dlist = Dish.GetDishes(r, _menuDAL);
-            vm.SelectedDish = 0;
-            return View("AddMenu", vm);
-            //pourquoi ne passe pas la dishlist  : tester avec viewdata puis appliquer au model dans razor block
-        }
-
-
-
-
-        [HttpPost]
         public IActionResult UpdatingDish(DishViewModel vm)
         {
             TempData["Updating"] = null;
@@ -189,8 +203,8 @@ namespace ASP_PROJECT.Controllers
 
         
 
-        // à refaire
-        //public IActionResult ConsultMenus(int idResto) {
+        // 
+        //public IActionResult ConsultMenuAndDish(int idResto) {
         //    // Parce que objet restaurant envoyé dans GetDishes
         //    Restaurant resto = new Restaurant();
         //    resto.Id = idResto;

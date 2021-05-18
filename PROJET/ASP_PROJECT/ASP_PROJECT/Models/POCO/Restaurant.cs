@@ -71,12 +71,12 @@ namespace ASP_PROJECT.Models.POCO
 
         public List<Opinion> opinionList;
         public List<Meal> mealList;
-        //public int Note { get; set; }
 
         public Restaurant()
         {
             OpeningsTimes = new List<DateTime>();
             CloseTimes = new List<DateTime>();
+            DeliveryCities = new List<string>();
         }
 
         public Restaurant(string name,string adress,string country,string description,string tel,string pc,string ntva,string type)

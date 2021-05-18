@@ -1,5 +1,4 @@
-﻿@using ASP_PROJECT.Models.POCO;
-@model ASP_PROJECT.ViewModels.MenuViewModel
+﻿@model ASP_PROJECT.ViewModels.MenuViewModel
 
 <h1>Créer un menu</h1>
 <div class="text-center">
@@ -37,7 +36,7 @@
                         <select asp-for="Menu.Service" asp-items="Model.TypeService"></select>
                     </td>
                 </tr>
-                <tr>
+                @*<tr>
                     <td><label asp-for="SelectedDish"></label></td>
                     <td>
                         <select class="width:200px;height:400px" asp-for="SelectedDish">
@@ -54,17 +53,24 @@
                             <p>@item.Name</p>
                         }
                     </td>
-                </tr>
-
+                </tr>*@
+            </table>
+            <table class="table">
                 <tr>
-                    <td>
-                        <input type="submit" value="Add" asp-action="AddDishToMenu" />
-                    </td>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Service</th>
+                    <th>Price</th>
                 </tr>
+                @foreach (var item in Model.Dlist)
+                {
+                    <partial name="_AddingDishesPartial" for="@item" />
+                }
                 <tr>
                     <td><a asp-action="Index">Annuler</a></td>
                     <td>
-                        <input type="submit" />
+                        <input type="submit" asp-action="AddMenu" />
                     </td>
                 </tr>
             </table>

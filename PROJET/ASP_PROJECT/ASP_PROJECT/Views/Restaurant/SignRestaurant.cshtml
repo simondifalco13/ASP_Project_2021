@@ -1,38 +1,29 @@
-﻿@model ASP_PROJECT.Models.POCO.Restaurant
+﻿@model ASP_PROJECT.ViewModels.SignRestaurantViewModel
 
-@{
-    List<string> jours = new List<string>();
-    jours.Add("Lundi");
-    jours.Add("Mardi");
-    jours.Add("Mercredi");
-    jours.Add("Jeudi");
-    jours.Add("Vendredi");
-    jours.Add("Samedi");
-    jours.Add("Dimanche");
-}
+
 <div>
     <h1>Ajout d'un restaurant</h1>
     <form method="post" asp-controller="Restaurant">
         <table>
             <tr>
-                <td><label asp-for="Name"></label></td>
+                <td><label asp-for="Resto.Name"></label></td>
                 <td>
-                    <input asp-for="Name" />
+                    <input asp-for="Resto.Name" />
                 </td>
-                <td><span asp-validation-for="Name" class="text-danger"></span></td>
+                <td><span asp-validation-for="Resto.Name" class="text-danger"></span></td>
             </tr>
             <tr>
-                <td><label asp-for="Description"></label></td>
+                <td><label asp-for="Resto.Description"></label></td>
                 <td>
-                    <textarea asp-for="Description"></textarea>
+                    <textarea asp-for="Resto.Description"></textarea>
 
                 </td>
-                <td><span asp-validation-for="Description" class="text-danger"></span></td>
+                <td><span asp-validation-for="Resto.Description" class="text-danger"></span></td>
             </tr>
             <tr>
-                <td><label asp-for="Type"></label></td>
+                <td><label asp-for="Resto.Type"></label></td>
                 <td>
-                    <select asp-for="Type">
+                    <select asp-for="Resto.Type">
                         <option value="0">Asiatique</option>
                         <option value="1">Mexicain</option>
                         <option value="2">Snack</option>
@@ -47,59 +38,142 @@
                 </td>
             </tr>
             <tr>
-                <td><label asp-for="Address"></label></td>
+                <td><label asp-for="Resto.Address"></label></td>
                 <td>
-                    <input asp-for="Address" />
+                    <input asp-for="Resto.Address" />
                 </td>
-                <td><span asp-validation-for="Address" class="text-danger"></span></td>
+                <td><span asp-validation-for="Resto.Address" class="text-danger"></span></td>
             </tr>
             <tr>
-                <td><label asp-for="City"></label></td>
+                <td><label asp-for="Resto.City"></label></td>
                 <td>
-                    <input asp-for="City" />
+                    <input asp-for="Resto.City" />
                 </td>
-                <td><span asp-validation-for="City" class="text-danger"></span></td>
+                <td><span asp-validation-for="Resto.City" class="text-danger"></span></td>
             </tr>
             <tr>
-                <td><label asp-for="Pc"></label></td>
+                <td><label asp-for="Resto.Pc"></label></td>
                 <td>
-                    <input asp-for="Pc" />
+                    <input asp-for="Resto.Pc" />
                 </td>
-                <td><span asp-validation-for="Pc" class="text-danger"></span></td>
+                <td><span asp-validation-for="Resto.Pc" class="text-danger"></span></td>
             </tr>
             <tr>
-                <td><label asp-for="Country"></label></td>
+                <td><label asp-for="Resto.Country"></label></td>
                 <td>
-                    <input asp-for="Country" />
+                    <input asp-for="Resto.Country" />
                 </td>
-                <td><span asp-validation-for="Country" class="text-danger"></span></td>
+                <td><span asp-validation-for="Resto.Country" class="text-danger"></span></td>
             </tr>
             <tr>
-                <td><label asp-for="NumTVA"></label></td>
+                <td><label asp-for="Resto.Tel"></label></td>
                 <td>
-                    <input asp-for="NumTVA" />
+                    <input asp-for="Resto.Tel" />
                 </td>
-                <td><span asp-validation-for="NumTVA" class="text-danger"></span></td>
+                <td><span asp-validation-for="Resto.Tel" class="text-danger"></span></td>
             </tr>
-            @foreach (var item in jours)
+            <tr>
+                <td><label asp-for="Resto.NumTVA"></label></td>
+                <td>
+                    <input asp-for="Resto.NumTVA" />
+                </td>
+                <td><span asp-validation-for="Resto.NumTVA" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Horaires d'ouverture</h3>
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Lundi</label></td>
+                <td>
+                    <input placeholder="Heure Ouverture" asp-for="@Model.MondayOt" />
+                    <input placeholder="Heure Fermeture" asp-for="@Model.MondayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Mardi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.TuesdayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.TuesdayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Mercredi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.WednesdayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.WednesdayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Jeudi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.ThursdayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.ThursdayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Vendredi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.FridayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.FridayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Samedi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.SaturdayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.SaturdayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Dimanche</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.SundayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.SundayCt" />
+                </td>
+            </tr>
+            <tr>
+                <td><label>Ville(s) de livraison</label></td>
+                <td>
+                    <input asp-for="@Model.DeliveryCity" />
+                </td>
+                <td>
+                    <button>
+                        <input type="submit" value="Ajouter ville" asp-action="AddDeliveryCity" />
+                    </button>
+                </td>
+                <td><span asp-validation-for="@Model.DeliveryCity" class="text-danger"></span></td>
+
+            </tr>
+            @if (@Model.cities.Count > 0)
             {
                 <tr>
-
-                    <td><label>@item</label></td>
                     <td>
-                        <input type="text" placeholder="Heure Ouverture" />
-                        <input type="text" placeholder="Heure Fermeture" />
+                        <h3>Villes ajoutées</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <ul>
+                            @foreach (var item in @Model.cities)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
                     </td>
                 </tr>
             }
             <tr>
-                <td><label asp-for="DeliveryCities"></label></td>
-                <td>
-                    <input asp-for="DeliveryCities" />
-                </td>
-                <td><span asp-validation-for="DeliveryCities" class="text-danger"></span></td>
-            </tr>
-            <tr>
+                <td><a asp-action="Index">Annuler</a></td>
                 <td><input type="submit" value="Ajouter" asp-action="SignRestaurant" /></td>
             </tr>
         </table>

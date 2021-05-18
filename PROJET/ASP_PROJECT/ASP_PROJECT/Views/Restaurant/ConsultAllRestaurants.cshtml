@@ -10,7 +10,8 @@
                 <th>Type de cuisine</th>
                 <th>Description</th>
             </tr>
-            @foreach (var resto in Model.ListRestoDb) {
+            @foreach (var resto in Model.ListRestoDb)
+            {
                 <partial name="_RestaurantSummaryPartial.cshtml" for="@resto" />
             }
         </table>

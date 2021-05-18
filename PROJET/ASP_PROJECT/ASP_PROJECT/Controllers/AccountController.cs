@@ -56,6 +56,74 @@ namespace ASP_PROJECT.Controllers
             restorer.Gender = gender[0];
             return View("ConsultRestorerInformations", restorer);
         }
+
+        public IActionResult ConsultCustomerInformations()
+        {
+            Customer customer = new Customer();
+            customer.Firstname = HttpContext.Session.GetString("Firstname");
+            customer.Lastname = HttpContext.Session.GetString("Lastname");
+            customer.Id = (int)HttpContext.Session.GetInt32("CustomerId");
+            customer.Email = HttpContext.Session.GetString("Email");
+            customer.City = HttpContext.Session.GetString("City");
+            customer.Address = HttpContext.Session.GetString("Address");
+            customer.Pc = HttpContext.Session.GetString("PostalCode");
+            customer.Tel = HttpContext.Session.GetString("PhoneNumber");
+            customer.Country = HttpContext.Session.GetString("Country");
+            string dobStr= HttpContext.Session.GetString("DoB");
+            customer.DoB = DateTime.Parse(dobStr);
+            string gender = HttpContext.Session.GetString("Gender");
+            customer.Gender = gender[0];
+            return View("ConsultCustomerInformations", customer);
+        }
+
+        public void UpdateRestorerSessionInformations(Restorer Account)
+        {
+            if (String.IsNullOrEmpty(HttpContext.Session.GetString("restorerConnected")))
+            {
+                HttpContext.Session.SetString("restorerConnected", "true");
+                HttpContext.Session.SetInt32("CustomerId", Account.Id);
+                HttpContext.Session.SetString("Firstname", Account.Firstname);
+                HttpContext.Session.SetString("Lastname", Account.Lastname);
+                HttpContext.Session.SetString("Email", Account.Email);
+                HttpContext.Session.SetString("City", Account.City);
+                HttpContext.Session.SetString("Address", Account.Address);
+                HttpContext.Session.SetString("PostalCode", Account.Pc);
+                HttpContext.Session.SetString("PhoneNumber",Account.Tel);
+                HttpContext.Session.SetString("Country",Account.Country);
+                HttpContext.Session.SetString("Gender", Account.Gender.ToString());
+            }
+        }
+
+        public void UpdateCustomerSessionInformations(Customer Account)
+        {
+            if (String.IsNullOrEmpty(HttpContext.Session.GetString("customerConnected")))
+            {
+                HttpContext.Session.SetString("restorerConnected", "true");
+                HttpContext.Session.SetInt32("CustomerId", Account.Id);
+                HttpContext.Session.SetString("Firstname", Account.Firstname);
+                HttpContext.Session.SetString("Lastname", Account.Lastname);
+                HttpContext.Session.SetString("Email", Account.Email);
+                HttpContext.Session.SetString("City", Account.City);
+                HttpContext.Session.SetString("Address", Account.Address);
+                HttpContext.Session.SetString("PostalCode", Account.Pc);
+                HttpContext.Session.SetString("PhoneNumber", Account.Tel);
+                HttpContext.Session.SetString("Country", Account.Country);
+                HttpContext.Session.SetString("DoB", ((Customer)Account).DoB.ToString("d"));
+                HttpContext.Session.SetString("Gender", Account.Gender.ToString());
+            }
+        }
+
+        public IActionResult ModifyRestorerInformations(string RestorerEmail)
+        {
+            Restorer RestorerToModify = Restorer.GetRestorerByMail(_accountDAL, RestorerEmail);
+            return View("ModifyRestorerAccount",RestorerToModify);
+        }
+        public IActionResult ModifyCustomerInformations(string CustomerEmail)
+        {
+            Customer RestorerToModify = Customer.GetCustomerByMail(_accountDAL, CustomerEmail);
+            return View("ModifyCustomerAccount", RestorerToModify);
+        }
+
         //POST
         [HttpPost]
         public IActionResult RestorerRegister(Restorer r)
@@ -144,6 +212,7 @@ namespace ASP_PROJECT.Controllers
                     catch (Exception e)
                     {
                         TempData["Exception"] = e.Message;
+                        return View("Login", vm);
 
                     }
                 }
@@ -158,16 +227,18 @@ namespace ASP_PROJECT.Controllers
                             RecuperatedAccount = Account.Login(_accountDAL, TryCustomer);
                             if (String.IsNullOrEmpty(HttpContext.Session.GetString("customerConnected")))
                             {
-                                TempData["Message"] = "State10";
+                                TempData["Message"] = "State11";
                                 HttpContext.Session.SetString("customerConnected", "true");
                                 HttpContext.Session.SetInt32("CustomerId", RecuperatedAccount.Id);
                                 HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
                                 HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
                                 HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
+                                HttpContext.Session.SetString("Address", RecuperatedAccount.Address);
                                 HttpContext.Session.SetString("City", RecuperatedAccount.City);
                                 HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
                                 HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
                                 HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
+                                HttpContext.Session.SetString("DoB", ((Customer)RecuperatedAccount).DoB.ToString("d"));
                                 HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
 
                             }
@@ -175,19 +246,84 @@ namespace ASP_PROJECT.Controllers
                         catch(Exception e)
                         {
                             TempData["Exception"] = e.Message;
+                            return View("Login", vm);
                         }
                     }
                     else
                     {
                         TempData["Message"] = "State1";
+                        return View("Login", vm);
                     }
                 }
             }
             else
             {
                 TempData["Message"] = "Uncompleted";
+
             }
             return View("Index");
+        }
+
+        [HttpPost]
+        public IActionResult ModifyRestorerInformations(Restorer RestorerToModify)
+        {
+            string mail = HttpContext.Session.GetString("Email");
+            Restorer RestOfInformations = Restorer.GetRestorerByMail(_accountDAL,mail);
+            RestorerToModify.Id = RestOfInformations.Id;
+            RestorerToModify.Email = RestOfInformations.Email;
+            if (RestorerToModify.Firstname != null
+                && RestorerToModify.Lastname != null
+                && RestorerToModify.Gender != 0
+                && RestorerToModify.Address != null
+                && RestorerToModify.City != null
+                && RestorerToModify.Address != null
+                && RestorerToModify.Pc != null
+                && RestorerToModify.Tel != null)
+            {
+                bool success = Restorer.ModifyRestorerInformations(_accountDAL, RestorerToModify);
+                if (success == true)
+                {
+                    UpdateRestorerSessionInformations(RestorerToModify);
+                    TempData["AccountModifications"] = "success";
+                    return View("ConsultRestorerInformations",RestorerToModify);
+                }
+            }
+            else
+            {
+                TempData["AccountModifications"] = "invalid";
+            }
+            return View("ModifyRestorerAccount", RestorerToModify);
+        }
+
+        [HttpPost]
+        public IActionResult ModifyCustomerInformations(Customer CustomerToModify)
+        {
+            string mail = HttpContext.Session.GetString("Email");
+            Customer RestOfInformations = Customer.GetCustomerByMail(_accountDAL, mail);
+            CustomerToModify.Id = RestOfInformations.Id;
+            CustomerToModify.Email = RestOfInformations.Email;
+            if (CustomerToModify.Firstname != null
+                && CustomerToModify.Lastname != null
+                && CustomerToModify.Gender != 0
+                && CustomerToModify.Address != null
+                && CustomerToModify.City != null
+                && CustomerToModify.Address != null
+                && CustomerToModify.Pc != null
+                && CustomerToModify.Tel != null)
+            {
+                bool success = Customer.ModifyCustomerInformations(_accountDAL, CustomerToModify);
+                if (success == true)
+                {
+                    UpdateCustomerSessionInformations(CustomerToModify);
+                    TempData["AccountModifications"] = "success";
+                    return View("ConsultCustomerInformations", CustomerToModify);
+                }
+            }
+            else
+            {
+                TempData["AccountModifications"] = "invalid";
+            }
+            return View("ModifyCustomerAccount", CustomerToModify);
         }
     }
 }

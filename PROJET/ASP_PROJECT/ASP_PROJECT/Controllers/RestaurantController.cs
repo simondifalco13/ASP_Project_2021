@@ -20,32 +20,57 @@ namespace ASP_PROJECT.Controllers {
         }
 
         public IActionResult ConsultRestaurant() {
-
             List<Restaurant> restos = Restaurant.GetAllRestaurants(_restaurantDAL);
             ListRestaurantsViewModel viewModel = new ListRestaurantsViewModel(restos);
 
-            return View("Views/Restaurant/ConsultAllRestaurants.cshtml",viewModel);
+            return View("Views/Restaurant/ConsultAllRestaurants.cshtml", viewModel);
         }
 
         //Simon : (délimitation pour m'y retrouver quand je fais des copier coller en attendant de résoudre le problème de versionning)
         public IActionResult SignRestaurant()
         {
-            Restaurant r = new Restaurant();
-            return View("SignRestaurant", r);
+            TempData["Previous"] = null;
+            SignRestaurantViewModel vm = new SignRestaurantViewModel();
+            vm.restorerId = 1;
+            return View("SignRestaurant", vm);
         }
 
         [HttpPost]
-        public IActionResult SignRestaurant(Restaurant r)
+        public IActionResult AddDeliveryCity(SignRestaurantViewModel vm)
+        {
+            vm.cities.Add(vm.DeliveryCity);
+            return View("SignRestaurant", vm);
+        }
+
+        [HttpPost]
+        public IActionResult SignRestaurant(SignRestaurantViewModel vm)
         {
             if (ModelState.IsValid)
             {
+                Restaurant CreatedRestaurant = vm.Resto;
+                CreatedRestaurant.OpeningsTimes.Add(DateTime.Parse(vm.MondayOt));
+                CreatedRestaurant.OpeningsTimes.Add(DateTime.Parse(vm.TuesdayOt));
+                CreatedRestaurant.OpeningsTimes.Add(DateTime.Parse(vm.WednesdayOt));
+                CreatedRestaurant.OpeningsTimes.Add(DateTime.Parse(vm.ThursdayOt));
+                CreatedRestaurant.OpeningsTimes.Add(DateTime.Parse(vm.FridayOt));
+                CreatedRestaurant.OpeningsTimes.Add(DateTime.Parse(vm.SaturdayOt));
+                CreatedRestaurant.OpeningsTimes.Add(DateTime.Parse(vm.SundayOt));
+
+                CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.MondayCt));
+                CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.TuesdayCt));
+                CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.WednesdayCt));
+                CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.ThursdayCt));
+                CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.FridayCt));
+                CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.SaturdayCt));
+                CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.SundayCt));
+
                 TempData["RestaurantSign"] = "L'ajout du restaurant s'est déroulée avec succès";
                 return View("Index");
             }
             else
             {
                 TempData["RestaurantSignError"] = "Le restaurant avec ce nom existe dèjà dans vos restaurants";
-                return View("SignRestaurant", r);
+                return View("SignRestaurant", vm);
 
             }
 

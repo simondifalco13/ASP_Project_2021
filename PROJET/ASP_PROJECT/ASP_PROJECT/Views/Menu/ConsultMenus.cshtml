@@ -1,45 +1,20 @@
-﻿<div class="Resto">
-    <h1>Resto</h1>
-    <form>
-        <table class="table">
-            <tr>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>Code postal</th>
-                <th>Pays</th>
-                <th>Téléphone</th>
-                <th>TVA</th>
-            </tr>
-        </table>
-    </form>
-</div>
+﻿@model ASP_PROJECT.ViewModels.ListMenuViewModel
 
-<div class="Menus">
-    <h1>Menus</h1>
-    <form>
+<div>
+    <h1>Les plats disponibles : </h1>
+    <form method="post" asp-controller="Menu">
         <table class="table">
             <tr>
-                <th>Service</th>
                 <th>Nom</th>
                 <th>Description</th>
+                <th>Type de service</th>
                 <th>Prix</th>
+                <th>Plats</th>
             </tr>
+            @foreach (var item in Model.ListMenuDb) {
+                <partial name="_MenuPartial.cshtml" for="@item" />
+            }
         </table>
     </form>
+    <a asp-controller="Restaurant" asp-action="ConsultRestaurant">Retour</a>
 </div>
-
-<div class="Plats">
-    <h1>Plats</h1>
-    <form>
-        <table class="table">
-            <tr>
-                <th>Service</th>
-                <th>Type plat</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-            </tr>
-        </table>
-    </form>
-</div>
-<a asp-controller="Menu" asp-action="Index">Retour</a>

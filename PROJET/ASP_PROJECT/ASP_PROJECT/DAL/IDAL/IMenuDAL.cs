@@ -14,8 +14,13 @@ namespace ASP_PROJECT.DAL.IDAL
 
         bool SuppressDish(Dish d);
 
+        bool SuppressMenu(Menu menu);
+
+        List<Menu> GetMenus(int idResto);
 
         Dish GetDishById(int id);
+
+        Menu GetMenuById(int MenuId);
 
         bool UpdatingDish(Dish dish);
     }
