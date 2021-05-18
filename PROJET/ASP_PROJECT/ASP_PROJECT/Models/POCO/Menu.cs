@@ -27,9 +27,9 @@ namespace ASP_PROJECT.Models.POCO
         {
 
         }
-        public static List<Menu> GetMenus(IMenuDAL DAL,int idResto) {
+        //public static List<Menu> GetMenus(IMenuDAL DAL,int idResto) {
 
-            return DAL.GetMenus(idResto);
-        }
+        //    return DAL.GetMenus(idResto);
+        //}
     }
 }

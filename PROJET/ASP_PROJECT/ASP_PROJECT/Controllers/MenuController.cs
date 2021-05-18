@@ -190,16 +190,16 @@ namespace ASP_PROJECT.Controllers
         
 
         // à refaire
-        public IActionResult ConsultMenus(int idResto) {
-            // Parce que objet restaurant envoyé dans GetDishes
-            Restaurant resto = new Restaurant();
-            resto.Id = idResto;
+        //public IActionResult ConsultMenus(int idResto) {
+        //    // Parce que objet restaurant envoyé dans GetDishes
+        //    Restaurant resto = new Restaurant();
+        //    resto.Id = idResto;
 
-            List<Menu> menus = Menu.GetMenus(_menuDAL,idResto);
+        //    List<Menu> menus = Menu.GetMenus(_menuDAL,idResto);
 
-            TempData["menus"] = menus;
-            TempData["dishes"] = Dish.GetDishes(resto, _menuDAL);
-            return View();
-        }
+        //    TempData["menus"] = menus;
+        //    TempData["dishes"] = Dish.GetDishes(resto, _menuDAL);
+        //    return View();
+        //}
     }
 }
