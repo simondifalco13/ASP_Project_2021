@@ -1,0 +1,24 @@
+﻿@model ASP_PROJECT.ViewModels.RestaurantOrderViewModel
+
+<div>
+    <form method="post" asp-controller="Order">
+        <table class="table">
+            <tr>
+                <th>Numéro de commande</th>
+                <th>Adresse de livraison</th>
+                <th>Date de commande</th>
+                <th>Prix</th>
+                <th>Informations client</th>
+                <th>Note</th>
+                <th>Détail de la commande</th>
+                <th>Status de la commande</th>
+            </tr>
+            @foreach (var item in @Model.Restaurant.OrdersList)
+            {
+                <tr>
+                    <partial name="_OrdersInformationsPartial" for="@item" />
+                </tr>
+            }
+        </table>
+    </form>
+</div>

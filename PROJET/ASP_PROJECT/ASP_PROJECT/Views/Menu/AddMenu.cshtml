@@ -1,5 +1,4 @@
 ﻿@model ASP_PROJECT.ViewModels.MenuViewModel
-
 <h1>Créer un menu</h1>
 <div class="text-center">
 
@@ -36,24 +35,18 @@
                         <select asp-for="Menu.Service" asp-items="Model.TypeService"></select>
                     </td>
                 </tr>
-                @*<tr>
-                    <td><label asp-for="SelectedDish"></label></td>
-                    <td>
-                        <select class="width:200px;height:400px" asp-for="SelectedDish">
-                            @foreach (var item in Model.Dlist)
+                @if (Model.Menu.DishList.Count > 0)
+                {
+                    <tr>
+                        <td>
+                            <h2>Liste des plats : </h2>
+                            @foreach (var item in Model.Menu.DishList)
                             {
-                                <option value="@item.Id">@(item.Name)</option>
+                                <p>@item.Name</p><br />
                             }
-                        </select>
-                    </td>
-                    <td>
-                        Affiche les dishes du menu
-                        @foreach (var item in Model.Menu.DishList)
-                        {
-                            <p>@item.Name</p>
-                        }
-                    </td>
-                </tr>*@
+                        </td>
+                    </tr>
+                }
             </table>
             <table class="table">
                 <tr>
@@ -75,7 +68,6 @@
                 </tr>
             </table>
         </form>
-        <partial name="_ShowDishesMenu.cshtml" />
     </div>
 
 </div>

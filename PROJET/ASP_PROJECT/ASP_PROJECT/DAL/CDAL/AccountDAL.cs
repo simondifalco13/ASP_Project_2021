@@ -228,6 +228,39 @@ namespace ASP_PROJECT.DAL.CDAL
             customer.Email = accountMail;
             return customer;
         }
+
+        public Customer GetCustomerById(int customerId)
+        {
+            Customer customer = new Customer();
+            string gender;
+            string request = "SELECT CustomerId,FirstName,Email,LastName,Gender,City,Address,PostalCode,PhoneNumber,DateOfBirth,Country FROM dbo.Customers WHERE CustomerId=@CustomerId";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("CustomerId", customerId);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        customer.Id = reader.GetInt32("CustomerId");
+                        customer.Firstname = reader.GetString("FirstName");
+                        customer.Lastname = reader.GetString("LastName");
+                        customer.Email = reader.GetString("Email");
+                        gender = reader.GetString("Gender");
+                        customer.Gender = gender[0];
+                        customer.City = reader.GetString("City");
+                        customer.Address = reader.GetString("Address");
+                        customer.Pc = reader.GetString("PostalCode");
+                        customer.Tel = reader.GetString("PhoneNumber");
+                        customer.DoB = reader.GetDateTime("DateOfBirth");
+                        customer.Country = reader.GetString("Country");
+                    }
+                }
+            }
+            return customer;
+        }
         public Restorer GetRestorerByMail(string accountMail) {
             Restorer restorer=new Restorer();
             string gender;
@@ -257,6 +290,8 @@ namespace ASP_PROJECT.DAL.CDAL
             restorer.Email = accountMail;
             return restorer;
         }
+
+
 
         public bool UpdateRestorerInformations(Restorer restorerToModify)
         {

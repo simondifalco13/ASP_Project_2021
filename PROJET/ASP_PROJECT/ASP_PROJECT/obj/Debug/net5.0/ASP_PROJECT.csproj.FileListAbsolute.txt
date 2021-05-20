@@ -390,3 +390,9 @@ C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Rest
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\SignRestaurant.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantAllInformationPartial.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantSummaryPartial.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Order\ConsultRestaurantOrders.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Order\_OrdersInformationsPartial.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\ConsultAllRestaurants.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantAllInformationPartial.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantSummaryPartial.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\bin\Debug\net5.0\Newtonsoft.Json.dll

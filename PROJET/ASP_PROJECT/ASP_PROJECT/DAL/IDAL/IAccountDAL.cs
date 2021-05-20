@@ -23,5 +23,7 @@ namespace ASP_PROJECT.DAL.IDAL
         public bool UpdateRestorerInformations(Restorer restorerToModify);
 
         public bool UpdateCustomerInformations(Customer customerToModify);
+
+        public Customer GetCustomerById(int customerId);
     }
 }
