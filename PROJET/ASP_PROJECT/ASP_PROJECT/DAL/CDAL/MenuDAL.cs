@@ -138,7 +138,7 @@ namespace ASP_PROJECT.DAL.CDAL
             return success;
         }
 
-        public List<Menu> GetMenus(int id) {
+        public List<Menu> GetMenus(Restaurant resto) {
             List<Menu> listMenus = new List<Menu>();
             Menu menu = new Menu();
             TypeService serviceType;
@@ -146,7 +146,7 @@ namespace ASP_PROJECT.DAL.CDAL
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 string request = "SELECT MenuId,Name,Price,Description,TypeService FROM dbo.Menus WHERE RestaurantId=@RestaurantId";
                 SqlCommand cmd = new SqlCommand(request, connection);
-                cmd.Parameters.AddWithValue("RestaurantId", id);
+                cmd.Parameters.AddWithValue("RestaurantId", resto.Id);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader()) {
                     while (reader.Read()) {

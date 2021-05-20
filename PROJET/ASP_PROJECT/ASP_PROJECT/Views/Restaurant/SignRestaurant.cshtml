@@ -140,7 +140,8 @@
                     <input type="text" placeholder="Heure Fermeture" asp-for="@Model.SundayCt" />
                 </td>
             </tr>
-            <tr>
+            <!--Retirer car manque de temps -->
+            @*<tr>
                 <td><label>Ville(s) de livraison</label></td>
                 <td>
                     <input asp-for="@Model.DeliveryCity" />
@@ -172,7 +173,7 @@
                     </td>
                 </tr>
             }
-            <tr>
+            <tr>*@
                 <td><a asp-action="Index">Annuler</a></td>
                 <td><input type="submit" value="Ajouter" asp-action="SignRestaurant" /></td>
             </tr>

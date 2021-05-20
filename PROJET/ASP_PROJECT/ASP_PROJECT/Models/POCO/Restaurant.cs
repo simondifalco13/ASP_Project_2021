@@ -110,11 +110,29 @@ namespace ASP_PROJECT.Models.POCO
         }
 
         public void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL){
-            r = restaurantDAL.GetRestaurantById(r.Id);
+            r = restaurantDAL.GetRestaurantById(r);
         }
 
         public static List<Restaurant> GetAllRestaurants(IRestaurantDAL DAL) {
             return DAL.GetAllRestaurants();
+        }
+
+        public Restaurant GetRestaurantDishesAndMenus(Restaurant r,IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
+        {
+            Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(r);
+            //on va utiliser la menu DAL pour récuperer les DISHES ET LES MENUS
+            List<Menu> RestaurantMenus = menuDAL.GetMenus(r);
+            foreach (var menu in RestaurantMenus)
+            {
+                RecuperatedResto.mealList.Add(menu);
+            }
+            //on veut récuperer nos dishes
+            List<Dish> RestaurantDishes=menuDAL.GetDishes(r);
+            foreach (var dish in RestaurantDishes)
+            {
+                RecuperatedResto.mealList.Add(dish);
+            }
+            return RecuperatedResto;
         }
     }
 }

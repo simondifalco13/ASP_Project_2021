@@ -10,10 +10,14 @@ using System.Threading.Tasks;
 namespace ASP_PROJECT.Controllers {
     public class RestaurantController : Controller {
         
-        private readonly IRestaurantDAL _restaurantDAL;
 
-        public RestaurantController(IRestaurantDAL restaurantDAL) {
+        private readonly IRestaurantDAL _restaurantDAL;
+        private readonly IMenuDAL _menuDAL;
+
+
+        public RestaurantController(IRestaurantDAL restaurantDAL,IMenuDAL menuDAL) {
             _restaurantDAL = restaurantDAL;
+            _menuDAL = menuDAL;
         }
         public IActionResult Index() {
             return View();

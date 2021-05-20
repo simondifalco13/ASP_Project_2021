@@ -29,7 +29,7 @@ namespace ASP_PROJECT.Models.POCO
         }
         public static List<Menu> GetMenus(IMenuDAL menuDAL,Restaurant r) {
 
-            return menuDAL.GetMenus(r.Id);
+            return menuDAL.GetMenus(r);
         }
 
         public static Menu GetMenuById(int MenuId, IMenuDAL menuDAL)

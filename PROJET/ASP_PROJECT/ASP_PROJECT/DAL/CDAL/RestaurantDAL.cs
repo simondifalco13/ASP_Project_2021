@@ -17,20 +17,20 @@ namespace ASP_PROJECT.DAL.CDAL
             this.connectionString = connectionString;
         }
 
-        public Restaurant GetRestaurantById(int id)
+        public Restaurant GetRestaurantById(Restaurant restaurant)
         {
             Restaurant r = new Restaurant();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string request = "SELECT Name,City,Adress,PostalCode,PhoneNumber,RestaurantType,Description,TvaNumber,Country FROM dbo.Restaurants WHERE RestaurantId=@RestaurantId";
                 SqlCommand cmd = new SqlCommand(request, connection);
-                cmd.Parameters.AddWithValue("Restaurantid",id);
+                cmd.Parameters.AddWithValue("RestaurantId",restaurant.Id);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        r.Id = id;
+                        r.Id = restaurant.Id;
                         r.Name = reader.GetString("Name");
                         r.City= reader.GetString("City");
                         r.Address= reader.GetString("Adress");
@@ -83,14 +83,14 @@ namespace ASP_PROJECT.DAL.CDAL
                 return restos;
         }
 
-        public List<Restaurant> GetRestaurantsById(int ID) {
+        public List<Restaurant> GetRestaurantsById(Restorer restorer) {
             List<Restaurant> restos = new List<Restaurant>();
 
 
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                string request = "SELECT * FROM dbo.Restaurants WHERE ID=@ID";
+                string request = "SELECT * FROM dbo.Restaurants WHERE RestaurantId=@RestaurantId";
                 SqlCommand cmd = new SqlCommand(request, connection);
-                cmd.Parameters.AddWithValue("ID", ID);
+                cmd.Parameters.AddWithValue("RestaurantId",restorer.Id);
                 connection.Open();
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) {
@@ -144,5 +144,9 @@ namespace ASP_PROJECT.DAL.CDAL
                     resto.CloseTimes = CloseTime;
             }
         }
+       
     }
+
+
+
 }

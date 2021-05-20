@@ -31,23 +31,29 @@ namespace ASP_PROJECT.Controllers
         public IActionResult AddMenu()
         {
             //envoyer le vm dans cette action
-            if (TempData["MenuViewModel"] != null)
-            {
-                MenuViewModel vm = TempData["MenuViewModel"] as MenuViewModel;
-                return View("AddMenu", vm);
-            }
-            else
-            {
-                MenuViewModel vm = new MenuViewModel();
-                Restaurant r = new Restaurant();
-                r.Id = 1;
-                vm.Dlist = Dish.GetDishes(r, _menuDAL);
-                TempData["MenuViewModel"] = vm;
-                MenuViewModel verif = TempData["MenuViewModel"] as MenuViewModel;
-                return View("AddMenu", verif);
+            //if (TempData["MenuViewModel"] != null)
+            //{
+            //    MenuViewModel vm = TempData["MenuViewModel"] as MenuViewModel;
+            //    return View("AddMenu", vm);
+            //}
+            //else
+            //{
+            //    MenuViewModel vm = new MenuViewModel();
+            //    Restaurant r = new Restaurant();
+            //    r.Id = 1;
+            //    vm.Dlist = Dish.GetDishes(r, _menuDAL);
+            //    TempData["MenuViewModel"] = vm;
+            //    MenuViewModel verif = TempData["MenuViewModel"] as MenuViewModel;
+            //    return View("AddMenu", verif);
 
-            }
-           
+            //}
+            MenuViewModel vm = new MenuViewModel();
+            Restaurant r = new Restaurant();
+            r.Id = 1;
+            vm.Dlist = Dish.GetDishes(r, _menuDAL);
+            //TempData["MenuViewModel"] = vm;
+            return View("AddMenu", vm);
+
         }
 
        
@@ -55,11 +61,12 @@ namespace ASP_PROJECT.Controllers
         public IActionResult AddDishToMenu(int DishId)
         {
             Dish AddedDish = Dish.GetDishById(DishId, _menuDAL);
+            //HttpContext.Session.SetInt32("DishId", DishId);
             MenuViewModel vm = TempData["MenuViewModel"] as MenuViewModel;
             vm.Menu.DishList.Add(AddedDish);
-            TempData["MenuViewModel"] = vm;
-            MenuViewModel verif = TempData["MenuViewModel"] as MenuViewModel;
-            return View("AddMenu", verif);
+            //TempData["MenuViewModel"] = vm;
+           // MenuViewModel verif = TempData["MenuViewModel"] as MenuViewModel;
+            return View("AddMenu", vm);
         }
 
         public IActionResult AddDish()

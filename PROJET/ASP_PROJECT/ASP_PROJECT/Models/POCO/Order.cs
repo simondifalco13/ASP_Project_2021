@@ -11,7 +11,8 @@ namespace ASP_PROJECT.Models.POCO
     {
         Validate,
         OnPreparation,
-        OnDelivery,
+        //Retiré car manque de temps
+        //OnDelivery,
         Finished
     }
     public class Order
