@@ -15,9 +15,5 @@ namespace ASP_PROJECT.ViewModels
             user = new Restorer();
         }
 
-        
-
-        
-       
     }
 }

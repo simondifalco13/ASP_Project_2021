@@ -27,18 +27,12 @@ namespace ASP_PROJECT.ViewModels
         public string SundayCt { get;set;}
         public string DeliveryCity { get; set; }
 
-        public List<String> cities { get; set; }
+        //public List<String> cities { get; set; }
 
         public SignRestaurantViewModel()
         {
             Resto = new Restaurant();
-            cities= new List<string>();
-           
-
-            
-
-            
-
+            //cities= new List<string>();
         }   
     }
 }   
