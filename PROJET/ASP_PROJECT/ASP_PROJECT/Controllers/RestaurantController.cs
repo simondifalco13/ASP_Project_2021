@@ -39,12 +39,12 @@ namespace ASP_PROJECT.Controllers {
             return View("SignRestaurant", vm);
         }
 
-        [HttpPost]
-        public IActionResult AddDeliveryCity(SignRestaurantViewModel vm)
-        {
-            vm.cities.Add(vm.DeliveryCity);
-            return View("SignRestaurant", vm);
-        }
+        ////[HttpPost]
+        ////public IActionResult AddDeliveryCity(SignRestaurantViewModel vm)
+        ////{
+        ////    vm.cities.Add(vm.DeliveryCity);
+        ////    return View("SignRestaurant", vm);
+        ////}
 
         [HttpPost]
         public IActionResult SignRestaurant(SignRestaurantViewModel vm)
@@ -77,7 +77,13 @@ namespace ASP_PROJECT.Controllers {
                 return View("SignRestaurant", vm);
 
             }
+        }
+        public IActionResult ConsultAll(int restaurantId) {
+            Restaurant resto = new Restaurant();
 
+            resto.Id = restaurantId;
+            resto = Restaurant.GetRestaurantDishesAndMenus(resto, _restaurantDAL, _menuDAL);
+            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml",resto);
         }
     }
 }

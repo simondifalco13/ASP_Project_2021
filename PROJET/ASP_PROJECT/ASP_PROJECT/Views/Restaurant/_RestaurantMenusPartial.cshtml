@@ -1,0 +1,13 @@
+﻿@model ASP_PROJECT.Models.POCO.Menu
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.Description</td>
+    <td>@Model.ConvertTypeService()</td>
+    <td>@Model.Price €</td>
+    <td>
+        @foreach (var item in Model.DishList) {
+            <partial name="_DishesInMenuPartial.cshtml" for="@item" />
+        }
+    </td>
+</tr>

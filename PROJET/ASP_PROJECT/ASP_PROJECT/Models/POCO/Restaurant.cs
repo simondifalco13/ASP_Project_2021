@@ -117,7 +117,7 @@ namespace ASP_PROJECT.Models.POCO
             return DAL.GetAllRestaurants();
         }
 
-        public Restaurant GetRestaurantDishesAndMenus(Restaurant r,IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
+        public  static Restaurant GetRestaurantDishesAndMenus(Restaurant r,IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
         {
             Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(r);
             //on va utiliser la menu DAL pour récuperer les DISHES ET LES MENUS

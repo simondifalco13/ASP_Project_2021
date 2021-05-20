@@ -160,8 +160,6 @@ namespace ASP_PROJECT.Controllers
             return View("ModifyDish", vm);
         }
 
-       
-
         //POST METHODS
 
         [HttpPost]

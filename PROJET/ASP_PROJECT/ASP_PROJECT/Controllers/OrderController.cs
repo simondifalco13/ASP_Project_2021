@@ -1,7 +1,9 @@
 ﻿using ASP_PROJECT.DAL.IDAL;
 using ASP_PROJECT.Models.POCO;
 using ASP_PROJECT.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,5 +46,35 @@ namespace ASP_PROJECT.Controllers
             
             return RedirectToAction("ConsultRestaurantOrders");
         }
-    }
+    ////    // eSPACE TEST
+    ////    public IActionResult AddToCartTest() {
+
+    ////        Restaurant r = new Restaurant();
+    ////        r.Id = 1;
+    ////        List<Dish> ld = Dish.GetDishes(r, _menuDAL);
+    ////        ListDishViewModel vm = new ListDishViewModel(ld);
+    ////        return View("Views/Order/ZTestDishPanier.cshtml",vm);
+    ////    }
+    ////    public void AddToCartTest2(Dish dish) {
+   
+    ////        if (String.IsNullOrEmpty(HttpContext.Session.GetString("DishAdded"))) {
+    ////            HttpContext.Session.SetObjectAsJson("test", dish);
+    ////        }
+    ////    }
+        
+    ////    public IActionResult CheckCart() {
+
+    ////        return View();
+    ////    }
+
+    ////    public static void SetObjectAsJson(this ISession session, string key, object value) {
+    ////        session.SetString(key, JsonConvert.SerializeObject(value));
+    ////    }
+
+    ////    public static T GetObjectFromJson<T>(this ISession session, string key) {
+    ////        var value = session.GetString(key);
+    ////        return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
+    ////    }
+       
+    ////}
 }

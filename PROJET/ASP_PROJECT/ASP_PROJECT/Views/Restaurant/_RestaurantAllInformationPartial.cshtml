@@ -4,17 +4,13 @@
     <td>@Model.Name</td>
     <td>@Model.Type</td>
     <td>@Model.Description</td>
-    <td>@Model.Address</td>
-    <td>@Model.City</td>
-    <td>@Model.Country</td>
-    <td>@Model.Pc</td>
+    <td>@Model.Address @Model.City @Model.Pc @Model.Country</td>
     <td>@Model.NumTVA</td>
     @*<td>@Model.DeliveryCities</td>*@
-    <td>@Model.OpeningsTimes</td>
-    <td>@Model.CloseTimes</td>
-
-    <a asp-route-ParametreMethodeController="@Model.Id"></a>
-    <td>
-        <a asp-controller="Menu" asp-action="ConsultMenus" asp-route-RestoId="@Model.Id">Voir</a>
-    </td>
+    @foreach (var open in Model.OpeningsTimes) {
+        <td>@Model.OpeningsTimes</td>
+    }
+    @foreach (var close in Model.CloseTimes) {
+        <td>@Model.CloseTimes</td>
+    }
 </tr>

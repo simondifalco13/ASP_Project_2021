@@ -25,5 +25,6 @@ namespace ASP_PROJECT.ViewModels {
                 Restos.Add(new SelectListItem() { Value = rest.Id.ToString(), Text = rest.Name });
             }
         }
+
     }
 }
