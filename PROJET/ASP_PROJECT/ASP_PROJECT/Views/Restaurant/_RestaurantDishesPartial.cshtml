@@ -6,4 +6,5 @@
     <td>@Model.ConvertDishType()</td>
     <td>@Model.Description</td>
     <td>@Model.Price</td>
+    <td><a asp-controller="Order" asp-action="AddDishToCart" asp-route-menuId="@Model.Id">Ajouter au panier</a></td>
 </tr>

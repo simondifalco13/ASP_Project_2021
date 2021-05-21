@@ -26,7 +26,7 @@ namespace ASP_PROJECT.Models.POCO
 
         public OrderStatus Status { get; set; }
 
-        public bool Delivery { get; set; }
+        //public bool Delivery { get; set; }
 
         [Required(ErrorMessage = "Champs obligatoire")]
         [Display(Name = "Adresse de livraison")]
@@ -65,6 +65,7 @@ namespace ASP_PROJECT.Models.POCO
 
         }
         
+        // N'existe pas vu que session??? 
         public void AddItemToCart()
         {
 
@@ -117,5 +118,7 @@ namespace ASP_PROJECT.Models.POCO
             bool success = false ;
             return success;
         }
+
+
     }
 }

@@ -80,10 +80,14 @@ namespace ASP_PROJECT.Controllers {
         }
         public IActionResult ConsultAll(int restaurantId) {
             Restaurant resto = new Restaurant();
-
+            
             resto.Id = restaurantId;
             resto = Restaurant.GetRestaurantDishesAndMenus(resto, _restaurantDAL, _menuDAL);
-            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml",resto);
+            resto = resto.GetScheduleResto(resto,_restaurantDAL);
+
+            ListRestaurantsViewModel vm = new ListRestaurantsViewModel(resto);
+
+            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml",vm);
         }
     }
 }

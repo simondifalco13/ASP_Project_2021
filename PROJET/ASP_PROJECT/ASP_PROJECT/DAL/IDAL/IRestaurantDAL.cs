@@ -15,5 +15,7 @@ namespace ASP_PROJECT.DAL.IDAL
 
         List<Restaurant> GetAllRestaurants();
 
+        public void GetRestaurantSchedules(Restaurant resto);
+
     }
 }

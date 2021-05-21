@@ -1,0 +1,8 @@
+﻿@model ASP_PROJECT.Models.POCO.Order
+
+<p> consulte ton panier</p>
+<form method="post" asp-controller="Order" asp-action="ConsultCart">
+
+</form>
+
+<td><a asp-controller="Order" asp-action="ValidateOrder" asp-route-order="@Model">Valider la commande</a></td>

@@ -46,35 +46,76 @@ namespace ASP_PROJECT.Controllers
             
             return RedirectToAction("ConsultRestaurantOrders");
         }
-    ////    // eSPACE TEST
-    ////    public IActionResult AddToCartTest() {
+        //
 
-    ////        Restaurant r = new Restaurant();
-    ////        r.Id = 1;
-    ////        List<Dish> ld = Dish.GetDishes(r, _menuDAL);
-    ////        ListDishViewModel vm = new ListDishViewModel(ld);
-    ////        return View("Views/Order/ZTestDishPanier.cshtml",vm);
-    ////    }
-    ////    public void AddToCartTest2(Dish dish) {
-   
-    ////        if (String.IsNullOrEmpty(HttpContext.Session.GetString("DishAdded"))) {
-    ////            HttpContext.Session.SetObjectAsJson("test", dish);
-    ////        }
-    ////    }
-        
-    ////    public IActionResult CheckCart() {
 
-    ////        return View();
-    ////    }
+        [HttpPost]
+        public IActionResult AddMenuToCart(int menuId) {
+            Order order = new Order();
 
-    ////    public static void SetObjectAsJson(this ISession session, string key, object value) {
-    ////        session.SetString(key, JsonConvert.SerializeObject(value));
-    ////    }
+            if (HttpContext.Session.GetString("MenusId") != null) {
+                string sessionMenusIds = HttpContext.Session.GetString("MenusId");
+                sessionMenusIds += ";" + menuId.ToString();
+                HttpContext.Session.SetString("MenusId", sessionMenusIds);
+                string[] menusIdsSplited = sessionMenusIds.Split(";");
 
-    ////    public static T GetObjectFromJson<T>(this ISession session, string key) {
-    ////        var value = session.GetString(key);
-    ////        return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
-    ////    }
-       
-    ////}
+                foreach (var item in menusIdsSplited) {
+                    int id = Int32.Parse(item);
+
+                    Menu menuAdded = Menu.GetMenuById(id, _menuDAL);
+                    order.listMenuOrdered.Add(menuAdded);
+                }
+            } else {
+                Menu menuAdded = Menu.GetMenuById(menuId, _menuDAL);
+                order.listMenuOrdered.Add(menuAdded);
+
+                HttpContext.Session.SetString("MenusId", menuId.ToString());
+            }
+
+            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml",order);
+        }
+
+        [HttpPost]
+        public IActionResult AddDishToCart(int dishId) {
+            Order order = new Order();
+
+            if (HttpContext.Session.GetString("DishesId") != null) {
+                string sessionDishesIds = HttpContext.Session.GetString("MenusId");
+                sessionDishesIds += ";" + dishId.ToString();
+                HttpContext.Session.SetString("DishesId", sessionDishesIds);
+                string[] dishesIdsSplited = sessionDishesIds.Split(";");
+
+                foreach (var item in dishesIdsSplited) {
+                    int id = Int32.Parse(item);
+
+                    Dish dishAdded = Dish.GetDishById(id, _menuDAL);
+                    
+                    order.listDishOrdered.Add(dishAdded);
+                }
+            } else {
+                Dish dishAdded = Dish.GetDishById(dishId, _menuDAL);
+                order.listDishOrdered.Add(dishAdded);
+
+                HttpContext.Session.SetString("MenusId", dishId.ToString());
+            }
+
+            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", order);
+        }
+
+        public IActionResult ConsultCart(Order order) {
+
+            // ?? 
+            return View("Views/Order/ConsultCart.cshtml");
+        }
+        public IActionResult ValidateOrder() {
+
+            
+
+
+            TempData["StatutOrder"] = "OK";
+            TempData["StatutOrder"] = "NOTOK";
+
+            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml");
+        }
+    }
 }

@@ -52,9 +52,6 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             return RestaurantOrders;
         }
-
-       
-
         public List<int> GetMenusIdInMenuDetails(Order order)
         {
             List<int> MenuDetailsId = new List<int>();
@@ -76,7 +73,6 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             return MenuDetailsId;
         }
-
         public List<int> GetDishesIdInMenuDetails(Order order)
         {
             List<int> DishDetailsId = new List<int>();
@@ -101,5 +97,43 @@ namespace ASP_PROJECT.DAL.CDAL
 
         //eventuellement déplacer pour faire un appel a l'autre DAl
 
+        public bool AddOrder(Order order, Customer customer) {
+            string request = "INSERT INTO dbo.Order (OrderDate,CustomerId,Price) VALUES (@OrderDate,@CustomerId,@Price";
+            bool success = false;
+
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand(request, connection);
+
+                cmd.Parameters.AddWithValue("OrderDate", DateTime.Now.ToString("MM/dd/yyyy"));
+                cmd.Parameters.AddWithValue("CustomerId", customer.Id);
+                // Calculer le prix total dans la poco ?
+                cmd.Parameters.AddWithValue("Price", order.TotalPrice);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+
+                AddOrderDetails(order, customer);
+                return success;
+            } 
+        }
+        // pas fini
+        public bool AddOrderDetails(Order order,Customer customer) {
+            string request = "INSERT INTO dbo.OrderMenuDetails (MenuId) VALUES (@MenuId)";
+            bool success = false;
+
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand(request, connection);
+
+
+                cmd.Parameters.AddWithValue("");
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+
+                AddOrderDetails(order, customer);
+                return success;
+            }
+
+        }
     }
 }

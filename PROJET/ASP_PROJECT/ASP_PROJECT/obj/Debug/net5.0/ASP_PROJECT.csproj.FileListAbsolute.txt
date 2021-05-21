@@ -407,5 +407,4 @@ C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\o
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\ConsultRestaurantMenuDish.cshtml.g.cs
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantDishesPartial.cshtml.g.cs
 C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantMenusPartial.cshtml.g.cs
-C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Order\ZTestDishPanier.cshtml.g.cs
-C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Order\_ZTestDishPanierPartial.cshtml.g.cs
+C:\Users\Kira\Documents\GitHub\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Order\ConsultCart.cshtml.g.cs

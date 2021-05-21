@@ -14,5 +14,6 @@ namespace ASP_PROJECT.DAL.IDAL
 
         public List<int> GetDishesIdInMenuDetails(Order order);
 
+        public bool AddOrder(Order order, Customer customer, Restaurant resto);
     }
 }

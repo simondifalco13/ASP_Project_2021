@@ -11,11 +11,14 @@ namespace ASP_PROJECT.ViewModels {
         public List<SelectListItem> Restos { get; set; }
         public List<Restaurant> ListRestoDb { get; set; }
         public Restaurant Resto { get; set; }
+        
 
         public ListRestaurantsViewModel()
         {
             Restos = new List<SelectListItem>();
             Resto = new Restaurant();
+            SelectedListMenus = new List<Menu>();
+            SelectedListDish = new List<Dish>();
         }
         public ListRestaurantsViewModel(List<Restaurant> restos) : this()
         {
@@ -25,6 +28,20 @@ namespace ASP_PROJECT.ViewModels {
                 Restos.Add(new SelectListItem() { Value = rest.Id.ToString(), Text = rest.Name });
             }
         }
+        public ListRestaurantsViewModel(Restaurant resto):this(){
+            foreach (var meal in resto.mealList) {
+                if(meal is Menu) {
+                    SelectedListMenus.Add(meal as Menu);
+                } else {
+                    SelectedListDish.Add(meal as Dish);
+                }
+            }
+            Resto = resto;
+        }
 
+        // Si je rajoute une propriété qui ajoute une liste de dish et de menus.
+        // J'arri
+        public List<Menu> SelectedListMenus { get; set; }
+        public List<Dish> SelectedListDish { get; set; }
     }
 }

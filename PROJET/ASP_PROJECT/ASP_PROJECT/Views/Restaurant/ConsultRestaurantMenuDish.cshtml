@@ -1,7 +1,6 @@
-﻿@model ASP_PROJECT.Models.POCO.Restaurant
-@using ASP_PROJECT.Models.POCO
+﻿@model ASP_PROJECT.ViewModels.ListRestaurantsViewModel
 
-
+<!-- ViewModel -->
     <form method="POST" asp-controller="Restaurant" asp-action="ConsultAll">
         <table class="table">
             <p>Informations restaurant</p>
@@ -10,13 +9,13 @@
                 <th>Type</th>
                 <th>Adresse</th>
                 <th>N° TVA</th>
-                @foreach (var open in Model.OpeningsTimes) {
+                @foreach (var open in Model.Resto.OpeningsTimes) {
                     <th>Ouverture : </th>
                 }
-                @foreach (var close in Model.CloseTimes) {
+                @foreach (var close in Model.Resto.CloseTimes) {
                     <th>Fermeture : </th>
                 }
-                <partial name="_RestaurantAllInformationPartial.cshtml" for="@Model" />
+                <partial name="_RestaurantAllInformationPartial.cshtml" for="@Model.Resto" />
             </tr>
 <!-- MENU -->
             <tr>
@@ -25,11 +24,10 @@
                 <th>Type de service</th>
                 <th>Prix</th>
             </tr>
-            @foreach (var item in Model.mealList) {
-                if (item is Menu) {
-                    <partial name="_RestaurantMenusPartial.cshtml" for="@item" />
-                }
-            }
+            @foreach (var item in Model.SelectedListMenus) {
+                <partial name="_RestaurantMenusPartial.cshtml" for="@item" />
+             }
+           
      <!-- PLAT -->
             <tr>
                 <th>Nom</th>
@@ -38,11 +36,10 @@
                 <th>Type</th>
                 <th>Price</th>
             </tr>
-            @foreach (var item in Model.mealList) {
-                if (item is Dish) {
-                    <partial name="_RestaurantDishesPartial.cshtml" for="@item" />
-                }
+            @foreach (var item in Model.SelectedListDish) {
+                <partial name="_RestaurantDishesPartial.cshtml" for="@item" />
             }
         </table>
     </form>
 <a asp-controller="Home" asp-action="Index">Retour</a>
+<td><a asp-controller="Order" asp-action="ConsultCart">Consulter panier</a></td>

@@ -4,9 +4,7 @@
     <td>@Model.Name</td>
     <td>@Model.Type</td>
     <td>@Model.Description</td>
-
-    <a asp-route-ParametreMethodeController="@Model.Id"></a>
     <td>
-        <a asp-controller="Restaurant" asp-action="ConsultAll" asp-route-RestoId="@Model.Id">Voir</a>
+        <a asp-action="ConsultAll" asp-route-restaurantId="@Model.Id">Voir</a>
     </td>
 </tr>

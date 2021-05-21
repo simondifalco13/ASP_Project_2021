@@ -8,9 +8,9 @@
     <td>@Model.NumTVA</td>
     @*<td>@Model.DeliveryCities</td>*@
     @foreach (var open in Model.OpeningsTimes) {
-        <td>@Model.OpeningsTimes</td>
+        <td>@open.Hour : @open.Minute</td>
     }
     @foreach (var close in Model.CloseTimes) {
-        <td>@Model.CloseTimes</td>
+        <td>@close.Hour : @close.Minute</td>
     }
 </tr>
