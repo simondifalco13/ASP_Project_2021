@@ -35,5 +35,11 @@ namespace ASP_PROJECT.Models.POCO
             bool success = accountDAL.UpdateRestorerInformations(restorerToModify);
             return success;
         }
+
+        public List<Restaurant> GetRestorerRestaurants(IRestaurantDAL restaurantDAL)
+        {
+            List<Restaurant> restaurants = restaurantDAL.GetRestorerRestaurantsById(this);
+            return restaurants;
+        }
     }
 }

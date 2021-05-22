@@ -16,7 +16,19 @@
 @if ((String)ViewData["success"] == "true")
 {
     <div class="alert-success">
-        <p>Ajout du dish avec succès</p>
+        <p>Ajout du plat avec succès</p>
     </div>
-} 
+}
+@if ((string)ViewData["MenuAdding"] == "true")
+{
+    <div class="alert-success">
+        <p>Ajout du menu avec succès</p>
+    </div>
+}
+@if ((string)ViewData["MenuAdding"] == "false")
+{
+    <div class="alert-danger">
+        <p>L'ajout du menu à échoué</p>
+    </div>
+}
 

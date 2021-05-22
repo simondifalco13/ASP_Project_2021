@@ -100,13 +100,23 @@ namespace ASP_PROJECT.Models.POCO
         {
 
         }
-        public void SignRestaurant()
-        {
-
-        }
+       
         public void DisplayOpinion()
         {
 
+        }
+
+        public static bool SignRestaurant(Restaurant resto, Restorer restorer, IRestaurantDAL restaurantDAL)
+        {
+            try
+            {
+                bool success = restaurantDAL.SignRestaurant(restorer, resto);
+                return success;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL){
@@ -117,7 +127,7 @@ namespace ASP_PROJECT.Models.POCO
             return DAL.GetAllRestaurants();
         }
 
-        public  static Restaurant GetRestaurantDishesAndMenus(Restaurant r,IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
+        public static Restaurant GetRestaurantDishesAndMenus(Restaurant r,IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
         {
             Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(r);
             //on va utiliser la menu DAL pour récuperer les DISHES ET LES MENUS
@@ -134,7 +144,9 @@ namespace ASP_PROJECT.Models.POCO
             }
             return RecuperatedResto;
         }
-        public Restaurant GetScheduleResto(Restaurant resto,IRestaurantDAL restoDAL) {
+
+        public Restaurant GetScheduleResto(Restaurant resto, IRestaurantDAL restoDAL)
+        {
             restoDAL.GetRestaurantSchedules(resto);
 
             return resto;

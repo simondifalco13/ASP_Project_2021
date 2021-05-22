@@ -10,10 +10,12 @@ namespace ASP_PROJECT.DAL.IDAL
     {
         List<Order> GetRestaurantOrders(Restaurant restaurant);
 
+        public List<Order> GetCustomerOrders(Customer customer);
+
         public List<int> GetMenusIdInMenuDetails(Order order);
 
         public List<int> GetDishesIdInMenuDetails(Order order);
 
-        public bool AddOrder(Order order, Customer customer, Restaurant resto);
+        public bool AddOrder(Order order, Customer customer);
     }
 }

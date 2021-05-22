@@ -33,22 +33,37 @@ namespace ASP_PROJECT.Controllers {
         //Simon : (délimitation pour m'y retrouver quand je fais des copier coller en attendant de résoudre le problème de versionning)
         public IActionResult SignRestaurant()
         {
-            TempData["Previous"] = null;
+            TempData["RestaurantSignError"] = null;
             SignRestaurantViewModel vm = new SignRestaurantViewModel();
             vm.restorerId = 1;
             return View("SignRestaurant", vm);
         }
 
-        ////[HttpPost]
-        ////public IActionResult AddDeliveryCity(SignRestaurantViewModel vm)
-        ////{
-        ////    vm.cities.Add(vm.DeliveryCity);
-        ////    return View("SignRestaurant", vm);
-        ////}
+        //faire consulterRestaurantSelonRestorer ! 
+        public IActionResult ConsultRestorerRestaurants()
+        {
+            Restorer r = new Restorer();
+            r.Id = 1;
+            r.restaurantList=r.GetRestorerRestaurants(_restaurantDAL);
+            ListRestaurantsViewModel viewModel = new ListRestaurantsViewModel(r.restaurantList);
+            return View("ConsultRestorerRestaurants", viewModel);
+        }
+        
+
+        //Pas réalisé car pas assez de temps 
+        //[HttpPost]
+        //public IActionResult AddDeliveryCity(SignRestaurantViewModel vm)
+        //{
+        //    vm.cities.Add(vm.DeliveryCity);
+        //    return View("SignRestaurant", vm);
+        //}
 
         [HttpPost]
         public IActionResult SignRestaurant(SignRestaurantViewModel vm)
         {
+            //EN DUR : a modifier 
+            Restorer r = new Restorer();
+            r.Id = 1;
             if (ModelState.IsValid)
             {
                 Restaurant CreatedRestaurant = vm.Resto;
@@ -68,26 +83,47 @@ namespace ASP_PROJECT.Controllers {
                 CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.SaturdayCt));
                 CreatedRestaurant.CloseTimes.Add(DateTime.Parse(vm.SundayCt));
 
-                TempData["RestaurantSign"] = "L'ajout du restaurant s'est déroulée avec succès";
-                return View("Index");
+                try
+                {
+                    bool success = Restaurant.SignRestaurant(CreatedRestaurant, r, _restaurantDAL);
+                    if (success == true)
+                    {
+                        TempData["RestaurantSign"] = "success";
+                        return View("Index");
+                    }
+                    else
+                    {
+                        TempData["RestaurantSignError"] = "error";
+                        return View("SignRestaurant", vm);
+
+                    }
+                }catch (Exception e)
+                {
+                    TempData["RestaurantSignError"] = e.Message;
+                    return View("SignRestaurant", vm);
+                }
             }
             else
             {
-                TempData["RestaurantSignError"] = "Le restaurant avec ce nom existe dèjà dans vos restaurants";
                 return View("SignRestaurant", vm);
-
             }
+
         }
-        public IActionResult ConsultAll(int restaurantId) {
+
+        public IActionResult ConsultAll(int restaurantId)
+        {
             Restaurant resto = new Restaurant();
-            
+
             resto.Id = restaurantId;
             resto = Restaurant.GetRestaurantDishesAndMenus(resto, _restaurantDAL, _menuDAL);
-            resto = resto.GetScheduleResto(resto,_restaurantDAL);
+            resto = resto.GetScheduleResto(resto, _restaurantDAL);
 
             ListRestaurantsViewModel vm = new ListRestaurantsViewModel(resto);
 
-            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml",vm);
+            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", vm);
         }
+
+
+
     }
 }

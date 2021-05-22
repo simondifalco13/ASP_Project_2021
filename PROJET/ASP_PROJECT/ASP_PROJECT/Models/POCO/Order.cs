@@ -65,11 +65,7 @@ namespace ASP_PROJECT.Models.POCO
 
         }
         
-        // N'existe pas vu que session??? 
-        public void AddItemToCart()
-        {
-
-        }
+       
         public void DisplayCart()
         {
 
@@ -113,12 +109,44 @@ namespace ASP_PROJECT.Models.POCO
             return RestaurantOrders;
         }
 
+        public static List<Order> GetCustomerOrders(Customer customer, IOrderDAL orderDAL, IMenuDAL menuDAL, IRestaurantDAL restaurantDAL)
+        {
+            List<Order> CustomerOrders = orderDAL.GetCustomerOrders(customer);
+            //get details
+            foreach (var order in CustomerOrders)
+            {
+                List<int> MenuDetailsId = orderDAL.GetMenusIdInMenuDetails(order);
+                List<int> DishDetailsId = orderDAL.GetDishesIdInMenuDetails(order);
+                List<Meal> OrderMeals = new List<Meal>();
+                Restaurant restaurant = restaurantDAL.GetRestaurantById(order.Restaurant);
+                order.Restaurant = restaurant;
+                foreach (var menuId in MenuDetailsId)
+                {
+                    OrderMeals.Add(menuDAL.GetMenuById(menuId));
+                }
+                foreach (var dishId in DishDetailsId)
+                {
+                    OrderMeals.Add(menuDAL.GetDishById(dishId));
+                }
+                foreach (var meal in OrderMeals)
+                {
+                    if (meal is Menu)
+                    {
+                        order.listMenuOrdered.Add(meal as Menu);
+                    }
+                    if (meal is Dish)
+                    {
+                        order.listDishOrdered.Add(meal as Dish);
+                    }
+                }
+            }
+            return CustomerOrders;
+        }
+
         public bool UpdateOrderStatus()
         {
             bool success = false ;
             return success;
         }
-
-
     }
 }

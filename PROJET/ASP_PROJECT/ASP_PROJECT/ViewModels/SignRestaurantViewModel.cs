@@ -25,7 +25,7 @@ namespace ASP_PROJECT.ViewModels
         public string SaturdayCt { get;set;}
         public string SundayOt { get;set;}
         public string SundayCt { get;set;}
-        public string DeliveryCity { get; set; }
+        //public string DeliveryCity { get; set; }
 
         //public List<String> cities { get; set; }
 

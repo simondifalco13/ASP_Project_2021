@@ -7,10 +7,14 @@
     <td>@Model.Address @Model.City @Model.Pc @Model.Country</td>
     <td>@Model.NumTVA</td>
     @*<td>@Model.DeliveryCities</td>*@
-    @foreach (var open in Model.OpeningsTimes) {
+    @foreach (var open in Model.OpeningsTimes)
+    {
         <td>@open.Hour : @open.Minute</td>
     }
-    @foreach (var close in Model.CloseTimes) {
+    @foreach (var close in Model.CloseTimes)
+    {
         <td>@close.Hour : @close.Minute</td>
+        
     }
 </tr>
+

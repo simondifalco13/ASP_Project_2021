@@ -8,11 +8,13 @@ namespace ASP_PROJECT.DAL.IDAL
 {
     public interface IMenuDAL
     {
-        bool AddDish(Dish d, Restaurant r);
+        bool AddDish(Dish dish, Restaurant restaurant);
 
-        List<Dish> GetDishes(Restaurant r);
+        bool AddMenu(Menu menu, Restaurant restaurant);
 
-        bool SuppressDish(Dish d);
+        List<Dish> GetDishes(Restaurant restaurant);
+
+        bool SuppressDish(Dish dish);
 
         bool SuppressMenu(Menu menu);
 
@@ -23,5 +25,7 @@ namespace ASP_PROJECT.DAL.IDAL
         Menu GetMenuById(int MenuId);
 
         bool UpdatingDish(Dish dish);
+
+        public bool UpdateMenu(Menu menu);
     }
 }

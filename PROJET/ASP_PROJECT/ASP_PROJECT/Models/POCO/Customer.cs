@@ -15,8 +15,10 @@ namespace ASP_PROJECT.Models.POCO
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
 
-        public Customer() : base(){
+        public List<Order> OrdersList;
 
+        public Customer() : base(){
+            OrdersList=new List<Order>();
         }
         public void GiveAnOpinion()
         {

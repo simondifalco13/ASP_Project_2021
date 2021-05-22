@@ -142,41 +142,56 @@
             </tr>
             <!--Retirer car manque de temps -->
             @*<tr>
-                <td><label>Ville(s) de livraison</label></td>
-                <td>
-                    <input asp-for="@Model.DeliveryCity" />
-                </td>
-                <td>
-                    <button>
-                        <input type="submit" value="Ajouter ville" asp-action="AddDeliveryCity" />
-                    </button>
-                </td>
-                <td><span asp-validation-for="@Model.DeliveryCity" class="text-danger"></span></td>
+                    <td><label>Ville(s) de livraison</label></td>
+                    <td>
+                        <input asp-for="@Model.DeliveryCity" />
+                    </td>
+                    <td>
+                        <button>
+                            <input type="submit" value="Ajouter ville" asp-action="AddDeliveryCity" />
+                        </button>
+                    </td>
+                    <td><span asp-validation-for="@Model.DeliveryCity" class="text-danger"></span></td>
 
-            </tr>
-            @if (@Model.cities.Count > 0)
-            {
-                <tr>
-                    <td>
-                        <h3>Villes ajoutées</h3>
-                    </td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <ul>
-                            @foreach (var item in @Model.cities)
-                            {
-                                <li>@item</li>
-                            }
-                        </ul>
-                    </td>
-                </tr>
-            }
-            <tr>*@
-                <td><a asp-action="Index">Annuler</a></td>
-                <td><input type="submit" value="Ajouter" asp-action="SignRestaurant" /></td>
+                @if (@Model.cities.Count > 0)
+                {
+                    <tr>
+                        <td>
+                            <h3>Villes ajoutées</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <ul>
+                                @foreach (var item in @Model.cities)
+                                {
+                                    <li>@item</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+                <tr>*@
+            <td><a asp-action="Index">Annuler</a></td>
+            <td><input type="submit" value="Ajouter" asp-action="SignRestaurant" /></td>
             </tr>
         </table>
     </form>
+    @if (!String.IsNullOrEmpty((string)TempData["RestaurantSignError"]))
+    {
+        if ((string)TempData["RestaurantSignError"] == "error")
+        {
+            <div class="alert-danger m-1">
+                L'ajout du restaurant a échoué.
+            </div>
+        }
+        if ((string)TempData["RestaurantSignError"] == "existing")
+        {
+            <div class="alert-danger m-1">
+               Un restaurant avec ce nom existe déjà, veuillez chosir un autre nom
+            </div>
+        }
+    }
 </div>

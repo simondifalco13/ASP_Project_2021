@@ -1,5 +1,5 @@
 ﻿@model ASP_PROJECT.ViewModels.MenuViewModel
-<h1>Créer un menu</h1>
+<h1>Modifier un menu</h1>
 <div class="text-center">
 
     <div class="card">
@@ -43,7 +43,7 @@
                             <ul>
                                 @foreach (var item in Model.Menu.DishList)
                                 {
-                                    <li>@item.Name <input type="submit" asp-action="DeleteDishFromMenu" asp-route-DishId="@item.Id" asp-route-menu="@Model.Menu" value="X"/></li>
+                                    <li>@item.Name <input type="submit" asp-action="DeleteDishFromMenu" asp-route-DishId="@item.Id" asp-route-menu="@Model.Menu" asp-route-operation="modifying" value="X" /></li>
                                 }
                             </ul>
                         </td>
@@ -67,14 +67,14 @@
                         <td>@item.ConvertTypeService()</td>
                         <td>@item.Price €</td>
                         <td>
-                            <input type="submit" asp-action="AddDishToMenu" asp-route-DishId="@item.Id" asp-route-vm="@Model.Menu" asp-route-operation="adding" value="Ajouter au menu" />
+                            <input type="submit" asp-action="AddDishToMenu" asp-route-DishId="@item.Id" asp-route-vm="@Model.Menu" asp-route-operation="modifying" value="Ajouter au menu" />
                         </td>
                     </tr>
                 }
                 <tr>
                     <td><a asp-action="Index">Annuler</a></td>
                     <td>
-                        <input type="submit" asp-action="AddMenu" />
+                        <input type="submit" asp-action="ModifyMenu" />
                     </td>
                 </tr>
             </table>

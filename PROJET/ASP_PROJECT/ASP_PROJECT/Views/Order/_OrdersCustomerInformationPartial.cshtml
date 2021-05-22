@@ -1,0 +1,46 @@
+﻿@model ASP_PROJECT.Models.POCO.Order
+
+
+<td>
+    @Model.Id
+</td>
+<td>
+    @Model.DeliveryAdress
+</td>
+<td>
+    @Model.DateOrder.Day/@Model.DateOrder.Month/@Model.DateOrder.Year
+</td>
+<td>
+    @Model.TotalPrice €
+</td>
+<td>
+    @if (Model.Note != null)
+    {
+        <p>@Model.Note</p>
+    }
+    @if(Model.Note == null)
+    { 
+        <p>\</p>
+    }
+</td>
+<td>
+    @foreach (var dish in Model.listDishOrdered)
+    {
+        <p>@dish.Name</p>
+    }
+    @foreach (var menu in Model.listMenuOrdered)
+    {
+        <p>@menu.Name</p>
+    }
+</td>
+<td>
+    <select asp-for="@Model.Status">
+        <option value="0">Validée</option>
+        <option value="1">En préparation</option>
+        <option value="2">En livraison</option>
+        <option value="3">Terminé</option>
+    </select>
+</td>
+@*<td>
+       <input type="submit" asp-action="ModifyOrderStatus" asp-route-OrderIdStatus="@Model.Id+@Model.Status" value="Modifier Status"/>
+    </td>*@

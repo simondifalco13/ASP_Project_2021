@@ -9,7 +9,7 @@ namespace ASP_PROJECT.DAL.IDAL
     public interface IRestaurantDAL 
     {
         Restaurant GetRestaurantById(Restaurant restaurant);
-        List<Restaurant> GetRestaurantsById(Restorer restorer);
+        List<Restaurant> GetRestorerRestaurantsById(Restorer restorer);
 
         bool SignRestaurant(Restorer restorer, Restaurant restaurant);
 

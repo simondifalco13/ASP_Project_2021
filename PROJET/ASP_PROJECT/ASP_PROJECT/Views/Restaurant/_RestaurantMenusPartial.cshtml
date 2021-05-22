@@ -6,7 +6,8 @@
     <td>@Model.ConvertTypeService()</td>
     <td>@Model.Price €</td>
     <td>
-        @foreach (var item in Model.DishList) {
+        @foreach (var item in Model.DishList)
+        {
             <partial name="/Views/Menu/_DishesInMenuPartial.cshtml" for="@item" />
         }
     </td>

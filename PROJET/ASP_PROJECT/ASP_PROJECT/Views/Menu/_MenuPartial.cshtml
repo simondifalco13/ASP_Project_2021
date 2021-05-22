@@ -12,6 +12,9 @@
         }
     </td>
     <td>
+        <button><a asp-controller="Menu" asp-action="ModifyMenuById" asp-route-MenuId="@Model.Id">Modifer</a></button>
+    </td>
+    <td>
         <button><a asp-controller="Menu" asp-action="DeleteMenuById" asp-route-MenuId="@Model.Id">Supprimer</a></button>
     </td>
 </tr>

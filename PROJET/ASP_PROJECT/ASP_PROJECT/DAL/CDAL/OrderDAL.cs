@@ -22,7 +22,6 @@ namespace ASP_PROJECT.DAL.CDAL
             decimal price;
             List<Order> RestaurantOrders = new List<Order>();
             Order Order = new Order();
-            Order.Restaurant = restaurant;
             OrderStatus Status;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -34,6 +33,7 @@ namespace ASP_PROJECT.DAL.CDAL
                 {
                     while (reader.Read())
                     {
+                        Order.Restaurant = restaurant;
                         Order.Id = reader.GetInt32("OrderId");
                         Order.DeliveryAdress = reader.GetString("DeliveryAdress");
                         price = reader.GetDecimal("Price");
@@ -52,6 +52,46 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             return RestaurantOrders;
         }
+
+        public List<Order> GetCustomerOrders(Customer customer)
+        {
+            decimal price;
+            List<Order> CustomerOrders = new List<Order>();
+            Order Order = new Order();
+            Order.Customer = customer;
+            OrderStatus Status;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "SELECT * FROM dbo.Orders WHERE CustomerId=@CustomerId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("CustomerId", customer.Id);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Order.Customer = customer;
+                        Order.Restaurant.Id= reader.GetInt32("RestaurantId");
+                        Order.Id = reader.GetInt32("OrderId");
+                        Order.DeliveryAdress = reader.GetString("DeliveryAdress");
+                        price = reader.GetDecimal("Price");
+                        Order.TotalPrice = (double)price;
+                        Order.Customer.Id = reader.GetInt32("CustomerId");
+                        Order.DateOrder = reader.GetDateTime("OrderDate");
+                        Enum.TryParse(reader.GetString("OrderStatus"), out Status);
+                        Order.Status = Status;
+
+                        //get Order Dish and Menu Details
+                        CustomerOrders.Add(Order);
+                        Order = new Order();
+
+                    }
+                }
+            }
+            return CustomerOrders;
+        }
+
+
         public List<int> GetMenusIdInMenuDetails(Order order)
         {
             List<int> MenuDetailsId = new List<int>();
@@ -73,6 +113,7 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             return MenuDetailsId;
         }
+
         public List<int> GetDishesIdInMenuDetails(Order order)
         {
             List<int> DishDetailsId = new List<int>();
@@ -95,13 +136,13 @@ namespace ASP_PROJECT.DAL.CDAL
             return DishDetailsId;
         }
 
-        //eventuellement déplacer pour faire un appel a l'autre DAl
-
-        public bool AddOrder(Order order, Customer customer) {
+        public bool AddOrder(Order order, Customer customer)
+        {
             string request = "INSERT INTO dbo.Order (OrderDate,CustomerId,Price) VALUES (@OrderDate,@CustomerId,@Price";
             bool success = false;
 
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
                 SqlCommand cmd = new SqlCommand(request, connection);
 
                 cmd.Parameters.AddWithValue("OrderDate", DateTime.Now.ToString("MM/dd/yyyy"));
@@ -114,18 +155,20 @@ namespace ASP_PROJECT.DAL.CDAL
 
                 AddOrderDetails(order, customer);
                 return success;
-            } 
+            }
         }
         // pas fini
-        public bool AddOrderDetails(Order order,Customer customer) {
+        public bool AddOrderDetails(Order order, Customer customer)
+        {
             string request = "INSERT INTO dbo.OrderMenuDetails (MenuId) VALUES (@MenuId)";
             bool success = false;
 
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
                 SqlCommand cmd = new SqlCommand(request, connection);
 
 
-                cmd.Parameters.AddWithValue("");
+                //cmd.Parameters.AddWithValue("");
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
@@ -135,5 +178,6 @@ namespace ASP_PROJECT.DAL.CDAL
             }
 
         }
+
     }
 }
