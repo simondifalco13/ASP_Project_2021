@@ -128,8 +128,5 @@ namespace ASP_PROJECT.Controllers {
 
             return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", vm);
         }
-
-
-
     }
 }

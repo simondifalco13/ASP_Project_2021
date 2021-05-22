@@ -151,5 +151,10 @@ namespace ASP_PROJECT.Models.POCO
 
             return resto;
         }
+
+        // 
+        public static Restaurant GetRestaurantById(Restaurant resto, IRestaurantDAL restoDAL) {
+            return restoDAL.GetRestaurantById(resto);
+        }
     }
 }

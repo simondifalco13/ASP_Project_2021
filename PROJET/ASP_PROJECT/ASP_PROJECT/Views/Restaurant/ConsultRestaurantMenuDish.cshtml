@@ -11,8 +11,8 @@
             <th>Adresse</th>
             <th>N° TVA</th>
             <th>Jours</th>
-            <th>Ouverture : </th>
-            <th>Fermeture : </th>
+            <th>Ouverture</th>
+            <th>Fermeture</th>
             <partial name="_RestaurantAllInformationPartial.cshtml" for="@Model.Resto" />
         </tr>
     </table>
@@ -47,10 +47,10 @@
         </tr>
         <tr>
             <th>Nom</th>
-            <th>Description</th>
-            <th>Type de service</th>
             <th>Type</th>
-            <th>Price</th>
+            <th>Type de service</th>
+            <th>Description</th>
+            <th>Prix</th>
         </tr>
         @foreach (var item in Model.SelectedListDish)
         {
@@ -59,7 +59,3 @@
     </table>
 </form>
 <a asp-controller="Home" asp-action="Index">Retour</a>
-@if (Context.Session.GetString("customerConnected") == "true")
-{
-    <a asp-controller="Order" asp-action="ConsultCart">Consulter panier</a>
-}

@@ -136,48 +136,66 @@ namespace ASP_PROJECT.DAL.CDAL
             return DishDetailsId;
         }
 
-        public bool AddOrder(Order order, Customer customer)
-        {
-            string request = "INSERT INTO dbo.Order (OrderDate,CustomerId,Price) VALUES (@OrderDate,@CustomerId,@Price";
+        public bool AddOrder(Order order, Customer customer){
+            Menu menu = new Menu();
+            Dish dish = new Dish();
+
+            string request = "INSERT INTO dbo.Orders (OrderStatus,OrderDate,DeliveryAdress,CustomerId,Price) VALUES (@orderStatus,@OrderDate,@DeliveryAdress,@CustomerId,@Price";
             bool success = false;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
+            using (SqlConnection connection = new SqlConnection(connectionString)){
                 SqlCommand cmd = new SqlCommand(request, connection);
-
+                cmd.Parameters.AddWithValue("OrderStatus", order.Status);
                 cmd.Parameters.AddWithValue("OrderDate", DateTime.Now.ToString("MM/dd/yyyy"));
+                //En attendant
+                string customerAdress = customer.Address;
+                customerAdress += customer.City;
+                customerAdress += customer.Country;
+                cmd.Parameters.AddWithValue("DeliveryAdress", customerAdress);
+
                 cmd.Parameters.AddWithValue("CustomerId", customer.Id);
-                // Calculer le prix total dans la poco ?
                 cmd.Parameters.AddWithValue("Price", order.TotalPrice);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
 
-                AddOrderDetails(order, customer);
+                AddOrderMenuDetails(order, menu);
+                AddOrderDishDetails(order, dish);
                 return success;
             }
         }
-        // pas fini
-        public bool AddOrderDetails(Order order, Customer customer)
-        {
-            string request = "INSERT INTO dbo.OrderMenuDetails (MenuId) VALUES (@MenuId)";
+        public bool AddOrderMenuDetails(Order order, Menu menu){
+            string request = "INSERT INTO dbo.OrderMenuDetails (OrderId,MenuId) VALUES (@OrderId,@MenuId)";
             bool success = false;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
+            using (SqlConnection connection = new SqlConnection(connectionString)){
                 SqlCommand cmd = new SqlCommand(request, connection);
 
-
-                //cmd.Parameters.AddWithValue("");
+                cmd.Parameters.AddWithValue("OrderId",order.Id);
+                cmd.Parameters.AddWithValue("MenuId",menu.Id);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
 
-                AddOrderDetails(order, customer);
                 return success;
             }
-
         }
+        public bool AddOrderDishDetails(Order order, Dish dish) {
+            string request = "INSERT INTO dbo.OrderDishDetails (OrderId,DishId) VALUES (@OrderId,@DishId)";
+            bool success = false;
 
+            using(SqlConnection connection = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand(request, connection);
+
+                cmd.Parameters.AddWithValue("OrderId", order.Id);
+                cmd.Parameters.AddWithValue("DishId", dish.Id);
+
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+
+                return success;
+            }
+        }
     }
 }

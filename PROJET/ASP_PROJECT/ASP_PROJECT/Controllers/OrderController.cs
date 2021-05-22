@@ -59,84 +59,113 @@ namespace ASP_PROJECT.Controllers
             return RedirectToAction("ConsultRestaurantOrders");
         }
 
-        [HttpPost]
-        public IActionResult AddMenuToCart(int menuId)
-        {
-            Order order = new Order();
+        public IActionResult AddMenuToCart(int menuId){
 
-            if (HttpContext.Session.GetString("MenusId") != null)
-            {
-                string sessionMenusIds = HttpContext.Session.GetString("MenusId");
-                sessionMenusIds += ";" + menuId.ToString();
-                HttpContext.Session.SetString("MenusId", sessionMenusIds);
-                string[] menusIdsSplited = sessionMenusIds.Split(";");
-
-                foreach (var item in menusIdsSplited)
-                {
-                    int id = Int32.Parse(item);
-
-                    Menu menuAdded = Menu.GetMenuById(id, _menuDAL);
-                    order.listMenuOrdered.Add(menuAdded);
+            if (HttpContext.Session.GetString("OrderExist") == "true") {
+                if (HttpContext.Session.GetString("MenusOrder") != "") {
+                    string sessionMenusIds = HttpContext.Session.GetString("MenusOrder");
+                    sessionMenusIds += ";" + menuId.ToString();
+                    HttpContext.Session.SetString("MenusOrder", sessionMenusIds);
+                } else {
+                    HttpContext.Session.SetString("MenusOrder", menuId.ToString());
                 }
             }
-            else
-            {
-                Menu menuAdded = Menu.GetMenuById(menuId, _menuDAL);
-                order.listMenuOrdered.Add(menuAdded);
-
-                HttpContext.Session.SetString("MenusId", menuId.ToString());
-            }
-
-            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", order);
-        }
-
-        public IActionResult AddDishToCart(int dishId)
-        {
-           //si la variable de session OrderExists= true, si pas on la crée , on crée par la meme occasion DishesOrder="" et MenusOrder="" 
-           if(HttpContext.Session.GetString("OrderExist")== "true")
-            {
-                if (HttpContext.Session.GetString("DishesOrder") != "")
-                {
-                    string sessionDishesIds = HttpContext.Session.GetString("DishesOrder");
-                    sessionDishesIds += ";" + dishId.ToString();
-                    HttpContext.Session.SetString("DishesOrder", sessionDishesIds);
-                }
-                else
-                {
-                    HttpContext.Session.SetString("DishesOrder", dishId.ToString());
-
-                }
-            }
-            
-            int restoId =(int) HttpContext.Session.GetInt32("restaurantId");
-            // retourner vers action qui va sur cette vue , mais pour le customer
+            int restoId = (int)HttpContext.Session.GetInt32("restaurantId");
             return RedirectToAction("ConsultAll", "Restaurant", new { restaurantId = restoId });
         }
 
-        public IActionResult ConsultCart(Order order)
-        {
-          
-            //verification que user est connecté 
-            //envoit un objet order, la vue sera basée sur un objet order => recuperer le customer par l'id et le restaurant par l'id, aussi les dishes et menu
-            //via les variables de session et donc en appelant les méthodes des pocos 
-            int customerId = (int)HttpContext.Session.GetInt32("CustomerId");
-            Customer customer = Customer.GetCustomerById(_accountDAL, customerId);
-            //traitement des id dans la variable de session ==> dans un tableau
-            List<Dish> DishesInOrder = new List<Dish>();
-            //foreach (var dishId in sessionDishesId)
-            //{
-            //    Dish Dish = Dish.GetDishById(_menuDAL,dishId);
-            //    DishesInOrder.Add(Dish);
-            //}
-            order.listDishOrdered = DishesInOrder;
+        public IActionResult AddDishToCart(int dishId){
+           if(HttpContext.Session.GetString("OrderExist")== "true"){
+                if (HttpContext.Session.GetString("DishesOrder") != ""){
+                    string sessionDishesIds = HttpContext.Session.GetString("DishesOrder");
+                    sessionDishesIds += ";" + dishId.ToString();
+                    HttpContext.Session.SetString("DishesOrder", sessionDishesIds);
+                }else{
+                    HttpContext.Session.SetString("DishesOrder", dishId.ToString());
+                }
+            }
+            int restoId =(int) HttpContext.Session.GetInt32("restaurantId");
+            return RedirectToAction("ConsultAll", "Restaurant", new { restaurantId = restoId });
+        }
 
+        public IActionResult ConsultCart(Order order){
+ 
+            if (HttpContext.Session.GetString("customerConnected") == "true") {
+                if (HttpContext.Session.GetString("DishesOrder") != "" || HttpContext.Session.GetString("MenusOrder") != "") {
+                    int customerId = (int)HttpContext.Session.GetInt32("CustomerId");
+                    Restaurant restaurant = new Restaurant();
+                    restaurant.Id=(int)HttpContext.Session.GetInt32("restaurantId");
+
+                    restaurant=Restaurant.GetRestaurantById(restaurant, _restaurantDAL);
+                    Customer customer = Customer.GetCustomerById(_accountDAL, customerId);
+
+                    //traitement des id dans la variable de session ==> dans un tableau
+                    //List<Dish> DishesInOrder = new List<Dish>();
+                    //List<Menu> MenusInOrder = new List<Menu>();
+
+                    string sessionMenusIds = HttpContext.Session.GetString("MenusOrder");
+                    string[] menusIdsSplited = sessionMenusIds.Split(";");
+
+                    string sessionDishesIds = HttpContext.Session.GetString("DishesOrder");
+                    string[] dishesIdsSplited = sessionDishesIds.Split(";");
+
+                    foreach (var item in menusIdsSplited) {
+                        int menuId = Int32.Parse(item);
+                        Menu menuAdded = Menu.GetMenuById(menuId, _menuDAL);
+                        order.listMenuOrdered.Add(menuAdded);
+                    }
+
+                    foreach (var dId in dishesIdsSplited) {
+                        int dishId = Int32.Parse(dId);
+                        Dish dishAdded = Dish.GetDishById(dishId, _menuDAL);
+                        order.listDishOrdered.Add(dishAdded);
+                    }
+                    order.Customer = customer;
+                    order.Restaurant = restaurant;
+                   
+                    //order.TotalPrice = CalculatePrice();
+                } else {
+                    TempData["Message"] = "Vide";
+                    return View("Views/Order/ConsultCart.cshtml", order);
+                }
+            }
             return View("Views/Order/ConsultCart.cshtml",order);
         }
-        public IActionResult ValidateOrder()
-        {
+        // Plutôt dans la poco ???
+        public double CalculatePrice(Order order) {
 
 
+            return order.TotalPrice;
+        }
+        public IActionResult DeleteDishOrdered(int dishId) {
+            // supprimer de la session
 
+            return View("Views/Order/ConsultCart.cshtml");
+        }
+        public IActionResult DeleteMenuOrdered(int menuId) {
+            // supprimer de la session 
+
+            return View("Views/Order/ConsultCart.cshtml");
+        }
+
+        public IActionResult DeleteCart(Order order) {
+            HttpContext.Session.SetString("MenusOrder", null);
+            HttpContext.Session.SetString("DishesOrder", null);
+            order = null;
+
+            return View("Views/Order/ConsultCart.cshtml", order);
+        }
+        public IActionResult ValidateOrder(Order order){
+
+            // Passer par un view model ?
+            OrderViewModel vm = new OrderViewModel();
+            //Commande validée
+            order.Status = 0;
+            // j'ai déjà dans l'objet order
+            //Restaurant resto = new Restaurant();
+            //resto.Id = (int)HttpContext.Session.GetInt32("restaurantId");
+
+            //order.Restaurant = Restaurant.GetRestaurantById(resto,_restaurantDAL) ;
 
             TempData["StatutOrder"] = "OK";
             TempData["StatutOrder"] = "NOTOK";
@@ -145,5 +174,4 @@ namespace ASP_PROJECT.Controllers
         }
 
     }
-
 }

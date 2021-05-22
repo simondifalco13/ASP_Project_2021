@@ -56,8 +56,7 @@ namespace ASP_PROJECT.Models.POCO
         {
 
         }
-        public void ValidateOrder()
-        {
+        public void ValidateOrder(Order order, IOrderDAL orderDAL){
 
         }
         public void CancelOrder()
