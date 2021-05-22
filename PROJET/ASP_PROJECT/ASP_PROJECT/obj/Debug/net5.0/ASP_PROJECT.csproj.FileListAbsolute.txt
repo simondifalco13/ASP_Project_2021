@@ -342,8 +342,6 @@ C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\Index.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\ModifyDish.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_DishPartialRestorer.cshtml.g.cs
-C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_MenuAndDishPartial.cshtml.g.cs
-C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_ShowDishesMenu.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\Index.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\SignRestaurant.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
@@ -413,3 +411,9 @@ C:\Users\simon\Desktop\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Vie
 C:\Users\simon\Desktop\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\ConsultRestorerRestaurants.cshtml.g.cs
 C:\Users\simon\Desktop\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantAllInformationPartial.cshtml.g.cs
 C:\Users\simon\Desktop\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantSummaryPartial.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Order\ConsultCart.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\ConsultRestaurantMenuDish.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantDishesPartial.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantMenusPartial.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Account\Inscription.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Shared\_navbar.cshtml.g.cs

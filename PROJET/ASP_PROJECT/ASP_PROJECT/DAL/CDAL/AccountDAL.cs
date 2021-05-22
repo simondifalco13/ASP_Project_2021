@@ -291,6 +291,39 @@ namespace ASP_PROJECT.DAL.CDAL
             return restorer;
         }
 
+        public Restorer GetRestorerById(Restorer restorer)
+        {
+            string gender;
+            string request = "SELECT RestorerId,FirstName,Email,LastName,Gender,City,Address,PostalCode,PhoneNumber,Country FROM dbo.Restorers WHERE RestorerId=@RestorerId";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("RestorerId", restorer.Id);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        restorer.Id = reader.GetInt32("RestorerId");
+                        restorer.Firstname = reader.GetString("FirstName");
+                        restorer.Lastname = reader.GetString("LastName");
+                        restorer.Email = reader.GetString("Email");
+                        //méthode GetChar ne fonctionnait pas pour une raison inconnue
+                        //modifier dans db GEnder -> nvarchar(1)
+                        gender = reader.GetString("Gender");
+                        restorer.Gender = gender[0];
+                        restorer.City = reader.GetString("City");
+                        restorer.Address = reader.GetString("Address");
+                        restorer.Pc = reader.GetString("PostalCode");
+                        restorer.Tel = reader.GetString("PhoneNumber");
+                        restorer.Country = reader.GetString("Country");
+                    }
+                }
+            }
+            return restorer;
+        }
+
 
 
         public bool UpdateRestorerInformations(Restorer restorerToModify)

@@ -7,4 +7,11 @@
     <td>@Model.Description</td>
     <td>@Model.Price</td>
     <td><a asp-controller="Order" asp-action="AddDishToCart" asp-route-menuId="@Model.Id">Ajouter au panier</a></td>
+    <!--Dans le cas d'un restorer-->
+    @*<td>
+        <a asp-controller="Menu" asp-action="ModifyDishById" asp-route-DishId="@Model.Id">Modifier</a>
+    </td>
+    <td>
+        <a asp-controller="Menu" asp-action="DeleteDishById" asp-route-DishId="@Model.Id">Supprimer</a>
+    </td>*@
 </tr>

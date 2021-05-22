@@ -1,6 +1,7 @@
 ﻿using ASP_PROJECT.DAL.IDAL;
 using ASP_PROJECT.Models.POCO;
 using ASP_PROJECT.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace ASP_PROJECT.Controllers {
 
         private readonly IRestaurantDAL _restaurantDAL;
         private readonly IMenuDAL _menuDAL;
+        private readonly IAccountDAL _accountDAL;
 
 
-        public RestaurantController(IRestaurantDAL restaurantDAL,IMenuDAL menuDAL) {
+        public RestaurantController(IRestaurantDAL restaurantDAL,IMenuDAL menuDAL, IAccountDAL accountDAL) {
             _restaurantDAL = restaurantDAL;
             _menuDAL = menuDAL;
+            _accountDAL = accountDAL;
         }
         public IActionResult Index() {
             return View();
@@ -31,21 +34,22 @@ namespace ASP_PROJECT.Controllers {
         }
 
         //Simon : (délimitation pour m'y retrouver quand je fais des copier coller en attendant de résoudre le problème de versionning)
-        public IActionResult SignRestaurant()
+        public IActionResult SignRestaurant(Restorer restorer)
         {
             TempData["RestaurantSignError"] = null;
             SignRestaurantViewModel vm = new SignRestaurantViewModel();
-            vm.restorerId = 1;
+            vm.Restorer = restorer;
             return View("SignRestaurant", vm);
         }
 
-        //faire consulterRestaurantSelonRestorer ! 
-        public IActionResult ConsultRestorerRestaurants()
+        public IActionResult ConsultRestorerRestaurants(Restorer r)
         {
-            Restorer r = new Restorer();
-            r.Id = 1;
+            //Restorer r = new Restorer();
+            //r.Id = restorerId;
+            r = Restorer.GetRestorerById(_accountDAL,r);
             r.restaurantList=r.GetRestorerRestaurants(_restaurantDAL);
             ListRestaurantsViewModel viewModel = new ListRestaurantsViewModel(r.restaurantList);
+            viewModel.Restorer = r;
             return View("ConsultRestorerRestaurants", viewModel);
         }
         
@@ -61,9 +65,8 @@ namespace ASP_PROJECT.Controllers {
         [HttpPost]
         public IActionResult SignRestaurant(SignRestaurantViewModel vm)
         {
-            //EN DUR : a modifier 
-            Restorer r = new Restorer();
-            r.Id = 1;
+            vm.Restorer.Id = (int)HttpContext.Session.GetInt32("restorerId");
+            vm.Restorer = Restorer.GetRestorerById(_accountDAL, vm.Restorer);
             if (ModelState.IsValid)
             {
                 Restaurant CreatedRestaurant = vm.Resto;
@@ -85,7 +88,7 @@ namespace ASP_PROJECT.Controllers {
 
                 try
                 {
-                    bool success = Restaurant.SignRestaurant(CreatedRestaurant, r, _restaurantDAL);
+                    bool success = Restaurant.SignRestaurant(CreatedRestaurant, vm.Restorer, _restaurantDAL);
                     if (success == true)
                     {
                         TempData["RestaurantSign"] = "success";

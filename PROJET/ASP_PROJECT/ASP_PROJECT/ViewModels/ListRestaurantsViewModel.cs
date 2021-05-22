@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace ASP_PROJECT.ViewModels {
     public class ListRestaurantsViewModel {
 
+        public Restorer Restorer { get; set; }
         public List<SelectListItem> Restos { get; set; }
         public List<Restaurant> ListRestoDb { get; set; }
         public Restaurant Resto { get; set; }
@@ -18,6 +19,7 @@ namespace ASP_PROJECT.ViewModels {
 
         public ListRestaurantsViewModel()
         {
+            Restorer = new Restorer();
             Restos = new List<SelectListItem>();
             Resto = new Restaurant();
             SelectedListMenus = new List<Menu>();

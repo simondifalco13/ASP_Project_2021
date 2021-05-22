@@ -41,5 +41,10 @@ namespace ASP_PROJECT.Models.POCO
             List<Restaurant> restaurants = restaurantDAL.GetRestorerRestaurantsById(this);
             return restaurants;
         }
+
+        public static Restorer GetRestorerById(IAccountDAL accountDAL,Restorer restorer)
+        {
+            return restorer = accountDAL.GetRestorerById(restorer);
+        }
     }
 }

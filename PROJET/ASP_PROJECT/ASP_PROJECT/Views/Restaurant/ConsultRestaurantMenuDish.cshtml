@@ -2,23 +2,21 @@
 <!-- ViewModel -->
 <form method="POST" asp-controller="Restaurant" asp-action="ConsultAll">
     <table class="table">
-        <p>Informations restaurant</p>
+        <tr><h3>Informations restaurant</h3></tr>
         <tr>
             <th>Nom</th>
             <th>Type</th>
+            <th>Description</th>
             <th>Adresse</th>
             <th>N° TVA</th>
-            @foreach (var open in Model.Resto.OpeningsTimes)
-            {
-                <th>Ouverture : </th>
-            }
-            @foreach (var close in Model.Resto.CloseTimes)
-            {
-                <th>Fermeture : </th>
-            }
+            <th>Ouverture : </th>
+            <th>Fermeture : </th>
             <partial name="_RestaurantAllInformationPartial.cshtml" for="@Model.Resto" />
         </tr>
+    </table>
+    <table class="table">
         <!-- MENU -->
+        <tr><h3>MENU</h3></tr>
         <tr>
             <th>Nom
             <th>Description</th>
@@ -29,8 +27,10 @@
         {
             <partial name="_RestaurantMenusPartial.cshtml" for="@item" />
         }
-
+    </table>
+    <table class="table">
         <!-- PLAT -->
+        <tr><h3>PLATS</h3></tr>
         <tr>
             <th>Nom</th>
             <th>Description</th>
@@ -45,4 +45,4 @@
     </table>
 </form>
 <a asp-controller="Home" asp-action="Index">Retour</a>
-<td><a asp-controller="Order" asp-action="ConsultCart">Consulter panier</a></td>
+<a asp-controller="Order" asp-action="ConsultCart">Consulter panier</a>

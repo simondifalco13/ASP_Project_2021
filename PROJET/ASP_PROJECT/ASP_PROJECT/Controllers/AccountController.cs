@@ -23,6 +23,10 @@ namespace ASP_PROJECT.Controllers
             return View();
         }
 
+        public IActionResult Inscription()
+        {
+            return View("Inscription");
+        }
 
         public IActionResult RestorerRegister()
         {
@@ -39,6 +43,7 @@ namespace ASP_PROJECT.Controllers
             LoginViewModel vm = new LoginViewModel();
             return View("Login", vm);
         }
+
 
         public IActionResult ConsultRestorerInformations()
         {
@@ -197,7 +202,7 @@ namespace ASP_PROJECT.Controllers
                         {
                             TempData["Message"] = "State10";
                             HttpContext.Session.SetString("restorerConnected", "true");
-                            HttpContext.Session.SetInt32("CustomerId", RecuperatedAccount.Id);
+                            HttpContext.Session.SetInt32("restorerId", RecuperatedAccount.Id);
                             HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
                             HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
                             HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
@@ -207,6 +212,12 @@ namespace ASP_PROJECT.Controllers
                             HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
                             HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
                             HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
+                            return RedirectToAction("ConsultRestorerRestaurants", "Restaurant",new { Id = RecuperatedAccount.Id });
+                        }
+                        else
+                        {
+                            //message d'erreur si déja connexté
+                            return View("Login", vm);
                         }
                     }
                     catch (Exception e)
@@ -240,7 +251,12 @@ namespace ASP_PROJECT.Controllers
                                 HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
                                 HttpContext.Session.SetString("DoB", ((Customer)RecuperatedAccount).DoB.ToString("d"));
                                 HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
-
+                                return RedirectToAction("ConsultRestaurant", "Restaurant");
+                            }
+                            else
+                            {
+                                //message d'erreur si déja connexté
+                                return View("Login", vm);
                             }
                         }
                         catch(Exception e)
@@ -259,9 +275,8 @@ namespace ASP_PROJECT.Controllers
             else
             {
                 TempData["Message"] = "Uncompleted";
-
+                return View("Login", vm);
             }
-            return View("Index");
         }
 
         [HttpPost]
@@ -324,6 +339,19 @@ namespace ASP_PROJECT.Controllers
                 TempData["AccountModifications"] = "invalid";
             }
             return View("ModifyCustomerAccount", CustomerToModify);
+        }
+
+        [HttpPost]
+        public IActionResult Inscription(string type)
+        {
+            if (type == "restorer")
+            {
+                return View("RestorerInscription");
+            }
+            else
+            {
+                return View("CustomerInscription");
+            }
         }
     }
 }

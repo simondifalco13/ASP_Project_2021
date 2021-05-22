@@ -124,7 +124,7 @@ namespace ASP_PROJECT.Controllers
 
         public IActionResult ConsultCart(Order order)
         {
-
+            //verification que user est connecté 
             // ?? 
             return View("Views/Order/ConsultCart.cshtml");
         }
