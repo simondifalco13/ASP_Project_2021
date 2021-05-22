@@ -34,11 +34,11 @@ namespace ASP_PROJECT.Controllers {
         }
 
         //Simon : (délimitation pour m'y retrouver quand je fais des copier coller en attendant de résoudre le problème de versionning)
-        public IActionResult SignRestaurant(Restorer restorer)
+        public IActionResult SignRestaurant(int id)
         {
             TempData["RestaurantSignError"] = null;
             SignRestaurantViewModel vm = new SignRestaurantViewModel();
-            vm.Restorer = restorer;
+            vm.restorerId = id;
             return View("SignRestaurant", vm);
         }
 
@@ -65,8 +65,8 @@ namespace ASP_PROJECT.Controllers {
         [HttpPost]
         public IActionResult SignRestaurant(SignRestaurantViewModel vm)
         {
-            vm.Restorer.Id = (int)HttpContext.Session.GetInt32("restorerId");
-            vm.Restorer = Restorer.GetRestorerById(_accountDAL, vm.Restorer);
+
+            vm.restorerId = (int)HttpContext.Session.GetInt32("restorerId");
             if (ModelState.IsValid)
             {
                 Restaurant CreatedRestaurant = vm.Resto;
@@ -88,7 +88,10 @@ namespace ASP_PROJECT.Controllers {
 
                 try
                 {
-                    bool success = Restaurant.SignRestaurant(CreatedRestaurant, vm.Restorer, _restaurantDAL);
+                    Restorer restorer = new Restorer();
+                    restorer.Id = vm.restorerId;
+                    restorer = Restorer.GetRestorerById(_accountDAL,restorer) ;
+                    bool success = Restaurant.SignRestaurant(CreatedRestaurant, restorer, _restaurantDAL);
                     if (success == true)
                     {
                         TempData["RestaurantSign"] = "success";
@@ -116,8 +119,8 @@ namespace ASP_PROJECT.Controllers {
         public IActionResult ConsultAll(int restaurantId)
         {
             Restaurant resto = new Restaurant();
-
             resto.Id = restaurantId;
+            HttpContext.Session.SetInt32("restaurantId", restaurantId);
             resto = Restaurant.GetRestaurantDishesAndMenus(resto, _restaurantDAL, _menuDAL);
             resto = resto.GetScheduleResto(resto, _restaurantDAL);
 

@@ -19,35 +19,32 @@
     <td>@Model.Description</td>
     <td>@Model.Address @Model.City @Model.Pc @Model.Country</td>
     <td>@Model.NumTVA</td>
-    @*<td>@Model.DeliveryCities</td>*@
-    @*@foreach (var open in Model.OpeningsTimes)
-    {
-        <td>@open.Hour : @open.Minute</td>
-    }
-    @foreach (var close in Model.CloseTimes)
-    {
-        <td>@close.Hour : @close.Minute</td>
-        
-    }*@
+    <td>
+        @foreach (var day in DayOfWeek)
+        {
 
-<td>
+            <p>@day</p>
 
-    @foreach (var open in Model.OpeningsTimes)
-    {
+        }
+    </td>
+    <td>
 
-        <p>@open.Hour : @open.Minute</p>
+        @foreach (var open in Model.OpeningsTimes)
+        {
+
+            <p>@open.Hour : @open.Minute</p>
 
 
 
-    }
-</td>
-<td>
-    @foreach (var close in Model.CloseTimes)
-    {
+        }
+    </td>
+    <td>
+        @foreach (var close in Model.CloseTimes)
+        {
 
-        <p>@close.Hour : @close.Minute</p>
-    }
-</td>
+            <p>@close.Hour : @close.Minute</p>
+        }
+    </td>
 
 
 </tr>

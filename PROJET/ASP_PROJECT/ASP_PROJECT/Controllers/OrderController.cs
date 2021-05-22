@@ -90,43 +90,47 @@ namespace ASP_PROJECT.Controllers
             return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", order);
         }
 
-        [HttpPost]
         public IActionResult AddDishToCart(int dishId)
         {
-            Order order = new Order();
-
-            if (HttpContext.Session.GetString("DishesId") != null)
+           //si la variable de session OrderExists= true, si pas on la crée , on crée par la meme occasion DishesOrder="" et MenusOrder="" 
+           if(HttpContext.Session.GetString("OrderExist")== "true")
             {
-                string sessionDishesIds = HttpContext.Session.GetString("MenusId");
-                sessionDishesIds += ";" + dishId.ToString();
-                HttpContext.Session.SetString("DishesId", sessionDishesIds);
-                string[] dishesIdsSplited = sessionDishesIds.Split(";");
-
-                foreach (var item in dishesIdsSplited)
+                if (HttpContext.Session.GetString("DishesOrder") != "")
                 {
-                    int id = Int32.Parse(item);
+                    string sessionDishesIds = HttpContext.Session.GetString("DishesOrder");
+                    sessionDishesIds += ";" + dishId.ToString();
+                    HttpContext.Session.SetString("DishesOrder", sessionDishesIds);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("DishesOrder", dishId.ToString());
 
-                    Dish dishAdded = Dish.GetDishById(id, _menuDAL);
-
-                    order.listDishOrdered.Add(dishAdded);
                 }
             }
-            else
-            {
-                Dish dishAdded = Dish.GetDishById(dishId, _menuDAL);
-                order.listDishOrdered.Add(dishAdded);
-
-                HttpContext.Session.SetString("MenusId", dishId.ToString());
-            }
-
-            return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", order);
+            
+            int restoId =(int) HttpContext.Session.GetInt32("restaurantId");
+            // retourner vers action qui va sur cette vue , mais pour le customer
+            return RedirectToAction("ConsultAll", "Restaurant", new { restaurantId = restoId });
         }
 
         public IActionResult ConsultCart(Order order)
         {
+          
             //verification que user est connecté 
-            // ?? 
-            return View("Views/Order/ConsultCart.cshtml");
+            //envoit un objet order, la vue sera basée sur un objet order => recuperer le customer par l'id et le restaurant par l'id, aussi les dishes et menu
+            //via les variables de session et donc en appelant les méthodes des pocos 
+            int customerId = (int)HttpContext.Session.GetInt32("CustomerId");
+            Customer customer = Customer.GetCustomerById(_accountDAL, customerId);
+            //traitement des id dans la variable de session ==> dans un tableau
+            List<Dish> DishesInOrder = new List<Dish>();
+            //foreach (var dishId in sessionDishesId)
+            //{
+            //    Dish Dish = Dish.GetDishById(_menuDAL,dishId);
+            //    DishesInOrder.Add(Dish);
+            //}
+            order.listDishOrdered = DishesInOrder;
+
+            return View("Views/Order/ConsultCart.cshtml",order);
         }
         public IActionResult ValidateOrder()
         {

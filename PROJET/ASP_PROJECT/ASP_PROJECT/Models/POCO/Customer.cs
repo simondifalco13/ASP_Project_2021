@@ -33,8 +33,14 @@ namespace ASP_PROJECT.Models.POCO
 
         public static Customer GetCustomerByMail(IAccountDAL accountDAL, string mail)
         {
-            Customer SearchedRestorer = accountDAL.GetCustomerByMail(mail);
-            return SearchedRestorer;
+            Customer SearchedCustomer = accountDAL.GetCustomerByMail(mail);
+            return SearchedCustomer;
+        }
+
+        public static Customer GetCustomerById(IAccountDAL accountDAL, int customerId)
+        {
+            Customer SearchedCustomer = accountDAL.GetCustomerById(customerId);
+            return SearchedCustomer;
         }
 
         public static bool ModifyCustomerInformations(IAccountDAL accountDAL, Customer customerToModify)

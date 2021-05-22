@@ -41,7 +41,7 @@ namespace ASP_PROJECT.Models.POCO
         [Display(Name = "Date de commande")]
         public DateTime DateOrder { get; set; }
 
-        // J'ai des doutes? 
+        
         public List<Menu> listMenuOrdered;
         public List<Dish> listDishOrdered;
 

@@ -1,5 +1,5 @@
 ﻿@model ASP_PROJECT.Models.POCO.Menu
-
+@using Microsoft.AspNetCore.Http
 <tr>
     <td>@Model.Name</td>
     <td>@Model.Description</td>
@@ -11,12 +11,18 @@
             <partial name="/Views/Menu/_DishesInMenuPartial.cshtml" for="@item" />
         }
     </td>
-    <td><a asp-controller="Order" asp-action="AddMenuToCart" asp-route-menuId="@Model.Id">Ajouter au panier</a></td>
-    <!--Dans le cas du restorer-->
-    @*<td>
-        <button><a asp-controller="Menu" asp-action="ModifyMenuById" asp-route-MenuId="@Model.Id">Modifer</a></button>
-    </td>
-    <td>
-        <button><a asp-controller="Menu" asp-action="DeleteMenuById" asp-route-MenuId="@Model.Id">Supprimer</a></button>
-    </td>*@
+    @if (Context.Session.GetString("customerConnected") == "true")
+    {
+        <td><a asp-controller="Order" asp-action="AddMenuToCart" asp-route-menuId="@Model.Id">Ajouter au panier</a></td>
+    }
+
+    @if (Context.Session.GetString("restorerConnected") == "true")
+    {
+        <td>
+            <button><a asp-controller="Menu" asp-action="ModifyMenuById" asp-route-MenuId="@Model.Id">Modifer</a></button>
+        </td>
+        <td>
+            <button><a asp-controller="Menu" asp-action="DeleteMenuById" asp-route-MenuId="@Model.Id">Supprimer</a></button>
+        </td>
+    }
 </tr>

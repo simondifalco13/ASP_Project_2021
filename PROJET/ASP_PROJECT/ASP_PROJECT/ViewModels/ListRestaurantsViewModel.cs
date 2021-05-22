@@ -12,10 +12,11 @@ namespace ASP_PROJECT.ViewModels {
         public List<SelectListItem> Restos { get; set; }
         public List<Restaurant> ListRestoDb { get; set; }
         public Restaurant Resto { get; set; }
-        // Si je rajoute une propriété qui ajoute une liste de dish et de menus.
-        // J'arri
+       
         public List<Menu> SelectedListMenus { get; set; }
         public List<Dish> SelectedListDish { get; set; }
+
+        //ajouter une variable de type order
 
         public ListRestaurantsViewModel()
         {

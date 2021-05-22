@@ -1,5 +1,6 @@
 ﻿@model ASP_PROJECT.ViewModels.ListRestaurantsViewModel
-<!-- ViewModel -->
+@using Microsoft.AspNetCore.Http
+
 <form method="POST" asp-controller="Restaurant" asp-action="ConsultAll">
     <table class="table">
         <tr><h3>Informations restaurant</h3></tr>
@@ -9,6 +10,7 @@
             <th>Description</th>
             <th>Adresse</th>
             <th>N° TVA</th>
+            <th>Jours</th>
             <th>Ouverture : </th>
             <th>Fermeture : </th>
             <partial name="_RestaurantAllInformationPartial.cshtml" for="@Model.Resto" />
@@ -16,7 +18,13 @@
     </table>
     <table class="table">
         <!-- MENU -->
-        <tr><h3>MENU</h3></tr>
+        <tr>
+            <h3>MENU</h3>
+            @if (Context.Session.GetString("restorerConnected") == "true")
+            {
+                <a asp-controller="Menu" asp-action="AddMenu" asp-route-restaurantId="@Model.Resto.Id">Ajouter un menu</a>
+            }
+        </tr>
         <tr>
             <th>Nom
             <th>Description</th>
@@ -30,7 +38,13 @@
     </table>
     <table class="table">
         <!-- PLAT -->
-        <tr><h3>PLATS</h3></tr>
+        <tr>
+            <h3>PLATS</h3>
+            @if (Context.Session.GetString("restorerConnected") == "true")
+            {
+                <a asp-controller="Menu" asp-action="AddDish" asp-route-restaurantId="@Model.Resto.Id">Ajouter un plat</a>
+            }
+        </tr>
         <tr>
             <th>Nom</th>
             <th>Description</th>
@@ -45,4 +59,7 @@
     </table>
 </form>
 <a asp-controller="Home" asp-action="Index">Retour</a>
-<a asp-controller="Order" asp-action="ConsultCart">Consulter panier</a>
+@if (Context.Session.GetString("customerConnected") == "true")
+{
+    <a asp-controller="Order" asp-action="ConsultCart">Consulter panier</a>
+}

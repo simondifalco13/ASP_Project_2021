@@ -50,7 +50,7 @@ namespace ASP_PROJECT.Controllers
             Restorer restorer = new Restorer();
             restorer.Firstname = HttpContext.Session.GetString("Firstname");
             restorer.Lastname = HttpContext.Session.GetString("Lastname");
-            restorer.Id = (int)HttpContext.Session.GetInt32("CustomerId");
+            restorer.Id = (int)HttpContext.Session.GetInt32("restorerId");
             restorer.Email = HttpContext.Session.GetString("Email");
             restorer.City = HttpContext.Session.GetString("City");
             restorer.Address = HttpContext.Session.GetString("Address");
@@ -251,6 +251,9 @@ namespace ASP_PROJECT.Controllers
                                 HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
                                 HttpContext.Session.SetString("DoB", ((Customer)RecuperatedAccount).DoB.ToString("d"));
                                 HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
+                                HttpContext.Session.SetString("OrderExist", "true");
+                                HttpContext.Session.SetString("DishesOrder", "");
+                                HttpContext.Session.SetString("MenusOrder", "");
                                 return RedirectToAction("ConsultRestaurant", "Restaurant");
                             }
                             else

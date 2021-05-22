@@ -8,8 +8,7 @@ namespace ASP_PROJECT.ViewModels
 {
     public class SignRestaurantViewModel
     {
-        //public int restorerId { get; set; }
-        public Restorer Restorer { get; set; }
+        public int restorerId { get; set; }
         public Restaurant Resto { get; set; }
         //Days:  Opening Time and Close time
         public string MondayOt { get; set; }
@@ -33,7 +32,6 @@ namespace ASP_PROJECT.ViewModels
         public SignRestaurantViewModel()
         {
             Resto = new Restaurant();
-            Restorer = new Restorer();
             //cities= new List<string>();
         }   
     }
