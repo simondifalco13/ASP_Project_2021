@@ -189,6 +189,7 @@ namespace ASP_PROJECT.Controllers
         }
         //POST
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult RestorerRegister(Restorer r)
         {
             if (ModelState.IsValid)
@@ -216,14 +217,11 @@ namespace ASP_PROJECT.Controllers
         }
 
         
-        /// À la création du comtpe, considérons la personne connectée -> Va pouvoir consulter les menus ( à modifier plus tard on verra )
-        /// Si pas bon, retourner au formulaire d'inscription.
-        /// Préciser HttpPost !!
+       
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CustomerRegister(Customer accountC) {
-            // Il est possible de bypasser la vérification dynamique donc double vérification.
             if (ModelState.IsValid) {
-                // -> Model -> DAL -> DB
                 bool success = Customer.Register(_accountDAL, accountC);
                 accountC = Customer.GetCustomerByMail(_accountDAL, accountC.Email);
 
@@ -231,7 +229,6 @@ namespace ASP_PROJECT.Controllers
                     TempData["Message"] = "State0";
                     SetCustomerSession((Account)accountC);
                     return RedirectToAction("ConsultRestaurant", "Restaurant");
-                    //return View("CustomerInscription", accountC);
                 } else {
                     TempData["Message"] = "State1";
                 }
@@ -241,10 +238,9 @@ namespace ASP_PROJECT.Controllers
 
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel vm)
         {
-            //verifier si le mail est un custommer ou restorer et ensuite créer un objet correspondant
-            //Account account;
             Account RecuperatedAccount;
             Account TryRestorer = new Restorer();
             Account TryCustomer = new Customer();
@@ -272,7 +268,6 @@ namespace ASP_PROJECT.Controllers
                         }
                         else
                         {
-                            //message d'erreur si déja connexté
                             return View("Login", vm);
                         }
                     }
@@ -300,7 +295,6 @@ namespace ASP_PROJECT.Controllers
                             }
                             else
                             {
-                                //message d'erreur si déja connexté
                                 return View("Login", vm);
                             }
                         }
@@ -327,6 +321,7 @@ namespace ASP_PROJECT.Controllers
        
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ModifyRestorerInformations(Restorer RestorerToModify)
         {
             string mail = HttpContext.Session.GetString("Email");
@@ -359,6 +354,7 @@ namespace ASP_PROJECT.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ModifyCustomerInformations(Customer CustomerToModify)
         {
             string mail = HttpContext.Session.GetString("Email");
@@ -392,6 +388,7 @@ namespace ASP_PROJECT.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Inscription(string type)
         {
             if (type == "restorer")

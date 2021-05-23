@@ -16,21 +16,21 @@ namespace ASP_PROJECT.DAL.CDAL
         {
             this.connectionString = connectionString;
         }
-        public bool AddDish(Dish d,Restaurant r)
+        public bool AddDish(Dish dish,Restaurant restaurant)
         {
             string request = "INSERT INTO dbo.Dishes(Name,Price,TypeService,Description,TypeDish,RestaurantId) VALUES (@Name,@Price,@TypeService,@Description,@TypeDish,@RestaurantId)";
             bool success = false;
             using (SqlConnection connection=new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(request,connection);
-                cmd.Parameters.AddWithValue("Name", d.Name);
-                cmd.Parameters.AddWithValue("Price", d.Price);
-                cmd.Parameters.AddWithValue("TypeService", d.Service);
-                cmd.Parameters.AddWithValue("Description", d.Description);
-                string typeDish = d.Type.ToString();
-                cmd.Parameters.AddWithValue("TypeDish", d.Type);
+                cmd.Parameters.AddWithValue("Name", dish.Name);
+                cmd.Parameters.AddWithValue("Price", dish.Price);
+                cmd.Parameters.AddWithValue("TypeService", dish.Service);
+                cmd.Parameters.AddWithValue("Description", dish.Description);
+                string typeDish = dish.Type.ToString();
+                cmd.Parameters.AddWithValue("TypeDish", dish.Type);
                 //get the restaurant id by method ou adding attribute to restaurantclass (option 2 done)
-                cmd.Parameters.AddWithValue("RestaurantId", r.Id);
+                cmd.Parameters.AddWithValue("RestaurantId", restaurant.Id);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 5;
@@ -38,6 +38,70 @@ namespace ASP_PROJECT.DAL.CDAL
             return success;
         }
 
+        public bool AddMenu(Menu menu, Restaurant restaurant)
+        {
+            string request = "INSERT INTO dbo.Menus(Name,Price,TypeService,Description,RestaurantId) VALUES (@Name,@Price,@TypeService,@Description,@RestaurantId)";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("Name", menu.Name);
+                cmd.Parameters.AddWithValue("Price", menu.Price);
+                cmd.Parameters.AddWithValue("TypeService", menu.Service);
+                cmd.Parameters.AddWithValue("Description", menu.Description);
+                cmd.Parameters.AddWithValue("RestaurantId", restaurant.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+            //recuperer id du menu créer
+            menu.Id = GetMenuIdByName(menu);
+            //on doit ajouter dans menu details aussi les dish composant le menu
+            success = AddingMenuDetails(menu);
+
+            return success;
+        }
+
+
+        public int GetMenuIdByName(Menu menu)
+        {
+            int id = 0;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "SELECT MenuId FROM dbo.Menus WHERE Name=@Name";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("Name", menu.Name);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32("MenuId");
+                    }
+                }
+            }
+            return id;
+        }
+
+        public bool AddingMenuDetails(Menu menu)
+        {
+            bool success = false;
+            string request = "INSERT INTO dbo.MenuDetails(DishId,MenuId) VALUES (@DishId,@MenuId)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                foreach (var dish in menu.DishList)
+                {
+                    SqlCommand cmd = new SqlCommand(request, connection);
+                    cmd.Parameters.AddWithValue("DishId", dish.Id);
+                    cmd.Parameters.AddWithValue("MenuId", menu.Id);
+                    connection.Open();
+                    int res = cmd.ExecuteNonQuery();
+                    success = res > 0;
+                    connection.Close();
+                }
+            }
+            return success;
+        }
         public List<Dish> GetDishes(Restaurant r)
         {
             List<Dish> listDishes = new List<Dish>();
@@ -47,7 +111,7 @@ namespace ASP_PROJECT.DAL.CDAL
             decimal price;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string request = "SELECT Name,Price,TypeService,Description,TypeDish FROM dbo.Dishes WHERE RestaurantId=@RestaurantId";
+                string request = "SELECT DishId,Name,Price,TypeService,Description,TypeDish FROM dbo.Dishes WHERE RestaurantId=@RestaurantId";
                 SqlCommand cmd = new SqlCommand(request, connection);
                 cmd.Parameters.AddWithValue("RestaurantId", r.Id);
                 connection.Open();
@@ -55,6 +119,7 @@ namespace ASP_PROJECT.DAL.CDAL
                 {
                     while (reader.Read())
                     {
+                        temp.Id = reader.GetInt32("DishId");
                         temp.Name=reader.GetString("Name");
                         price=reader.GetDecimal("Price");
                         temp.Price = (double)price;
@@ -70,5 +135,295 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             return listDishes;
         }
+
+        public bool SuppressDish(Dish d)
+        {
+            bool success = false;
+            success = DeleteMenuDetailsByDishId(d.Id);
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "DELETE FROM dbo.Dishes WHERE DishId=@DishId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("DishId", d.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res >0;
+
+            }
+            return success;
+        }
+
+        public bool SuppressMenu(Menu menu)
+        {
+            bool success = false;
+            success = DeleteMenuDetailsByMenuId(menu.Id);
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "DELETE FROM dbo.Menus WHERE MenuId=@MenuId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("MenuId", menu.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+
+            }
+            return success;
+        }
+
+        public bool DeleteMenuDetailsByMenuId(int menuId)
+        {
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "DELETE FROM dbo.MenuDetails WHERE MenuId=@MenuId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("MenuId", menuId);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+
+            }
+            return success;
+        }
+
+        public bool DeleteMenuDetailsByDishId(int dishId)
+        {
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "DELETE FROM dbo.MenuDetails WHERE DishId=@DishId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("DishId", dishId);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+
+            }
+            return success;
+        }
+
+        public List<Menu> GetMenus(Restaurant resto) {
+            List<Menu> listMenus = new List<Menu>();
+            Menu menu = new Menu();
+            TypeService serviceType;
+            decimal price;
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                string request = "SELECT MenuId,Name,Price,Description,TypeService FROM dbo.Menus WHERE RestaurantId=@RestaurantId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("RestaurantId", resto.Id);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        menu.Id = reader.GetInt32("MenuId");
+                        menu.Name = reader.GetString("Name");
+                        price = reader.GetDecimal("Price");
+                        menu.Price = (double)price;
+                        Enum.TryParse(reader.GetString("TypeService"), out serviceType);
+                        menu.Service = serviceType;
+                        menu.Description = reader.GetString("Description");
+                        listMenus.Add(menu);
+                        menu = new Menu();
+                    }
+                }
+            }
+            foreach (var item in listMenus)
+            {
+                item.DishList = GetMenuDetails(item.Id);
+            }
+            return listMenus;
+        }
+
+        public Menu GetMenuById(int MenuId)
+        {
+            Menu menu = new Menu();
+            TypeService serviceType;
+            decimal price;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "SELECT MenuId,Name,Price,Description,TypeService FROM dbo.Menus WHERE MenuId=@MenuId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("MenuId", MenuId);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        menu.Id = reader.GetInt32("MenuId");
+                        menu.Name = reader.GetString("Name");
+                        price = reader.GetDecimal("Price");
+                        menu.Price = (double)price;
+                        Enum.TryParse(reader.GetString("TypeService"), out serviceType);
+                        menu.Service = serviceType;
+                        menu.Description = reader.GetString("Description");
+                    }
+                }
+            }
+            
+            menu.DishList = GetMenuDetails(menu.Id);
+            return menu;
+        }
+        public List<Dish> GetMenuDetails(int menuId)
+        {
+            List<Dish> MenuDetails = new List<Dish>();
+            Dish Detail = new Dish();
+            int id;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "SELECT DishId FROM dbo.MenuDetails WHERE MenuId=@MenuId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("MenuId", menuId);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32("DishId");
+                        Detail = GetDishById(id);
+                        MenuDetails.Add(Detail);
+                        Detail = new Dish();
+                    }
+                }
+            }
+            return MenuDetails;
+        }
+        public Dish GetDishById(int id)
+        {
+            Dish SearchedDish = new Dish();
+            TypeService serviceType;
+            decimal price;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "SELECT * FROM dbo.Dishes WHERE DishId=@DishId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("DishId", id);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SearchedDish.Id = reader.GetInt32("DishId");
+                        SearchedDish.Name = reader.GetString("Name");
+                        price = reader.GetDecimal("Price");
+                        SearchedDish.Price = (double)price;
+                        Enum.TryParse(reader.GetString("TypeService"), out serviceType);
+                        SearchedDish.Service = serviceType;
+                        SearchedDish.Description = reader.GetString("Description");
+                    }
+                }
+            }
+            return SearchedDish;
+        }
+
+        public bool UpdatingDish(Dish dish)
+        {
+            string request = "UPDATE dbo.Dishes SET Name=@Name ,Price=@Price ,TypeService=@TypeService ,Description=@Description ,TypeDish=@TypeDish WHERE DishId=@DishId";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("Name", dish.Name);
+                cmd.Parameters.AddWithValue("Price", dish.Price);
+                cmd.Parameters.AddWithValue("TypeService", dish.Service);
+                cmd.Parameters.AddWithValue("Description", dish.Description);
+                cmd.Parameters.AddWithValue("TypeDish", dish.Type);
+                cmd.Parameters.AddWithValue("DishId", dish.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+            return success;
+        }
+
+        public bool UpdateMenu(Menu menu)
+        {
+            //metttre a jour la table principale 
+            string request = "UPDATE dbo.Menus SET Name=@Name ,Price=@Price ,TypeService=@TypeService ,Description=@Description  WHERE MenuId=@MenuId";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("Name", menu.Name);
+                cmd.Parameters.AddWithValue("Price", menu.Price);
+                cmd.Parameters.AddWithValue("TypeService", menu.Service);
+                cmd.Parameters.AddWithValue("Description", menu.Description);
+                cmd.Parameters.AddWithValue("MenuId", menu.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+
+            //menu.Id = GetMenuIdByName(menu);
+            List<Dish> MenuDishesBeforeModification = GetMenuDetails(menu.Id);
+            List<int> MenuDishesIdBeforeModification = new List<int>();
+            //récuperer les id des menusDetails de la db
+            foreach (var itemDB in MenuDishesBeforeModification)
+            {
+                MenuDishesIdBeforeModification.Add(itemDB.Id);
+            }
+
+            foreach (var item in menu.DishList)
+            {
+                //Quand on a rajouté un plat au menu
+                if (!MenuDishesIdBeforeModification.Contains(item.Id))
+                {
+                    success = AddingOneMenuDetail(menu, item);
+                }
+                
+
+            }
+            //récuperer les id des menusDetails de menu
+            List<int> MenuDishesId = new List<int>();
+            foreach (var dish in menu.DishList)
+            {
+                MenuDishesId.Add(dish.Id);
+            }
+
+            foreach (var item in MenuDishesBeforeModification)
+            {
+                // si on a supprimer un dish dans le menu 
+                if (!MenuDishesId.Contains(item.Id))
+                {
+                    success = DeleteMenuDetail(menu, item);
+                }
+            }
+            return success;
+        }
+
+        public bool DeleteMenuDetail(Menu menu, Dish dish)
+        {
+            string request = "DELETE FROM dbo.MenuDetails WHERE MenuId=@MenuId AND DishId=@DishId";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("MenuId", menu.Id);
+                cmd.Parameters.AddWithValue("DishId", dish.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+            return success;
+        }
+
+        public bool AddingOneMenuDetail(Menu menu,Dish dish)
+        {
+            bool success = false;
+            string request = "INSERT INTO dbo.MenuDetails(DishId,MenuId) VALUES (@DishId,@MenuId)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("DishId", dish.Id);
+                cmd.Parameters.AddWithValue("MenuId", menu.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+                connection.Close();
+                
+            }
+            return success;
+        }
+
+
     }
 }

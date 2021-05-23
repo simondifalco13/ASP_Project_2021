@@ -101,16 +101,7 @@ namespace ASP_PROJECT.Models.POCO
             Type = t;
         }
 
-        public void OrderByRestaurant()
-        {
-
-        }
        
-        public void DisplayOpinion()
-        {
-
-        }
-
         public static bool SignRestaurant(Restaurant resto, Restorer restorer, IRestaurantDAL restaurantDAL)
         {
             try

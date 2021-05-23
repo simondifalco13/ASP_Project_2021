@@ -29,21 +29,16 @@ namespace ASP_PROJECT.Models.POCO
         [Display(Name = "Prix")]
         public double Price { get; set; }
 
+        public Restaurant Restaurant { get; set; }
+
         public Meal()
         {
 
         }
-        virtual public void Add()
-        {
 
-        }
-        virtual public void Remove()
+        public Meal(Restaurant resto)
         {
-
-        }
-        virtual public void Modify()
-        {
-
+            Restaurant = resto;
         }
 
         public string ConvertTypeService()

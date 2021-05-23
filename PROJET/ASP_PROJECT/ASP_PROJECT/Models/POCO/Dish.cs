@@ -33,18 +33,7 @@ namespace ASP_PROJECT.Models.POCO
         {
             Type = t;
         }
-        public override void Add()
-        {
-
-        }
-        public override void Remove()
-        {
-
-        }
-        public override void Modify()
-        {
-
-        }
+       
 
         public static bool AddDish(Dish d,Restaurant r,IMenuDAL menuDAL)
         {

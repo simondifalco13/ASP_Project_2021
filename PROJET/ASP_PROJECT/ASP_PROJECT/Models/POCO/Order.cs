@@ -57,24 +57,6 @@ namespace ASP_PROJECT.Models.POCO
             Restaurant = resto;
             Customer = customer;
         }
-        public void DisplayOrder()
-        {
-
-        }
-        public void ValidateOrder()
-        {
-
-        }
-        public void CancelOrder()
-        {
-
-        }
-
-
-        public void DisplayCart()
-        {
-
-        }
 
         public static List<Order> GetRestaurantOrders(Restaurant resto, IOrderDAL orderDAL, IMenuDAL menuDAL, IAccountDAL accountDAL)
         {
@@ -167,5 +149,10 @@ namespace ASP_PROJECT.Models.POCO
             order.TotalPrice = totalDishes + totalMenus;
         }
 
+        public bool ValidateOrder(IOrderDAL orderDAL, Order order)
+        {
+            bool success = orderDAL.AddOrder(order);
+            return success;
+        }
     }   
 }

@@ -82,22 +82,7 @@ namespace ASP_PROJECT.Models.POCO
                 throw new Exception(message);
             }
         }
-        public void CreateAccount()
-        {
-
-        }
-        public void Authentication()
-        {
-
-        }
-        public void ConsultInformation()
-        {
-
-        }
-        public void ModifyInformation()
-        {
-
-        }
+       
 
         public bool VerifyExistingRestorer(IAccountDAL accountDAL,Account account)
         {

@@ -21,14 +21,7 @@ namespace ASP_PROJECT.Models.POCO
             DishList = dishes;
         }
         
-        public override void Remove()
-        {
-
-        }
-        public override void Modify()
-        {
-
-        }
+       
         public static List<Menu> GetMenus(IMenuDAL menuDAL,Restaurant r) {
 
             return menuDAL.GetMenus(r);

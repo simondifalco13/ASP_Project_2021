@@ -1,0 +1,61 @@
+﻿@model ASP_PROJECT.Models.POCO.Customer
+
+<div>
+    <table class="table">
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Genre</th>
+            <th>Date de naissance</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th>Pays</th>
+            <th>Code Postal</th>
+            <th>Téléphone</th>
+        </tr>
+        <tr>
+            <td>
+                <p>@Model.Firstname</p>
+            </td>
+            <td>
+                <p>@Model.Lastname</p>
+            </td>
+            <td>
+                <p>@Model.Email</p>
+            </td>
+            <td>
+                <p>@Model.Gender</p>
+            </td>
+            <td>
+                <p>@Model.DoB.ToString("d")</p>
+            </td>
+            <td>
+                <p>@Model.Address</p>
+            </td>
+            <td>
+                <p>@Model.City</p>
+            </td>
+            <td>
+                <p>@Model.Country</p>
+            </td>
+            <td>
+                <p>@Model.Pc</p>
+            </td>
+            <td>
+                <p>@Model.Tel</p>
+            </td>
+            <td><a asp-controller="Account" asp-action="ModifyCustomerInformations" asp-route-CustomerEmail="@Model.Email">Modifier</a></td>
+        </tr>
+    </table>
+    <button><a asp-controller="Restaurant" asp-action="ConsultRestaurant">Retour</a></button>
+    @if (!String.IsNullOrEmpty((string)TempData["AccountModifications"]))
+    {
+        if ((string)TempData["AccountModifications"] == "success")
+        {
+            <div class="m-2 alert-success">
+                <p>Modification effectuée avec succès</p>
+            </div>
+        }
+    }
+</div>

@@ -425,3 +425,4 @@ C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Rest
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantDishesPartial.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Restaurant\_RestaurantMenusPartial.cshtml.g.cs
 C:\Users\simon\Desktop\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Shared\_navbar.cshtml.g.cs
+C:\Users\simon\Desktop\ASP_Project_2021\PROJET\ASP_PROJECT\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Menu\_AddingDishesPartial.cshtml.g.cs

@@ -1,0 +1,28 @@
+﻿@model ASP_PROJECT.ViewModels.CustomerOrderViewModel
+
+<div>
+    <form method="post" asp-controller="Order">
+        <table class="table">
+            <tr>
+                <th>Informations Restaurant</th>
+                <th>Numéro de commande</th>
+                <th>Adresse de livraison</th>
+                <th>Date de commande</th>
+                <th>Prix</th>
+                <th>Note</th>
+                <th>Détail de la commande</th>
+                <th>Status de la commande</th>
+            </tr>
+            @foreach (var item in @Model.Customer.OrdersList)
+            {
+                <tr>
+                    <td>
+                        Nom : @item.Restaurant.Name<br />
+                        Contact : @item.Restaurant.Tel
+                    </td>
+                    <partial name="_OrdersCustomerInformationPartial" for="@item" />
+                </tr>
+            }
+        </table>
+    </form>
+</div>

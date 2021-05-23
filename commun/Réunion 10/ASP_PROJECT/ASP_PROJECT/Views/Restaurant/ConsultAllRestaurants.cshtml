@@ -1,0 +1,27 @@
+﻿@model ASP_PROJECT.ViewModels.ListRestaurantsViewModel
+
+<div>
+    <h1>Tous les restaurants</h1>
+    <form method="post" asp-controller="Restaurant" asp-action="ConsultRestaurant">
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Type de cuisine</th>
+                <th>Description</th>
+            </tr>
+            @foreach (var resto in Model.ListRestoDb)
+            {
+                <partial name="_RestaurantSummaryPartial.cshtml" for="@resto" />
+            }
+        </table>
+    </form>
+    @if ((string)TempData["Message"] == "State0")
+    {
+    <span class="alert-success"> Le compte a bien été créé et vous êtes maintenant connecté</span>
+    }
+    @if ((string)TempData["Message"] == "State10")
+    {
+        <span class="m-2 alert-success">Vous êtes bien connecté</span>
+    }
+    <a asp-controller="Home" asp-action="Index">Retour</a>
+</div>

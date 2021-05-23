@@ -11,6 +11,7 @@ namespace ASP_PROJECT.ViewModels
     public class DishViewModel
     {
         public Dish Dish { get; set; }
+        public int RestaurantId { get; set; }
         public DishViewModel()
         {
             Dish = new Dish();

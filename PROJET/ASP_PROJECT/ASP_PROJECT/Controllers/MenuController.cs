@@ -22,7 +22,6 @@ namespace ASP_PROJECT.Controllers
             _menuDAL = menuDAL;
         }
 
-        //public static List<Dish> ListDish = new List<Dish>();
         public IActionResult Index()
         {
             HttpContext.Session.SetString("DishesId", "");
@@ -143,7 +142,6 @@ namespace ASP_PROJECT.Controllers
             vm.Menu = SearchedMenu;
             //on stocke l'id du menu en session car il disparait 
             HttpContext.Session.SetInt32("MenuId",vm.Menu.Id );
-            //ok on a recuperer le menu, maintenant stockons dans la variable de session nos différents dish afin de gérer l'ajout ou suppression de dish
             HttpContext.Session.SetString("DishesId","");
             string sessionsDishid = "";
             foreach (var dish in vm.Menu.DishList)
@@ -170,6 +168,7 @@ namespace ASP_PROJECT.Controllers
         //POST METHODS
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddDish(DishViewModel vm)
         {
             vm.RestaurantId=(int)HttpContext.Session.GetInt32("restaurantId");
@@ -186,6 +185,7 @@ namespace ASP_PROJECT.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddMenu(MenuViewModel vm)
         {
             if (ModelState.IsValid)
@@ -219,6 +219,7 @@ namespace ASP_PROJECT.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ModifyMenu(MenuViewModel vm)
         {
             if (ModelState.IsValid)
@@ -256,6 +257,7 @@ namespace ASP_PROJECT.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddDishToMenu(int DishId, Menu menu, string operation)
         {
             if (HttpContext.Session.GetString("DishesId") != null && HttpContext.Session.GetString("DishesId") != "")
@@ -297,6 +299,7 @@ namespace ASP_PROJECT.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteDishFromMenu(int DishId,Menu menu, string operation)
         {
             if (HttpContext.Session.GetString("DishesId") != null && HttpContext.Session.GetString("DishesId") != "")
@@ -376,6 +379,7 @@ namespace ASP_PROJECT.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdatingDish(DishViewModel vm)
         {
             int restoId=(int)HttpContext.Session.GetInt32("restaurantId");

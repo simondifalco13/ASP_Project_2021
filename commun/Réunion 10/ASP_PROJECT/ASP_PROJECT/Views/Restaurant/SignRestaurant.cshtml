@@ -1,0 +1,198 @@
+﻿@model ASP_PROJECT.ViewModels.SignRestaurantViewModel
+
+
+<div>
+    <h1>Ajout d'un restaurant</h1>
+    <form method="post" asp-controller="Restaurant">
+        <table>
+            <tr>
+                <td><label asp-for="Resto.Name"></label></td>
+                <td>
+                    <input asp-for="Resto.Name" />
+                </td>
+                <td><span asp-validation-for="Resto.Name" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Resto.Description"></label></td>
+                <td>
+                    <textarea asp-for="Resto.Description"></textarea>
+
+                </td>
+                <td><span asp-validation-for="Resto.Description" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Resto.Type"></label></td>
+                <td>
+                    <select asp-for="Resto.Type">
+                        <option value="0">Asiatique</option>
+                        <option value="1">Mexicain</option>
+                        <option value="2">Snack</option>
+                        <option value="3">Africain</option>
+                        <option value="4">Thaï</option>
+                        <option value="5">Grec</option>
+                        <option value="6">Sushi</option>
+                        <option value="7">Espagnol</option>
+                        <option value="8">Pizza</option>
+                        <option value="9">Italien</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label asp-for="Resto.Address"></label></td>
+                <td>
+                    <input asp-for="Resto.Address" />
+                </td>
+                <td><span asp-validation-for="Resto.Address" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Resto.City"></label></td>
+                <td>
+                    <input asp-for="Resto.City" />
+                </td>
+                <td><span asp-validation-for="Resto.City" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Resto.Pc"></label></td>
+                <td>
+                    <input asp-for="Resto.Pc" />
+                </td>
+                <td><span asp-validation-for="Resto.Pc" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Resto.Country"></label></td>
+                <td>
+                    <input asp-for="Resto.Country" />
+                </td>
+                <td><span asp-validation-for="Resto.Country" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Resto.Tel"></label></td>
+                <td>
+                    <input asp-for="Resto.Tel" />
+                </td>
+                <td><span asp-validation-for="Resto.Tel" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td><label asp-for="Resto.NumTVA"></label></td>
+                <td>
+                    <input asp-for="Resto.NumTVA" />
+                </td>
+                <td><span asp-validation-for="Resto.NumTVA" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Horaires d'ouverture</h3>
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Lundi</label></td>
+                <td>
+                    <input placeholder="Heure Ouverture" asp-for="@Model.MondayOt" />
+                    <input placeholder="Heure Fermeture" asp-for="@Model.MondayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Mardi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.TuesdayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.TuesdayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Mercredi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.WednesdayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.WednesdayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Jeudi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.ThursdayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.ThursdayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Vendredi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.FridayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.FridayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Samedi</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.SaturdayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.SaturdayCt" />
+                </td>
+            </tr>
+            <tr>
+
+                <td><label>Dimanche</label></td>
+                <td>
+                    <input type="text" placeholder="Heure Ouverture" asp-for="@Model.SundayOt" />
+                    <input type="text" placeholder="Heure Fermeture" asp-for="@Model.SundayCt" />
+                </td>
+            </tr>
+            <!--Retirer car manque de temps -->
+            @*<tr>
+                    <td><label>Ville(s) de livraison</label></td>
+                    <td>
+                        <input asp-for="@Model.DeliveryCity" />
+                    </td>
+                    <td>
+                        <button>
+                            <input type="submit" value="Ajouter ville" asp-action="AddDeliveryCity" />
+                        </button>
+                    </td>
+                    <td><span asp-validation-for="@Model.DeliveryCity" class="text-danger"></span></td>
+
+                </tr>
+                @if (@Model.cities.Count > 0)
+                {
+                    <tr>
+                        <td>
+                            <h3>Villes ajoutées</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <ul>
+                                @foreach (var item in @Model.cities)
+                                {
+                                    <li>@item</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+                <tr>*@
+            <tr>
+                <td><a asp-action="Index">Annuler</a></td>
+                <td><input type="submit" value="Ajouter" asp-action="SignRestaurant" /></td>
+            </tr>
+        </table>
+    </form>
+    @if (!String.IsNullOrEmpty((string)TempData["RestaurantSignError"]))
+    {
+        if ((string)TempData["RestaurantSignError"] == "error")
+        {
+            <div class="alert-danger m-1">
+                L'ajout du restaurant a échoué.
+            </div>
+        }
+        if ((string)TempData["RestaurantSignError"] == "existing")
+        {
+            <div class="alert-danger m-1">
+               Un restaurant avec ce nom existe déjà, veuillez chosir un autre nom
+            </div>
+        }
+    }
+</div>

@@ -54,11 +54,6 @@ namespace ASP_PROJECT.Models.POCO
             return success;
         }
 
-        //a déplacer éventuellement
-        public bool Order(IOrderDAL orderDAL, Order order)
-        {
-            bool success = orderDAL.AddOrder(order);
-            return success;
-        }
+        
     }
 }

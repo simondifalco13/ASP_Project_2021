@@ -1,0 +1,67 @@
+﻿@model ASP_PROJECT.ViewModels.ListRestaurantsViewModel
+@using Microsoft.AspNetCore.Http
+
+@if ((string)TempData["ErreurAjout"] !="") 
+{
+    <div class="alert-danger">
+        <p>@TempData["ErreurAjout"]</p>
+    </div>
+}
+<form method="POST" asp-controller="Restaurant" asp-action="ConsultAll">
+    <table class="table">
+        <tr><h3>Informations restaurant</h3></tr>
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Adresse</th>
+            <th>N° TVA</th>
+            <th>Jours</th>
+            <th>Ouverture</th>
+            <th>Fermeture</th>
+            <partial name="_RestaurantAllInformationPartial.cshtml" for="@Model.Resto" />
+        </tr>
+    </table>
+    <table class="table">
+        <!-- MENU -->
+        <tr>
+            <h3>MENU</h3>
+            @if (Context.Session.GetString("restorerConnected") == "true")
+            {
+                <a asp-controller="Menu" asp-action="AddMenu" asp-route-restaurantId="@Model.Resto.Id">Ajouter un menu</a>
+            }
+        </tr>
+        <tr>
+            <th>Nom
+            <th>Description</th>
+            <th>Type de service</th>
+            <th>Prix</th>
+        </tr>
+        @foreach (var item in Model.SelectedListMenus)
+        {
+            <partial name="_RestaurantMenusPartial.cshtml" for="@item" />
+        }
+    </table>
+    <table class="table">
+        <!-- PLAT -->
+        <tr>
+            <h3>PLATS</h3>
+            @if (Context.Session.GetString("restorerConnected") == "true")
+            {
+                <a asp-controller="Menu" asp-action="AddDish" asp-route-restaurantId="@Model.Resto.Id">Ajouter un plat</a>
+            }
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Type de service</th>
+            <th>Description</th>
+            <th>Prix</th>
+        </tr>
+        @foreach (var item in Model.SelectedListDish)
+        {
+            <partial name="_RestaurantDishesPartial.cshtml" for="@item" />
+        }
+    </table>
+</form>
+<a asp-controller="Home" asp-action="Index">Retour</a>

@@ -40,18 +40,6 @@ namespace ASP_PROJECT.Models.POCO
         {
             Restaurant = resto;
         }
-        virtual public void Add()
-        {
-
-        }
-        virtual public void Remove()
-        {
-
-        }
-        virtual public void Modify()
-        {
-
-        }
 
         public string ConvertTypeService()
         {

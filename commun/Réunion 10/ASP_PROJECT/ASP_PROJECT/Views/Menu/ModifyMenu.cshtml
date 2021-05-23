@@ -1,0 +1,88 @@
+﻿@model ASP_PROJECT.ViewModels.MenuViewModel
+<h1>Modifier un menu</h1>
+<div class="text-center">
+
+    <div class="card">
+        <form asp-controller="Menu" method="post">
+            <table>
+                <tr>
+                    <td><label asp-for="Menu.Name"></label></td>
+                    <td>
+                        <input asp-for="Menu.Name" />
+                    </td>
+                    <td><span asp-validation-for="Menu.Name" class="text-danger"></span></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Menu.Description"></label></td>
+                    <td>
+                        <textarea asp-for="Menu.Description"></textarea>
+
+                    </td>
+                    <td><span asp-validation-for="Menu.Description" class="text-danger"></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Menu.Price"></label>
+                    </td>
+                    <td>
+                        <input asp-for="Menu.Price" class="float-left" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><label asp-for="Menu.Service"></label></td>
+                    <td>
+                        <select asp-for="Menu.Service" asp-items="Model.TypeService"></select>
+                    </td>
+                </tr>
+                @if (Model.Menu.DishList.Count > 0)
+                {
+                    <tr>
+                        <td>
+                            <h2>Liste des plats : </h2>
+                            <ul>
+                                @foreach (var item in Model.Menu.DishList)
+                                {
+                                    <li>@item.Name <input type="submit" asp-action="DeleteDishFromMenu" asp-route-DishId="@item.Id" asp-route-menu="@Model.Menu" asp-route-operation="modifying" value="X" /></li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <table class="table">
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Service</th>
+                    <th>Price</th>
+                </tr>
+                @foreach (var item in Model.Dlist)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.ConvertDishType()</td>
+                        <td>@item.ConvertTypeService()</td>
+                        <td>@item.Price €</td>
+                        <td>
+                            <input type="submit" asp-action="AddDishToMenu" asp-route-DishId="@item.Id" asp-route-vm="@Model.Menu" asp-route-operation="modifying" value="Ajouter au menu" />
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td><a asp-action="Index">Annuler</a></td>
+                    <td>
+                        <input type="submit" asp-action="ModifyMenu" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+<script>
+
+</script>

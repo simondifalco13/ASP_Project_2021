@@ -8,6 +8,14 @@ namespace ASP_PROJECT.DAL.IDAL
 {
     public interface IRestaurantDAL 
     {
-        Restaurant GetRestaurantById(int id);
+        Restaurant GetRestaurantById(Restaurant restaurant);
+        List<Restaurant> GetRestorerRestaurantsById(Restorer restorer);
+
+        bool SignRestaurant(Restorer restorer, Restaurant restaurant);
+
+        List<Restaurant> GetAllRestaurants();
+
+        public void GetRestaurantSchedules(Restaurant resto);
+
     }
 }

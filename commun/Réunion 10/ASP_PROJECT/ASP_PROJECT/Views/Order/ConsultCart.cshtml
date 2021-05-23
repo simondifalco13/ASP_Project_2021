@@ -1,0 +1,67 @@
+﻿@model ASP_PROJECT.Models.POCO.Order
+@using Microsoft.AspNetCore.Http
+
+@if ((string)TempData["MessageCart"] == "vide")
+{
+    <p>Votre panier est vide.</p>
+}
+@if ((string)TempData["MessageCart"] != "vide")
+{
+    <form asp-controller="Order">
+        @if (Context.Session.GetString("DishesOrder") != "")
+        {
+            <h1>Panier</h1>
+            <h3>Plats commandés</h3>
+            <table class="table">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                </tr>
+
+                @foreach (var item in Model.listDishOrdered)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price €</td>
+                        <td><a asp-controller="Order" asp-action="DeleteDishOrdered" asp-route-dishId="@item.Id">Supprimer</a></td>
+                    </tr>
+                }
+            </table>
+        }
+        @if (Context.Session.GetString("MenusOrder") != "")
+        {
+            <h3>Menus commandés</h3>
+
+            <table class="table">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                </tr>
+                @foreach (var item in Model.listMenuOrdered)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price €</td>
+                        <td><a asp-controller="Order" asp-action="DeleteMenuOrdered" asp-route-menuId="@item.Id">Supprimer</a></td>
+                    </tr>
+                }
+            </table>
+        }
+
+        <h3>Prix total : @Model.TotalPrice € </h3>
+
+        <p><input type="submit" asp-action="ValidateOrder" value="Valider la commande"/></p>
+    </form>
+
+    <p><a asp-controller="Order" asp-action="DeleteCart">Vider le panier</a></p>
+}
+
+@if (Context.Session.GetString("restorerConnected") == "true")
+{
+    <p><a asp-controller="Restaurant" asp-action="ConsultAll" asp-route-restaurantId="@Model.Restaurant.Id">Retour</a></p>
+}
+
+@if (Context.Session.GetString("customerConnected") == "true")
+{
+    <p><a asp-controller="Restaurant" asp-action="ConsultRestaurant">Retour</a></p>
+}

@@ -2,18 +2,31 @@
 
 <div>
     <h1>Les plat de votre restaurant : </h1>
-    <table class="table">
-        <tr>
-            <th>Nom</th>
-            <th>Description</th>
-            <th>Type de plat</th>
-            <th>Type de service</th>
-            <th>Prix</th>
-        </tr>
-        @foreach (var item in Model.ListDishesDb)
+    <form method="post" asp-controller="Menu">
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Type de plat</th>
+                <th>Type de service</th>
+                <th>Prix</th>
+            </tr>
+            @foreach (var item in Model.ListDishesDb)
+            {
+                <partial name="_DishPartialRestorer.cshtml" for="@item" />
+            }
+        </table>
+    </form>
+    <a asp-controller="Menu" asp-action="Index">Retour</a>
+
+    @if (!String.IsNullOrEmpty((string)TempData["Updating"]))
+    {
+        @if ((string)TempData["Updating"] == "success")
         {
-            <partial name="_DishPartial.cshtml" for="@item" />
+
+            <div class="m-2">
+                <span class="alert alert-success border border-success">Modification effectuée avec succès</span>
+            </div>
         }
-    </table>
-    <a  asp-controller="Menu" asp-action="Index">Retour</a>
+    }
 </div>

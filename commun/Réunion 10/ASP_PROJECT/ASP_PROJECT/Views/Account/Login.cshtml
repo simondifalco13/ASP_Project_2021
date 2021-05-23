@@ -1,0 +1,60 @@
+﻿@model ASP_PROJECT.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if ((string)TempData["Message"] == "Uncompleted")
+{
+    <span class="m-2 alert-danger">Remplissez tout les champs</span>
+}
+@if ((string)TempData["Message"] == "State1")
+{
+    <div class="m-2 alert-danger">
+        <p>Aucun compte existant avec cet email</p>
+        <button><a asp-controller="Account" asp-action="RestorerRegister">Créer un compte de restorateur</a></button>
+        <br />
+        <button><a asp-controller="Account" asp-action="CustomerInscription">Créer un compte de client</a></button>
+    </div>
+}
+@if (!String.IsNullOrEmpty((string)TempData["Exception"]))
+{
+    <span class="m-2 alert-danger">@TempData["Exception"]</span>
+}
+
+<form method="post" asp-controller="Account">
+    <table>
+        <tr>
+            <td>
+                <label asp-for="user.Email"></label>
+            </td>
+            <td>
+                <input asp-for="user.Email" />
+            </td>
+            <td>
+                <span asp-validation-for="user.Email" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="user.Password"></label>
+            </td>
+            <td>
+                <input asp-for="user.Password" type="password" />
+            </td>
+            <td>
+                <span asp-validation-for="user.Password" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a asp-action="Index"> Annuler </a>
+            </td>
+            <td>
+                <input type="submit" asp-action="Login" />
+            </td>
+        </tr>
+    </table>
+</form>

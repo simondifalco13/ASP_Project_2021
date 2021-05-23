@@ -1,4 +1,5 @@
 ﻿using ASP_PROJECT.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,6 +21,7 @@ namespace ASP_PROJECT.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetInt32("restaurantId", 0);
             return View();
         }
 
