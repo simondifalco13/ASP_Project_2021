@@ -125,10 +125,68 @@ namespace ASP_PROJECT.Controllers
         }
         public IActionResult ModifyCustomerInformations(string CustomerEmail)
         {
+            
             Customer RestorerToModify = Customer.GetCustomerByMail(_accountDAL, CustomerEmail);
             return View("ModifyCustomerAccount", RestorerToModify);
         }
 
+        public void SetCustomerSession(Account RecuperatedAccount)
+        {
+            HttpContext.Session.SetString("customerConnected", "true");
+            HttpContext.Session.SetString("OrderExist", "true");
+            HttpContext.Session.SetInt32("CustomerId", RecuperatedAccount.Id);
+            HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
+            HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
+            HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
+            HttpContext.Session.SetString("Address", RecuperatedAccount.Address);
+            HttpContext.Session.SetString("City", RecuperatedAccount.City);
+            HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
+            HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
+            HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
+            HttpContext.Session.SetString("DoB", ((Customer)RecuperatedAccount).DoB.ToString("d"));
+            HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
+            HttpContext.Session.SetString("OrderExist", "true");
+            HttpContext.Session.SetString("DishesOrder", "");
+            HttpContext.Session.SetString("MenusOrder", "");
+            HttpContext.Session.SetString("currentRestaurantOrder", "");
+        }
+
+        public void SetRestorerSession(Account RecuperatedAccount)
+        {
+            HttpContext.Session.SetString("restorerConnected", "true");
+            HttpContext.Session.SetString("OrderExist", "true");
+            HttpContext.Session.SetInt32("restorerId", RecuperatedAccount.Id);
+            HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
+            HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
+            HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
+            HttpContext.Session.SetString("City", RecuperatedAccount.City);
+            HttpContext.Session.SetString("Address", RecuperatedAccount.Address);
+            HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
+            HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
+            HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
+            HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
+            HttpContext.Session.SetString("currentRestaurantOrder", "");
+        }
+
+        public IActionResult Deconnexion()
+        {
+            HttpContext.Session.SetString("restorerConnected", "");
+            HttpContext.Session.SetString("customerConnected", "");
+            HttpContext.Session.SetString("Firstname", "");
+            HttpContext.Session.SetString("Lastname", "");
+            HttpContext.Session.SetString("Email", "");
+            HttpContext.Session.SetString("City", "");
+            HttpContext.Session.SetString("Address", "");
+            HttpContext.Session.SetString("PostalCode", "");
+            HttpContext.Session.SetString("PhoneNumber", "");
+            HttpContext.Session.SetString("Country", "");
+            HttpContext.Session.SetString("DoB", "");
+            HttpContext.Session.SetString("Gender", "");
+            HttpContext.Session.SetString("OrderExist", "");
+            HttpContext.Session.SetString("currentRestaurantOrder","");
+            TempData["Message"] = "";
+            return RedirectToAction("ConsultRestaurant", "Restaurant");
+        }
         //POST
         [HttpPost]
         public IActionResult RestorerRegister(Restorer r)
@@ -139,8 +197,11 @@ namespace ASP_PROJECT.Controllers
                 bool success = Restorer.Register(_accountDAL, r);
                 if (success == true)
                 {
-                    TempData["RegisterSuccess"] = "Vous avez créer un compte de restorateur avec succès";
-                    return View("Index");
+                    r = Restorer.GetRestorerByMail(_accountDAL, r.Email);
+                    TempData["RegisterSuccess"] = "success";
+                    SetRestorerSession((Account)r);
+                    return RedirectToAction("ConsultRestorerRestaurants", "Restaurant", new { Id = r.Id });
+
                 }
                 else
                 {
@@ -153,7 +214,8 @@ namespace ASP_PROJECT.Controllers
                 return View("RestorerInscription", r);
             }
         }
-       
+
+        
         /// À la création du comtpe, considérons la personne connectée -> Va pouvoir consulter les menus ( à modifier plus tard on verra )
         /// Si pas bon, retourner au formulaire d'inscription.
         /// Préciser HttpPost !!
@@ -163,9 +225,13 @@ namespace ASP_PROJECT.Controllers
             if (ModelState.IsValid) {
                 // -> Model -> DAL -> DB
                 bool success = Customer.Register(_accountDAL, accountC);
+                accountC = Customer.GetCustomerByMail(_accountDAL, accountC.Email);
+
                 if (success == true) {
                     TempData["Message"] = "State0";
-                    return View("CustomerInscription", accountC);
+                    SetCustomerSession((Account)accountC);
+                    return RedirectToAction("ConsultRestaurant", "Restaurant");
+                    //return View("CustomerInscription", accountC);
                 } else {
                     TempData["Message"] = "State1";
                 }
@@ -201,17 +267,7 @@ namespace ASP_PROJECT.Controllers
                         if (String.IsNullOrEmpty(HttpContext.Session.GetString("restorerConnected")))
                         {
                             TempData["Message"] = "State10";
-                            HttpContext.Session.SetString("restorerConnected", "true");
-                            HttpContext.Session.SetInt32("restorerId", RecuperatedAccount.Id);
-                            HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
-                            HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
-                            HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
-                            HttpContext.Session.SetString("City", RecuperatedAccount.City);
-                            HttpContext.Session.SetString("Address", RecuperatedAccount.Address);
-                            HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
-                            HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
-                            HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
-                            HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
+                            SetRestorerSession(RecuperatedAccount);
                             return RedirectToAction("ConsultRestorerRestaurants", "Restaurant",new { Id = RecuperatedAccount.Id });
                         }
                         else
@@ -239,21 +295,7 @@ namespace ASP_PROJECT.Controllers
                             if (String.IsNullOrEmpty(HttpContext.Session.GetString("customerConnected")))
                             {
                                 TempData["Message"] = "State11";
-                                HttpContext.Session.SetString("customerConnected", "true");
-                                HttpContext.Session.SetInt32("CustomerId", RecuperatedAccount.Id);
-                                HttpContext.Session.SetString("Firstname", RecuperatedAccount.Firstname);
-                                HttpContext.Session.SetString("Lastname", RecuperatedAccount.Lastname);
-                                HttpContext.Session.SetString("Email", RecuperatedAccount.Email);
-                                HttpContext.Session.SetString("Address", RecuperatedAccount.Address);
-                                HttpContext.Session.SetString("City", RecuperatedAccount.City);
-                                HttpContext.Session.SetString("PostalCode", RecuperatedAccount.Pc);
-                                HttpContext.Session.SetString("PhoneNumber", RecuperatedAccount.Tel);
-                                HttpContext.Session.SetString("Country", RecuperatedAccount.Country);
-                                HttpContext.Session.SetString("DoB", ((Customer)RecuperatedAccount).DoB.ToString("d"));
-                                HttpContext.Session.SetString("Gender", RecuperatedAccount.Gender.ToString());
-                                HttpContext.Session.SetString("OrderExist", "true");
-                                HttpContext.Session.SetString("DishesOrder", "");
-                                HttpContext.Session.SetString("MenusOrder", "");
+                                SetCustomerSession(RecuperatedAccount);
                                 return RedirectToAction("ConsultRestaurant", "Restaurant");
                             }
                             else
@@ -282,6 +324,8 @@ namespace ASP_PROJECT.Controllers
             }
         }
 
+       
+
         [HttpPost]
         public IActionResult ModifyRestorerInformations(Restorer RestorerToModify)
         {
@@ -303,7 +347,8 @@ namespace ASP_PROJECT.Controllers
                 {
                     UpdateRestorerSessionInformations(RestorerToModify);
                     TempData["AccountModifications"] = "success";
-                    return View("ConsultRestorerInformations",RestorerToModify);
+                    //return View("ConsultRestorerInformations",RestorerToModify);
+                    return RedirectToAction("ConsultRestorerInformations");
                 }
             }
             else
@@ -334,7 +379,9 @@ namespace ASP_PROJECT.Controllers
                 {
                     UpdateCustomerSessionInformations(CustomerToModify);
                     TempData["AccountModifications"] = "success";
-                    return View("ConsultCustomerInformations", CustomerToModify);
+                    //return View("ConsultCustomerInformations", CustomerToModify);
+                    return RedirectToAction("ConsultCustomerInformations");
+
                 }
             }
             else
@@ -349,7 +396,8 @@ namespace ASP_PROJECT.Controllers
         {
             if (type == "restorer")
             {
-                return View("RestorerInscription");
+                return RedirectToAction("RestorerRegister");
+                //return View("RestorerInscription");
             }
             else
             {

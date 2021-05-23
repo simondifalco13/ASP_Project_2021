@@ -1,6 +1,12 @@
 ﻿@model ASP_PROJECT.ViewModels.ListRestaurantsViewModel
 @using Microsoft.AspNetCore.Http
 
+@if ((string)TempData["ErreurAjout"] !="") 
+{
+    <div class="alert-danger">
+        <p>@TempData["ErreurAjout"]</p>
+    </div>
+}
 <form method="POST" asp-controller="Restaurant" asp-action="ConsultAll">
     <table class="table">
         <tr><h3>Informations restaurant</h3></tr>

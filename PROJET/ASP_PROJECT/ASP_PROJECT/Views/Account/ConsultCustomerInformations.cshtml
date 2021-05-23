@@ -48,7 +48,7 @@
             <td><a asp-controller="Account" asp-action="ModifyCustomerInformations" asp-route-CustomerEmail="@Model.Email">Modifier</a></td>
         </tr>
     </table>
-    <button><a asp-controller="Account" asp-action="Index">Retour</a></button>
+    <button><a asp-controller="Restaurant" asp-action="ConsultRestaurant">Retour</a></button>
     @if (!String.IsNullOrEmpty((string)TempData["AccountModifications"]))
     {
         if ((string)TempData["AccountModifications"] == "success")

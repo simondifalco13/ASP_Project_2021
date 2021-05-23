@@ -44,8 +44,6 @@ namespace ASP_PROJECT.Controllers {
 
         public IActionResult ConsultRestorerRestaurants(Restorer r)
         {
-            //Restorer r = new Restorer();
-            //r.Id = restorerId;
             r = Restorer.GetRestorerById(_accountDAL,r);
             r.restaurantList=r.GetRestorerRestaurants(_restaurantDAL);
             ListRestaurantsViewModel viewModel = new ListRestaurantsViewModel(r.restaurantList);
@@ -61,6 +59,13 @@ namespace ASP_PROJECT.Controllers {
         //    vm.cities.Add(vm.DeliveryCity);
         //    return View("SignRestaurant", vm);
         //}
+
+        public IActionResult RestorerAcceuil()
+        {
+            Restorer restorer = new Restorer();
+            restorer.Id =(int)HttpContext.Session.GetInt32("restorerId");
+            return RedirectToAction("ConsultRestorerRestaurants", restorer);
+        }
 
         [HttpPost]
         public IActionResult SignRestaurant(SignRestaurantViewModel vm)
@@ -128,5 +133,8 @@ namespace ASP_PROJECT.Controllers {
 
             return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", vm);
         }
+
+
+
     }
 }

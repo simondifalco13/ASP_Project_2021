@@ -64,6 +64,7 @@ namespace ASP_PROJECT.Models.POCO
         [Display(Name = "N° TVA")]
         public string NumTVA { get; set; }
 
+        public Restorer Owner { get; set; }
 
         public List<string> DeliveryCities;
         public List<DateTime> OpeningsTimes { get; set; }
@@ -80,9 +81,13 @@ namespace ASP_PROJECT.Models.POCO
             DeliveryCities = new List<string>();
             mealList = new List<Meal>();
             OrdersList = new List<Order>();
+            Owner = new Restorer();
         }
-
-        public Restaurant(string name,string adress,string country,string description,string tel,string pc,string ntva,string type)
+        public Restaurant(Restorer resto):this()
+        {
+            Owner = resto;
+        }
+        public Restaurant(string name,string adress,string country,string description,string tel,string pc,string ntva,string type):this()
         {
             Name = name;
             Address = adress;
@@ -152,8 +157,8 @@ namespace ASP_PROJECT.Models.POCO
             return resto;
         }
 
-        // 
-        public static Restaurant GetRestaurantById(Restaurant resto, IRestaurantDAL restoDAL) {
+        public static Restaurant GetRestaurantById(Restaurant resto, IRestaurantDAL restoDAL)
+        {
             return restoDAL.GetRestaurantById(resto);
         }
     }

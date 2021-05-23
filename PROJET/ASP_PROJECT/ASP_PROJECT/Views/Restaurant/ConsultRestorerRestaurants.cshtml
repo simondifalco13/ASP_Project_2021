@@ -16,6 +16,10 @@
             }
         </table>
     </form>
+    @if ((string)TempData["RegisterSuccess"] == "success")
+    {
+        <span class="alert-success"> Le compte restorateur a bien été créé et vous êtes maintenant connecté</span>
+    }
     <a asp-controller="Restaurant" asp-action="SignRestaurant" asp-route-id="@Model.Restorer.Id">Ajouter un restaurant</a>
     <a asp-controller="Home" asp-action="Index">Retour</a>
 </div>

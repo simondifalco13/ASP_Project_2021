@@ -20,6 +20,11 @@ namespace ASP_PROJECT.Models.POCO
         public Customer() : base(){
             OrdersList=new List<Order>();
         }
+
+        public Customer(List<Order> Orders) : this()
+        {
+            OrdersList = Orders;
+        }
         public void GiveAnOpinion()
         {
 
@@ -46,6 +51,13 @@ namespace ASP_PROJECT.Models.POCO
         public static bool ModifyCustomerInformations(IAccountDAL accountDAL, Customer customerToModify)
         {
             bool success = accountDAL.UpdateCustomerInformations(customerToModify);
+            return success;
+        }
+
+        //a déplacer éventuellement
+        public bool Order(IOrderDAL orderDAL, Order order)
+        {
+            bool success = orderDAL.AddOrder(order);
             return success;
         }
     }

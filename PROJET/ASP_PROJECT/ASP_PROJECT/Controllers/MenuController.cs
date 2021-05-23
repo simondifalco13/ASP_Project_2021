@@ -199,8 +199,6 @@ namespace ASP_PROJECT.Controllers
                     Dish AddedDish = Dish.GetDishById(id, _menuDAL);
                     menu.DishList.Add(AddedDish);
                 }
-                //traitement de addMenu
-                //en dur a modifier via session etc
                 Restaurant r = new Restaurant();
                 r.Id = (int)HttpContext.Session.GetInt32("restaurantId");
                 bool success = Menu.AddMenu(menu, r,_menuDAL);

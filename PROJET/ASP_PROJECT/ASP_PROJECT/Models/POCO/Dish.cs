@@ -17,6 +17,7 @@ namespace ASP_PROJECT.Models.POCO
     }
     public class Dish : Meal
     {
+
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Champs obligatoire")]

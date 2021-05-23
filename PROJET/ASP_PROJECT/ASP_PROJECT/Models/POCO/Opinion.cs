@@ -8,6 +8,8 @@ namespace ASP_PROJECT.Models.POCO
 { 
     public class Opinion
     {
+        public Restaurant Restaurant { get; set; }
+        public Customer Customer { get; set; }
         [Display(Name = "Commentaire")]
         [StringLength(500)]
         public string OpinionDescription { get; set; }
@@ -18,7 +20,14 @@ namespace ASP_PROJECT.Models.POCO
 
         public Opinion()
         {
+            Restaurant = new Restaurant();
+            Customer = new Customer();
+        }
 
+        public Opinion(Restaurant resto,Customer customer):this()
+        {
+            Restaurant = resto;
+            Customer = customer;
         }
         public void ModerateOpinion()
         {

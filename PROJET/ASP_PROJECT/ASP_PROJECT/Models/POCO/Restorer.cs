@@ -14,7 +14,7 @@ namespace ASP_PROJECT.Models.POCO
 
         public Restorer() : base()
         {
-
+            restaurantList = new List<Restaurant>();
         }
 
         public static bool Register(IAccountDAL accountDAL,Restorer r)

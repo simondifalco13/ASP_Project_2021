@@ -46,7 +46,7 @@
             </td>
         </tr>
     </table>
-    <button><a asp-controller="Account" asp-action="Index">Retour</a></button>
+    <button><a asp-controller="Restaurant" asp-action="ConsultRestorerRestaurants" asp-route-Id="@Model.Id">Retour</a></button>
     @if (!String.IsNullOrEmpty((string)TempData["AccountModifications"]))
     {
         if ((string)TempData["AccountModifications"] == "success")
@@ -57,5 +57,5 @@
         }
     }
     <!--Permet de consulter les restaurant du restorateur-->
-    <a asp-controller="Restaurant" asp-action="ConsultRestorerRestaurants" asp-route-restorerId="@Model.Id" >Consulter la liste de vos restaurants</a>
+    <a asp-controller="Restaurant" asp-action="ConsultRestorerRestaurants" asp-route-restorerId="@Model.Id">Consulter la liste de vos restaurants</a>
 </div>

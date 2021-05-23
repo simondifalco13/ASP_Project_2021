@@ -41,7 +41,7 @@ namespace ASP_PROJECT.Models.POCO
         [Display(Name = "Date de commande")]
         public DateTime DateOrder { get; set; }
 
-        
+
         public List<Menu> listMenuOrdered;
         public List<Dish> listDishOrdered;
 
@@ -52,29 +52,31 @@ namespace ASP_PROJECT.Models.POCO
             listMenuOrdered = new List<Menu>();
             listDishOrdered = new List<Dish>();
         }
+        public Order(Restaurant resto,Customer customer) :this()
+        {
+            Restaurant = resto;
+            Customer = customer;
+        }
         public void DisplayOrder()
         {
 
         }
-        public void ValidateOrder(Order order, IOrderDAL orderDAL){
+        public void ValidateOrder()
+        {
 
         }
         public void CancelOrder()
         {
 
         }
-        
-       
+
+
         public void DisplayCart()
         {
 
         }
-        public void CalculatePrice()
-        {
 
-        }
-
-        public static List<Order> GetRestaurantOrders(Restaurant resto, IOrderDAL orderDAL,IMenuDAL menuDAL,IAccountDAL accountDAL)
+        public static List<Order> GetRestaurantOrders(Restaurant resto, IOrderDAL orderDAL, IMenuDAL menuDAL, IAccountDAL accountDAL)
         {
             List<Order> RestaurantOrders = orderDAL.GetRestaurantOrders(resto);
             //get details
@@ -144,8 +146,26 @@ namespace ASP_PROJECT.Models.POCO
 
         public bool UpdateOrderStatus()
         {
-            bool success = false ;
+            bool success = false;
             return success;
         }
-    }
+
+        public void CalculateTotalPrice(Order order)
+        {
+            double totalDishes=0;
+            foreach (var dish in order.listDishOrdered)
+            {
+                totalDishes += dish.Price;
+            }
+
+            double totalMenus = 0;
+            foreach (var menu in order.listMenuOrdered)
+            {
+                totalMenus += menu.Price;
+            }
+
+            order.TotalPrice = totalDishes + totalMenus;
+        }
+
+    }   
 }

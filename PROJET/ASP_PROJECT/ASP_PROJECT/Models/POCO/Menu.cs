@@ -16,6 +16,10 @@ namespace ASP_PROJECT.Models.POCO
             DishList = new List<Dish>();
         }
 
+        public Menu(List<Dish> dishes) : this()
+        {
+            DishList = dishes;
+        }
         
         public override void Remove()
         {
