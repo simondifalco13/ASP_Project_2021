@@ -36,7 +36,7 @@ namespace ASP_PROJECT.Models.POCO
             return success;
         }
 
-        public List<Restaurant> GetRestorerRestaurants(IRestaurantDAL restaurantDAL)
+        public  List<Restaurant> GetRestorerRestaurants(IRestaurantDAL restaurantDAL)
         {
             List<Restaurant> restaurants = restaurantDAL.GetRestorerRestaurantsById(this);
             return restaurants;
@@ -44,7 +44,7 @@ namespace ASP_PROJECT.Models.POCO
 
         public static Restorer GetRestorerById(IAccountDAL accountDAL,Restorer restorer)
         {
-            return restorer = accountDAL.GetRestorerById(restorer);
+            return accountDAL.GetRestorerById(restorer);
         }
     }
 }
