@@ -31,7 +31,7 @@ namespace ASP_PROJECT.Models.POCO
         [Required(ErrorMessage = "Champs obligatoire")]
         [Display(Name = "Adresse de livraison")]
         public string DeliveryAdress { get; set; }
-
+       
         [Display(Name = "Note")]
         public string Note { get; set; }
 
@@ -125,7 +125,6 @@ namespace ASP_PROJECT.Models.POCO
             }
             return CustomerOrders;
         }
-
         public bool UpdateOrderStatus()
         {
             bool success = false;
