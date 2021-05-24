@@ -13,16 +13,16 @@
     </td>
     @if (Context.Session.GetString("customerConnected") == "true")
     {
-        <td><a asp-controller="Order" asp-action="AddMenuToCart" asp-route-menuId="@Model.Id">Ajouter au panier</a></td>
+        <td><a class="btn btn-outline-primary" asp-controller="Order" asp-action="AddMenuToCart" asp-route-menuId="@Model.Id">Ajouter au panier</a></td>
     }
 
     @if (Context.Session.GetString("restorerConnected") == "true")
     {
         <td>
-            <button><a asp-controller="Menu" asp-action="ModifyMenuById" asp-route-MenuId="@Model.Id">Modifer</a></button>
+            <a class="btn btn-outline-primary" asp-controller="Menu" asp-action="ModifyMenuById" asp-route-MenuId="@Model.Id">Modifer</a>
         </td>
         <td>
-            <button><a asp-controller="Menu" asp-action="DeleteMenuById" asp-route-MenuId="@Model.Id">Supprimer</a></button>
+           <a  class="btn btn-outline-danger" asp-controller="Menu" asp-action="DeleteMenuById" asp-route-MenuId="@Model.Id">Supprimer</a>
         </td>
     }
 </tr>

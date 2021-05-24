@@ -2,13 +2,16 @@
 @if (Context.Session.GetString("restorerConnected") != "true" && Context.Session.GetString("customerConnected") != "true")
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Restaurant" asp-action="ConsultRestaurant">Accueil</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
+    </li> 
+    <li class="nav-item">
+        <a class="nav-link text-light" asp-area="" asp-controller="Restaurant" asp-action="ConsultRestaurant">Restaurants</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Inscription">Inscription</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Inscription">Inscription</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Connexion</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Connexion</a>
     </li>
 }
 
@@ -16,13 +19,13 @@
 @if (Context.Session.GetString("restorerConnected") == "true")
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Restaurant" asp-action="RestorerAcceuil">Accueil</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Restaurant" asp-action="RestorerAcceuil">Accueil</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ConsultRestorerInformations">Compte</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="ConsultRestorerInformations">Compte</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Deconnexion">Deconnexion</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Deconnexion">Deconnexion</a>
     </li>
 
 }
@@ -30,17 +33,16 @@
 @if (Context.Session.GetString("customerConnected") == "true")
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Restaurant" asp-action="ConsultRestaurant">Accueil</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Restaurant" asp-action="ConsultRestaurant">Restaurants</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ConsultCustomerInformations">Compte</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="ConsultCustomerInformations">Compte</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="ConsultCart">Panier</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="ConsultCart">Panier</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Deconnexion">Deconnexion</a>
+        <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Deconnexion">Deconnexion</a>
     </li>
 }
 
-<!--GOOD ONE-->

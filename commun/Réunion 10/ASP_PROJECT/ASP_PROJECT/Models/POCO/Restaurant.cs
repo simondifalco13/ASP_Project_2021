@@ -101,6 +101,7 @@ namespace ASP_PROJECT.Models.POCO
             Type = t;
         }
 
+       
         public static bool SignRestaurant(Restaurant resto, Restorer restorer, IRestaurantDAL restaurantDAL)
         {
             try
@@ -114,8 +115,8 @@ namespace ASP_PROJECT.Models.POCO
             }
         }
 
-        public static void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL){
-            restaurantDAL.GetRestaurantById(r);
+        public void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL){
+            r = restaurantDAL.GetRestaurantById(r);
         }
 
         public static List<Restaurant> GetAllRestaurants(IRestaurantDAL DAL) {
@@ -146,6 +147,7 @@ namespace ASP_PROJECT.Models.POCO
 
             return resto;
         }
+
         public static Restaurant GetRestaurantById(Restaurant resto, IRestaurantDAL restoDAL)
         {
             return restoDAL.GetRestaurantById(resto);

@@ -21,6 +21,9 @@ namespace ASP_PROJECT.DAL.CDAL
         public  bool SaveRestorer(Restorer r)
         {
             bool existingUser = VerifyExistingRestorer(r);
+            Customer VerifIfCustomer = new Customer();
+            VerifIfCustomer.Email = r.Email;
+            existingUser= VerifyExistingCustomer(VerifIfCustomer);
             if (existingUser != true)
             {
                 string request = "INSERT INTO dbo.Restorers (FirstName,LastName,Email,Password,Gender,City,Address,PostalCode,PhoneNumber,Country) VALUES (@FirstName,@LastName,@Email,@Password,@Gender,@City,@Address,@PostalCode,@PhoneNumber,@Country)";
@@ -68,7 +71,7 @@ namespace ASP_PROJECT.DAL.CDAL
             }
             foreach (var email in emails)
             {
-                if (email == r.Email)
+                if (email.ToLower() == r.Email.ToLower())
                 {
                     exists = true;
                 }
@@ -80,9 +83,11 @@ namespace ASP_PROJECT.DAL.CDAL
 
 
 
-        // A reçu l'objet depuis le contrôleur. ( Contrôleur -> Class métier -> DAL )
         public bool SaveCustomer(Customer accountC) {
             bool existingCustomer = VerifyExistingCustomer(accountC);
+            Restorer VerifIfCustomer = new Restorer();
+            VerifIfCustomer.Email = accountC.Email;
+            existingCustomer=VerifyExistingRestorer(VerifIfCustomer);
 
             if (existingCustomer == false) {
                 string request = "INSERT INTO dbo.Customers (FirstName,LastName,DateOfBirth,Email,Password,Gender,City,Address,PostalCode,PhoneNumber,Country) VALUES (@FirstName,@LastName,@DateOfBirth,@Email,@Password,@Gender,@City,@Address,@PostalCode,@PhoneNumber,@Country)";
@@ -123,7 +128,7 @@ namespace ASP_PROJECT.DAL.CDAL
                 }
             }
             foreach (var email in emails) {
-                if (email == accountC.Email) {
+                if (email.ToLower() == accountC.Email.ToLower()) {
                     exists = true;
                 }
             }

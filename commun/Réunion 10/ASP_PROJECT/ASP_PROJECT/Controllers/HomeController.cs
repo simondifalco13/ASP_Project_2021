@@ -22,6 +22,7 @@ namespace ASP_PROJECT.Controllers
         public IActionResult Index()
         {
             HttpContext.Session.SetInt32("restaurantId", 0);
+            TempData["ItemAdded"] = "";
             return View();
         }
 

@@ -29,7 +29,7 @@ namespace ASP_PROJECT.Controllers {
         public IActionResult ConsultRestaurant() {
             List<Restaurant> restos = Restaurant.GetAllRestaurants(_restaurantDAL);
             ListRestaurantsViewModel viewModel = new ListRestaurantsViewModel(restos);
-
+            TempData["ItemAdded"] = "";
             return View("Views/Restaurant/ConsultAllRestaurants.cshtml", viewModel);
         }
 
@@ -41,8 +41,11 @@ namespace ASP_PROJECT.Controllers {
             return View("SignRestaurant", vm);
         }
 
-        public IActionResult ConsultRestorerRestaurants(Restorer r)
+        public IActionResult ConsultRestorerRestaurants()
         {
+            TempData["ItemAdded"] = "";
+            Restorer r = new Restorer();
+            r.Id = (int)HttpContext.Session.GetInt32("restorerId");
             r = Restorer.GetRestorerById(_accountDAL,r);
             r.restaurantList=r.GetRestorerRestaurants(_restaurantDAL);
             ListRestaurantsViewModel viewModel = new ListRestaurantsViewModel(r.restaurantList);
@@ -73,19 +76,45 @@ namespace ASP_PROJECT.Controllers {
             HttpContext.Session.SetInt32("restaurantId", restaurantId);
             resto = Restaurant.GetRestaurantDishesAndMenus(resto, _restaurantDAL, _menuDAL);
             resto = resto.GetScheduleResto(resto, _restaurantDAL);
-
             ListRestaurantsViewModel vm = new ListRestaurantsViewModel(resto);
 
             return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", vm);
+        }
+
+        public bool VerifySignRestaurant(SignRestaurantViewModel vm)
+        {
+            bool success = false;
+            success = vm.MondayCt != null;
+            success = vm.TuesdayCt != null;
+            success = vm.WednesdayCt != null;
+            success = vm.FridayCt != null;
+            success = vm.SaturdayCt != null;
+            success = vm.SaturdayCt != null;
+            success = vm.MondayOt != null;
+            success = vm.TuesdayOt != null;
+            success = vm.WednesdayOt != null;
+            success = vm.FridayOt != null;
+            success = vm.SaturdayOt != null;
+            success = vm.SaturdayOt != null;
+            success = vm.Resto.Name != "";
+            success = vm.Resto.Description != "";
+            success = vm.Resto.Address != "";
+            success = vm.Resto.City != "";
+            success = vm.Resto.Pc != "";
+            success = vm.Resto.Country != "";
+            success = vm.Resto.Tel != "";
+            success = vm.Resto.NumTVA != "";
+
+            return success;
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult SignRestaurant(SignRestaurantViewModel vm)
         {
-
+            bool valid = VerifySignRestaurant(vm);
             vm.restorerId = (int)HttpContext.Session.GetInt32("restorerId");
-            if (ModelState.IsValid)
+            if (valid)
             {
                 Restaurant CreatedRestaurant = vm.Resto;
                 CreatedRestaurant.OpeningsTimes.Add(DateTime.Parse(vm.MondayOt));
@@ -113,7 +142,7 @@ namespace ASP_PROJECT.Controllers {
                     if (success == true)
                     {
                         TempData["RestaurantSign"] = "success";
-                        return View("Index");
+                        return RedirectToAction("ConsultRestorerRestaurants");
                     }
                     else
                     {

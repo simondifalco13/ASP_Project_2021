@@ -30,12 +30,22 @@ namespace ASP_PROJECT.Controllers
             return View();
         }
 
-        public IActionResult ConsultRestaurantOrders()
+        public IActionResult ConsultRestaurantOrders(int restoId)
         {
             RestaurantOrderViewModel vm = new RestaurantOrderViewModel();
             Restaurant resto = new Restaurant();
-            resto.Id = (int)HttpContext.Session.GetInt32("restaurantId");
+            //resto.Id = (int)HttpContext.Session.GetInt32("restaurantId");
+            resto.Id = restoId;
             List<Order> RestaurantOrders = Order.GetRestaurantOrders(resto,_orderDAL,_menuDAL,_accountDAL);
+            if (RestaurantOrders.Count == 0)
+            {
+                TempData["listOrders"] = "empty";
+            }
+            else
+            {
+                TempData["listOrders"] = "";
+
+            }
             vm.Restaurant.OrdersList = RestaurantOrders;
             return View("ConsultRestaurantOrders",vm);
         }
@@ -47,6 +57,15 @@ namespace ASP_PROJECT.Controllers
             customer.Id = (int)HttpContext.Session.GetInt32("CustomerId");
             List<Order> CustomerOrders = Order.GetCustomerOrders(customer, _orderDAL, _menuDAL, _restaurantDAL);
             vm.Customer.OrdersList = CustomerOrders;
+            if (CustomerOrders.Count == 0)
+            {
+                TempData["listOrders"] = "empty";
+            }
+            else
+            {
+                TempData["listOrders"] = "";
+
+            }
             return View("ConsultCustomerOrders",vm);
         }
 
@@ -59,6 +78,7 @@ namespace ASP_PROJECT.Controllers
 
         public IActionResult AddMenuToCart(int menuId)
         {
+            TempData["ItemAdded"] = "";
             int restoId = (int)HttpContext.Session.GetInt32("restaurantId");
             string var = HttpContext.Session.GetString("currentRestaurantOrder");
 
@@ -72,10 +92,12 @@ namespace ASP_PROJECT.Controllers
                         string sessionMenusIds = HttpContext.Session.GetString("MenusOrder");
                         sessionMenusIds += ";" + menuId.ToString();
                         HttpContext.Session.SetString("MenusOrder", sessionMenusIds);
+                        TempData["ItemAdded"] = "menu";
                     }
                     else
                     {
                         HttpContext.Session.SetString("MenusOrder", menuId.ToString());
+                        TempData["ItemAdded"] = "menu";
                     }
                 }
             }
@@ -96,14 +118,19 @@ namespace ASP_PROJECT.Controllers
                             string sessionMenusIds = HttpContext.Session.GetString("MenusOrder");
                             sessionMenusIds += ";" + menuId.ToString();
                             HttpContext.Session.SetString("MenusOrder", sessionMenusIds);
+                            TempData["ItemAdded"] = "menu";
                         }
                         else
                         {
                             HttpContext.Session.SetString("MenusOrder", menuId.ToString());
+                            TempData["ItemAdded"] = "menu";
                         }
                     }
                 }
             }
+
+
+            
             return RedirectToAction("ConsultAll", "Restaurant", new { restaurantId = restoId });
         }
 
@@ -111,6 +138,7 @@ namespace ASP_PROJECT.Controllers
 
         public IActionResult AddDishToCart(int dishId)
         {
+            TempData["ItemAdded"] = "";
             if (HttpContext.Session.GetString("OrderExist") == "true")
             {
                 if (HttpContext.Session.GetString("DishesOrder") != "")
@@ -118,13 +146,16 @@ namespace ASP_PROJECT.Controllers
                     string sessionDishesIds = HttpContext.Session.GetString("DishesOrder");
                     sessionDishesIds += ";" + dishId.ToString();
                     HttpContext.Session.SetString("DishesOrder", sessionDishesIds);
+                    TempData["ItemAdded"] = "plat";
                 }
                 else
                 {
                     HttpContext.Session.SetString("DishesOrder", dishId.ToString());
+                    TempData["ItemAdded"] = "plat";
                 }
             }
             int restoId = (int)HttpContext.Session.GetInt32("restaurantId");
+            
             return RedirectToAction("ConsultAll", "Restaurant", new { restaurantId = restoId });
         }
 
@@ -241,11 +272,13 @@ namespace ASP_PROJECT.Controllers
 
             return View("Views/Order/ConsultCart.cshtml", order);
         }
+
         public void EmptyCart()
         {
             HttpContext.Session.SetString("MenusOrder", "");
             HttpContext.Session.SetString("DishesOrder", "");
         }
+
         public Order GetOrdersInformations(Order order)
         {
             string sessionMenusIds = HttpContext.Session.GetString("MenusOrder");
@@ -259,6 +292,8 @@ namespace ASP_PROJECT.Controllers
                     order.listMenuOrdered.Add(menuAdded);
                 }
             }
+
+
             string sessionDishesIds = HttpContext.Session.GetString("DishesOrder");
 
             if (sessionDishesIds != "")
@@ -288,6 +323,8 @@ namespace ASP_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ValidateOrder(Order order)
         {
+
+           
             order = GetOrdersInformations(order);
             //1 ere option
             order.DeliveryAdress = order.Customer.Address + "," + order.Customer.City + "," + order.Customer.Pc;
@@ -299,7 +336,12 @@ namespace ASP_PROJECT.Controllers
             TempData["MessageCart"] = "vide";
             TempData["StatutOrder"] = "OK";
             TempData["StatutOrder"] = "NOTOK";
-            return RedirectToAction("ConsultRestaurant", "Restaurant");
+
+            //return RedirectToAction("ConsultRestaurant", "Restaurant");
+            return View("ResumeOrder", order);
         }
+
+
     }
+
 }

@@ -17,11 +17,10 @@
     </form>
     @if ((string)TempData["Message"] == "State0")
     {
-    <span class="alert-success"> Le compte a bien été créé et vous êtes maintenant connecté</span>
+        <div class="alert alert-success"> Le compte a bien été créé et vous êtes maintenant connecté</div>
     }
     @if ((string)TempData["Message"] == "State10")
     {
-        <span class="m-2 alert-success">Vous êtes bien connecté</span>
+        <div class="m-2 alert alert-success">Vous êtes bien connecté</div>
     }
-    <a asp-controller="Home" asp-action="Index">Retour</a>
 </div>

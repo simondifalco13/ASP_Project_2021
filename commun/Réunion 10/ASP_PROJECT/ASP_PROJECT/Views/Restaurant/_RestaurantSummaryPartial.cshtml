@@ -1,4 +1,5 @@
 ﻿@model ASP_PROJECT.Models.POCO.Restaurant
+@using Microsoft.AspNetCore.Http
 
 <tr>
     <td>@Model.Name</td>
@@ -7,6 +8,11 @@
 
     <td>
         @*<a asp-controller="Menu" asp-action="ConsultMenus" asp-route-RestoId="@Model.Id">Voir</a>*@
-        <a asp-action="ConsultAll" asp-route-restaurantId="@Model.Id">Voir</a>
+        <a class="btn btn-outline-primary" asp-action="ConsultAll" asp-route-restaurantId="@Model.Id">Carte</a>
+        @if (Context.Session.GetString("restorerConnected") == "true")
+        {
+            <a class="btn btn-outline-primary" asp-controller="Order" asp-action="ConsultRestaurantOrders" asp-route-restoId="@Model.Id">Commandes</a>
+
+        }
     </td>
 </tr>

@@ -1,10 +1,16 @@
 ﻿@model ASP_PROJECT.ViewModels.ListRestaurantsViewModel
 @using Microsoft.AspNetCore.Http
 
-@if ((string)TempData["ErreurAjout"] !="") 
+@if ((string)TempData["ErreurAjout"] != "" && TempData["ErreurAjout"] != null)
 {
-    <div class="alert-danger">
+    <div class="alert alert-danger">
         <p>@TempData["ErreurAjout"]</p>
+    </div>
+}
+@if((string)TempData["ItemAdded"] != "" && TempData["ItemAdded"] != null)
+{
+    <div class="alert alert-success">
+        <p>Vous avez ajouté un @TempData["ItemAdded"] dans votre panier</p>
     </div>
 }
 <form method="POST" asp-controller="Restaurant" asp-action="ConsultAll">
@@ -23,12 +29,11 @@
         </tr>
     </table>
     <table class="table">
-        <!-- MENU -->
         <tr>
             <h3>MENU</h3>
             @if (Context.Session.GetString("restorerConnected") == "true")
             {
-                <a asp-controller="Menu" asp-action="AddMenu" asp-route-restaurantId="@Model.Resto.Id">Ajouter un menu</a>
+                <a class="btn btn-outline-primary pb-1" asp-controller="Menu" asp-action="AddMenu" asp-route-restaurantId="@Model.Resto.Id">Ajouter un menu</a>
             }
         </tr>
         <tr>
@@ -36,6 +41,7 @@
             <th>Description</th>
             <th>Type de service</th>
             <th>Prix</th>
+            <th>Contenu</th>
         </tr>
         @foreach (var item in Model.SelectedListMenus)
         {
@@ -43,12 +49,11 @@
         }
     </table>
     <table class="table">
-        <!-- PLAT -->
         <tr>
             <h3>PLATS</h3>
             @if (Context.Session.GetString("restorerConnected") == "true")
             {
-                <a asp-controller="Menu" asp-action="AddDish" asp-route-restaurantId="@Model.Resto.Id">Ajouter un plat</a>
+                <a class="btn btn-outline-primary pb-1" asp-controller="Menu" asp-action="AddDish" asp-route-restaurantId="@Model.Resto.Id">Ajouter un plat</a>
             }
         </tr>
         <tr>
@@ -64,4 +69,12 @@
         }
     </table>
 </form>
-<a asp-controller="Home" asp-action="Index">Retour</a>
+@if (Context.Session.GetString("customerConnected") == "true")
+{
+    <a class="btn btn-primary" asp-controller="Restaurant" asp-action="ConsultRestaurant">Retour</a>
+}
+@if (Context.Session.GetString("restorerConnected") == "true")
+{
+    <a class="btn btn-primary" asp-controller="Restaurant" asp-action="ConsultRestorerRestaurants">Retour</a>
+
+}

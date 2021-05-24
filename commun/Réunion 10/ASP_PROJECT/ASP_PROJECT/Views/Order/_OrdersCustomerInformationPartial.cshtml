@@ -24,14 +24,16 @@
     }
 </td>
 <td>
-    @foreach (var dish in Model.listDishOrdered)
-    {
-        <p>@dish.Name</p>
-    }
-    @foreach (var menu in Model.listMenuOrdered)
-    {
-        <p>@menu.Name</p>
-    }
+    <ul>
+        @foreach (var dish in Model.listDishOrdered)
+        {
+            <li>@dish.Name</li>
+        }
+        @foreach (var menu in Model.listMenuOrdered)
+        {
+            <li>@menu.Name</li>
+        }
+    </ul>
 </td>
 <td>
     <select asp-for="@Model.Status">

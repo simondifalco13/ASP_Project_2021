@@ -83,7 +83,9 @@ namespace ASP_PROJECT.Controllers
 
         public void UpdateRestorerSessionInformations(Restorer Account)
         {
-            if (String.IsNullOrEmpty(HttpContext.Session.GetString("restorerConnected")))
+            Restorer BeforeModifications = Restorer.GetRestorerById(_accountDAL, Account);
+            Account.Country = BeforeModifications.Country;
+            if (HttpContext.Session.GetString("restorerConnected")!="")
             {
                 HttpContext.Session.SetString("restorerConnected", "true");
                 HttpContext.Session.SetInt32("CustomerId", Account.Id);
@@ -101,9 +103,9 @@ namespace ASP_PROJECT.Controllers
 
         public void UpdateCustomerSessionInformations(Customer Account)
         {
-            if (String.IsNullOrEmpty(HttpContext.Session.GetString("customerConnected")))
+            if (HttpContext.Session.GetString("customerConnected")!="")
             {
-                HttpContext.Session.SetString("restorerConnected", "true");
+                HttpContext.Session.SetString("customerConnected", "true");
                 HttpContext.Session.SetInt32("CustomerId", Account.Id);
                 HttpContext.Session.SetString("Firstname", Account.Firstname);
                 HttpContext.Session.SetString("Lastname", Account.Lastname);
@@ -185,7 +187,7 @@ namespace ASP_PROJECT.Controllers
             HttpContext.Session.SetString("OrderExist", "");
             HttpContext.Session.SetString("currentRestaurantOrder","");
             TempData["Message"] = "";
-            return RedirectToAction("ConsultRestaurant", "Restaurant");
+            return RedirectToAction("Index", "Home");
         }
         //POST
         [HttpPost]
@@ -194,7 +196,7 @@ namespace ASP_PROJECT.Controllers
         {
             if (ModelState.IsValid)
             {
-                //pb dans register
+                r.Email = r.Email.ToLower();
                 bool success = Restorer.Register(_accountDAL, r);
                 if (success == true)
                 {
@@ -222,6 +224,7 @@ namespace ASP_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CustomerRegister(Customer accountC) {
             if (ModelState.IsValid) {
+                accountC.Email = accountC.Email.ToLower();
                 bool success = Customer.Register(_accountDAL, accountC);
                 accountC = Customer.GetCustomerByMail(_accountDAL, accountC.Email);
 
@@ -233,7 +236,7 @@ namespace ASP_PROJECT.Controllers
                     TempData["Message"] = "State1";
                 }
             } 
-            return View("Index");
+            return View("CustomerInscription",accountC);
         }
 
         
@@ -359,8 +362,10 @@ namespace ASP_PROJECT.Controllers
         {
             string mail = HttpContext.Session.GetString("Email");
             Customer RestOfInformations = Customer.GetCustomerByMail(_accountDAL, mail);
+            //CustomerToModify = Customer.GetCustomerByMail(_accountDAL, mail);
             CustomerToModify.Id = RestOfInformations.Id;
             CustomerToModify.Email = RestOfInformations.Email;
+            CustomerToModify.Country = RestOfInformations.Country;
             if (CustomerToModify.Firstname != null
                 && CustomerToModify.Lastname != null
                 && CustomerToModify.Gender != 0

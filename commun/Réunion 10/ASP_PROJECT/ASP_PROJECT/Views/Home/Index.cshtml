@@ -1,16 +1,40 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p><a asp-controller="Menu" asp-action="Index">Menu management</a></p>
-    <p><a asp-controller="Account" asp-action="Index">Account Management</a></p>
-
-    <p><a asp-controller="Account" asp-action="CustomerInscription">New Customer</a></p>
-    <p><a asp-controller="Restaurant" asp-action="ConsultRestaurant">Consult Restaurant</a></p>
-    <p><a asp-controller="Restaurant" asp-action="Index">Restaurant Management</a></p>
-    <p><a asp-controller="Account" asp-action="Login">Connexion</a></p>
-    <p><a asp-controller="Order" asp-action="Index">Order Management</a></p>
+﻿
+<div class="align-content-center">
+    <p>Bienvenue sur la page de notre Projet Takeway pour travail de fin d'année 2020-2021.</p>
+    <p>Nous vous proposons donc de vous inscrire ou de vous connecter afin de pouvoir commander dans l'un des restaurants.</p>
+    <p>
+        Comme vous l'avez sans doute vu, nous vous avons fourni un fichier d'insertion pour la DB, veuillez tout de même créer des comptes via l'application car les
+        comptes dans ce fichier d'insertion contiendront déjà des informations afin de par exemple pouvoir commander dans un restaurant ayant déjà des menus etc...
+    </p>
+    @*<table class="table">
+            <tr>
+                <th>Inscription</th>
+                <th>Connexion</th>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Account" asp-action="Inscription">S'inscrire</a>
+                </td>
+                <td>
+                    <a asp-controller="Account" asp-action="Login">Se connecter</a>
+                </td>
+            </tr>
+        </table>*@
+    <div class="row">
+        <div class="card col-6" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Inscription</h5>
+                <p class="card-text">Vous pouvez créer un compte client ou un compte restorateur</p>
+                <a class="btn btn-primary" asp-controller="Account" asp-action="Inscription">S'inscrire</a>
+            </div>
+        </div>
+        <div class="card col-6" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Connexion</h5>
+                <p class="card-text">Connectez vous pour pouvoir accèder à votre compte</p>
+                <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Se connecter</a>
+            </div>
+        </div>
+    </div>
 </div>
+

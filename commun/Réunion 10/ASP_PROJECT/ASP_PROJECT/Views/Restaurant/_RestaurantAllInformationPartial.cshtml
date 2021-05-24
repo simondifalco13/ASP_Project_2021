@@ -10,6 +10,7 @@
         "Samedi",
         "Dimanche"
     };
+    int cpt = 0;
 }
 
 <tr>
@@ -31,7 +32,8 @@
         @foreach (var open in Model.OpeningsTimes)
         {
 
-            <p>@open.Hour : @open.Minute</p>
+            @*<p>@open.Hour : @open.Minute</p>*@
+            <p>@open.ToString("HH:mm")</p>
 
 
 
@@ -41,7 +43,8 @@
         @foreach (var close in Model.CloseTimes)
         {
 
-            <p>@close.Hour : @close.Minute</p>
+            @*<p>@close.Hour : @close.Minute</p>*@
+            <p>@close.ToString("HH:mm")</p>
         }
     </td>
 

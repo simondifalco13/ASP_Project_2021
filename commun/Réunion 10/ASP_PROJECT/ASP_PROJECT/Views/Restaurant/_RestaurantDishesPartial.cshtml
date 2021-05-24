@@ -8,15 +8,15 @@
     <td>@Model.Price €</td>
     @if (Context.Session.GetString("customerConnected") == "true")
     {
-        <td><a asp-controller="Order" asp-action="AddDishToCart" asp-route-dishId="@Model.Id">Ajouter au panier</a></td>
+        <td><a  class="btn btn-outline-primary" asp-controller="Order" asp-action="AddDishToCart" asp-route-dishId="@Model.Id">Ajouter au panier</a></td>
     }
     @if (Context.Session.GetString("restorerConnected") == "true")
     {
         <td>
-            <a asp-controller="Menu" asp-action="ModifyDishById" asp-route-DishId="@Model.Id">Modifier</a>
+            <a class="btn btn-outline-primary" asp-controller="Menu" asp-action="ModifyDishById" asp-route-DishId="@Model.Id">Modifier</a>
         </td>
         <td>
-            <a asp-controller="Menu" asp-action="DeleteDishById" asp-route-DishId="@Model.Id">Supprimer</a>
+            <a  class="btn btn-outline-danger" asp-controller="Menu" asp-action="DeleteDishById" asp-route-DishId="@Model.Id">Supprimer</a>
         </td>
     }
 </tr>
