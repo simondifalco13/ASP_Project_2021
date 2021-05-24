@@ -140,7 +140,7 @@ namespace ASP_PROJECT.Models.POCO
             return RecuperatedResto;
         }
 
-        public static Restaurant GetScheduleResto(Restaurant resto, IRestaurantDAL restoDAL)
+        public Restaurant GetScheduleResto(Restaurant resto, IRestaurantDAL restoDAL)
         {
             restoDAL.GetRestaurantSchedules(resto);
 

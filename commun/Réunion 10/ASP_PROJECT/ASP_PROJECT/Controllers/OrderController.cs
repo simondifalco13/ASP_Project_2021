@@ -104,9 +104,6 @@ namespace ASP_PROJECT.Controllers
                     }
                 }
             }
-
-
-            
             return RedirectToAction("ConsultAll", "Restaurant", new { restaurantId = restoId });
         }
 
@@ -244,13 +241,11 @@ namespace ASP_PROJECT.Controllers
 
             return View("Views/Order/ConsultCart.cshtml", order);
         }
-
         public void EmptyCart()
         {
             HttpContext.Session.SetString("MenusOrder", "");
             HttpContext.Session.SetString("DishesOrder", "");
         }
-
         public Order GetOrdersInformations(Order order)
         {
             string sessionMenusIds = HttpContext.Session.GetString("MenusOrder");
@@ -264,8 +259,6 @@ namespace ASP_PROJECT.Controllers
                     order.listMenuOrdered.Add(menuAdded);
                 }
             }
-
-
             string sessionDishesIds = HttpContext.Session.GetString("DishesOrder");
 
             if (sessionDishesIds != "")
@@ -295,8 +288,6 @@ namespace ASP_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ValidateOrder(Order order)
         {
-
-           
             order = GetOrdersInformations(order);
             //1 ere option
             order.DeliveryAdress = order.Customer.Address + "," + order.Customer.City + "," + order.Customer.Pc;
@@ -310,8 +301,5 @@ namespace ASP_PROJECT.Controllers
             TempData["StatutOrder"] = "NOTOK";
             return RedirectToAction("ConsultRestaurant", "Restaurant");
         }
-
-
     }
-
 }

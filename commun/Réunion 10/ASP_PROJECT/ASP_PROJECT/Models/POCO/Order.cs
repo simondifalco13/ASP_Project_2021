@@ -125,7 +125,6 @@ namespace ASP_PROJECT.Models.POCO
             }
             return CustomerOrders;
         }
-
         public bool UpdateOrderStatus()
         {
             bool success = false;
