@@ -20,35 +20,38 @@ namespace ASP_PROJECT.Models.POCO
         {
             DishList = dishes;
         }
-        
-       //restaurants : this pas en statique
-        public static List<Menu> GetMenus(IMenuDAL menuDAL,Restaurant r) {
 
-            return menuDAL.GetMenus(r);
-        }
+        ////restaurants : this pas en statique
+        // public static List<Menu> GetMenus(IMenuDAL menuDAL,Restaurant r) {
 
-        
+        //     return menuDAL.GetMenus(r);
+        // }
+
+        ////restaurant : pas en statique et restaurant en this
+        //public static bool AddMenu(Menu menu,Restaurant restaurant, IMenuDAL menuDAL)
+        //{
+        //    return menuDAL.AddMenu( menu, restaurant);
+        //}
+
+        // this 
+
         public static Menu GetMenuById(int MenuId, IMenuDAL menuDAL)
         {
             return menuDAL.GetMenuById(MenuId);
         }
 
-        //restaurant pas en statique avec this
-        public static bool DeleteMenu(Menu menu, IMenuDAL menuDAL)
+        //ICI ?? 
+
+        //restaurant pas en statique avec this 
+        public  bool DeleteMenu(IMenuDAL menuDAL)
         {
-            return menuDAL.SuppressMenu(menu);
+            return menuDAL.SuppressMenu(this);
         }
 
-        //restaurant : pas en statique et restaurant en this
-        public static bool AddMenu(Menu menu,Restaurant restaurant, IMenuDAL menuDAL)
+       
+        public bool ModifyMenu(IMenuDAL menuDAL)
         {
-            return menuDAL.AddMenu( menu, restaurant);
-        }
-
-        //restaurant , this 
-        public bool ModifyMenu(Menu menu,IMenuDAL menuDAL)
-        {
-            return menuDAL.UpdateMenu(menu);
+            return menuDAL.UpdateMenu(this);
         }
     }
 }

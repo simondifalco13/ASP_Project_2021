@@ -30,34 +30,66 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        //this et pas static : mettre une classe dans Account et faire hériter -> override
-        public static bool Register(IAccountDAL DAL, Customer accountC) {
-            accountC.Password = Hash.CreateHash(accountC.Password);
-            bool success = DAL.SaveCustomer(accountC);
+        //ok : mettre une classe dans Account et faire hériter -> override ??
+        public  bool Register(IAccountDAL DAL) {
+            this.Password = Hash.CreateHash(this.Password);
+            bool success = DAL.SaveCustomer(this);
             return success;
         }
 
-        //verifie si pas d'instance avant 
         public static Customer GetCustomerByMail(IAccountDAL accountDAL, string mail)
         {
             Customer SearchedCustomer = accountDAL.GetCustomerByMail(mail);
             return SearchedCustomer;
         }
 
-        //verifie si pas d'instance avant 
         public static Customer GetCustomerById(IAccountDAL accountDAL, int customerId)
         {
             Customer SearchedCustomer = accountDAL.GetCustomerById(customerId);
             return SearchedCustomer;
         }
 
-        //this: pas methode statique 
-        public static bool ModifyCustomerInformations(IAccountDAL accountDAL, Customer customerToModify)
+        //OK 
+        public  bool ModifyCustomerInformations(IAccountDAL accountDAL)
         {
-            bool success = accountDAL.UpdateCustomerInformations(customerToModify);
+            bool success = accountDAL.UpdateCustomerInformations(this);
             return success;
         }
 
-        
+        //OK
+        public  List<Order> GetCustomerOrders( IOrderDAL orderDAL, IMenuDAL menuDAL, IRestaurantDAL restaurantDAL)
+        {
+            List<Order> CustomerOrders = orderDAL.GetCustomerOrders(this);
+            foreach (var order in CustomerOrders)
+            {
+                List<int> MenuDetailsId = orderDAL.GetMenusIdInMenuDetails(order);
+                List<int> DishDetailsId = orderDAL.GetDishesIdInMenuDetails(order);
+                List<Meal> OrderMeals = new List<Meal>();
+                Restaurant restaurant = restaurantDAL.GetRestaurantById(order.Restaurant);
+                order.Restaurant = restaurant;
+                foreach (var menuId in MenuDetailsId)
+                {
+                    OrderMeals.Add(menuDAL.GetMenuById(menuId));
+                }
+                foreach (var dishId in DishDetailsId)
+                {
+                    OrderMeals.Add(menuDAL.GetDishById(dishId));
+                }
+                foreach (var meal in OrderMeals)
+                {
+                    if (meal is Menu)
+                    {
+                        order.listMenuOrdered.Add(meal as Menu);
+                    }
+                    if (meal is Dish)
+                    {
+                        order.listDishOrdered.Add(meal as Dish);
+                    }
+                }
+            }
+            return CustomerOrders;
+        }
+
+
     }
 }

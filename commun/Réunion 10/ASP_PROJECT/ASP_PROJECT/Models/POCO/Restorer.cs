@@ -17,11 +17,11 @@ namespace ASP_PROJECT.Models.POCO
             restaurantList = new List<Restaurant>();
         }
 
-        //this et pas statique : mettre une classe dans Account et faire hériter -> override
-        public static bool Register(IAccountDAL accountDAL,Restorer r)
+        //OK
+        public  bool Register(IAccountDAL accountDAL)
         {
-            r.Password = Hash.CreateHash(r.Password);
-            bool success = accountDAL.SaveRestorer(r);
+            this.Password = Hash.CreateHash(this.Password);
+            bool success = accountDAL.SaveRestorer(this);
             return success;
         }
 
@@ -32,24 +32,47 @@ namespace ASP_PROJECT.Models.POCO
             return SearchedRestorer;
         }
 
-        //pas en statique 
-        public static bool ModifyRestorerInformations(IAccountDAL accountDAL,Restorer restorerToModify)
+        //OK
+        public  bool ModifyRestorerInformations(IAccountDAL accountDAL)
         {
-            bool success = accountDAL.UpdateRestorerInformations(restorerToModify);
+            bool success = accountDAL.UpdateRestorerInformations(this);
             return success;
         }
 
-        //this
+        //OK
         public List<Restaurant> GetRestorerRestaurants(IRestaurantDAL restaurantDAL)
         {
             List<Restaurant> restaurants = restaurantDAL.GetRestorerRestaurantsById(this);
             return restaurants;
         }
 
-        //this
-        public static Restorer GetRestorerById(IAccountDAL accountDAL,Restorer restorer)
+        //OK
+        public  Restorer GetRestorerById(IAccountDAL accountDAL)
         {
-            return restorer = accountDAL.GetRestorerById(restorer);
+            Restorer restorer = new Restorer();
+            return restorer = accountDAL.GetRestorerById(this);
+        }
+
+        //INSERTION REFACTO
+        //OK
+        public  bool SignRestaurant(Restaurant resto,IRestaurantDAL restaurantDAL)
+        {
+            try
+            {
+                //passer restorer en this
+                bool success = restaurantDAL.SignRestaurant(this, resto);
+                return success;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        //Normalement OK
+        public void GetRestaurant(Restaurant r, IRestaurantDAL restaurantDAL)
+        {
+            r = restaurantDAL.GetRestaurantById(r);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace ASP_PROJECT.Controllers {
             TempData["ItemAdded"] = "";
             Restorer r = new Restorer();
             r.Id = (int)HttpContext.Session.GetInt32("restorerId");
-            r = Restorer.GetRestorerById(_accountDAL,r);
+            r = r.GetRestorerById(_accountDAL);
             r.restaurantList=r.GetRestorerRestaurants(_restaurantDAL);
             ListRestaurantsViewModel viewModel = new ListRestaurantsViewModel(r.restaurantList);
             viewModel.Restorer = r;
@@ -74,10 +74,9 @@ namespace ASP_PROJECT.Controllers {
             Restaurant resto = new Restaurant();
             resto.Id = restaurantId;
             HttpContext.Session.SetInt32("restaurantId", restaurantId);
-            resto = Restaurant.GetRestaurantDishesAndMenus(resto, _restaurantDAL, _menuDAL);
-            resto = resto.GetScheduleResto(resto, _restaurantDAL);
+            resto = resto.GetRestaurantDishesAndMenus(_restaurantDAL, _menuDAL);
+            resto = resto.GetScheduleResto(_restaurantDAL);
             ListRestaurantsViewModel vm = new ListRestaurantsViewModel(resto);
-
             return View("Views/Restaurant/ConsultRestaurantMenuDish.cshtml", vm);
         }
 
@@ -138,8 +137,8 @@ namespace ASP_PROJECT.Controllers {
                     Restorer restorer = new Restorer();
                     restorer.Id = vm.restorerId;
                     HttpContext.Session.SetInt32("restoredId", restorer.Id);
-                    restorer = Restorer.GetRestorerById(_accountDAL,restorer) ;
-                    bool success = Restaurant.SignRestaurant(CreatedRestaurant, restorer, _restaurantDAL);
+                    restorer = restorer.GetRestorerById(_accountDAL) ;
+                    bool success = restorer.SignRestaurant(CreatedRestaurant, _restaurantDAL);
                     if (success == true)
                     {
                         TempData["RestaurantSign"] = "success";

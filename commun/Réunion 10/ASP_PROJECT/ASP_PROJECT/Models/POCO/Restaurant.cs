@@ -114,42 +114,26 @@ namespace ASP_PROJECT.Models.POCO
             Type = t;
         }
 
-       //restorer : passer objet restaurant + dal ->  revoir si méthode statique
-        public static bool SignRestaurant(Restaurant resto, Restorer restorer, IRestaurantDAL restaurantDAL)
-        {
-            try
-            {
-                //passer restorer en this
-                bool success = restaurantDAL.SignRestaurant(restorer, resto);
-                return success;
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        ////restorer
+        //public void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL){
+        //    r = restaurantDAL.GetRestaurantById(r);
+        //}
 
-
-        //restorer
-        public void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL){
-            r = restaurantDAL.GetRestaurantById(r);
-        }
-
-        //???
+        //normalement ici : OK
         public static List<Restaurant> GetAllRestaurants(IRestaurantDAL DAL) {
             return DAL.GetAllRestaurants();
         }
 
-        //pour compléter l'objet restaurant -> ici
-        public static Restaurant GetRestaurantDishesAndMenus(Restaurant r,IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
+        //pour compléter l'objet ==> OK
+        public Restaurant GetRestaurantDishesAndMenus(IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
         {
-            Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(r);
-            List<Menu> RestaurantMenus = menuDAL.GetMenus(r);
+            Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(this);
+            List<Menu> RestaurantMenus = menuDAL.GetMenus(this);
             foreach (var menu in RestaurantMenus)
             {
                 RecuperatedResto.mealList.Add(menu);
             }
-            List<Dish> RestaurantDishes=menuDAL.GetDishes(r);
+            List<Dish> RestaurantDishes=menuDAL.GetDishes(this);
             foreach (var dish in RestaurantDishes)
             {
                 RecuperatedResto.mealList.Add(dish);
@@ -157,18 +141,80 @@ namespace ASP_PROJECT.Models.POCO
             return RecuperatedResto;
         }
 
-
-        public Restaurant GetScheduleResto(Restaurant resto, IRestaurantDAL restoDAL)
+        //OK
+        public Restaurant GetScheduleResto(IRestaurantDAL restoDAL)
         {
-            restoDAL.GetRestaurantSchedules(resto);
-
-            return resto;
+            restoDAL.GetRestaurantSchedules(this);
+            return this;
         }
 
-        //a voir les parametres : soit juste passer la DAL et utiliser this => retirer le static soit laisser ainsi
-        public static Restaurant GetRestaurantById(Restaurant resto, IRestaurantDAL restoDAL)
+        //OK
+        public  Restaurant GetRestaurantById(IRestaurantDAL restoDAL)
         {
-            return restoDAL.GetRestaurantById(resto);
+            return restoDAL.GetRestaurantById(this);
+        }
+
+        //OK
+        public  bool AddDish(Dish d, IMenuDAL menuDAL)
+        {
+            bool success;
+            success = menuDAL.AddDish(d, this);
+            return success;
+        }
+
+        //OK
+        public List<Dish> GetDishes(IMenuDAL menuDAL)
+        {
+            List<Dish> list;
+            list = menuDAL.GetDishes(this);
+            return list;
+        }
+
+        //OK
+        public  List<Menu> GetMenus(IMenuDAL menuDAL)
+        {
+
+            return menuDAL.GetMenus(this);
+        }
+
+        //OK
+        public  bool AddMenu(Menu menu, IMenuDAL menuDAL)
+        {
+            return menuDAL.AddMenu(menu, this);
+        }
+
+        //OK
+        public  List<Order> GetRestaurantOrders(IOrderDAL orderDAL, IMenuDAL menuDAL, IAccountDAL accountDAL)
+        {
+            List<Order> RestaurantOrders = orderDAL.GetRestaurantOrders(this);
+            foreach (var order in RestaurantOrders)
+            {
+                List<int> MenuDetailsId = orderDAL.GetMenusIdInMenuDetails(order);
+                List<int> DishDetailsId = orderDAL.GetDishesIdInMenuDetails(order);
+                List<Meal> OrderMeals = new List<Meal>();
+                Customer customer = accountDAL.GetCustomerById(order.Customer.Id);
+                order.Customer = customer;
+                foreach (var menuId in MenuDetailsId)
+                {
+                    OrderMeals.Add(menuDAL.GetMenuById(menuId));
+                }
+                foreach (var dishId in DishDetailsId)
+                {
+                    OrderMeals.Add(menuDAL.GetDishById(dishId));
+                }
+                foreach (var meal in OrderMeals)
+                {
+                    if (meal is Menu)
+                    {
+                        order.listMenuOrdered.Add(meal as Menu);
+                    }
+                    if (meal is Dish)
+                    {
+                        order.listDishOrdered.Add(meal as Dish);
+                    }
+                }
+            }
+            return RestaurantOrders;
         }
     }
 }

@@ -83,7 +83,7 @@ namespace ASP_PROJECT.Controllers
 
         public void UpdateRestorerSessionInformations(Restorer Account)
         {
-            Restorer BeforeModifications = Restorer.GetRestorerById(_accountDAL, Account);
+            Restorer BeforeModifications = Account.GetRestorerById(_accountDAL);
             Account.Country = BeforeModifications.Country;
             if (HttpContext.Session.GetString("restorerConnected")!="")
             {
@@ -197,7 +197,7 @@ namespace ASP_PROJECT.Controllers
             if (ModelState.IsValid)
             {
                 r.Email = r.Email.ToLower();
-                bool success = Restorer.Register(_accountDAL, r);
+                bool success = r.Register(_accountDAL);
                 if (success == true)
                 {
                     r = Restorer.GetRestorerByMail(_accountDAL, r.Email);
@@ -225,7 +225,7 @@ namespace ASP_PROJECT.Controllers
         public IActionResult CustomerRegister(Customer accountC) {
             if (ModelState.IsValid) {
                 accountC.Email = accountC.Email.ToLower();
-                bool success = Customer.Register(_accountDAL, accountC);
+                bool success = accountC.Register(_accountDAL);
                 accountC = Customer.GetCustomerByMail(_accountDAL, accountC.Email);
 
                 if (success == true) {
@@ -257,12 +257,12 @@ namespace ASP_PROJECT.Controllers
 
             if (vm.user.Email!=null && vm.user.Password!=null)
             {
-                IsRestorer = TryRestorer.VerifyExistingRestorer(_accountDAL, TryRestorer);
+                IsRestorer = TryRestorer.VerifyExistingRestorer(_accountDAL);
                 if (IsRestorer == true)
                 {
                     try
                     {
-                        RecuperatedAccount = Account.Login(_accountDAL, TryRestorer);
+                        RecuperatedAccount = TryRestorer.Login(_accountDAL);
                         if (String.IsNullOrEmpty(HttpContext.Session.GetString("restorerConnected")))
                         {
                             TempData["Message"] = "State10";
@@ -284,12 +284,12 @@ namespace ASP_PROJECT.Controllers
                 else
                 {
 
-                    IsCustomer = TryCustomer.VerifyExistingCustomer(_accountDAL, TryCustomer);
+                    IsCustomer = TryCustomer.VerifyExistingCustomer(_accountDAL);
                     if (IsCustomer == true)
                     {
                         try
                         {
-                            RecuperatedAccount = Account.Login(_accountDAL, TryCustomer);
+                            RecuperatedAccount = TryCustomer.Login(_accountDAL);
                             if (String.IsNullOrEmpty(HttpContext.Session.GetString("customerConnected")))
                             {
                                 TempData["Message"] = "State11";
@@ -340,7 +340,7 @@ namespace ASP_PROJECT.Controllers
                 && RestorerToModify.Pc != null
                 && RestorerToModify.Tel != null)
             {
-                bool success = Restorer.ModifyRestorerInformations(_accountDAL, RestorerToModify);
+                bool success = RestorerToModify.ModifyRestorerInformations(_accountDAL);
                 if (success == true)
                 {
                     UpdateRestorerSessionInformations(RestorerToModify);
@@ -375,7 +375,7 @@ namespace ASP_PROJECT.Controllers
                 && CustomerToModify.Pc != null
                 && CustomerToModify.Tel != null)
             {
-                bool success = Customer.ModifyCustomerInformations(_accountDAL, CustomerToModify);
+                bool success = CustomerToModify.ModifyCustomerInformations(_accountDAL);
                 if (success == true)
                 {
                     UpdateCustomerSessionInformations(CustomerToModify);

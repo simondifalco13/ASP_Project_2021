@@ -68,13 +68,13 @@ namespace ASP_PROJECT.Models.POCO
         {
 
         }
-
-        //this et pas en statique 
-        public static Account Login(IAccountDAL accountDAL, Account account){
+        
+        //OK
+        public  Account Login(IAccountDAL accountDAL){
 
             try
             {
-                Account RecuperatedAccount = accountDAL.Login(account);
+                Account RecuperatedAccount = accountDAL.Login(this);
                 return RecuperatedAccount;
             }
             catch(Exception e)
@@ -85,17 +85,17 @@ namespace ASP_PROJECT.Models.POCO
         }
        
 
-        //this
-        public bool VerifyExistingRestorer(IAccountDAL accountDAL,Account account)
+        //OK
+        public bool VerifyExistingRestorer(IAccountDAL accountDAL)
         {
-            Restorer restorer = (Restorer)account;
+            Restorer restorer = (Restorer)this;
             bool existing = accountDAL.VerifyExistingRestorer(restorer);
             return existing;
         }
-        //this
-        public bool VerifyExistingCustomer(IAccountDAL accountDAL,Account account)
+        //OK
+        public bool VerifyExistingCustomer(IAccountDAL accountDAL)
         {
-            Customer customer = (Customer)account;
+            Customer customer = (Customer)this;
             bool existing = accountDAL.VerifyExistingCustomer(customer);
             return existing;
         }

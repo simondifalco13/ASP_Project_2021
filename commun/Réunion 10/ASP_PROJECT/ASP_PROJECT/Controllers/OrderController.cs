@@ -36,7 +36,7 @@ namespace ASP_PROJECT.Controllers
             Restaurant resto = new Restaurant();
             //resto.Id = (int)HttpContext.Session.GetInt32("restaurantId");
             resto.Id = restoId;
-            List<Order> RestaurantOrders = Order.GetRestaurantOrders(resto,_orderDAL,_menuDAL,_accountDAL);
+            List<Order> RestaurantOrders = resto.GetRestaurantOrders(_orderDAL,_menuDAL,_accountDAL);
             if (RestaurantOrders.Count == 0)
             {
                 TempData["listOrders"] = "empty";
@@ -55,7 +55,7 @@ namespace ASP_PROJECT.Controllers
             CustomerOrderViewModel vm = new CustomerOrderViewModel();
             Customer customer = new Customer();
             customer.Id = (int)HttpContext.Session.GetInt32("CustomerId");
-            List<Order> CustomerOrders = Order.GetCustomerOrders(customer, _orderDAL, _menuDAL, _restaurantDAL);
+            List<Order> CustomerOrders = customer.GetCustomerOrders(_orderDAL, _menuDAL, _restaurantDAL);
             vm.Customer.OrdersList = CustomerOrders;
             if (CustomerOrders.Count == 0)
             {
@@ -311,7 +311,7 @@ namespace ASP_PROJECT.Controllers
             Restaurant restaurant = new Restaurant();
             restaurant.Id = (int)HttpContext.Session.GetInt32("restaurantId");
 
-            restaurant = Restaurant.GetRestaurantById(restaurant, _restaurantDAL);
+            restaurant = restaurant.GetRestaurantById(_restaurantDAL);
             Customer customer = Customer.GetCustomerById(_accountDAL, customerId);
             order.Customer = customer;
             order.Restaurant = restaurant;

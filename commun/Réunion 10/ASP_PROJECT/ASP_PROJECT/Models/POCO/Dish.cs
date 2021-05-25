@@ -34,20 +34,21 @@ namespace ASP_PROJECT.Models.POCO
             Type = t;
         }
        
-        //restaurant : this (pour restaurant)
-        public static bool AddDish(Dish d,Restaurant r,IMenuDAL menuDAL)
-        {
-            bool success;
-            success=menuDAL.AddDish(d, r);
-            return success;
-        }
-        //restaurant : this pas en static
-        public static List<Dish> GetDishes(Restaurant r,IMenuDAL menuDAL)
-        {
-            List<Dish> list;
-            list = menuDAL.GetDishes(r);
-            return list;
-        }
+        ////restaurant : this (pour restaurant)
+        //public static bool AddDish(Dish d,Restaurant r,IMenuDAL menuDAL)
+        //{
+        //    bool success;
+        //    success=menuDAL.AddDish(d, r);
+        //    return success;
+        //}
+
+        ////restaurant : this pas en static
+        //public static List<Dish> GetDishes(Restaurant r,IMenuDAL menuDAL)
+        //{
+        //    List<Dish> list;
+        //    list = menuDAL.GetDishes(r);
+        //    return list;
+        //}
 
         public  string ConvertDishType()
         {
@@ -80,25 +81,25 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        //restaurant : r-> this et pas en statique 
-        public static bool DeleteDish(Dish d,Restaurant r,IMenuDAL menuDAL)
+        //OK
+        public bool DeleteDish(IMenuDAL menuDAL)
         {
-            bool success=false;
-            success = menuDAL.SuppressDish(d);
+            bool success = false;
+            success = menuDAL.SuppressDish(this);
             return success;
         }
 
-        
+
         public static Dish GetDishById(int id,IMenuDAL menuDAL)
         {
             Dish SearchedDish = menuDAL.GetDishById(id);
             return SearchedDish;
         }
 
-        //pas en statique et dish en this
-        public static bool UpdateDish(Dish dish, IMenuDAL menuDAL)
+        //OK
+        public  bool UpdateDish(IMenuDAL menuDAL)
         {
-            bool success = menuDAL.UpdatingDish(dish);
+            bool success = menuDAL.UpdatingDish(this);
             return success;
         }
     }

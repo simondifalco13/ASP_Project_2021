@@ -30,12 +30,13 @@ namespace ASP_PROJECT.Controllers
 
         public IActionResult AddMenu(int restaurantId)
         {
-            
+
+            HttpContext.Session.SetString("DishesId");
             MenuViewModel vm = new MenuViewModel();
             //en brut a enlever
             Restaurant r = new Restaurant();
             r.Id = restaurantId;
-            vm.Dlist = Dish.GetDishes(r, _menuDAL);
+            vm.Dlist = r.GetDishes(_menuDAL);
             return View("AddMenu", vm);
 
         }
@@ -56,7 +57,7 @@ namespace ASP_PROJECT.Controllers
                 Restaurant r = new Restaurant();
                 r.Id = 1;
                 //appel a la db 
-                List<Dish> dishes = Dish.GetDishes(r, _menuDAL);
+                List<Dish> dishes = r.GetDishes(_menuDAL);
                 vm = new MenuViewModel(dishes);
 
             }
@@ -67,7 +68,7 @@ namespace ASP_PROJECT.Controllers
         {
             Restaurant r = new Restaurant();
             r.Id = 1;
-            List<Dish> ld= Dish.GetDishes(r, _menuDAL);
+            List<Dish> ld= r.GetDishes(_menuDAL);
             ListDishViewModel vm = new ListDishViewModel(ld);
             return View("Views/Menu/ConsultDishes.cshtml",vm);
         }
@@ -76,7 +77,7 @@ namespace ASP_PROJECT.Controllers
         {
             Restaurant r = new Restaurant();
             r.Id = RestoId;
-            List<Menu> ListMenu = Menu.GetMenus(_menuDAL,r);
+            List<Menu> ListMenu = r.GetMenus(_menuDAL);
             ListMenuViewModel vm = new ListMenuViewModel(ListMenu);
             return View("ConsultMenus", vm);
         }
@@ -92,7 +93,7 @@ namespace ASP_PROJECT.Controllers
         {
             Restaurant r = new Restaurant();
             r.Id = 1;
-            List<Dish> ld = Dish.GetDishes(r, _menuDAL);
+            List<Dish> ld = r.GetDishes(_menuDAL);
             ListDishViewModel vm = new ListDishViewModel(ld);
             return View("DeleteDish", vm);
 
@@ -103,7 +104,7 @@ namespace ASP_PROJECT.Controllers
             Dish SearchedDish = Dish.GetDishById(Dishid, _menuDAL);
             Restaurant r = new Restaurant();
             r.Id = (int)HttpContext.Session.GetInt32("restaurantId"); 
-            bool success = Dish.DeleteDish(SearchedDish, r, _menuDAL);
+            bool success = SearchedDish.DeleteDish(_menuDAL);
             if (success == true)
             {
                 TempData["Suppressing"] = "La suppression du plat à été effectuée";
@@ -119,7 +120,7 @@ namespace ASP_PROJECT.Controllers
         public IActionResult DeleteMenuById(int MenuId)
         {
             Menu SearchedMenu = Menu.GetMenuById(MenuId, _menuDAL);
-            bool success = Menu.DeleteMenu(SearchedMenu, _menuDAL);
+            bool success = SearchedMenu.DeleteMenu(_menuDAL);
             int restoId= (int)HttpContext.Session.GetInt32("restaurantId");
             return RedirectToAction("ConsultAll", "Restaurant", new { restaurantId = restoId });
         }
@@ -159,7 +160,7 @@ namespace ASP_PROJECT.Controllers
             }
             Restaurant r = new Restaurant();
             r.Id = (int)HttpContext.Session.GetInt32("restaurantId");
-            vm.Dlist = Dish.GetDishes(r, _menuDAL);
+            vm.Dlist = r.GetDishes(_menuDAL);
             HttpContext.Session.SetString("DishesId", sessionsDishid);
             return View("ModifyMenu",vm);
         }
@@ -178,7 +179,7 @@ namespace ASP_PROJECT.Controllers
                 Dish d = vm.Dish;
                 Restaurant restaurant = new Restaurant();
                 restaurant.Id = vm.RestaurantId;
-                bool success =Dish.AddDish(d,restaurant, _menuDAL);
+                bool success =restaurant.AddDish(d, _menuDAL);
                 return RedirectToAction("ConsultAll", "Restaurant", new { restaurantId = vm.RestaurantId });
             }
             return View("Views/Menu/AddDish.cshtml", vm);
@@ -201,7 +202,7 @@ namespace ASP_PROJECT.Controllers
                 }
                 Restaurant r = new Restaurant();
                 r.Id = (int)HttpContext.Session.GetInt32("restaurantId");
-                bool success = Menu.AddMenu(menu, r,_menuDAL);
+                bool success = r.AddMenu(menu,_menuDAL);
                 if (success == true)
                 {
                     ViewData["MenuAdding"] = "true";
@@ -238,7 +239,7 @@ namespace ASP_PROJECT.Controllers
                 //en dur a modifier via session etc
                 Restaurant r = new Restaurant();
                 r.Id = (int)HttpContext.Session.GetInt32("restaurantId");
-                bool success = menu.ModifyMenu(menu,_menuDAL);
+                bool success = menu.ModifyMenu(_menuDAL);
                 if (success == true)
                 {
                     ViewData["MenuModifying"] = "true";
@@ -286,7 +287,7 @@ namespace ASP_PROJECT.Controllers
             vm.Menu = menu;
             Restaurant r = new Restaurant();
             r.Id = (int)HttpContext.Session.GetInt32("restaurantId");
-            vm.Dlist = Dish.GetDishes(r, _menuDAL);
+            vm.Dlist = r.GetDishes(_menuDAL);
             if(operation== "modifying")
             {
                 return View("ModifyMenu", vm);
@@ -366,7 +367,7 @@ namespace ASP_PROJECT.Controllers
             vm.Menu = menu;
             Restaurant r = new Restaurant();
             r.Id = (int)HttpContext.Session.GetInt32("restaurantId");
-            vm.Dlist = Dish.GetDishes(r, _menuDAL);
+            vm.Dlist = r.GetDishes(_menuDAL);
             if (operation == "modifying")
             {
                 return View("ModifyMenu", vm);
@@ -388,7 +389,7 @@ namespace ASP_PROJECT.Controllers
             DishToUpdate.Id = (int)TempData["ModifyDishId"];
             if (ModelState.IsValid)
             {
-                bool success = Dish.UpdateDish(DishToUpdate, _menuDAL);
+                bool success = DishToUpdate.UpdateDish(_menuDAL);
                 if (success == true)
                 {
                     TempData["Updating"] = "success";
