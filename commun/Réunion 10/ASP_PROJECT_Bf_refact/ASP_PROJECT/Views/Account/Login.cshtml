@@ -1,0 +1,77 @@
+﻿@model ASP_PROJECT.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if ((string)TempData["Message"] == "Uncompleted")
+{
+    <div class="m-2 alert alert-danger">Remplissez tout les champs</div>
+}
+@if ((string)TempData["Message"] == "State1")
+{
+    <div class="m-2 alert alert-danger">
+        <p>Aucun compte existant avec cet email</p>
+        <button><a asp-controller="Account" asp-action="RestorerRegister">Créer un compte de restorateur</a></button>
+        <br />
+        <button><a asp-controller="Account" asp-action="CustomerInscription">Créer un compte de client</a></button>
+    </div>
+}
+@if (!String.IsNullOrEmpty((string)TempData["Exception"]))
+{
+    <span class="m-2 alert alert-danger">@TempData["Exception"]</span>
+}
+
+@*<form method="post" asp-controller="Account">
+    <table>
+        <tr>
+            <td>
+                <label asp-for="user.Email"></label>
+            </td>
+            <td>
+                <input asp-for="user.Email" />
+            </td>
+            <td>
+                <span asp-validation-for="user.Email" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="user.Password"></label>
+            </td>
+            <td>
+                <input asp-for="user.Password" type="password" />
+            </td>
+            <td>
+                <span asp-validation-for="user.Password" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a asp-controller="Home"asp-action="Index"> Annuler </a>
+            </td>
+            <td>
+                <input type="submit" asp-action="Login" />
+            </td>
+        </tr>
+    </table>
+</form>*@
+
+<form class="row g-3" method="post" asp-controller="Account">
+    <div class="col-md-12">
+        <label for="email" asp-for="user.Email" class="form-label"></label>
+        <input class="form-control" id="email" asp-for="user.Email">
+    </div>
+    <div class="col-md-12">
+        <label for="password" class="form-label" asp-for="user.Password"></label>
+        <input class="form-control" id="password" asp-for="user.Password">
+    </div>
+    <div class="col-6">
+        <a  class="btn btn-primary mt-2" asp-controller="Account" asp-action="Inscription">Annuler</a>
+    </div>
+    <div class="col-6">
+        <input type="submit" class="mt-2 btn btn-outline-primary" asp-action="Login"/>
+    </div>
+</form>

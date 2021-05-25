@@ -1,0 +1,38 @@
+﻿<div>
+    <h1>Bienvenue sur la page de l'Account controller</h1>
+    <div>
+        <button><a asp-controller="Account" asp-action="RestorerRegister">Créer un compte de restorateur</a></button>
+        <br />
+        <button><a asp-controller="Account" asp-action="CustomerInscription">Créer un compte de client</a></button>
+        <br />
+        <button><a asp-controller="Home" asp-action="Index">Retour à l'acceuil</a></button>
+        <br>
+        @*@if ((string)ViewData["Message"] == "State10")
+        {
+            <button><a asp-controller="Account" asp-action="ConsultRestorerInformations">Consulter Information de votre compte</a></button>
+        }
+        @if ((string)TempData["Message"] == "State11")
+        {
+            <button><a asp-controller="Account" asp-action="ConsultCustomerInformations">Consulter Information de votre compte</a></button>
+        }*@
+        <button><a asp-controller="Account" asp-action="ConsultRestorerInformations">Consulter Information de votre compte(R)</a></button>
+        <button><a asp-controller="Account" asp-action="ConsultCustomerInformations">Consulter Information de votre compte(C)</a></button>
+    </div>
+
+
+
+    @if (!String.IsNullOrEmpty((string)TempData["RegisterSuccess"]))
+    {
+        <div class="padding:10">
+            <span class="alert alert-success border border-success">@TempData["RegisterSuccess"]</span>
+        </div>
+    }
+    @if ((string)TempData["Message"] == "State0")
+    {
+        <span class="alert-success"> Le compte a bien été créé</span>
+    }
+    @if ((string)TempData["Message"] == "State10")
+    {
+        <span class="m-2 alert-success">Vous êtes bien connecté</span>
+    }
+</div>

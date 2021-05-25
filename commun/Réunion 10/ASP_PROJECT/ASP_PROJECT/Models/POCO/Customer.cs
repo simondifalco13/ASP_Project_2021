@@ -29,25 +29,29 @@ namespace ASP_PROJECT.Models.POCO
         {
 
         }
+
+        //this et pas static : mettre une classe dans Account et faire hériter -> override
         public static bool Register(IAccountDAL DAL, Customer accountC) {
-            // Pour permettre de prévenir l'utilisateur.
             accountC.Password = Hash.CreateHash(accountC.Password);
             bool success = DAL.SaveCustomer(accountC);
             return success;
         }
 
+        //verifie si pas d'instance avant 
         public static Customer GetCustomerByMail(IAccountDAL accountDAL, string mail)
         {
             Customer SearchedCustomer = accountDAL.GetCustomerByMail(mail);
             return SearchedCustomer;
         }
 
+        //verifie si pas d'instance avant 
         public static Customer GetCustomerById(IAccountDAL accountDAL, int customerId)
         {
             Customer SearchedCustomer = accountDAL.GetCustomerById(customerId);
             return SearchedCustomer;
         }
 
+        //this: pas methode statique 
         public static bool ModifyCustomerInformations(IAccountDAL accountDAL, Customer customerToModify)
         {
             bool success = accountDAL.UpdateCustomerInformations(customerToModify);
