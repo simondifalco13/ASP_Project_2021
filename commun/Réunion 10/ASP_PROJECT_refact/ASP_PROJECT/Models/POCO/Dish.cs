@@ -34,21 +34,7 @@ namespace ASP_PROJECT.Models.POCO
             Type = t;
         }
        
-        ////restaurant : this (pour restaurant)
-        //public static bool AddDish(Dish d,Restaurant r,IMenuDAL menuDAL)
-        //{
-        //    bool success;
-        //    success=menuDAL.AddDish(d, r);
-        //    return success;
-        //}
-
-        ////restaurant : this pas en static
-        //public static List<Dish> GetDishes(Restaurant r,IMenuDAL menuDAL)
-        //{
-        //    List<Dish> list;
-        //    list = menuDAL.GetDishes(r);
-        //    return list;
-        //}
+       
 
         public  string ConvertDishType()
         {
@@ -81,7 +67,6 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        //OK
         public bool DeleteDish(IMenuDAL menuDAL)
         {
             bool success = false;
@@ -96,7 +81,6 @@ namespace ASP_PROJECT.Models.POCO
             return SearchedDish;
         }
 
-        //OK
         public  bool UpdateDish(IMenuDAL menuDAL)
         {
             bool success = menuDAL.UpdatingDish(this);
