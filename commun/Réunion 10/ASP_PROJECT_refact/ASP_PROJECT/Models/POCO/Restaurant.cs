@@ -124,7 +124,7 @@ namespace ASP_PROJECT.Models.POCO
             return DAL.GetAllRestaurants();
         }
 
-        //pour compléter l'objet ==> OK
+        //OK
         public Restaurant GetRestaurantDishesAndMenus(IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
         {
             Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(this);

@@ -53,7 +53,6 @@ namespace ASP_PROJECT.Models.POCO
             return restorer = accountDAL.GetRestorerById(this);
         }
 
-        //INSERTION REFACTO
         //OK
         public  bool SignRestaurant(Restaurant resto,IRestaurantDAL restaurantDAL)
         {
@@ -69,7 +68,7 @@ namespace ASP_PROJECT.Models.POCO
             }
         }
 
-        //Normalement OK
+        //OK
         public void GetRestaurant(Restaurant r, IRestaurantDAL restaurantDAL)
         {
             r = restaurantDAL.GetRestaurantById(r);

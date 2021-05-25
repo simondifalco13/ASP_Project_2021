@@ -140,27 +140,27 @@ namespace ASP_PROJECT.Models.POCO
             return success;
         }
 
-        public void CalculateTotalPrice(Order order)
+        public void CalculateTotalPrice()
         {
             double totalDishes=0;
-            foreach (var dish in order.listDishOrdered)
+            foreach (var dish in this.listDishOrdered)
             {
                 totalDishes += dish.Price;
             }
 
             double totalMenus = 0;
-            foreach (var menu in order.listMenuOrdered)
+            foreach (var menu in this.listMenuOrdered)
             {
                 totalMenus += menu.Price;
             }
 
-            order.TotalPrice = totalDishes + totalMenus;
+            this.TotalPrice = totalDishes + totalMenus;
         }
 
-        //ici paser en this
-        public bool ValidateOrder(IOrderDAL orderDAL, Order order)
+        //OK
+        public bool ValidateOrder(IOrderDAL orderDAL)
         {
-            bool success = orderDAL.AddOrder(order);
+            bool success = orderDAL.AddOrder(this);
             return success;
         }
     }   

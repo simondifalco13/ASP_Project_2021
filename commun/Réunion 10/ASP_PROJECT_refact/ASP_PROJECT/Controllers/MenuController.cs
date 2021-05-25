@@ -31,7 +31,7 @@ namespace ASP_PROJECT.Controllers
         public IActionResult AddMenu(int restaurantId)
         {
 
-            HttpContext.Session.SetString("DishesId");
+            HttpContext.Session.SetString("DishesId","");
             MenuViewModel vm = new MenuViewModel();
             //en brut a enlever
             Restaurant r = new Restaurant();

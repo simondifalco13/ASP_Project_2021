@@ -42,7 +42,7 @@ namespace ASP_PROJECT.Models.POCO
 
         //ICI ?? 
 
-        //restaurant pas en statique avec this 
+        //OK
         public  bool DeleteMenu(IMenuDAL menuDAL)
         {
             return menuDAL.SuppressMenu(this);

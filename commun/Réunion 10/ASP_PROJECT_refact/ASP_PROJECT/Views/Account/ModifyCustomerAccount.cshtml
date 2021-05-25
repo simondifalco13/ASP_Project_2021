@@ -1,9 +1,9 @@
 ﻿@model ASP_PROJECT.Models.POCO.Customer
 
 @{
-    ViewData["Title"] = "Inscription d'un client.";
+    ViewData["Title"] = "Modification des informations";
 }
-<h1>@ViewData["Title"]</h1>
+<h2>@ViewData["Title"]</h2>
 
 @*<div>
     <form asp-controller="Account" method="post">
@@ -181,10 +181,10 @@
 
     </div>
     <div class="col-6">
-        <a asp-controller="Account" asp-action="ConsultCustomerInformations">Annuler</a>
+        <a asp-controller="Account" asp-action="ConsultCustomerInformations" class="btn btn-primary">Annuler</a>
     </div>
     <div class="col-6">
-        <input type="submit" asp-action="ModifyCustomerInformations"  class="mt-2"/>
+        <input type="submit" class="btn btn-outline-primary mt-2" asp-action="ModifyCustomerInformations" />
     </div>
 </form>
     @if (!String.IsNullOrEmpty((string)TempData["AccountModifications"]))

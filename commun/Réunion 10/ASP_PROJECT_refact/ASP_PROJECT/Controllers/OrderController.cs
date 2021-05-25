@@ -165,6 +165,7 @@ namespace ASP_PROJECT.Controllers
             Order order = new Order();
             if (HttpContext.Session.GetString("customerConnected") == "true")
             {
+
                 if (HttpContext.Session.GetString("DishesOrder") != "" || HttpContext.Session.GetString("MenusOrder") != "")
                 {
 
@@ -315,7 +316,7 @@ namespace ASP_PROJECT.Controllers
             Customer customer = Customer.GetCustomerById(_accountDAL, customerId);
             order.Customer = customer;
             order.Restaurant = restaurant;
-            order.CalculateTotalPrice(order);
+            order.CalculateTotalPrice();
             return order;
         }
 
@@ -331,7 +332,7 @@ namespace ASP_PROJECT.Controllers
             order.DateOrder = DateTime.Now;
             order.Status = 0;
             Customer customer = order.Customer;
-            bool success = order.ValidateOrder(_orderDAL, order);
+            bool success = order.ValidateOrder(_orderDAL);
             EmptyCart();
             TempData["MessageCart"] = "vide";
             TempData["StatutOrder"] = "OK";
