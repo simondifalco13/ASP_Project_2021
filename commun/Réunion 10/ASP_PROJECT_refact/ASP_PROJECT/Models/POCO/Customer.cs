@@ -49,12 +49,14 @@ namespace ASP_PROJECT.Models.POCO
             return SearchedCustomer;
         }
 
+        //OK 
         public  bool ModifyCustomerInformations(IAccountDAL accountDAL)
         {
             bool success = accountDAL.UpdateCustomerInformations(this);
             return success;
         }
 
+        //OK
         public  List<Order> GetCustomerOrders( IOrderDAL orderDAL, IMenuDAL menuDAL, IRestaurantDAL restaurantDAL)
         {
             List<Order> CustomerOrders = orderDAL.GetCustomerOrders(this);

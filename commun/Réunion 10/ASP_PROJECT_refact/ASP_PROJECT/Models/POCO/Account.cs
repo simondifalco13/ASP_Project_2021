@@ -69,7 +69,7 @@ namespace ASP_PROJECT.Models.POCO
 
         }
         
-       
+        //OK
         public  Account Login(IAccountDAL accountDAL){
 
             try
@@ -85,14 +85,14 @@ namespace ASP_PROJECT.Models.POCO
         }
        
 
-        
+        //OK
         public bool VerifyExistingRestorer(IAccountDAL accountDAL)
         {
             Restorer restorer = (Restorer)this;
             bool existing = accountDAL.VerifyExistingRestorer(restorer);
             return existing;
         }
-       
+        //OK
         public bool VerifyExistingCustomer(IAccountDAL accountDAL)
         {
             Customer customer = (Customer)this;

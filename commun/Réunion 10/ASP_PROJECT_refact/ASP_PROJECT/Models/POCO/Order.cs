@@ -64,7 +64,76 @@ namespace ASP_PROJECT.Models.POCO
             Customer = customer;
         }
 
-        
+        ////restaurant : this pas en statique 
+        //public static List<Order> GetRestaurantOrders(Restaurant resto, IOrderDAL orderDAL, IMenuDAL menuDAL, IAccountDAL accountDAL)
+        //{
+        //    List<Order> RestaurantOrders = orderDAL.GetRestaurantOrders(resto);
+        //    //get details
+        //    foreach (var order in RestaurantOrders)
+        //    {
+        //        List<int> MenuDetailsId = orderDAL.GetMenusIdInMenuDetails(order);
+        //        List<int> DishDetailsId = orderDAL.GetDishesIdInMenuDetails(order);
+        //        List<Meal> OrderMeals = new List<Meal>();
+        //        Customer customer = accountDAL.GetCustomerById(order.Customer.Id);
+        //        order.Customer = customer;
+        //        foreach (var menuId in MenuDetailsId)
+        //        {
+        //            OrderMeals.Add(menuDAL.GetMenuById(menuId));
+        //        }
+        //        foreach (var dishId in DishDetailsId)
+        //        {
+        //            OrderMeals.Add(menuDAL.GetDishById(dishId));
+        //        }
+        //        foreach (var meal in OrderMeals)
+        //        {
+        //            if (meal is Menu)
+        //            {
+        //                order.listMenuOrdered.Add(meal as Menu);
+        //            }
+        //            if (meal is Dish)
+        //            {
+        //                order.listDishOrdered.Add(meal as Dish);
+        //            }
+        //        }
+        //    }
+        //    return RestaurantOrders;
+        //}
+
+        ////customer : pas en statique et this
+        //public static List<Order> GetCustomerOrders(Customer customer, IOrderDAL orderDAL, IMenuDAL menuDAL, IRestaurantDAL restaurantDAL)
+        //{
+        //    List<Order> CustomerOrders = orderDAL.GetCustomerOrders(customer);
+        //    //get details
+        //    foreach (var order in CustomerOrders)
+        //    {
+        //        List<int> MenuDetailsId = orderDAL.GetMenusIdInMenuDetails(order);
+        //        List<int> DishDetailsId = orderDAL.GetDishesIdInMenuDetails(order);
+        //        List<Meal> OrderMeals = new List<Meal>();
+        //        Restaurant restaurant = restaurantDAL.GetRestaurantById(order.Restaurant);
+        //        order.Restaurant = restaurant;
+        //        foreach (var menuId in MenuDetailsId)
+        //        {
+        //            OrderMeals.Add(menuDAL.GetMenuById(menuId));
+        //        }
+        //        foreach (var dishId in DishDetailsId)
+        //        {
+        //            OrderMeals.Add(menuDAL.GetDishById(dishId));
+        //        }
+        //        foreach (var meal in OrderMeals)
+        //        {
+        //            if (meal is Menu)
+        //            {
+        //                order.listMenuOrdered.Add(meal as Menu);
+        //            }
+        //            if (meal is Dish)
+        //            {
+        //                order.listDishOrdered.Add(meal as Dish);
+        //            }
+        //        }
+        //    }
+        //    return CustomerOrders;
+        //}
+
         public bool UpdateOrderStatus()
         {
             bool success = false;
@@ -88,6 +157,7 @@ namespace ASP_PROJECT.Models.POCO
             this.TotalPrice = totalDishes + totalMenus;
         }
 
+        //OK
         public bool ValidateOrder(IOrderDAL orderDAL)
         {
             bool success = orderDAL.AddOrder(this);

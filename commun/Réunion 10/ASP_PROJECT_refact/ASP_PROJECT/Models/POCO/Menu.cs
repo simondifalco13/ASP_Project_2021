@@ -21,13 +21,28 @@ namespace ASP_PROJECT.Models.POCO
             DishList = dishes;
         }
 
-       
+        ////restaurants : this pas en statique
+        // public static List<Menu> GetMenus(IMenuDAL menuDAL,Restaurant r) {
+
+        //     return menuDAL.GetMenus(r);
+        // }
+
+        ////restaurant : pas en statique et restaurant en this
+        //public static bool AddMenu(Menu menu,Restaurant restaurant, IMenuDAL menuDAL)
+        //{
+        //    return menuDAL.AddMenu( menu, restaurant);
+        //}
+
+        // this 
 
         public static Menu GetMenuById(int MenuId, IMenuDAL menuDAL)
         {
             return menuDAL.GetMenuById(MenuId);
         }
 
+        //ICI ?? 
+
+        //OK
         public  bool DeleteMenu(IMenuDAL menuDAL)
         {
             return menuDAL.SuppressMenu(this);

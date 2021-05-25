@@ -17,6 +17,7 @@ namespace ASP_PROJECT.Models.POCO
             restaurantList = new List<Restaurant>();
         }
 
+        //OK
         public  bool Register(IAccountDAL accountDAL)
         {
             this.Password = Hash.CreateHash(this.Password);
@@ -31,29 +32,33 @@ namespace ASP_PROJECT.Models.POCO
             return SearchedRestorer;
         }
 
+        //OK
         public  bool ModifyRestorerInformations(IAccountDAL accountDAL)
         {
             bool success = accountDAL.UpdateRestorerInformations(this);
             return success;
         }
 
+        //OK
         public List<Restaurant> GetRestorerRestaurants(IRestaurantDAL restaurantDAL)
         {
             List<Restaurant> restaurants = restaurantDAL.GetRestorerRestaurantsById(this);
             return restaurants;
         }
 
+        //OK
         public  Restorer GetRestorerById(IAccountDAL accountDAL)
         {
             Restorer restorer = new Restorer();
             return restorer = accountDAL.GetRestorerById(this);
         }
 
-
+        //OK
         public  bool SignRestaurant(Restaurant resto,IRestaurantDAL restaurantDAL)
         {
             try
             {
+                //passer restorer en this
                 bool success = restaurantDAL.SignRestaurant(this, resto);
                 return success;
             }
@@ -63,6 +68,7 @@ namespace ASP_PROJECT.Models.POCO
             }
         }
 
+        //OK
         public void GetRestaurant(Restaurant r, IRestaurantDAL restaurantDAL)
         {
             r = restaurantDAL.GetRestaurantById(r);
