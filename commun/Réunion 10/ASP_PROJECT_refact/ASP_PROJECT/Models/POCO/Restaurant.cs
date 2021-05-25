@@ -114,11 +114,17 @@ namespace ASP_PROJECT.Models.POCO
             Type = t;
         }
 
-        
+        ////restorer
+        //public void GetRestaurant(Restaurant r,IRestaurantDAL restaurantDAL){
+        //    r = restaurantDAL.GetRestaurantById(r);
+        //}
+
+        //normalement ici : OK
         public static List<Restaurant> GetAllRestaurants(IRestaurantDAL DAL) {
             return DAL.GetAllRestaurants();
         }
 
+        //OK
         public Restaurant GetRestaurantDishesAndMenus(IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
         {
             Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(this);
@@ -135,17 +141,20 @@ namespace ASP_PROJECT.Models.POCO
             return RecuperatedResto;
         }
 
+        //OK
         public Restaurant GetScheduleResto(IRestaurantDAL restoDAL)
         {
             restoDAL.GetRestaurantSchedules(this);
             return this;
         }
 
+        //OK
         public  Restaurant GetRestaurantById(IRestaurantDAL restoDAL)
         {
             return restoDAL.GetRestaurantById(this);
         }
 
+        //OK
         public  bool AddDish(Dish d, IMenuDAL menuDAL)
         {
             bool success;
@@ -153,7 +162,7 @@ namespace ASP_PROJECT.Models.POCO
             return success;
         }
 
-
+        //OK
         public List<Dish> GetDishes(IMenuDAL menuDAL)
         {
             List<Dish> list;
@@ -161,17 +170,20 @@ namespace ASP_PROJECT.Models.POCO
             return list;
         }
 
+        //OK
         public  List<Menu> GetMenus(IMenuDAL menuDAL)
         {
 
             return menuDAL.GetMenus(this);
         }
 
+        //OK
         public  bool AddMenu(Menu menu, IMenuDAL menuDAL)
         {
             return menuDAL.AddMenu(menu, this);
         }
 
+        //OK
         public  List<Order> GetRestaurantOrders(IOrderDAL orderDAL, IMenuDAL menuDAL, IAccountDAL accountDAL)
         {
             List<Order> RestaurantOrders = orderDAL.GetRestaurantOrders(this);
