@@ -7,18 +7,31 @@ using System.Threading.Tasks;
 
 namespace ASP_PROJECT.Models.POCO
 {
+    //public enum RestaurantType
+    //{
+    //    Asian,
+    //    Mexican,
+    //    Snack,
+    //    African,
+    //    Thaï,
+    //    Greek,
+    //    Sushi,
+    //    Spanish,
+    //    Pizza,
+    //    Italian
+    //}
     public enum RestaurantType
     {
-        Asian,
-        Mexican,
+        Asiatique,
+        Mexicain,
         Snack,
-        African,
+        Africain,
         Thaï,
-        Greek,
+        Grec,
         Sushi,
-        Spanish,
+        Espagnol,
         Pizza,
-        Italian
+        Italien
     }
     public class Restaurant
     {

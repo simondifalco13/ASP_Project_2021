@@ -29,6 +29,7 @@ namespace ASP_PROJECT.Models.POCO
         [Display(Name = "Prix")]
         public double Price { get; set; }
 
+        //éventuellement mettre Id dans meal
         public Restaurant Restaurant { get; set; }
 
         public Meal()

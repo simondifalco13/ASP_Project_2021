@@ -8,11 +8,11 @@
 
 @if ((string)TempData["Message"] == "Uncompleted")
 {
-    <div class="m-2 alert-danger">Remplissez tout les champs</div>
+    <div class="m-2 alert alert-danger">Remplissez tout les champs</div>
 }
 @if ((string)TempData["Message"] == "State1")
 {
-    <div class="m-2 alert-danger">
+    <div class="m-2 alert alert-danger">
         <p>Aucun compte existant avec cet email</p>
         <button><a asp-controller="Account" asp-action="RestorerRegister">Créer un compte de restorateur</a></button>
         <br />
@@ -21,7 +21,7 @@
 }
 @if (!String.IsNullOrEmpty((string)TempData["Exception"]))
 {
-    <span class="m-2 alert-danger">@TempData["Exception"]</span>
+    <span class="m-2 alert alert-danger">@TempData["Exception"]</span>
 }
 
 @*<form method="post" asp-controller="Account">

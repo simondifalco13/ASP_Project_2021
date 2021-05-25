@@ -137,6 +137,7 @@ namespace ASP_PROJECT.Controllers {
                 {
                     Restorer restorer = new Restorer();
                     restorer.Id = vm.restorerId;
+                    HttpContext.Session.SetInt32("restoredId", restorer.Id);
                     restorer = Restorer.GetRestorerById(_accountDAL,restorer) ;
                     bool success = Restaurant.SignRestaurant(CreatedRestaurant, restorer, _restaurantDAL);
                     if (success == true)

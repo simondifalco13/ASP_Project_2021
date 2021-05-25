@@ -36,12 +36,13 @@
     </ul>
 </td>
 <td>
-    <select asp-for="@Model.Status">
+    @*<select asp-for="@Model.Status">
         <option value="0">Validée</option>
         <option value="1">En préparation</option>
         <option value="2">En livraison</option>
         <option value="3">Terminé</option>
-    </select>
+    </select>*@
+    <label>@Model.Status</label>
 </td>
 @*<td>
        <input type="submit" asp-action="ModifyOrderStatus" asp-route-OrderIdStatus="@Model.Id+@Model.Status" value="Modifier Status"/>

@@ -6,14 +6,20 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASP_PROJECT.Models.POCO
-{ 
+{
+    //public enum OrderStatus
+    //{
+    //    Validate,
+    //    OnPreparation,
+    //    //Retiré car manque de temps
+    //    //OnDelivery,
+    //    Finished
+
     public enum OrderStatus
     {
-        Validate,
-        OnPreparation,
-        //Retiré car manque de temps
-        //OnDelivery,
-        Finished
+        Validée,
+        Preparation,
+        Finie
     }
     public class Order
     {

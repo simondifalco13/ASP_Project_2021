@@ -36,16 +36,19 @@
                 <a class="btn btn-outline-primary pb-1" asp-controller="Menu" asp-action="AddMenu" asp-route-restaurantId="@Model.Resto.Id">Ajouter un menu</a>
             }
         </tr>
-        <tr>
-            <th>Nom
-            <th>Description</th>
-            <th>Type de service</th>
-            <th>Prix</th>
-            <th>Contenu</th>
-        </tr>
-        @foreach (var item in Model.SelectedListMenus)
+        @if (Model.SelectedListMenus.Count > 0)
         {
-            <partial name="_RestaurantMenusPartial.cshtml" for="@item" />
+            <tr>
+                <th>Nom
+                <th>Description</th>
+                <th>Type de service</th>
+                <th>Prix</th>
+                <th>Contenu</th>
+            </tr>
+            @foreach (var item in Model.SelectedListMenus)
+            {
+                <partial name="_RestaurantMenusPartial.cshtml" for="@item" />
+            }
         }
     </table>
     <table class="table">
@@ -56,16 +59,19 @@
                 <a class="btn btn-outline-primary pb-1" asp-controller="Menu" asp-action="AddDish" asp-route-restaurantId="@Model.Resto.Id">Ajouter un plat</a>
             }
         </tr>
-        <tr>
-            <th>Nom</th>
-            <th>Type</th>
-            <th>Type de service</th>
-            <th>Description</th>
-            <th>Prix</th>
-        </tr>
-        @foreach (var item in Model.SelectedListDish)
+        @if (Model.SelectedListDish.Count > 0)
         {
-            <partial name="_RestaurantDishesPartial.cshtml" for="@item" />
+            <tr>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Type de service</th>
+                <th>Description</th>
+                <th>Prix</th>
+            </tr>
+            @foreach (var item in Model.SelectedListDish)
+            {
+                <partial name="_RestaurantDishesPartial.cshtml" for="@item" />
+            }
         }
     </table>
 </form>
