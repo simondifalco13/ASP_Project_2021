@@ -1,0 +1,90 @@
+
+
+INSERT INTO customers (FirstName,LastName,Password,Gender,Address,PostalCode,City,Country,Email,PhoneNumber,DateOfBirth) VALUES 
+('Daniel','Pret','password1234','M','rue enghien 12','6200','Chatelet','Belgique','daniel.pret@hotmail.com','0479854147','1956-12-03'),
+('Marie','Roper','password1234','F','rue enior 32','6400','Boyou','Belgique','marie.roper@hotmail.com','0479334117','1976-11-28'),
+('Annie','Cordale','password1234','F','rue de la sambre 1','6010','Couillet','Belgique','annie.c@gmail.com','0431394518','1970-01-08')
+
+
+INSERT INTO restorers(FirstName,LastName,Password,Gender,Address,PostalCode,City,Country,Email,PhoneNumber) VALUES
+('Phillipe','Esteb','password1234','M','rue steak ','6000','Charleroi','Belgique','phil.est@hotmail.com','0479781295'),
+('Frank','Angus','password1234','M','avenue Baudouin','6001','Marcinelle','Belgique','frank.angus@gmail.com','0425219365'),
+('Daniella','Passin','password1234','F','rue du rosier','6010','Couillet','Belgique','daniella.ps@hotmail.com','0494135925')
+
+
+INSERT INTO restaurants(Name,Adress,PostalCode,City,Country,PhoneNumber,RestaurantType,Description,TvaNumber,RestorerId) 
+VALUES
+('Snack Dan','place verte 3','6000','Charleroi','Belgique','071323768','Snack','Snack de qualité supérieure','BE7123543235',3),
+('Chez Phil','chaussée de bruxelles','6040','Lodelinsart','Belgique','071143568','Italien','Restaurant italien avec des produits plus que frais','BE71678563235',1),
+('Mex and Go','rue de leuven','4000','Louvain-La-Neuve','Belgique','071315918','Mexicain','Nourriture mexicain en fast food','BE7173543485',2),
+('Phill & Co','rue de gosselies','6041','Jumet','Belgique','071891291','Pizza','Pizzeria de qualité','BE8923543729',1)
+
+//faire
+
+INSERT INTO schedules (restaurantId,openingDay,openTime,closeTime) VALUES
+(1,'Lundi','12:00:00','23:00:00'),
+(1,'Mardi','12:00:00','23:00:00'),
+(1,'Mercredi','12:00:00','23:00:00'),
+(1,'Jeudi','12:00:00','23:00:00'),
+(1,'Vendredi','12:00:00','23:00:00'),
+(1,'Samedi','11:30:00','23:00:00'),
+(2,'Lundi','15:00:00','23:00:00'),
+(2,'Mardi','15:00:00','23:00:00'),
+(2,'Mercredi','12:00:00','23:00:00'),
+(2,'Jeudi','17:00:00','23:00:00'),
+(2,'Vendredi','16:00:00','23:00:00'),
+(2,'Samedi','11:30:00','23:00:00'),
+(3,'Lundi','11:00:00','21:00:00'),
+(3,'Mardi','11:00:00','21:00:00'),
+(3,'Mercredi','11:00:00','21:00:00'),
+(3,'Jeudi','11:00:00','21:00:00'),
+(3,'Vendredi','11:00:00','23:00:00'),
+(3,'Samedi','11:30:00','23:00:00'),
+(4,'Lundi','12:00:00','23:00:00'),
+(4,'Mardi','12:00:00','23:00:00'),
+(4,'Mercredi','12:00:00','23:00:00'),
+(4,'Jeudi','12:00:00','23:00:00'),
+(4,'Vendredi','12:00:00','23:00:00'),
+(4,'Samedi','11:30:00','23:00:00')
+
+INSERT INTO opinions(restaurantId,customerId,opinionText,rating) VALUES
+(1,2,'Très bon snack je recommande ! ',4),
+(2,3,'Quel délice, j y retournerais rapidement !',5),
+(3,1,'Rapide ,bon et sain, que demander de plus ? ',4),
+(3,2,'Bien surpris par ce fast food ! ',3)
+
+
+INSERT INTO dishes (restaurantId,name,price,typeService,typeDish,description) VALUES
+(1,'Mitraillette Poulet Mariné',6.5,'Evening','Dish','La mitraillette avec du poulet mariné maison !'),
+(1,'Hamburger',3,'Lunch','Dish','Le bon hamburger viande maison'),
+(1,'Assiette Pitta',10,'Evening','Dish','Assiette Pitta avec crudités,feta,sauce'),
+(1,'Soda Maison',2,'Lunch','Drink','Soda à la pêche fait maison, très frais'),
+(1,'Frites',3,'Evening','Dish','Frites maison avec des pommes de terres locales'),
+(1,'Crême glacée vanille',3,'Lunch','Dessert','Glace faite maison'),
+(2,'Pâtes bolognese',12,'Evening','Dish','Les pâtes bolognese de la maison ! Un classique.'),
+(2,'Scampi maison',10,'Evening','Dish','Produit frais de qualité'),
+(2,'Verre de Vin rouge',4,'Evening','Drink','Du vin de très bon millésime'),
+(2,'Patisseries siciliennes',15,'Evening','Dessert','Les meilleurs de la région')
+
+
+INSERT INTO menus (restaurantId,name,price,typeService,description) VALUES
+(1,'Menu étudiant',6,'Lunch','Mitraillette + Boisson'),
+(1,'Assiette Royale',12,'Lunch','Assiette Pitta + boisson + frites'),
+(2,'Italie Menu',15,'Evening','Le bon vin accompagné de la traditionelle bolognese'),
+(2,'Italie Complète',25,'Evening',' La traditionelle bolognese accompagnée de desserts siciliens')
+
+INSERT INTO MenuDetails(menuId,dishId) VALUES 
+(1,1),(1,4),
+(2,3),(2,4),(2,5),
+(3,7),(3,9),
+(4,7),(4,10)
+
+INSERT INTO orders (OrderStatus,DeliveryAdress,OrderDate,Price,Note,CustomerId,RestaurantId) VALUES
+('Validated','Rue françois oublié 12,6061, Montignies-Sur-Sambre','05/04/2021 13:02:00',53.2,'',1)
+
+INSERT INTO OrderMenuDetails(orderId,menuId) VALUES
+(1,2)
+
+INSERT INTO OrderDishDetails (orderId,dishId) VALUES
+(1,1),(1,5),(1,6)
+-------------------------------
