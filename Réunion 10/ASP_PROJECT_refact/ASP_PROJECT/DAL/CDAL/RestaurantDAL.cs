@@ -17,20 +17,20 @@ namespace ASP_PROJECT.DAL.CDAL
             this.connectionString = connectionString;
         }
 
-        public Restaurant GetRestaurantById(Restaurant restaurant)
+        public Restaurant GetRestaurantById(int restaurantId)
         {
             Restaurant r = new Restaurant();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string request = "SELECT Name,City,Adress,PostalCode,PhoneNumber,RestaurantType,Description,TvaNumber,Country FROM dbo.Restaurants WHERE RestaurantId=@RestaurantId";
                 SqlCommand cmd = new SqlCommand(request, connection);
-                cmd.Parameters.AddWithValue("RestaurantId",restaurant.Id);
+                cmd.Parameters.AddWithValue("RestaurantId",restaurantId);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        r.Id = restaurant.Id;
+                        r.Id = restaurantId;
                         r.Name = reader.GetString("Name");
                         r.City= reader.GetString("City");
                         r.Address= reader.GetString("Adress");

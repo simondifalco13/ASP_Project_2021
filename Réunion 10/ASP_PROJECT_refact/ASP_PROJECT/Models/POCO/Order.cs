@@ -7,20 +7,16 @@ using System.Threading.Tasks;
 
 namespace ASP_PROJECT.Models.POCO
 {
-    //public enum OrderStatus
-    //{
-    //    Validate,
-    //    OnPreparation,
-    //    //Retiré car manque de temps
-    //    //OnDelivery,
-    //    Finished
-
     public enum OrderStatus
     {
-        Validée,
-        Preparation,
-        Finie
+        Validate,
+        OnPreparation,
+        //Retiré car manque de temps
+        //OnDelivery,
+        Finished
     }
+
+ 
     public class Order
     {
 
@@ -64,7 +60,29 @@ namespace ASP_PROJECT.Models.POCO
             Customer = customer;
         }
 
-        
+        public string ConvertOrderStatus()
+        {
+            string value = "";
+            switch (this.Status)
+            {
+                case OrderStatus.Validate:
+                    value = "Validée";
+                    break;
+
+                case OrderStatus.OnPreparation:
+                    value = "En préparation";
+                    break;
+
+                case OrderStatus.Finished:
+                    value = "Terminée";
+                    break;
+
+            }
+            return value;
+
+        }
+
+
         public bool UpdateOrderStatus()
         {
             bool success = false;

@@ -42,7 +42,7 @@
         <option value="2">En livraison</option>
         <option value="3">Terminé</option>
     </select>*@
-    <label>@Model.Status</label>
+    <label>@Model.ConvertOrderStatus()</label>
 </td>
 @*<td>
        <input type="submit" asp-action="ModifyOrderStatus" asp-route-OrderIdStatus="@Model.Id+@Model.Status" value="Modifier Status"/>

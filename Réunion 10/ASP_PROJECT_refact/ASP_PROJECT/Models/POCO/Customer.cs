@@ -30,7 +30,7 @@ namespace ASP_PROJECT.Models.POCO
 
         }
 
-        //ok : mettre une classe dans Account et faire hériter -> override ??
+        
         public override bool Register(IAccountDAL DAL) {
             this.Password = Hash.CreateHash(this.Password);
             bool success = DAL.SaveCustomer(this);
@@ -63,7 +63,7 @@ namespace ASP_PROJECT.Models.POCO
                 List<int> MenuDetailsId = orderDAL.GetMenusIdInMenuDetails(order);
                 List<int> DishDetailsId = orderDAL.GetDishesIdInMenuDetails(order);
                 List<Meal> OrderMeals = new List<Meal>();
-                Restaurant restaurant = restaurantDAL.GetRestaurantById(order.Restaurant);
+                Restaurant restaurant = restaurantDAL.GetRestaurantById(order.Restaurant.Id);
                 order.Restaurant = restaurant;
                 foreach (var menuId in MenuDetailsId)
                 {

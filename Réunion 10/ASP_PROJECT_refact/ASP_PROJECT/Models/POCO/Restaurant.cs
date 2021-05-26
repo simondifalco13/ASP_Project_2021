@@ -7,32 +7,21 @@ using System.Threading.Tasks;
 
 namespace ASP_PROJECT.Models.POCO
 {
-    //public enum RestaurantType
-    //{
-    //    Asian,
-    //    Mexican,
-    //    Snack,
-    //    African,
-    //    Thaï,
-    //    Greek,
-    //    Sushi,
-    //    Spanish,
-    //    Pizza,
-    //    Italian
-    //}
     public enum RestaurantType
     {
-        Asiatique,
-        Mexicain,
+        Asian,
+        Mexican,
         Snack,
-        Africain,
+        African,
         Thaï,
-        Grec,
+        Greek,
         Sushi,
-        Espagnol,
+        Spanish,
         Pizza,
-        Italien
+        Italian
     }
+   
+
     public class Restaurant
     {
         public int Id { get; set; }
@@ -114,14 +103,64 @@ namespace ASP_PROJECT.Models.POCO
             Type = t;
         }
 
-        
+        public string ConvertRestaurantType()
+        {
+            string value = "";
+            switch (this.Type)
+            {
+                case RestaurantType.Asian:
+                    value = "Asiatique";
+                    break;
+
+                case RestaurantType.Mexican:
+                    value = "Mexicain";
+                    break;
+
+                case RestaurantType.Snack:
+                    value = "Snack";
+                    break;
+
+                case RestaurantType.African:
+                    value = "Africain";
+                    break;
+
+                case RestaurantType.Thaï:
+                    value = "Thaî";
+                    break;
+
+                case RestaurantType.Greek:
+                    value = "Grec";
+                    break;
+
+                case RestaurantType.Sushi:
+                    value = "Sushi";
+                    break;
+
+                case RestaurantType.Spanish:
+                    value = "Espagnol";
+                    break;
+
+                case RestaurantType.Pizza:
+                    value = "Pizza";
+                    break;
+
+                case RestaurantType.Italian:
+                    value = "Italien";
+                    break;
+            }
+            return value;
+
+        }
+
+
         public static List<Restaurant> GetAllRestaurants(IRestaurantDAL DAL) {
             return DAL.GetAllRestaurants();
         }
 
         public Restaurant GetRestaurantDishesAndMenus(IRestaurantDAL restaurantDAL,IMenuDAL menuDAL)
         {
-            Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(this);
+            int id = this.Id;
+            Restaurant RecuperatedResto = restaurantDAL.GetRestaurantById(id);
             List<Menu> RestaurantMenus = menuDAL.GetMenus(this);
             foreach (var menu in RestaurantMenus)
             {
@@ -141,9 +180,9 @@ namespace ASP_PROJECT.Models.POCO
             return this;
         }
 
-        public  Restaurant GetRestaurantById(IRestaurantDAL restoDAL)
+        public static Restaurant GetRestaurantById(IRestaurantDAL restoDAL,int id)
         {
-            return restoDAL.GetRestaurantById(this);
+            return restoDAL.GetRestaurantById(id);
         }
 
         public  bool AddDish(Dish d, IMenuDAL menuDAL)
@@ -161,7 +200,7 @@ namespace ASP_PROJECT.Models.POCO
             return list;
         }
 
-        public  List<Menu> GetMenus(IMenuDAL menuDAL)
+        public List<Menu> GetMenus(IMenuDAL menuDAL)
         {
 
             return menuDAL.GetMenus(this);

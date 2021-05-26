@@ -496,11 +496,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simon\\Desktop\\prj\\ASP_Project_2021\\commun\\Réunion 10\\ASP_PROJECT_refact\\ASP_PROJECT\\ASP_PROJECT.csproj",
+      "projectUniqueName": "C:\\Users\\simon\\Desktop\\prj\\ASP_Project_2021\\Réunion 10\\ASP_PROJECT_refact\\ASP_PROJECT\\ASP_PROJECT.csproj",
       "projectName": "ASP_PROJECT",
-      "projectPath": "C:\\Users\\simon\\Desktop\\prj\\ASP_Project_2021\\commun\\Réunion 10\\ASP_PROJECT_refact\\ASP_PROJECT\\ASP_PROJECT.csproj",
+      "projectPath": "C:\\Users\\simon\\Desktop\\prj\\ASP_Project_2021\\Réunion 10\\ASP_PROJECT_refact\\ASP_PROJECT\\ASP_PROJECT.csproj",
       "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simon\\Desktop\\prj\\ASP_Project_2021\\commun\\Réunion 10\\ASP_PROJECT_refact\\ASP_PROJECT\\obj\\",
+      "outputPath": "C:\\Users\\simon\\Desktop\\prj\\ASP_Project_2021\\Réunion 10\\ASP_PROJECT_refact\\ASP_PROJECT\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",

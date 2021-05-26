@@ -333,9 +333,9 @@ namespace ASP_PROJECT.Controllers
 
             int customerId = (int)HttpContext.Session.GetInt32("CustomerId");
             Restaurant restaurant = new Restaurant();
-            restaurant.Id = (int)HttpContext.Session.GetInt32("restaurantId");
+            int Id = (int)HttpContext.Session.GetInt32("restaurantId");
 
-            restaurant = restaurant.GetRestaurantById(_restaurantDAL);
+            restaurant = Restaurant.GetRestaurantById(_restaurantDAL,Id);
             Customer customer = Customer.GetCustomerById(_accountDAL, customerId);
             order.Customer = customer;
             order.Restaurant = restaurant;
