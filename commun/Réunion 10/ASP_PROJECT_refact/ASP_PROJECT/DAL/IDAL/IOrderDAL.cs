@@ -18,5 +18,8 @@ namespace ASP_PROJECT.DAL.IDAL
 
         public bool AddOrder(Order order);
 
+        public Order GetOrderById(int orderId);
+
+        public bool UpdateOrderStatus(Order Order);
     }
 }

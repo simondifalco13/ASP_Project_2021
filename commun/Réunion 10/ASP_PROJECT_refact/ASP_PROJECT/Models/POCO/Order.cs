@@ -93,5 +93,15 @@ namespace ASP_PROJECT.Models.POCO
             bool success = orderDAL.AddOrder(this);
             return success;
         }
+
+        public static Order GetOrderById(IOrderDAL orderDAL,int orderId)
+        {
+            return orderDAL.GetOrderById(orderId);
+        }
+
+        public bool UpdateOrderStatus(IOrderDAL orderDAL)
+        {
+            return orderDAL.UpdateOrderStatus(this);
+        }
     }   
 }

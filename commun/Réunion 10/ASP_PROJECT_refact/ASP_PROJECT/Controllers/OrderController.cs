@@ -36,6 +36,7 @@ namespace ASP_PROJECT.Controllers
             Restaurant resto = new Restaurant();
             //resto.Id = (int)HttpContext.Session.GetInt32("restaurantId");
             resto.Id = restoId;
+            HttpContext.Session.SetInt32("restaurantId", restoId);
             List<Order> RestaurantOrders = resto.GetRestaurantOrders(_orderDAL,_menuDAL,_accountDAL);
             if (RestaurantOrders.Count == 0)
             {
@@ -69,11 +70,33 @@ namespace ASP_PROJECT.Controllers
             return View("ConsultCustomerOrders",vm);
         }
 
-        public IActionResult ModifyOrderStatus(string OrderIdStatus)
+        [HttpPost]
+
+        public IActionResult ModifyOrderStatus(int orderId)
+        {
+            Order searchedOrder = Order.GetOrderById(_orderDAL, orderId);
+            //rediriger vers page de modification
+            HttpContext.Session.SetInt32("orderIdToModify",searchedOrder.Id);
+            return View("UpdateOrderStatus",searchedOrder);
+        }
+
+        [HttpPost]
+        public IActionResult ValidateUpdatingOrderStatus(Order order)
         {
             //modifier en db
-            
-            return RedirectToAction("ConsultRestaurantOrders");
+            int orderId=(int)HttpContext.Session.GetInt32("orderIdToModify");
+            order.Id = orderId;
+            bool success = order.UpdateOrderStatus(_orderDAL);
+            if (success == true)
+            {
+                HttpContext.Session.SetInt32("orderIdToModify", 0);
+                int restaurantId = (int)HttpContext.Session.GetInt32("restaurantId");
+                return RedirectToAction("ConsultRestaurantOrders", new {restoId= restaurantId});
+            }
+            else
+            {
+                return View("UpdateOrderStatus", order);
+            }
         }
 
         public IActionResult AddMenuToCart(int menuId)

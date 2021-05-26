@@ -231,5 +231,52 @@ namespace ASP_PROJECT.DAL.CDAL
             return id;
         }
 
+        public Order GetOrderById(int orderId)
+        {
+            Order SearchedOrder = new Order();
+            OrderStatus Status;
+            decimal price;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string request = "SELECT * FROM dbo.Orders WHERE OrderId=@OrderId";
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("OrderId", orderId);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        SearchedOrder.Id = orderId;
+                        SearchedOrder.Restaurant.Id = reader.GetInt32("RestaurantId");
+                        SearchedOrder.DeliveryAdress = reader.GetString("DeliveryAdress");
+                        price = reader.GetDecimal("Price");
+                        SearchedOrder.TotalPrice = (double)price;
+                        SearchedOrder.Customer.Id = reader.GetInt32("CustomerId");
+                        SearchedOrder.DateOrder = reader.GetDateTime("OrderDate");
+                        Enum.TryParse(reader.GetString("OrderStatus"), out Status);
+                        SearchedOrder.Status = Status;
+                    }
+                }
+            }
+            return SearchedOrder;
+        }
+
+        public bool UpdateOrderStatus(Order Order)
+        {
+            string request = "UPDATE dbo.Orders SET OrderStatus=@OrderStatus  WHERE OrderId=@OrderId";
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(request, connection);
+                cmd.Parameters.AddWithValue("OrderStatus", Order.Status);
+                cmd.Parameters.AddWithValue("OrderId", Order.Id);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+
+            return success;
+        }
     }
 }

@@ -687,3 +687,4 @@ C:\Users\simon\Desktop\prj\ASP_Project_2021\commun\Réunion 10\ASP_PROJECT_refac
 C:\Users\simon\Desktop\prj\ASP_Project_2021\commun\Réunion 10\ASP_PROJECT_refact\ASP_PROJECT\obj\Debug\net5.0\ref\ASP_PROJECT.dll
 C:\Users\simon\Desktop\prj\ASP_Project_2021\commun\Réunion 10\ASP_PROJECT_refact\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.pdb
 C:\Users\simon\Desktop\prj\ASP_Project_2021\commun\Réunion 10\ASP_PROJECT_refact\ASP_PROJECT\obj\Debug\net5.0\ASP_PROJECT.genruntimeconfig.cache
+C:\Users\simon\Desktop\prj\ASP_Project_2021\commun\Réunion 10\ASP_PROJECT_refact\ASP_PROJECT\obj\Debug\net5.0\Razor\Views\Order\UpdateOrderStatus.cshtml.g.cs
