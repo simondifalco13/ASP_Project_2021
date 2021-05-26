@@ -17,7 +17,7 @@ namespace ASP_PROJECT.Models.POCO
             restaurantList = new List<Restaurant>();
         }
 
-        public  bool Register(IAccountDAL accountDAL)
+        public override bool Register(IAccountDAL accountDAL)
         {
             this.Password = Hash.CreateHash(this.Password);
             bool success = accountDAL.SaveRestorer(this);

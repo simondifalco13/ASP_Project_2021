@@ -99,5 +99,8 @@ namespace ASP_PROJECT.Models.POCO
             bool existing = accountDAL.VerifyExistingCustomer(customer);
             return existing;
         }
+
+        public abstract bool Register(IAccountDAL accountDAL);
+        
     }
 }

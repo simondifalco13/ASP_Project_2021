@@ -31,7 +31,7 @@ namespace ASP_PROJECT.Models.POCO
         }
 
         //ok : mettre une classe dans Account et faire hériter -> override ??
-        public  bool Register(IAccountDAL DAL) {
+        public override bool Register(IAccountDAL DAL) {
             this.Password = Hash.CreateHash(this.Password);
             bool success = DAL.SaveCustomer(this);
             return success;
