@@ -345,7 +345,6 @@ namespace ASP_PROJECT.Controllers
                 {
                     UpdateRestorerSessionInformations(RestorerToModify);
                     TempData["AccountModifications"] = "success";
-                    //return View("ConsultRestorerInformations",RestorerToModify);
                     return RedirectToAction("ConsultRestorerInformations");
                 }
             }
@@ -362,7 +361,6 @@ namespace ASP_PROJECT.Controllers
         {
             string mail = HttpContext.Session.GetString("Email");
             Customer RestOfInformations = Customer.GetCustomerByMail(_accountDAL, mail);
-            //CustomerToModify = Customer.GetCustomerByMail(_accountDAL, mail);
             CustomerToModify.Id = RestOfInformations.Id;
             CustomerToModify.Email = RestOfInformations.Email;
             CustomerToModify.Country = RestOfInformations.Country;
@@ -380,7 +378,6 @@ namespace ASP_PROJECT.Controllers
                 {
                     UpdateCustomerSessionInformations(CustomerToModify);
                     TempData["AccountModifications"] = "success";
-                    //return View("ConsultCustomerInformations", CustomerToModify);
                     return RedirectToAction("ConsultCustomerInformations");
 
                 }
@@ -399,7 +396,6 @@ namespace ASP_PROJECT.Controllers
             if (type == "restorer")
             {
                 return RedirectToAction("RestorerRegister");
-                //return View("RestorerInscription");
             }
             else
             {
