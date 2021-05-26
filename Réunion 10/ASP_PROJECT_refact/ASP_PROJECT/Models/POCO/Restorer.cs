@@ -43,10 +43,10 @@ namespace ASP_PROJECT.Models.POCO
             return restaurants;
         }
 
-        public  Restorer GetRestorerById(IAccountDAL accountDAL)
+        public static  Restorer GetRestorerById(IAccountDAL accountDAL,int id)
         {
             Restorer restorer = new Restorer();
-            return restorer = accountDAL.GetRestorerById(this);
+            return restorer = accountDAL.GetRestorerById(id);
         }
 
 

@@ -34,7 +34,6 @@ namespace ASP_PROJECT.Controllers
         {
             RestaurantOrderViewModel vm = new RestaurantOrderViewModel();
             Restaurant resto = new Restaurant();
-            //resto.Id = (int)HttpContext.Session.GetInt32("restaurantId");
             resto.Id = restoId;
             HttpContext.Session.SetInt32("restaurantId", restoId);
             List<Order> RestaurantOrders = resto.GetRestaurantOrders(_orderDAL,_menuDAL,_accountDAL);
@@ -75,29 +74,11 @@ namespace ASP_PROJECT.Controllers
         public IActionResult ModifyOrderStatus(int orderId)
         {
             Order searchedOrder = Order.GetOrderById(_orderDAL, orderId);
-            //rediriger vers page de modification
             HttpContext.Session.SetInt32("orderIdToModify",searchedOrder.Id);
             return View("UpdateOrderStatus",searchedOrder);
         }
 
-        [HttpPost]
-        public IActionResult ValidateUpdatingOrderStatus(Order order)
-        {
-            //modifier en db
-            int orderId=(int)HttpContext.Session.GetInt32("orderIdToModify");
-            order.Id = orderId;
-            bool success = order.UpdateOrderStatus(_orderDAL);
-            if (success == true)
-            {
-                HttpContext.Session.SetInt32("orderIdToModify", 0);
-                int restaurantId = (int)HttpContext.Session.GetInt32("restaurantId");
-                return RedirectToAction("ConsultRestaurantOrders", new {restoId= restaurantId});
-            }
-            else
-            {
-                return View("UpdateOrderStatus", order);
-            }
-        }
+        
 
         public IActionResult AddMenuToCart(int menuId)
         {
@@ -265,6 +246,7 @@ namespace ASP_PROJECT.Controllers
                         newMenuSession += id;
                     }
                 }
+                //gestion doublon : supprimer un seul exemplaire 
                 if (receivedId == id && flag == 1)
                 {
                     if (newMenuSession != "")
@@ -360,9 +342,26 @@ namespace ASP_PROJECT.Controllers
             TempData["MessageCart"] = "vide";
             TempData["StatutOrder"] = "OK";
             TempData["StatutOrder"] = "NOTOK";
-
-            //return RedirectToAction("ConsultRestaurant", "Restaurant");
             return View("ResumeOrder", order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ValidateUpdatingOrderStatus(Order order)
+        {
+            int orderId = (int)HttpContext.Session.GetInt32("orderIdToModify");
+            order.Id = orderId;
+            bool success = order.UpdateOrderStatus(_orderDAL);
+            if (success == true)
+            {
+                HttpContext.Session.SetInt32("orderIdToModify", 0);
+                int restaurantId = (int)HttpContext.Session.GetInt32("restaurantId");
+                return RedirectToAction("ConsultRestaurantOrders", new { restoId = restaurantId });
+            }
+            else
+            {
+                return View("UpdateOrderStatus", order);
+            }
         }
 
 

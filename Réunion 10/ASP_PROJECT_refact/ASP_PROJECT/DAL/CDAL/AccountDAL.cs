@@ -296,21 +296,22 @@ namespace ASP_PROJECT.DAL.CDAL
             return restorer;
         }
 
-        public Restorer GetRestorerById(Restorer restorer)
+        public Restorer GetRestorerById(int restorerId)
         {
+            Restorer restorer = new Restorer();
             string gender;
             string request = "SELECT RestorerId,FirstName,Email,LastName,Gender,City,Address,PostalCode,PhoneNumber,Country FROM dbo.Restorers WHERE RestorerId=@RestorerId";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(request, connection);
-                cmd.Parameters.AddWithValue("RestorerId", restorer.Id);
+                cmd.Parameters.AddWithValue("RestorerId", restorerId);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
 
-                        restorer.Id = reader.GetInt32("RestorerId");
+                        restorer.Id = restorerId;
                         restorer.Firstname = reader.GetString("FirstName");
                         restorer.Lastname = reader.GetString("LastName");
                         restorer.Email = reader.GetString("Email");

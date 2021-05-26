@@ -83,7 +83,7 @@ namespace ASP_PROJECT.Controllers
 
         public void UpdateRestorerSessionInformations(Restorer Account)
         {
-            Restorer BeforeModifications = Account.GetRestorerById(_accountDAL);
+            Restorer BeforeModifications = Restorer.GetRestorerById(_accountDAL,Account.Id);
             Account.Country = BeforeModifications.Country;
             if (HttpContext.Session.GetString("restorerConnected")!="")
             {
