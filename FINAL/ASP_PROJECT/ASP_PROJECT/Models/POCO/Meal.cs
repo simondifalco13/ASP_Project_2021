@@ -26,6 +26,8 @@ namespace ASP_PROJECT.Models.POCO
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Champs obligatoire")]
+        [DataType(DataType.Currency)]
+        [Range(0.001, 100, ErrorMessage = "Le prix doit être supérieur à 0")]
         [Display(Name = "Prix")]
         public double Price { get; set; }
 

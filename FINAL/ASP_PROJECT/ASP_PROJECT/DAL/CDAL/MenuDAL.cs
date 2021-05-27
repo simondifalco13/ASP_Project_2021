@@ -33,7 +33,7 @@ namespace ASP_PROJECT.DAL.CDAL
                 cmd.Parameters.AddWithValue("RestaurantId", restaurant.Id);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
-                success = res > 5;
+                success = res > 0;
             }
             return success;
         }

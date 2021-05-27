@@ -7,7 +7,6 @@
     <td>@Model.Description</td>
 
     <td>
-        @*<a asp-controller="Menu" asp-action="ConsultMenus" asp-route-RestoId="@Model.Id">Voir</a>*@
         <a class="btn btn-outline-primary" asp-action="ConsultAll" asp-route-restaurantId="@Model.Id">Carte</a>
         @if (Context.Session.GetString("restorerConnected") == "true")
         {
