@@ -52,6 +52,8 @@ namespace ASP_PROJECT.Models.POCO
 
         [Required(ErrorMessage = "Champs obligatoire")]
         [Display(Name = "Téléphone")]
+        [Phone]
+        [RegularExpression(@"^(04([0-9]{2}[-. ]?){3}([0-9]{2}))|(071(([-. ]?[0-9]){2}){3})$", ErrorMessage = "Numéro de téléphone incorrect")]
         [DataType(DataType.PhoneNumber)]
         public string Tel { get; set; }
 
