@@ -1,0 +1,14 @@
+﻿
+<div>
+    <h1>Bienvenue sur la page de gestion des restaurants</h1>
+    <button><a asp-controller="Restaurant" asp-action="SignRestaurant">Ajouter un restaurant</a></button>
+    <button><a asp-controller="Restaurant" asp-action="ConsultRestorerRestaurants">Consultez vos restaurants</a></button>
+    @if (!String.IsNullOrEmpty((string)TempData["RestaurantSign"]))
+    {
+        if ((string)TempData["RestaurantSign"]=="success"){
+            <div class="alert-success m-1">
+                L'ajout du restaurant s'est déroulée avec succès
+            </div>
+        } 
+    }
+</div>
