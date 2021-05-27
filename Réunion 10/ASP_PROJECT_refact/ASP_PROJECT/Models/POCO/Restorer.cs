@@ -64,9 +64,5 @@ namespace ASP_PROJECT.Models.POCO
         }
 
         
-        //public void GetRestaurant(Restaurant r, IRestaurantDAL restaurantDAL)
-        //{
-        //    r = restaurantDAL.GetRestaurantById(r);
-        //}
     }
 }

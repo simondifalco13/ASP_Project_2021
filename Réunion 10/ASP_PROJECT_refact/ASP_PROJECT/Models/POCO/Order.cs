@@ -83,12 +83,6 @@ namespace ASP_PROJECT.Models.POCO
         }
 
 
-        public bool UpdateOrderStatus()
-        {
-            bool success = false;
-            return success;
-        }
-
         public void CalculateTotalPrice()
         {
             double totalDishes=0;
